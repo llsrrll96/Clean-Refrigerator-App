@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/headerLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@color/colorWhite"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/buttonBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:background="@color/colorWhite"
+         />
+
+        <SearchView
+            android:id="@+id/searchRecipe"
+            android:layout_width="250dp"
+            android:layout_weight="1"
+
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            />
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:text="@string/ingredients" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/HeadertextView"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorSky"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/resultRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="top"/>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        android:gravity="center"
+        android:textSize="17sp"
+        android:background="@color/colorWhite"
+        android:layout_marginTop="-50dp"
+        android:text="@string/anotherRecipeMsg" />
+
+
+</LinearLayout>
