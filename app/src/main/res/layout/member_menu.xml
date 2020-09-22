@@ -14,12 +14,12 @@
         app:layout_constraintGuide_percent="0.4" />
 
     <!--  android:scaleType="fitCenter"  은 이미지를 공간에 맞게 비율맞춰서 줄이는 코멘트임-->
-    <!-- 메인 페이지에서 회원조회 아이콘 클릭시 -->
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorSky"
+        android:background="#0DE1F2"
         android:paddingLeft="25dp"
         android:paddingTop="25dp"
         android:paddingBottom="25dp"
@@ -52,7 +52,7 @@
             android:layout_height="match_parent">
 
             <ImageButton
-                android:id="@+id/imageButton2"
+                android:id="@+id/recipeInquireBtn"
                 android:layout_width="96dp"
                 android:layout_height="75dp"
                 android:layout_weight="1"
@@ -63,7 +63,7 @@
                 app:srcCompat="@drawable/recipes" />
 
             <ImageButton
-                android:id="@+id/imageButton3"
+                android:id="@+id/commentInquireBtn"
                 android:layout_width="118dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -72,7 +72,7 @@
                 app:srcCompat="@drawable/comment" />
 
             <ImageButton
-                android:id="@+id/imageButton4"
+                android:id="@+id/likeInquireBtn"
                 android:layout_width="116dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -81,7 +81,7 @@
                 app:srcCompat="@drawable/like" />
 
             <ImageButton
-                android:id="@+id/imageButton5"
+                android:id="@+id/settingBtn"
                 android:layout_width="85dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -194,7 +194,7 @@
         android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorSky"
+        android:background="#0DE1F2"
         android:paddingLeft="25dp"
         android:paddingTop="25dp"
         android:paddingBottom="25dp"
@@ -206,7 +206,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline" />
 
     <ImageButton
-        android:id="@+id/imageButton6"
+        android:id="@+id/memberEditBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="25dp"
