@@ -62,7 +62,7 @@ public class Login extends AppCompatActivity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
                 loginAsyncTask login = new loginAsyncTask();
-                login.execute("http://192.168.25.44:3000/login").equals("success");
+                login.execute("http://192.168.25.44:3000/Login");
             }
         });
 
