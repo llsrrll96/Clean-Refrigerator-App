@@ -17,7 +17,7 @@ import com.example.emptytherefrigerator.entity.RecipeList;
 
 import java.util.ArrayList;
 
-//FragMainSearch 의 리싸이클러뷰의 어댑터
+//MainSearchFrag 의 리싸이클러뷰의 어댑터
 public class MainSearchAdapter extends RecyclerView.Adapter<MainSearchAdapter.ViewHolder>
 {
     private final ArrayList<RecipeList> recipeLists;

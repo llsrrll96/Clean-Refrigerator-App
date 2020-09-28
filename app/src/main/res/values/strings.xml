@@ -8,8 +8,11 @@
     <string name="strCheck">확인</string>
     <string name="strCancel">취소</string>
     <string name="anotherRecipeMsg">원하는 레시피가 없나요? (외부사이트 검색)</string>
-    <string name="ingredients">레시피</string>
+    <string name="ingredients">식재료</string>
+    <string name="recipe">레시피</string>
     <string name="setting">설정</string>
+    <string name="comment">댓글</string>
+    <string name="like">좋아요</string>
     <string name="notice">알림</string>
     <string name="withdraw">  탈퇴하기</string>
     <string name="profile">회원 정보</string>

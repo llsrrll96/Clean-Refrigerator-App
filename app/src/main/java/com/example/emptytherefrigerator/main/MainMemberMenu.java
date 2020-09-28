@@ -7,7 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.emptytherefrigerator.R;
 
-public class activity_memberView extends AppCompatActivity
+//Main 화면의 회원창
+public class MainMemberMenu extends AppCompatActivity
 {
     ImageButton memberEditBtn, recipeInquireBtn, commentInquireBtn, likeInquireBtn, settingBtn;
 

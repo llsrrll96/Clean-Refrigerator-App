@@ -24,11 +24,10 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 public class Login extends AppCompatActivity {
-
+    private String serverURL = "http://192.168.25.8:3000/";
     private Button btnLogin;
     private Button btnSignUp;
     private Intent intent;
@@ -62,7 +61,7 @@ public class Login extends AppCompatActivity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
                 loginAsyncTask login = new loginAsyncTask();
-                login.execute("http://192.168.25.44:3000/login");
+                login.execute(serverURL+"login");
             }
         });
 
@@ -150,7 +149,7 @@ public class Login extends AppCompatActivity {
         protected void onPostExecute(String result)         //doinbackground의 결과값 사용
         {
             super.onPostExecute(result);
-           // System.out.println(result);       //-> success
+           // System.out.println(result);       //-> ok
             if(result.equals("ok"))        //로그인 성공
             {
                 Toast.makeText(getApplicationContext(),"로그인 성공", Toast.LENGTH_SHORT).show();

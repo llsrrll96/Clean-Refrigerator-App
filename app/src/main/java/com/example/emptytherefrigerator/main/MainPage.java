@@ -11,11 +11,13 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.emptytherefrigerator.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+
+//MainSearchFrag 와 MainUserFrag 가 합쳐짐
 public class MainPage extends AppCompatActivity
 {
     private FragmentManager fragmentManager = getSupportFragmentManager();
-    private FragMainSearch fragMainSearch = new FragMainSearch();
-    private FragMainUser fragMainUser = new FragMainUser();
+    private MainSearchFrag mainSearchFrag = new MainSearchFrag();
+    private MainUserFrag mainUserFrag = new MainUserFrag();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +30,7 @@ public class MainPage extends AppCompatActivity
     public void setFragMainPage()
     {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.frameLayout, fragMainSearch).commitAllowingStateLoss();
+        transaction.replace(R.id.frameLayout, mainSearchFrag).commitAllowingStateLoss();
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.navigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(new ItemSelectedListener());
@@ -41,11 +43,11 @@ public class MainPage extends AppCompatActivity
 
             switch (menuItem.getItemId()) {
                 case R.id.menu_home:
-                    transaction.replace(R.id.frameLayout, fragMainSearch).commitAllowingStateLoss();
+                    transaction.replace(R.id.frameLayout, mainSearchFrag).commitAllowingStateLoss();
 
                     break;
                 case R.id.menu_user:
-                    transaction.replace(R.id.frameLayout, fragMainUser).commitAllowingStateLoss();
+                    transaction.replace(R.id.frameLayout, mainUserFrag).commitAllowingStateLoss();
                     break;
             }
             return true;

@@ -19,13 +19,13 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#0DE1F2"
+        android:background="@color/colorSky"
         android:paddingLeft="25dp"
         android:paddingTop="25dp"
         android:paddingBottom="25dp"
         android:text="@string/profile"
         android:textColor="#FFFFFF"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:textStyle="normal"
         app:layout_constraintBottom_toTopOf="@+id/tableLayout"
         app:layout_constraintStart_toStartOf="parent"
@@ -102,7 +102,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
-                android:text="레시피"
+                android:text="@string/recipe"
                 android:textSize="20dp" />
 
             <TextView
@@ -111,7 +111,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
-                android:text="댓글"
+                android:text="@string/comment"
                 android:textSize="20dp" />
 
             <TextView
@@ -120,7 +120,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
-                android:text="좋아요"
+                android:text="@string/like"
                 android:textSize="20dp" />
 
             <TextView
@@ -128,7 +128,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal"
-                android:text="설정"
+                android:text="@string/setting"
                 android:textSize="20dp" />
         </TableRow>
 
@@ -152,11 +152,11 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:paddingLeft="20dp"
-                android:text="ID"
+                android:text="@string/strID"
                 android:textSize="20dp" />
 
             <TextView
-                android:id="@+id/textView10"
+                android:id="@+id/userIdTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -175,11 +175,11 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:paddingLeft="20dp"
-                android:text="PW"
+                android:text="@string/strPW"
                 android:textSize="20dp" />
 
             <TextView
-                android:id="@+id/textView11"
+                android:id="@+id/userPwTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -194,7 +194,7 @@
         android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#0DE1F2"
+        android:background="@color/colorSky"
         android:paddingLeft="25dp"
         android:paddingTop="25dp"
         android:paddingBottom="25dp"

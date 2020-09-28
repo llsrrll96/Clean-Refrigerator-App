@@ -20,8 +20,9 @@ import com.example.emptytherefrigerator.entity.RecipeList;
 
 import java.util.ArrayList;
 
+//Main 화면 Home
 //이 달의 레시피 검색 결과
-public class FragMainSearch extends Fragment
+public class MainSearchFrag extends Fragment
 {
     private View view;
     private RecyclerView recyclerView;

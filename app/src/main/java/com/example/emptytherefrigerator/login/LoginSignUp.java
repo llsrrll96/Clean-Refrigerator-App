@@ -10,7 +10,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.emptytherefrigerator.R;
-import com.example.emptytherefrigerator.main.MainPage;
 
 import org.json.JSONObject;
 
@@ -25,7 +24,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class LoginSignUp extends AppCompatActivity {
-
+    private String serverURL = "http://192.168.25.8:3000/";
     private TextView btnOk;
     private TextView btnCancel;
     private Intent intent;
@@ -59,7 +58,7 @@ public class LoginSignUp extends AppCompatActivity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
                 SignUpAsyncTask signUpTask = new SignUpAsyncTask();
-                signUpTask.execute("http://192.168.25.44:3000/signUp");
+                signUpTask.execute(serverURL+"signUp");
                 //회원가입 완료
                 //v.getContext().startActivity(intent);
             }

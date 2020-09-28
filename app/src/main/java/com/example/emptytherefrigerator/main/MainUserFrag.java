@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import com.example.emptytherefrigerator.R;
 
 //회원 정보 조회 아이콘 눌렀을 때
-public class FragMainUser extends Fragment
+public class MainUserFrag extends Fragment
 {
     @Nullable
     @Override
