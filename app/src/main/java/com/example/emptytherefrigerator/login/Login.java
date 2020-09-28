@@ -62,7 +62,7 @@ public class Login extends AppCompatActivity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
                 loginAsyncTask login = new loginAsyncTask();
-                login.execute("http://192.168.25.44:3000/Login");
+                login.execute("http://192.168.25.44:3000/login");
             }
         });
 
@@ -88,8 +88,8 @@ public class Login extends AppCompatActivity {
 
             try {
                 JSONObject loginTest = new JSONObject();
-                loginTest.accumulate("ID", editTextID.getText().toString());
-                loginTest.accumulate("PW", editTextPW.getText().toString());
+                loginTest.accumulate("id", editTextID.getText().toString());
+                loginTest.accumulate("pw", editTextPW.getText().toString());
                 String jsonStrng = loginTest.toString();
 
                 URL url = new URL(urls[0]);
@@ -151,13 +151,13 @@ public class Login extends AppCompatActivity {
         {
             super.onPostExecute(result);
            // System.out.println(result);       //-> success
-            if(result.equals("SUCCESS"))        //로그인 성공
+            if(result.equals("ok"))        //로그인 성공
             {
                 Toast.makeText(getApplicationContext(),"로그인 성공", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), MainPage.class);      //현재 화면의 제어를 넘길 클래스 지정
                 startActivity(intent);      //다음 화면으로 넘어감
             }
-            else if(result.equals("FAIL"))      //로그인 실패
+            else if(result.equals("wrong") || result.equals("error"))      //로그인 실패
             {
                 Toast.makeText(getApplicationContext(),"로그인 실패", Toast.LENGTH_SHORT).show();
             }

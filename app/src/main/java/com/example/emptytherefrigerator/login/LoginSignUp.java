@@ -59,7 +59,7 @@ public class LoginSignUp extends AppCompatActivity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
                 SignUpAsyncTask signUpTask = new SignUpAsyncTask();
-                signUpTask.execute("http://192.168.25.44:3000/Sign_Up");
+                signUpTask.execute("http://192.168.25.44:3000/signUp");
                 //회원가입 완료
                 //v.getContext().startActivity(intent);
             }
@@ -85,8 +85,8 @@ public class LoginSignUp extends AppCompatActivity {
 
             try {
                 JSONObject loginTest = new JSONObject();
-                loginTest.accumulate("ID", id.getText().toString());
-                loginTest.accumulate("PW", password.getText().toString());
+                loginTest.accumulate("id", id.getText().toString());
+                loginTest.accumulate("pw", password.getText().toString());
                 String jsonStrng = loginTest.toString();
 
                 URL url = new URL(urls[0]);
@@ -147,16 +147,15 @@ public class LoginSignUp extends AppCompatActivity {
         protected void onPostExecute(String result)         //doinbackground의 결과값 사용
         {
             super.onPostExecute(result);
-            // System.out.println(result);       //-> success
-            if(result.equals("SUCCESS"))        //로그인 성공
+            if(result.equals("ok"))        //성공
             {
                 Toast.makeText(getApplicationContext(),"회원가입 성공", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), Login.class);      //현재 화면의 제어를 넘길 클래스 지정
                 startActivity(intent);      //다음 화면으로 넘어감
             }
-            else if(result.equals("FAIL"))      //로그인 실패
+            else if(result.equals("error") | result.equals("중복"))      //실패
             {
-                Toast.makeText(getApplicationContext(),"회원가입 실패", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),result, Toast.LENGTH_SHORT).show();
             }
 
         }
