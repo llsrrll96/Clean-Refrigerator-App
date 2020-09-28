@@ -6,10 +6,10 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/recipe_name"
+        android:id="@+id/recipeName"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="15dp"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/recipeMainImage"
         app:layout_constraintStart_toEndOf="@+id/recipeMainImage"
@@ -21,10 +21,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        app:layout_constraintEnd_toEndOf="@+id/recipe_name"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/recipe_name"
-        app:layout_constraintTop_toBottomOf="@+id/recipe_name">
+        app:layout_constraintStart_toStartOf="@+id/recipeName"
+        app:layout_constraintTop_toBottomOf="@+id/recipeName">
 
         <ImageView
             android:id="@+id/imageView6"
@@ -66,8 +64,6 @@
         android:layout_marginBottom="15dp"
         android:text="2020.09.01"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/tableRow3"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/tableRow3"
         app:layout_constraintTop_toBottomOf="@+id/tableRow3" />
 
@@ -77,10 +73,10 @@
         android:layout_height="40dp"
         android:background="#ffffff"
         app:layout_constraintBottom_toBottomOf="@+id/writtenDay"
-        app:layout_constraintTop_toTopOf="@+id/recipe_name"
-        app:layout_constraintVertical_bias="0.52"
+        app:layout_constraintTop_toTopOf="@+id/recipeName"
+        app:layout_constraintVertical_bias="0.526"
         app:srcCompat="@drawable/edit_icon_blue"
-        tools:layout_editor_absoluteX="303dp" />
+        tools:layout_editor_absoluteX="307dp" />
 
     <ImageButton
         android:id="@+id/recipeDelBtn"
@@ -91,6 +87,7 @@
         android:background="#fffff"
         app:layout_constraintBottom_toBottomOf="@+id/recipeEditBtn"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.375"
         app:layout_constraintStart_toEndOf="@+id/recipeEditBtn"
         app:layout_constraintTop_toTopOf="@+id/recipeEditBtn"
         app:layout_constraintVertical_bias="0.0"
