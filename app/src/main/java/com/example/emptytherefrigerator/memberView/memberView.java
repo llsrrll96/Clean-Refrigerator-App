@@ -1,4 +1,4 @@
-package com.example.emptytherefrigerator.main;
+package com.example.emptytherefrigerator.memberView;
 
 import android.os.Bundle;
 import android.widget.ImageButton;
@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.emptytherefrigerator.R;
 
-public class activity_memberView extends AppCompatActivity
+public class memberView extends AppCompatActivity
 {
     ImageButton memberEditBtn, recipeInquireBtn, commentInquireBtn, likeInquireBtn, settingBtn;
 
