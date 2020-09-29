@@ -44,7 +44,7 @@
             android:layout_width="20dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            app:srcCompat="@drawable/like_filled" />
+            app:srcCompat="@drawable/like_filled2" />
 
         <TextView
             android:id="@+id/like_count"
@@ -71,12 +71,13 @@
         android:id="@+id/recipeEditBtn"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:layout_marginStart="88dp"
         android:background="#ffffff"
         app:layout_constraintBottom_toBottomOf="@+id/writtenDay"
+        app:layout_constraintStart_toEndOf="@+id/tableRow3"
         app:layout_constraintTop_toTopOf="@+id/recipeName"
         app:layout_constraintVertical_bias="0.526"
-        app:srcCompat="@drawable/edit_icon_blue"
-        tools:layout_editor_absoluteX="307dp" />
+        app:srcCompat="@drawable/edit_icon_blue" />
 
     <ImageButton
         android:id="@+id/recipeDelBtn"
