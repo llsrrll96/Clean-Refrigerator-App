@@ -11,21 +11,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".main.SettingView"></activity>
-        <activity android:name=".login.Login">
+        <activity android:name=".main.RecipeDetailView"></activity>
+        <activity android:name=".main.RecipeDetailCreateView" />
+        <activity android:name=".main.SettingView" />
+        <activity android:name=".login.LoginView">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".login.LoginSignUp" />
-        <activity android:name=".main.MainPage">
+        <activity android:name=".login.LoginSignUpView" />
+        <activity android:name=".main.MainPageView">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
         </activity>
-        <activity android:name=".main.MainSearchResultView"></activity>
+        <activity android:name=".main.MainSearchResultView" />
     </application>
 
 </manifest>

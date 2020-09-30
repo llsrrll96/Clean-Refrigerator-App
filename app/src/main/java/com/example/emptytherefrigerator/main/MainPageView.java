@@ -14,7 +14,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 //MainSearchFrag 와 MainUserFrag 가 합쳐짐
-public class MainPage extends AppCompatActivity
+public class MainPageView extends AppCompatActivity
 {
     private FragmentManager fragmentManager = getSupportFragmentManager();
     private MainSearchFragView mainSearchFrag = new MainSearchFragView();

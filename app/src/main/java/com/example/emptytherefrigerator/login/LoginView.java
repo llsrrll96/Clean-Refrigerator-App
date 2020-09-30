@@ -12,7 +12,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.emptytherefrigerator.R;
-import com.example.emptytherefrigerator.main.MainPage;
+import com.example.emptytherefrigerator.main.MainPageView;
 
 import org.json.JSONObject;
 
@@ -26,7 +26,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class Login extends AppCompatActivity {
+public class LoginView extends AppCompatActivity {
     private String serverURL = "http://192.168.43.162:3000/";
     private Button btnLogin;
     private Button btnSignUp;
@@ -56,7 +56,7 @@ public class Login extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(v.getContext(), MainPage.class);
+                intent = new Intent(v.getContext(), MainPageView.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
@@ -68,7 +68,7 @@ public class Login extends AppCompatActivity {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(v.getContext(), LoginSignUp.class);
+                intent = new Intent(v.getContext(), LoginSignUpView.class);
                 v.getContext().startActivity(intent);
             }
         });
@@ -153,7 +153,7 @@ public class Login extends AppCompatActivity {
             if(result.equals("ok"))        //로그인 성공
             {
                 Toast.makeText(getApplicationContext(),"로그인 성공", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getApplicationContext(), MainPage.class);      //현재 화면의 제어를 넘길 클래스 지정
+                Intent intent = new Intent(getApplicationContext(), MainPageView.class);      //현재 화면의 제어를 넘길 클래스 지정
                 startActivity(intent);      //다음 화면으로 넘어감
             }
             else if(result.equals("wrong") || result.equals("error"))      //로그인 실패

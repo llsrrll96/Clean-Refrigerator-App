@@ -10,11 +10,11 @@ public class Recipe
     private int recipePerson;       //몇 인분
     private int recipeTime;         //조리 시간
     private String recipeContents;  //레시피 조리법
-    private int chatNumber;         //댓글 개수
-    private int likeNumber;         //좋아요 개수
+    private int commentCount;         //댓글 개수
+    private int likeCount;         //좋아요 개수
     private String uploadDate;      //작성 날짜
 
-    public Recipe(String recipeId, String title, String userId, String ingredient, String recipeImgPath, int recipePerson, int recipeTime, String recipeContents, int chatNumber, int likeNumber, String uploadDate) {
+    public Recipe(String recipeId, String title, String userId, String ingredient, String recipeImgPath, int recipePerson, int recipeTime, String recipeContents, int commentCount, int likeCount, String uploadDate) {
         this.recipeId = recipeId;
         this.title = title;
         this.userId = userId;
@@ -23,8 +23,8 @@ public class Recipe
         this.recipePerson = recipePerson;
         this.recipeTime = recipeTime;
         this.recipeContents = recipeContents;
-        this.chatNumber = chatNumber;
-        this.likeNumber = likeNumber;
+        this.commentCount = commentCount;
+        this.likeCount = likeCount;
         this.uploadDate = uploadDate;
     }
 
@@ -92,20 +92,20 @@ public class Recipe
         this.recipeContents = recipeContents;
     }
 
-    public int getChatNumber() {
-        return chatNumber;
+    public int getCommentCount() {
+        return commentCount;
     }
 
-    public void setChatNumber(int chatNumber) {
-        this.chatNumber = chatNumber;
+    public void setCommentCount(int commentCount) {
+        this.commentCount = commentCount;
     }
 
-    public int getLikeNumber() {
-        return likeNumber;
+    public int getLikeCount() {
+        return likeCount;
     }
 
-    public void setLikeNumber(int likeNumber) {
-        this.likeNumber = likeNumber;
+    public void setLikeCount(int likeCount) {
+        this.likeCount = likeCount;
     }
 
     public String getUploadDate() {

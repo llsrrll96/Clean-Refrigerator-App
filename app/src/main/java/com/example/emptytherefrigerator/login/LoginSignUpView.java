@@ -23,7 +23,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class LoginSignUp extends AppCompatActivity {
+public class LoginSignUpView extends AppCompatActivity {
     private String serverURL = "http://192.168.25.8:3000/";
     private TextView btnOk;
     private TextView btnCancel;
@@ -53,7 +53,7 @@ public class LoginSignUp extends AppCompatActivity {
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(v.getContext(), Login.class);
+                intent = new Intent(v.getContext(), LoginView.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
@@ -149,7 +149,7 @@ public class LoginSignUp extends AppCompatActivity {
             if(result.equals("ok"))        //성공
             {
                 Toast.makeText(getApplicationContext(),"회원가입 성공", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getApplicationContext(), Login.class);      //현재 화면의 제어를 넘길 클래스 지정
+                Intent intent = new Intent(getApplicationContext(), LoginView.class);      //현재 화면의 제어를 넘길 클래스 지정
                 startActivity(intent);      //다음 화면으로 넘어감
             }
             else if(result.equals("error") | result.equals("중복"))      //실패
