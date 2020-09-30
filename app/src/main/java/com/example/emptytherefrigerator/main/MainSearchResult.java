@@ -16,7 +16,7 @@ import com.example.emptytherefrigerator.entity.RecipeResult;
 import java.util.ArrayList;
 
 //조회된 레시피
-//레시피, 식재료 검색결과
+//레시피, 식재료 검색결과 바운더리
 public class MainSearchResult extends AppCompatActivity {
 
     private View view;

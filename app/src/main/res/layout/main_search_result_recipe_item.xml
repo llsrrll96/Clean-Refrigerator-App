@@ -4,15 +4,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="120dp"
-    android:orientation="horizontal">
+    android:layout_height="140dp"
+    android:orientation="horizontal"
+    android:padding="10dp">
     <!--레시피 검색 결과로 리사이클러뷰에 들어갈 아이템-->
 
     <ImageView
         android:id="@+id/recipeImage"
         android:layout_width="120dp"
-        android:layout_height="120dp"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:layout_height="120dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,7 +37,7 @@
                 android:id="@+id/chatimg"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
-                app:srcCompat="@android:drawable/sym_action_chat" />
+                app:srcCompat="@drawable/comment" />
 
             <TextView
                 android:id="@+id/chatNumber"
@@ -49,8 +49,9 @@
             <ImageView
                 android:id="@+id/heartimg"
                 android:layout_width="40dp"
-                android:layout_height="wrap_content"
-                app:srcCompat="@android:drawable/btn_star_big_on" />
+                android:layout_height="40dp"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/like" />
 
             <TextView
                 android:id="@+id/likeNumber"

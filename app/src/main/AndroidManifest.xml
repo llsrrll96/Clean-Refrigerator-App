@@ -25,13 +25,8 @@
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
         </activity>
-<<<<<<< HEAD
-        <activity android:name=".main.MainSearchResult" />
-        <activity android:name=".main.MainMemberMenu" />
-=======
         <activity android:name=".main.MainSearchResult"></activity>
         <activity android:name=".memberView.memberView"></activity>
->>>>>>> jaehe_0923
     </application>
 
 </manifest>

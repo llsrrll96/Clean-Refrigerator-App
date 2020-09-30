@@ -11,7 +11,8 @@ import androidx.fragment.app.Fragment;
 
 import com.example.emptytherefrigerator.R;
 
-//회원 정보 조회 아이콘 눌렀을 때
+//Main 화면의 회원창
+//회원 정보 조회 바운더리 클래스
 public class MainUserFrag extends Fragment
 {
     @Nullable
