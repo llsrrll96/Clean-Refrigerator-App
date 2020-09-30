@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/in_recipe_like"
+        android:checked="true"
+        android:enabled="true"
+        android:icon="@drawable/ic_recipe_book"
+        android:title="" />
+    <item
+        android:id="@+id/out_site_like"
+        android:checked="true"
+        android:enabled="true"
+        android:icon="@drawable/ic_public_black_24dp"
+        android:title="" />
+</menu>

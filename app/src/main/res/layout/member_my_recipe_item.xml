@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/recipeName"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/recipeMainImage"
+        app:layout_constraintStart_toEndOf="@+id/recipeMainImage"
+        app:layout_constraintTop_toTopOf="@+id/recipeMainImage"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TableRow
+        android:id="@+id/tableRow3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="@+id/recipeName"
+        app:layout_constraintTop_toBottomOf="@+id/recipeName">
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/comment" />
+
+        <TextView
+            android:id="@+id/comment_count"
+            android:layout_width="25dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingLeft="3dp"
+            android:text="30" />
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/like_filled2" />
+
+        <TextView
+            android:id="@+id/like_count"
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="3dp"
+            android:text="20" />
+
+    </TableRow>
+
+    <TextView
+        android:id="@+id/writtenDay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="15dp"
+        android:text="2020.09.01"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tableRow3"
+        app:layout_constraintTop_toBottomOf="@+id/tableRow3" />
+
+    <ImageButton
+        android:id="@+id/recipeEditBtn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="88dp"
+        android:background="#ffffff"
+        app:layout_constraintBottom_toBottomOf="@+id/writtenDay"
+        app:layout_constraintStart_toEndOf="@+id/tableRow3"
+        app:layout_constraintTop_toTopOf="@+id/recipeName"
+        app:layout_constraintVertical_bias="0.526"
+        app:srcCompat="@drawable/edit_icon_blue" />
+
+    <ImageButton
+        android:id="@+id/recipeDelBtn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="30dp"
+        android:background="#fffff"
+        app:layout_constraintBottom_toBottomOf="@+id/recipeEditBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.375"
+        app:layout_constraintStart_toEndOf="@+id/recipeEditBtn"
+        app:layout_constraintTop_toTopOf="@+id/recipeEditBtn"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/delete_blue" />
+
+    <ImageView
+        android:id="@+id/recipeMainImage"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_gallery" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
