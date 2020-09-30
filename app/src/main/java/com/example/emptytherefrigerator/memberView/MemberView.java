@@ -9,18 +9,18 @@ import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import androidx.fragment.app.Fragment;
 
 import com.example.emptytherefrigerator.R;
 
-//Main 화면의 회원창
-//회원 정보 조회 바운더리 클래스
+//Main 화면 Home
+//이 달의 레시피 검색 결과
 public class MemberView extends Fragment
 {
     private ImageButton memberEditBtn, recipeInquireBtn, commentInquireBtn, likeInquireBtn, settingBtn;
     private Button logoutBtn;
     private View view;
-
 
     @Nullable
     @Override
@@ -29,6 +29,7 @@ public class MemberView extends Fragment
         initializeView();
         return view;
     }
+
 
     private void initializeView()
     {

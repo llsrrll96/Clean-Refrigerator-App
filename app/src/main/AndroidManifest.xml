@@ -26,7 +26,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".main.MainSearchResultView"></activity>
-        <activity android:name=".memberView.memberView"></activity>
     </application>
 
 </manifest>
