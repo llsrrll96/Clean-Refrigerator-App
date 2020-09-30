@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.emptytherefrigerator.R;
 
 
-public class memberView extends AppCompatActivity
+public class MemberView extends AppCompatActivity
 {
     private ImageButton memberEditBtn, recipeInquireBtn, commentInquireBtn, likeInquireBtn, settingBtn;
     private Button logoutBtn;
