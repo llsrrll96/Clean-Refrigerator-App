@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.emptytherefrigerator.R;
 
-public class SettingActivity extends AppCompatActivity {
+public class SettingView extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

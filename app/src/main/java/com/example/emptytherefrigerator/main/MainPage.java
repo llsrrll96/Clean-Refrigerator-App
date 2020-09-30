@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.emptytherefrigerator.R;
+import com.example.emptytherefrigerator.memberView.MemberView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
@@ -16,8 +17,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainPage extends AppCompatActivity
 {
     private FragmentManager fragmentManager = getSupportFragmentManager();
-    private MainSearchFrag mainSearchFrag = new MainSearchFrag();
-    private MainUserFrag mainUserFrag = new MainUserFrag();
+    private MainSearchFragView mainSearchFrag = new MainSearchFragView();
+    private MemberView memberView = new MemberView();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,7 @@ public class MainPage extends AppCompatActivity
 
                     break;
                 case R.id.menu_user:
-                    transaction.replace(R.id.frameLayout, mainUserFrag).commitAllowingStateLoss();
+                    transaction.replace(R.id.frameLayout, memberView).commitAllowingStateLoss();
                     break;
             }
             return true;

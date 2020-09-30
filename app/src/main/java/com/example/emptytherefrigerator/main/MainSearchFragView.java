@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 //Main 화면 Home
 //이 달의 레시피 검색 결과
-public class MainSearchFrag extends Fragment
+public class MainSearchFragView extends Fragment
 {
     private View view;
     private RecyclerView recyclerView;
@@ -56,7 +56,7 @@ public class MainSearchFrag extends Fragment
                 //검색어 버튼이 눌러졌을 때 이벤트 처리
                 Toast.makeText(searchView.getContext(),"검색어: "+query,Toast.LENGTH_SHORT).show();
 
-                intent = new Intent(getContext(), MainSearchResult.class);
+                intent = new Intent(getContext(), MainSearchResultView.class);
                 getContext().startActivity(intent);
                 return true;
             }

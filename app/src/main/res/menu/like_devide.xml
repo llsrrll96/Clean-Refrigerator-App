@@ -5,7 +5,7 @@
         android:id="@+id/in_recipe_like"
         android:checked="true"
         android:enabled="true"
-        android:icon="@drawable/ic_recipe_book"
+        android:icon="@drawable/recipe_book"
         android:title="" />
     <item
         android:id="@+id/out_site_like"

@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 //조회된 레시피
 //레시피, 식재료 검색결과 바운더리
-public class MainSearchResult extends AppCompatActivity {
+public class MainSearchResultView extends AppCompatActivity {
 
     private View view;
     private RecyclerView recyclerView;

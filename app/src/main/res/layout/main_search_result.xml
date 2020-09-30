@@ -14,12 +14,12 @@
 
         <Button
             android:id="@+id/buttonBack"
-            android:layout_marginLeft="10dp"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
             android:layout_weight="1"
-            android:background="@drawable/left_arrow" />
+            android:background="@drawable/back_button" />
 
         <SearchView
             android:id="@+id/searchRecipe"

@@ -27,7 +27,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class Login extends AppCompatActivity {
-    private String serverURL = "http://192.168.25.8:3000/";
+    private String serverURL = "http://192.168.43.162:3000/";
     private Button btnLogin;
     private Button btnSignUp;
     private Intent intent;

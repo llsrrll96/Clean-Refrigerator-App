@@ -10,7 +10,7 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-
+        vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -35,4 +35,5 @@ dependencies {
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'com.squareup.retrofit2:retrofit:2.1.0'              //API server에 RESTful API에 맞는 요청을 할 때
     implementation 'com.squareup.retrofit2:converter-gson:2.0.0'        //gson = json <-> java object 해주는 라이브러리
+
 }
