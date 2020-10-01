@@ -20,12 +20,7 @@ import java.util.ArrayList;
 public class RecipeDetailView extends AppCompatActivity {
 
     private ArrayList<Integer> imageList;
-    private TextView titleTextView;
     private RecyclerView recipeImgRecyclerView;
-    private ImageView userImageView;
-    private TextView userIdTextView;
-    private TextView recipeInfoCountTextView;
-    private TextView recipeInfoTimeTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
