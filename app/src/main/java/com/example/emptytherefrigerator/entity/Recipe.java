@@ -14,6 +14,16 @@ public class Recipe
     private int likeCount;         //좋아요 개수
     private String uploadDate;      //작성 날짜
 
+    //검색결과
+    public Recipe(String recipeImgPath, String title, int commentCount, int likeCount, String uploadDate) {
+        this.recipeImgPath = recipeImgPath;
+        this.title = title;
+        this.commentCount = commentCount;
+        this.likeCount = likeCount;
+        this.uploadDate = uploadDate;
+    }
+
+    //조회용
     public Recipe(String recipeId, String title, String userId, String ingredient, String recipeImgPath, int recipePerson, int recipeTime, String recipeContents, int commentCount, int likeCount, String uploadDate) {
         this.recipeId = recipeId;
         this.title = title;

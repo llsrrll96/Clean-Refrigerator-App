@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.emptytherefrigerator.R;
-import com.example.emptytherefrigerator.entity.RecipeList;
+import com.example.emptytherefrigerator.entity.Recipe;
 
 import java.util.ArrayList;
 
@@ -27,7 +27,7 @@ public class MainSearchFragView extends Fragment
     private View view;
     private RecyclerView recyclerView;
     private SearchView searchView;
-    private ArrayList<RecipeList> list;
+    private ArrayList<Recipe> list;
     private Intent intent;
 
     @Nullable
@@ -83,17 +83,19 @@ public class MainSearchFragView extends Fragment
         recyclerView.addItemDecoration(dividerItemDecoration);
     }
 
-    //데이터 넣는 곳
+    //데이터 넣는 곳 , db에서 데이터 불러서 반복문으로 list에 저장 추가 , 비동기 백그라운드 사용 예정
     ArrayList insertItemList(){
         list = new ArrayList<>(  );
-        RecipeList recipeList1 = new RecipeList(R.drawable.logo,"제목1~~~","by id", 12);
-        RecipeList recipeList2 = new RecipeList(R.drawable.logo,"제목2 ","by id",12);
-        RecipeList recipeList3 = new RecipeList(R.drawable.logo,"제목3","by id", 9);
-        RecipeList recipeList4 = new RecipeList(R.drawable.logo,"제목4","by id", 7);
-        RecipeList recipeList5 = new RecipeList(R.drawable.logo,"제목5", "by id",4);
-        RecipeList recipeList6 = new RecipeList(R.drawable.logo,"제목6 ","' by id", 3);
+        Recipe recipeList1 = new Recipe("https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG_transparency_demonstration_1.png/420px-PNG_transparency_demonstration_1.png"
+                ,"제목1~~~",100, 12,"2020-10-01");
+        Recipe recipeList2 = new Recipe("https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG_transparency_demonstration_1.png/420px-PNG_transparency_demonstration_1.png"
+                ,"제목1~~~",100, 12,"2020-10-01");
+        Recipe recipeList3 = new Recipe("https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG_transparency_demonstration_1.png/420px-PNG_transparency_demonstration_1.png"
+                ,"제목1~~~",100, 12,"2020-10-01");
 
-        list.add(recipeList1);list.add(recipeList2);list.add(recipeList3);list.add(recipeList4);list.add(recipeList5);list.add(recipeList6);
+        list.add(recipeList1);
+        list.add(recipeList2);
+        list.add(recipeList3);
         return list;
     }
 }

@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.emptytherefrigerator.R;
-import com.example.emptytherefrigerator.entity.RecipeResult;
+import com.example.emptytherefrigerator.entity.Recipe;
 
 import java.util.ArrayList;
 
@@ -22,7 +22,7 @@ public class MainSearchResultView extends AppCompatActivity {
     private View view;
     private RecyclerView recyclerView;
     private SearchView searchView;
-    private ArrayList<RecipeResult> resultList;
+    private ArrayList<Recipe> resultList;
     private Intent intent;
 
     @Override
@@ -57,21 +57,15 @@ public class MainSearchResultView extends AppCompatActivity {
 
     //데이터 넣는 곳
     ArrayList insertItemList(){
+        String serverimgUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG_transparency_demonstration_1.png/420px-PNG_transparency_demonstration_1.png";
+
         resultList = new ArrayList<>(  );
         for(int i =0; i < 10; i++)
         {
-            RecipeResult recipeResult = new RecipeResult(R.drawable.logo, "제목",i,i+1,"2020.09.20");
+            Recipe recipeResult = new Recipe(serverimgUrl, "제목",i,i+1,"2020.09.20");
             resultList.add(recipeResult);
         }
 
-//        RecipeList recipeList1 = new RecipeList(R.drawable.logo,"1111","name", 12);
-//        RecipeList recipeList2 = new RecipeList(R.drawable.logo,"2222","hname",12);
-//        RecipeList recipeList3 = new RecipeList(R.drawable.logo,"3333","name", 9);
-//        RecipeList recipeList4 = new RecipeList(R.drawable.logo,"4444","name", 7);
-//        RecipeList recipeList5 = new RecipeList(R.drawable.logo,"5555", "name",4);
-//        RecipeList recipeList6 = new RecipeList(R.drawable.logo,"6666 ","' name", 3);
-
-//        list.add(recipeList1);list.add(recipeList2);list.add(recipeList3);list.add(recipeList4);list.add(recipeList5);list.add(recipeList6);
-        return resultList;
+      return resultList;
     }
 }

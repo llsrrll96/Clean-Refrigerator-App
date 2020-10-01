@@ -11,20 +11,21 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.emptytherefrigerator.R;
-import com.example.emptytherefrigerator.entity.RecipeResult;
+import com.example.emptytherefrigerator.entity.Recipe;
 
 import java.util.ArrayList;
 
 public class MainSearchResultAdapter extends RecyclerView.Adapter<MainSearchResultAdapter.ViewHolder>
 {
-    private static final int FOOTER_VIEW = 1;
-    private static final int RECYCLER_VIEW = 2;
-    private final ArrayList<RecipeResult> recipeResults;
+
+    private final ArrayList<Recipe> recipeResults;
     private Context context;
     private Intent intent;
 
-    public MainSearchResultAdapter(ArrayList<RecipeResult> recipeResults) {
+    public MainSearchResultAdapter(ArrayList<Recipe> recipeResults) {
         this.recipeResults = recipeResults;
     }
 
@@ -38,18 +39,16 @@ public class MainSearchResultAdapter extends RecyclerView.Adapter<MainSearchResu
     }
 
     @Override
-    public int getItemViewType(int position) {
-        if (position == recipeResults.size() + 1) {
-            return FOOTER_VIEW;
-        }
-        return RECYCLER_VIEW;
-    }
-    @Override
     public void onBindViewHolder(@NonNull MainSearchResultAdapter.ViewHolder holder, int position) {
-        holder.recipeImage.setImageResource(recipeResults.get(position).getImage());
+        context = holder.itemView.getContext();
+
+        Glide.with(context)
+            .load(recipeResults.get(position).getRecipeImgPath())
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .into(holder.recipeImage);
         holder.title.setText(recipeResults.get(position).getTitle());   //viewHolder 객체
-        holder.chatNumber.setText(Integer.toString(recipeResults.get(position).getChatNumber()));   //viewHolder 객체
-        holder.likeNumber.setText(Integer.toString(recipeResults.get(position).getLikeNumber()));   //viewHolder 객체
+        holder.commentCount.setText(Integer.toString(recipeResults.get(position).getCommentCount()));   //viewHolder 객체
+        holder.likeCount.setText(Integer.toString(recipeResults.get(position).getLikeCount()));   //viewHolder 객체
         holder.uploadDate.setText(recipeResults.get(position).getUploadDate());
     }
 
@@ -62,16 +61,17 @@ public class MainSearchResultAdapter extends RecyclerView.Adapter<MainSearchResu
     class ViewHolder extends RecyclerView.ViewHolder{
         public ImageView recipeImage;
         public TextView title;
-        public TextView chatNumber;
-        public TextView likeNumber;
+        public TextView commentCount;
+        public TextView likeCount;
         public TextView uploadDate;
+        private Context holdercontext;
 
         public ViewHolder(@NonNull View view) {
             super(view);
             recipeImage = itemView.findViewById(R.id.recipeImage);
             title = itemView.findViewById(R.id.title); //파라메타 id 찾기
-            chatNumber = itemView.findViewById(R.id.chatNumber); //파라메타 id 찾기
-            likeNumber = itemView.findViewById(R.id.likeNumber); //파라메타 id 찾기
+            commentCount = itemView.findViewById(R.id.chatNumber); //파라메타 id 찾기
+            likeCount = itemView.findViewById(R.id.likeNumber); //파라메타 id 찾기
             uploadDate = itemView.findViewById(R.id.uploadDate);
 
             view.setOnClickListener(new View.OnClickListener() { // 리싸이클러 아이템 클릭시
@@ -79,7 +79,9 @@ public class MainSearchResultAdapter extends RecyclerView.Adapter<MainSearchResu
                 public void onClick(View v) {           //클릭시
                     int pos = getAdapterPosition();
                     if(pos != RecyclerView.NO_POSITION){
-
+                        holdercontext = v.getContext();
+                        intent = new Intent(holdercontext, RecipeDetailView.class);     //조회된 레시피 화면으로 넘어간다
+                        holdercontext.startActivity(intent);
                     }
                 }
             });
