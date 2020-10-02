@@ -51,15 +51,4 @@
             android:text="@string/notice" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btnDelete"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="@drawable/layout_background"
-        android:textColor="@color/colorGray"
-        android:textSize="20sp"
-        android:gravity="left|center_vertical"
-        android:paddingLeft="10dp"
-        android:text="@string/withdraw"/>
-
 </LinearLayout>

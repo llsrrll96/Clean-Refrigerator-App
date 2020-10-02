@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.Switch;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,7 +14,7 @@ import com.example.emptytherefrigerator.R;
 public class SettingView extends AppCompatActivity {
 
     Switch swAlarm;
-    Button btnDelete, btnBack;
+    Button btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,19 +27,24 @@ public class SettingView extends AppCompatActivity {
     void initailize()
     {
         swAlarm = (Switch)findViewById(R.id.swAlarm);
-        btnDelete = (Button)findViewById(R.id.btnDelete);
         btnBack = (Button) findViewById(R.id.btnBack);
     }
 
     void setAlarm()
     {
+        swAlarm.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-    }
+                if(isChecked)
+                {
 
-    //회원탈퇴 버튼
-    void deleteAccount(View view)
-    {
+                }else
+                {
 
+                }
+            }
+        });
     }
 
     //뒤로가기 버튼
