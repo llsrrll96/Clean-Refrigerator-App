@@ -14,7 +14,7 @@ import com.example.emptytherefrigerator.R;
 public class SettingView extends AppCompatActivity {
 
     Switch swAlarm;
-    Button btnBack;
+    Button btnDelete, btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +27,7 @@ public class SettingView extends AppCompatActivity {
     void initailize()
     {
         swAlarm = (Switch)findViewById(R.id.swAlarm);
+        btnDelete = (Button)findViewById(R.id.btnDelete);
         btnBack = (Button) findViewById(R.id.btnBack);
     }
 
@@ -45,6 +46,12 @@ public class SettingView extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    //회원탈퇴 버튼
+    void deleteAccount(View view)
+    {
+
     }
 
     //뒤로가기 버튼
