@@ -73,9 +73,9 @@
                         android:id="@+id/recipeInfoTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="요리 정보"
+                        android:text="@string/recipeInfo"
                         android:paddingLeft="25dp"
-                        android:textSize="30sp"
+                        android:textSize="25sp"
                         android:textStyle="bold"/>
 
                     <LinearLayout
@@ -142,9 +142,9 @@
                         android:id="@+id/ingredients"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="재료"
+                        android:text="@string/ingredi"
                         android:paddingLeft="25dp"
-                        android:textSize="30sp"
+                        android:textSize="25sp"
                         android:textStyle="bold"/>
 
                     <!---재료 동적추가-->
@@ -168,9 +168,9 @@
                         android:id="@+id/textView8"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="식재료 가격"
+                        android:text="@string/recipePrice"
                         android:paddingLeft="25dp"
-                        android:textSize="30sp"
+                        android:textSize="25sp"
                         android:textStyle="bold"/>
 
                     <!---식재료가격 동적추가-->
@@ -193,9 +193,9 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="요리 방법"
+                        android:text="@string/strRecipe"
                         android:paddingLeft="25dp"
-                        android:textSize="30sp"
+                        android:textSize="25sp"
                         android:textStyle="bold"
                         android:paddingBottom="10dp"/>
 
