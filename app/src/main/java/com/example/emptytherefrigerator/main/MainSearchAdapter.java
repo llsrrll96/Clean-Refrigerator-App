@@ -45,7 +45,7 @@ public class MainSearchAdapter extends RecyclerView.Adapter<MainSearchAdapter.Vi
         context = holder.itemView.getContext();
 
         Glide.with(context)
-                .load(recipeLists.get(position).getRecipeImgPath())
+                .load(recipeLists.get(position).getRecipeImagePath())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.getRecipeImage());                         //이미지
 

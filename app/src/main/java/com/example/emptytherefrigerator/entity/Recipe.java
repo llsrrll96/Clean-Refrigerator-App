@@ -6,46 +6,72 @@ public class Recipe
     private String title;
     private String userId;
     private String ingredient;      //식재료
-    private String recipeImgPath;   //요리 이미지 경로(들) (대표이미지 겸) : ㅇㅇㅇ, ㅁㅁㅁ
+    private String ingredientUnit;   //식재료 단위
     private int recipePerson;       //몇 인분
     private int recipeTime;         //조리 시간
-    private String recipeContentsImagePath; //레시피 조리 이미지 경로(들) : ㅇㅇㅇ, ㅇㅇㅇ
-    private String recipeContents;  //레시피 조리법
+    private byte[][] recipeImageByte; //다중 레시피 이미지 데이터
+    private String recipeImagePath; //레시피 조리 이미지 경로(들) : ㅇㅇㅇ, ㅇㅇㅇ
+    private String recipeContents;  //레시피 조리법 설명
     private int commentCount;         //댓글 개수
     private int likeCount;         //좋아요 개수
     private String uploadDate;      //작성 날짜
 
+    /*private byte[row][col] recipeImageByte 데이터는
+     * row 는 사진 갯수, col 은 해당 이미지 데이터 byte 코드
+     * */
+
+    public Recipe() {
+    }
+
     //검색결과
-    public Recipe(String recipeImgPath, String title, int commentCount, int likeCount, String uploadDate) {
-        this.recipeImgPath = recipeImgPath;
+    public Recipe(String recipeImagePath, String title, int commentCount, int likeCount, String uploadDate) {
+        this.recipeImagePath = recipeImagePath;
         this.title = title;
         this.commentCount = commentCount;
         this.likeCount = likeCount;
         this.uploadDate = uploadDate;
     }
 
+    //등록
+    public Recipe(String title, String ingredient, String ingredientUnit, int recipePerson, int recipeTime, String recipeImagePath, String recipeContents) {
+        this.title = title;
+        this.ingredient = ingredient;
+        this.ingredientUnit = ingredientUnit;
+        this.recipePerson = recipePerson;
+        this.recipeTime = recipeTime;
+        this.recipeImagePath = recipeImagePath;
+        this.recipeContents = recipeContents;
+    }
+
     //조회용
-    public Recipe(String recipeId, String title, String userId, String ingredient, String recipeImgPath, int recipePerson, int recipeTime, String recipeContentsImagePath,String recipeContents, int commentCount, int likeCount, String uploadDate) {
+    public Recipe(String recipeId, String title, String userId, String ingredient , int recipePerson, int recipeTime, String recipeImagePath,String recipeContents, int commentCount, int likeCount, String uploadDate) {
         this.recipeId = recipeId;
         this.title = title;
         this.userId = userId;
         this.ingredient = ingredient;
-        this.recipeImgPath = recipeImgPath;
         this.recipePerson = recipePerson;
         this.recipeTime = recipeTime;
-        this.recipeContentsImagePath = recipeContentsImagePath;
+        this.recipeImagePath = recipeImagePath;
         this.recipeContents = recipeContents;
         this.commentCount = commentCount;
         this.likeCount = likeCount;
         this.uploadDate = uploadDate;
     }
 
-    public String getRecipeContentsImagePath() {
-        return recipeContentsImagePath;
+    public byte[][] getRecipeImageByte() {
+        return recipeImageByte;
     }
 
-    public void setRecipeContentsImagePath(String recipeContentsImagePath) {
-        this.recipeContentsImagePath = recipeContentsImagePath;
+    public void setRecipeImageByte(byte[][] recipeImageByte) {
+        this.recipeImageByte = recipeImageByte;
+    }
+
+    public String getIngredientUnit() {
+        return ingredientUnit;
+    }
+
+    public void setIngredientUnit(String ingredientUnit) {
+        this.ingredientUnit = ingredientUnit;
     }
 
     public String getRecipeId() {
@@ -80,12 +106,12 @@ public class Recipe
         this.ingredient = ingredient;
     }
 
-    public String getRecipeImgPath() {
-        return recipeImgPath;
+    public String getRecipeImagePath() {
+        return recipeImagePath;
     }
 
-    public void setRecipeImgPath(String recipeImgPath) {
-        this.recipeImgPath = recipeImgPath;
+    public void setRecipeImagePath(String recipeImagePath) {
+        this.recipeImagePath = recipeImagePath;
     }
 
     public int getRecipePerson() {

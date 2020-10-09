@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+
+
 
     <LinearLayout
         android:id="@+id/headerLinearLayout"
@@ -50,18 +60,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="top"/>
+    </LinearLayout>
 
-
-    <TextView
-        android:id="@+id/textView2"
+    <LinearLayout
+        android:id="@+id/footer"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_gravity="bottom"
-        android:gravity="center"
-        android:textSize="17sp"
-        android:background="@color/colorWhite"
-        android:layout_marginTop="-50dp"
-        android:text="@string/anotherRecipeMsg" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorSky"
+        android:orientation="horizontal">
 
-
-</LinearLayout>
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:textSize="17sp"
+            android:background="@color/colorWhite"
+            android:text="@string/anotherRecipeMsg" />
+    </LinearLayout>
+</RelativeLayout>
