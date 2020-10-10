@@ -48,6 +48,7 @@
         android:layout_marginStart="64dp"
         android:layout_marginTop="492dp"
         android:background="@drawable/btn_background"
+        android:onClick="login"
         android:text="@string/strLogin"
         android:textColor="@color/colorWhite"
         android:textStyle="bold"

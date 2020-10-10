@@ -8,14 +8,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
+import com.example.emptytherefrigerator.AsyncTasks.LoginMngAsyncTask;
 import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.main.MainPageView;
-
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -27,7 +24,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class LoginView extends AppCompatActivity {
-    private String serverURL = "http://192.168.46.162:3000/";
     private Button btnLogin;
     private Button btnSignUp;
     private Intent intent;
@@ -35,10 +31,10 @@ public class LoginView extends AppCompatActivity {
     private EditText editTextPW;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-
         initializeView();
         setListener();
     }
@@ -56,12 +52,7 @@ public class LoginView extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(v.getContext(), MainPageView.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-                loginAsyncTask login = new loginAsyncTask();
-                login.execute(serverURL+"login");
+               login(v);
             }
         });
 
@@ -74,77 +65,22 @@ public class LoginView extends AppCompatActivity {
         });
     }
 
-    // 로그인을 처리하는 새로운 thread 생성
-    private class loginAsyncTask extends AsyncTask<String, String, String>
+    public void login(View view)        //로그인 버튼의 listener
     {
-        @SuppressLint("WrongThread")
-        @Override
-        protected String doInBackground(String...urls)
+        LoginMngAsyncTask login = new LoginMngAsyncTask();
+        JSONObject data = new JSONObject();
+        try
         {
-            URL urlCon=null;
-            HttpURLConnection con = null;
-            BufferedReader reader = null;
-
-            try {
-                JSONObject loginTest = new JSONObject();
-                loginTest.accumulate("id", editTextID.getText().toString());
-                loginTest.accumulate("pw", editTextPW.getText().toString());
-                String jsonStrng = loginTest.toString();
-
-                URL url = new URL(urls[0]);
-                //연결을 함
-                con = (HttpURLConnection) url.openConnection();
-
-                con.setRequestMethod("POST");//POST방식으로 보냄
-                con.setRequestProperty("Cache-Control", "no-cache");//캐시 설정
-                con.setRequestProperty("Content-Type", "application/json");//application JSON 형식으로 전송
-                con.setRequestProperty("Accept", "text/html");//서버에 response 데이터를 html로 받음
-
-                con.setDoOutput(true);//Outstream으로 post 데이터를 넘겨주겠다는 의미
-                con.setDoInput(true);//Inputstream으로 서버로부터 응답을 받겠다는 의미
-                con.connect();
-
-                OutputStream outStream = con.getOutputStream();
-                //버퍼를 생성하고 넣음
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outStream));
-                writer.write(loginTest.toString());
-                writer.flush();
-                writer.close();//버퍼를 받아줌
-
-                //서버로 부터 데이터를 받음
-                InputStream stream = con.getInputStream();
-
-                reader = new BufferedReader(new InputStreamReader(stream));
-
-                StringBuffer buffer = new StringBuffer();
-
-                String line = "";
-                while((line = reader.readLine()) != null)
-                {
-                    buffer.append(line);
-                }
-                return buffer.toString();//서버로 부터 받은 값을 return
-            }
-
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
-            finally {
-                if(con != null){
-                    con.disconnect();
-                }
-                try {
-                    if(reader != null){
-                        reader.close();//버퍼를 닫음
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            return "fail";
+            data.accumulate("id", editTextID.getText().toString());
+            data.accumulate("pw", editTextPW.getText().toString());
+            login.execute("login", data.toString());
         }
-
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+    /*
         @Override
         protected void onPostExecute(String result)         //doinbackground의 결과값 사용
         {
@@ -163,5 +99,5 @@ public class LoginView extends AppCompatActivity {
 
         }
     }
-
+*/
 }
