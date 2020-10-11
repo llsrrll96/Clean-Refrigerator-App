@@ -27,22 +27,32 @@
                     android:id="@+id/titleTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="50sp"
+                    android:textSize="40sp"
                     android:textStyle="bold"
                     android:gravity="center"/>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recipeImgRecyclerView"
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="250dp"
-                    android:scrollbars="horizontal"
-                    />
+                    android:layout_height="2dp"
+                    android:background="@color/colorGray"/>
+
+                <ImageView
+                    android:id="@+id/recipe_image"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/colorGray"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="81dp"
                     android:orientation="horizontal"
                     >
+
 
                     <ImageView
                         android:id="@+id/userImageView"
@@ -60,6 +70,10 @@
                 </LinearLayout>
 
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/colorGray"/>
 
                 <!---요리정보-->
                 <LinearLayout
@@ -73,7 +87,7 @@
                         android:id="@+id/recipeInfoTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/recipeInfo"
+                        android:text="요리 정보"
                         android:paddingLeft="25dp"
                         android:textSize="25sp"
                         android:textStyle="bold"/>
@@ -129,9 +143,12 @@
                             />
                     </LinearLayout>
 
-
                 </LinearLayout>
-
+                <!--요리정보끝-->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/colorGray"/>
                 <!---재료-->
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -142,7 +159,7 @@
                         android:id="@+id/ingredients"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/ingredi"
+                        android:text="재료"
                         android:paddingLeft="25dp"
                         android:textSize="25sp"
                         android:textStyle="bold"/>
@@ -157,6 +174,10 @@
                     </LinearLayout>
                 </LinearLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/colorGray"/>
 
                 !---식재료 가격-->
                 <LinearLayout
@@ -168,7 +189,7 @@
                         android:id="@+id/textView8"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/recipePrice"
+                        android:text="식재료 가격"
                         android:paddingLeft="25dp"
                         android:textSize="25sp"
                         android:textStyle="bold"/>
@@ -183,7 +204,10 @@
                     </LinearLayout>
 
                 </LinearLayout>
-
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/colorGray"/>
                 <!---요리방법(레시피) 등록-->
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -193,7 +217,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/strRecipe"
+                        android:text="요리 방법"
                         android:paddingLeft="25dp"
                         android:textSize="25sp"
                         android:textStyle="bold"
@@ -207,36 +231,13 @@
                         android:orientation="horizontal"
                         >
 
-                        <!--
-                                <TextView
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
-                                    android:text="1"
-                                    android:textStyle="italic"
-                                    android:textSize="20sp"
-                                    android:layout_gravity="center"/>
-                                <ImageView
-                                    android:layout_width="100dp"
-                                    android:layout_height="100dp"
-                                    android:scaleType="fitXY"
-                                    tools:srcCompat="@drawable/logo"
-                                    />
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:paddingLeft="10dp"
-                                    android:text="오징어 볶음에 같이 넣어줄 잴는 먹지좋은\n 크기로 잘라서 준비해주세요"/>
-                        -->
-
                     </LinearLayout>
+
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"/>
-
-            </LinearLayout>
+                    android:layout_height="35dp"/></LinearLayout>
         </ScrollView>
     </LinearLayout>
 
@@ -257,10 +258,9 @@
 
         <ImageView
             android:id="@+id/heartimg"
-            android:layout_width="35dp"
-            android:layout_height="30dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_weight="1"
-            android:layout_gravity="center"
             app:srcCompat="@drawable/heart" />
 
 

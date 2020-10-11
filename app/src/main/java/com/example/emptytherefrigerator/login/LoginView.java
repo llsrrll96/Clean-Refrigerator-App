@@ -13,6 +13,8 @@ import com.example.emptytherefrigerator.main.MainPageView;
 import org.json.JSONObject;
 
 public class LoginView extends AppCompatActivity {
+    private String serverURL = "http://192.168.0.6:3000/";
+
     private Button btnLogin;
     private Button btnSignUp;
     private Intent intent;

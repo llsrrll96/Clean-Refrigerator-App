@@ -43,7 +43,7 @@ public class MainSearchResultAdapter extends RecyclerView.Adapter<MainSearchResu
         context = holder.itemView.getContext();
 
         Glide.with(context)
-            .load(recipeResults.get(position).getRecipeImgPath())
+            .load(recipeResults.get(position).getRecipeImagePath())
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(holder.recipeImage);
         holder.title.setText(recipeResults.get(position).getTitle());   //viewHolder 객체
@@ -88,12 +88,4 @@ public class MainSearchResultAdapter extends RecyclerView.Adapter<MainSearchResu
         }
     }
 
-    class FooterViewHolder extends RecyclerView.ViewHolder
-    {
-        TextView footer;
-        FooterViewHolder(View footerView) {
-            super(footerView);
-            footer = (TextView) footerView.findViewById(R.id.footer);
-        }
-    }
 }

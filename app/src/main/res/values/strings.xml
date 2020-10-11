@@ -6,6 +6,7 @@
     <string name="strLogin">로그인</string>
     <string name="strSignup">회원가입</string>
     <string name="strCheck">확인</string>
+    <string name="strRegister">등록</string>
     <string name="strCancel">취소</string>
     <string name="anotherRecipeMsg">원하는 레시피가 없나요? (외부사이트 검색)</string>
     <string name="ingredients">식재료</string>
