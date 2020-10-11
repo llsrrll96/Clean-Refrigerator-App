@@ -26,7 +26,6 @@ public class NetworkHandler
         try
         {
             URL connUrl = new URL(url+reqUrl);
-            System.out.println(url+reqUrl);
             this.conn=(HttpURLConnection)connUrl.openConnection();
 
             conn.setRequestMethod("POST");//POST방식으로 보냄

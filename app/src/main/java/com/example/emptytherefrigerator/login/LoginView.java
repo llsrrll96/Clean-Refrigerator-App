@@ -1,8 +1,6 @@
 package com.example.emptytherefrigerator.login;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,15 +11,6 @@ import com.example.emptytherefrigerator.AsyncTasks.LoginMngAsyncTask;
 import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.main.MainPageView;
 import org.json.JSONObject;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 public class LoginView extends AppCompatActivity {
     private Button btnLogin;
@@ -73,31 +62,22 @@ public class LoginView extends AppCompatActivity {
         {
             data.accumulate("id", editTextID.getText().toString());
             data.accumulate("pw", editTextPW.getText().toString());
-            login.execute("login", data.toString());
+
+            String result = login.execute("login", data.toString()).get();      //통신 결과값 저장
+
+            if(result.equals("ok"))
+            {
+                Intent intent = new Intent(getApplicationContext(), MainPageView.class);      //현재 화면의 제어를 넘길 클래스 지정
+                startActivity(intent);      //다음 화면으로 넘어감
+            }
+            else if(result.equals("wrong") || result.equals("error"))
+            {
+                Toast.makeText(getApplicationContext(),"로그인 실패 : 아이디와 비밀번호를 확인해주세요", Toast.LENGTH_SHORT).show();
+            }
         }
         catch (Exception e)
         {
             e.printStackTrace();
         }
     }
-    /*
-        @Override
-        protected void onPostExecute(String result)         //doinbackground의 결과값 사용
-        {
-            super.onPostExecute(result);
-           // System.out.println(result);       //-> ok
-            if(result.equals("ok"))        //로그인 성공
-            {
-                Toast.makeText(getApplicationContext(),"로그인 성공", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getApplicationContext(), MainPageView.class);      //현재 화면의 제어를 넘길 클래스 지정
-                startActivity(intent);      //다음 화면으로 넘어감
-            }
-            else if(result.equals("wrong") || result.equals("error"))      //로그인 실패
-            {
-                Toast.makeText(getApplicationContext(),"로그인 실패", Toast.LENGTH_SHORT).show();
-            }
-
-        }
-    }
-*/
 }
