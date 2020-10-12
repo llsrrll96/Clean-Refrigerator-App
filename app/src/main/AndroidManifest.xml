@@ -3,6 +3,8 @@
     package="com.example.emptytherefrigerator">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!--파일 읽기 권한-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!--파일 쓰기 권한-->
 
     <application
         android:allowBackup="true"
@@ -10,7 +12,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
+        >
         <activity android:name=".main.RecipeDetailView"></activity>
         <activity android:name=".main.RecipeDetailCreateView" />
         <activity android:name=".main.SettingView" />
