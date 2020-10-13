@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.emptytherefrigerator.AsyncTasks.RecipeSearchAsyncTask;
 import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.entity.Recipe;
 
@@ -44,7 +45,7 @@ public class MainSearchFragView extends Fragment
         super.onActivityCreated(savedInstanceState);
 
         setSearchRecipe();             //검색창
-        setRecoRecipe();          //이달의 레시피 창
+        setRecyclerView();          //이달의 레시피 창
     }
 
     public void setSearchRecipe()
@@ -69,13 +70,24 @@ public class MainSearchFragView extends Fragment
         });
     }
 
-    public void setRecoRecipe()
+    public void setRecyclerView()   //이달의 레시피 출력
     {
+        ArrayList<Recipe> recipeList;
+        try
+        {
+            recipeList =  new RecipeSearchAsyncTask().execute("bestRecipeReq").get();//서버쪽에 따라 변경될 수 있음
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+
         //RecyclerView
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity()); //상하
         recyclerView.addItemDecoration(new RecyclerDecoration(50)); //아이템 간격
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(new MainSearchAdapter(insertItemList()));
+        //recyclerView.setAdapter(new MainSearchAdapter(recipeList));   //서버쪽 구현이 완료되면 이걸로 바꿀 예정
 
         //리사이클러뷰 구분선
         DividerItemDecoration dividerItemDecoration =
