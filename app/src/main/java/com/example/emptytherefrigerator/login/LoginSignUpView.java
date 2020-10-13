@@ -52,14 +52,9 @@ public class LoginSignUpView extends AppCompatActivity {
     {
         btnOk.setOnClickListener(new View.OnClickListener() {       //회원가입 버튼 -> 뷰에서는 OK 버튼
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 signUp(v);
-//                intent = new Intent(v.getContext(), LoginView.class);
-//                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-                //회원가입 완료
-                //v.getContext().startActivity(intent);
             }
         });
 
