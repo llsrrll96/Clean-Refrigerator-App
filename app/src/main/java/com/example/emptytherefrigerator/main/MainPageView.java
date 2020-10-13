@@ -12,7 +12,6 @@ import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.memberView.MemberView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-
 //MainSearchFrag 와 MainUserFrag 가 합쳐짐
 public class MainPageView extends AppCompatActivity
 {
