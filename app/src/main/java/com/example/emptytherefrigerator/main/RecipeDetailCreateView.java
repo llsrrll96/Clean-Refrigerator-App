@@ -9,7 +9,9 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Base64;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -21,15 +23,23 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.emptytherefrigerator.AsyncTasks.RecipeMngAsyncTask;
 import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.entity.Recipe;
+import com.google.gson.JsonObject;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 //레시피 등록 화면
 //등록버튼으로 데이터 서버에 전송 후 완료 메시지를 빋아온다.
@@ -41,6 +51,8 @@ public class RecipeDetailCreateView extends AppCompatActivity {
     private EditText editTextTitle;
 
     private ImageView recipeDetailImage;
+    private int recipeDetailImageIdx;
+    private boolean isDetail;
 
     private EditText recipeInfoCount;
     private EditText recipeInfoTime;
@@ -50,6 +62,7 @@ public class RecipeDetailCreateView extends AppCompatActivity {
 
     private ImageButton btnIngredient;          //재료 edittext 추가 버튼
     private ImageButton btnRecipe;
+    private int ingredientCnt, recipeCnt;
 
     private List<EditText> etIngredientList;        //재료 리스트
     private List<EditText> etIngredientUnitList;    //재료단위 리스트
@@ -82,6 +95,8 @@ public class RecipeDetailCreateView extends AppCompatActivity {
 
     public void initialize()
     {
+        isDetail = false;
+        recipeDetailImageIdx = -1;
         editTextTitle=(EditText) findViewById(R.id.editTextTitle);
         //대표 이미지
         //이미지뷰를 눌러 이미지 선택하면 옆에 선택한 이미지 생성
@@ -107,68 +122,117 @@ public class RecipeDetailCreateView extends AppCompatActivity {
 
         recipe = new Recipe();
 
+        //대표이미지뷰를 리스트에 추가
         recipeImageViewList.add(recipeDetailImage);
         //권한 체크
         permissionCheck();
 
         //재료 첫 번째 레이아웃
         setIngredient();
+        ingredientCnt = 1;
         //요리 방법 첫번째 레이아웃
         setRecipeContent();
-
+        recipeCnt = 1;
     }
 
     public void setListener()
     {
+        recipeDetailImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setDetailImage();
+            }
+        });
         //재료추가 버튼
-        btnIngredient.setOnClickListener(new View.OnClickListener() {
+        btnIngredient.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                setIngredient();
+                if (ingredientCnt++ < 10) {
+                    setIngredient();
+                }else {
+                    Toast.makeText(v.getContext(),"더 이상 늘릴 수 없습니다.",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
         //요리 방법 추가 버튼
-        btnRecipe.setOnClickListener(new View.OnClickListener() {
+        btnRecipe.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                setRecipeContent();
+                if (recipeCnt++ < 10) {
+                    setRecipeContent();
+                }else
+                    Toast.makeText(v.getContext(),"더 이상 늘릴 수 없습니다.",Toast.LENGTH_SHORT).show();
             }
         });
 
         //등록 버튼
-        btnRegister.setOnClickListener(new View.OnClickListener() {
+        btnRegister.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 //서버에 등록데이터 보내고 서버에서 받은 메시지로 결과 출력
-                getServerData(sendRegisterDataToServer());
+                //getServerData(sendRegisterDataToServer());
+                try {
+                    sendRegisterDataToServer();
+                } catch (JSONException e) { e.printStackTrace();
+                } catch (ExecutionException e) { e.printStackTrace();
+                } catch (InterruptedException | IOException e) { e.printStackTrace(); }
             }
         });
 
         //취소 버튼
-        btnCancel.setOnClickListener(new View.OnClickListener() {
+        btnCancel.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-
             }
         });
     }
 
-    public String sendRegisterDataToServer()
+    ////////////////////////////////////////////////////////////////////////////////
+    public void setDetailImage() // 앨범에서 이미지 가져오기 버튼
     {
-        setRecipeData();
-        //AsyncTask 실행
-        return "";
+        permissionCheck();
+
+        // 앨범 호출
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
+        //onActivityResult 호출
+        isDetail = true;
+        startActivityForResult(intent, PICK_FROM_ALBUM);
+        recipeDetailImageIdx = recipeImageViewList.size();
     }
 
-    public void getServerData(String result)
-    {
+    // 레시피 정보 JSON 전송 및 결과 수신 
+    public String sendRegisterDataToServer() throws JSONException, ExecutionException, InterruptedException, IOException {
+        JSONObject recipeJSON = new JSONObject();
+        setRecipeData();
+        makeRecipeJSON(recipeJSON);
 
+        String result = new RecipeMngAsyncTask().execute("createRecipe", recipeJSON.toString()).get();
+        return result;
+    }
+
+    // 레시피 JSON 만들기
+    public void makeRecipeJSON(JSONObject json) throws JSONException {
+        json.accumulate("recipeId", recipe.getRecipeId());
+        json.accumulate("title", recipe.getTitle());
+        json.accumulate("userId", recipe.getUserId());
+        json.accumulate("ingredient", recipe.getIngredient());
+        json.accumulate("ingredientUnit", recipe.getIngredientUnit());
+        json.accumulate("recipePerson", recipe.getRecipePerson());
+        json.accumulate("recipeTime", recipe.getRecipeTime());
+        json.accumulate("recipeContents", recipe.getRecipeContents());
+        json.accumulate("recipeImageCount", recipe.getRecipeImageByte().length);
+
+        String name = "recipeImageByte";
+        for (int i = 0; i < recipe.getRecipeImageByte().length; i++) {
+            char n = (char) (i + '0');
+            json.accumulate(name + n, recipe.getRecipeImageByte()[i]);
+        }
     }
 
     //사용자가 입력한 데이터를 recipe 객체에 set
-    public void setRecipeData()
-    {
+    public void setRecipeData() throws IOException {
         //타이틀, 인원, 조리시간
         recipe.setTitle(editTextTitle.getText().toString());
         recipe.setRecipePerson(Integer.parseInt(recipeInfoCount.getText().toString()));
@@ -203,32 +267,30 @@ public class RecipeDetailCreateView extends AppCompatActivity {
             }
         }
         recipe.setRecipeContents(recipeContents);
-
     }
 
     //모든 이미지 데이터를 가져온다.
-    public byte[][] getByteArrayFromBitmap(List<ImageView> imageViewList, int count)
+    public String[] getByteArrayFromBitmap(List<ImageView> imageViewList, int count)
     {
-        byte[][] data= null;
-        for(int idx = 0; idx < imageViewList.size(); idx++) {
+        String[] data = new String[count];
+        System.out.println("count: " + count);
+
+        for(int idx = 0; idx < count; idx++) {
             //비트맵으로 바꾼다
             BitmapDrawable drawable = (BitmapDrawable) imageViewList.get(idx).getDrawable();
             Bitmap bitmapImage = drawable.getBitmap();
             //바이트로 바꾸는 작업
+            System.out.println(idx + " : " + imageViewList.get(idx).getWidth());
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, stream);
 
-            byte[] streamData = stream.toByteArray();
-            data = new byte[count][streamData.length];
-
-            for(int i = 0; i< count; i++) {
-                for (int j = 0; j < streamData.length; j++) {
-                    data[i][j] = streamData[j];
-                }
-            }
+            String streamData = Base64.encodeToString(stream.toByteArray(), Base64.DEFAULT);
+            data[idx] = streamData;
         }
+
         return data;
     }
+
 
     ///////////////////////////////////////////////////////////////////////////////
     public void permissionCheck()
@@ -258,17 +320,6 @@ public class RecipeDetailCreateView extends AppCompatActivity {
                 }
                 break;
         }
-    }
-    ////////////////////////////////////////////////////////////////////////////////
-    public void btnDoTakeAlbumAction(View view) // 앨범에서 이미지 가져오기 버튼
-    {
-        permissionCheck();
-
-        // 앨범 호출
-        Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
-        //onActivityResult 호출
-        startActivityForResult(intent, PICK_FROM_ALBUM);
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -301,8 +352,8 @@ public class RecipeDetailCreateView extends AppCompatActivity {
                 intent.putExtra("scale", true);
                 intent.putExtra("return-data", true);
                 startActivityForResult(intent, CROP_FROM_iMAGE); // CROP_FROM_iMAGE case문 이동
+                System.out.println("Recipe"+ mImageCaptureUri.getPath().toString());
                 break;
-                //System.out.println("Recipe"+ mImageCaptureUri.getPath().toString());
             }
 
             case CROP_FROM_iMAGE: {
@@ -321,9 +372,16 @@ public class RecipeDetailCreateView extends AppCompatActivity {
 
                 if (extras != null) {
                     repPhotoBitmap = extras.getParcelable("data"); // CROP된 BITMAP
-                    recipeDetailImage.setImageBitmap(repPhotoBitmap); // 레이아웃의 이미지칸에 CROP된 BITMAP을 보여줌
-                    storeCropImage(repPhotoBitmap, filePath); // CROP된 이미지를 외부저장소, 앨범에 저장한다.
-                    absoultePath = filePath;
+                    if (isDetail) {
+                        recipeDetailImage.setImageBitmap(repPhotoBitmap); // 레이아웃의 이미지칸에 CROP된 BITMAP을 보여줌
+                        isDetail = false;
+                    }
+                    else {
+                        recipeImageViewList.get(recipeImageViewList.size() - 1).setImageBitmap(repPhotoBitmap);
+                    }
+
+                    //storeCropImage(repPhotoBitmap, filePath); // CROP된 이미지를 외부저장소, 앨범에 저장한다.
+                    //absoultePath = filePath;
                     break;
                 }
                 // 임시 파일 삭제
@@ -336,33 +394,6 @@ public class RecipeDetailCreateView extends AppCompatActivity {
         }
     }
 
-    private void storeCropImage(Bitmap bitmap, String filePath) {                       //자른 이미지를 저장
-        try {
-            // Recipe 폴더를 생성하여 이미지를 저장하는 방식이다.
-            String dirPath = Environment.getExternalStorageDirectory().getAbsolutePath()+"/Recipe";
-
-            File directory_Recipe = new File(dirPath);
-            if(!directory_Recipe.exists()) // Recipe 디렉터리에 폴더가 없다면 만든다(새로 이미지를 저장할 경우에 속한다.)
-                directory_Recipe.mkdir();
-
-            File copyFile = new File(filePath);
-            BufferedOutputStream out = null;
-
-            copyFile.createNewFile();
-
-            out = new BufferedOutputStream(new FileOutputStream(copyFile));
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
-
-            // sendBroadcast를 통해 Crop된 사진을 앨범에 보이도록 갱신한다.
-            sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
-                    Uri.fromFile(copyFile)));
-
-            out.flush();
-            out.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
     /////////////////////////////////////////////////////////////////////////////////////////////////////
     public void setIngredient()
     {
@@ -395,20 +426,22 @@ public class RecipeDetailCreateView extends AppCompatActivity {
 
         TextView tvRecipeCount = new TextView(this);
         tvRecipeCount.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT,1f));
-        tvRecipeCount.setText(Integer.toString(recipeContCnt));
+        tvRecipeCount.setText(Integer.toString(recipeContCnt + 1));
         recipeContCnt++;
 
-        ImageView recipeImageView = new ImageView(this);
+        final ImageView recipeImageView = new ImageView(this);
         // 요리 방법 이미지
         LinearLayout.LayoutParams paramsImg = new LinearLayout.LayoutParams(300, 300,2f);
         recipeImageView.setLayoutParams(paramsImg);
-        recipeImageView.setPadding(20,0,20,0);
+        recipeImageView.setPadding(30,0,30,0);
         recipeImageView.setScaleType(ImageView.ScaleType.FIT_XY);
         recipeImageView.setImageResource(R.drawable.logo);
-        recipeImageView.setOnClickListener(new View.OnClickListener() {
+        recipeImageView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 // 앨범 호출
+                recipeImageViewList.add(recipeImageView);
+
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
                 //onActivityResult 호출
@@ -421,7 +454,6 @@ public class RecipeDetailCreateView extends AppCompatActivity {
         //etRecipe.setPadding(20,20,20,20);
         etRecipe.setHint("설명");
 
-        recipeImageViewList.add(recipeImageView);
         recipeContentList.add(etRecipe);
         recipeLayout.addView(tvRecipeCount);
         recipeLayout.addView(recipeImageView);
@@ -429,6 +461,35 @@ public class RecipeDetailCreateView extends AppCompatActivity {
         recipeContentLayout.addView(recipeLayout);
     }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    private void storeCropImage(Bitmap bitmap, String filePath) {                       //자른 이미지를 저장
+        try {
+            // Recipe 폴더를 생성하여 이미지를 저장하는 방식이다.
+            String dirPath = Environment.getExternalStorageDirectory().getAbsolutePath()+"/Recipe";
+
+            File directory_Recipe = new File(dirPath);
+            if(!directory_Recipe.exists()) // Recipe 디렉터리에 폴더가 없다면 만든다(새로 이미지를 저장할 경우에 속한다.)
+                directory_Recipe.mkdir();
+
+            File copyFile = new File(filePath);
+            BufferedOutputStream out = null;
+
+            copyFile.createNewFile();
+
+            out = new BufferedOutputStream(new FileOutputStream(copyFile));
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
+
+            // sendBroadcast를 통해 Crop된 사진을 앨범에 보이도록 갱신한다.
+            sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
+                    Uri.fromFile(copyFile)));
+
+            out.flush();
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }
