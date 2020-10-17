@@ -36,7 +36,6 @@
             android:adjustViewBounds="true"
             android:maxWidth="150dp"
             android:maxHeight="150dp"
-            android:onClick="btnDoTakeAlbumAction"
             app:srcCompat="@android:drawable/ic_menu_gallery" />
 
 
