@@ -1,5 +1,6 @@
 package com.example.emptytherefrigerator.memberView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.emptytherefrigerator.R;
+import com.example.emptytherefrigerator.main.MainPageView;
+import com.example.emptytherefrigerator.memberView.MyRecipe.MyRecipeListView;
 
 //Main 화면 Home
 //이 달의 레시피 검색 결과
@@ -28,6 +31,7 @@ public class UserView extends Fragment
     {
         view = inflater.inflate(R.layout.member_menu,container,false);
         initializeView();
+        setListener();
         return view;
     }
     private void initializeView()
@@ -54,7 +58,8 @@ public class UserView extends Fragment
                     @Override
                     public void onClick(View v)
                     {
-                        //내 레시피 조회
+                        Intent intent = new Intent(getActivity(), MyRecipeListView.class);      //현재 화면의 제어를 넘길 클래스 지정
+                        startActivity(intent);      //다음 화면으로 넘어감
                     }
                 });
         btnCommentInquire.setOnClickListener(new View.OnClickListener()

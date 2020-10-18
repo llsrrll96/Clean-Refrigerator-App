@@ -29,20 +29,21 @@ public class MyRecipeListView extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.member_my_recipe_list);
 
+        getRecipeList();
         initializeView();
-        setListener();
+        //setListener();
     }
 
     public void initializeView()
     {
-        list = getRecipeList();
         recyclerView = findViewById(R.id.recipeRecycler);
-        adapter = new MyRecipeListAdapter(this, list);      //list 가져오는 aysnctask 필요
+        adapter = new MyRecipeListAdapter(this, list);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);//기본 제목을 없애줍니다
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
@@ -50,39 +51,42 @@ public class MyRecipeListView extends AppCompatActivity
         getMenuInflater().inflate(R.menu.my_recipe_list_menu, menu);
         return true;
     }
-    public void setListener()
-    {
-        btnCreateRecipe.setOnClickListener(new View.OnClickListener()
-        {
-           @Override
-           public void onClick(View v)
-           {
-               //레시피 등록 화면 넘기기
-           }
-
-        });
-    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
-        if(item.getItemId()==R.id.btnCreateRecipe)
+        switch(item.getItemId())
         {
-            //레시피 등록 화면으로 넘어감
+            case android.R.id.home:     //뒤로가기 버튼이 눌렸을 때
+                finish();
+            case R.id.btnCreateRecipe:
+                //레시피 등록 화면으로 넘어감
+                break;
         }
-        return true;
+        return super.onOptionsItemSelected(item);
     }
-    public ArrayList<Recipe> getRecipeList()        //내 레시피 서버에서 받아온다
+    public void setListener()
     {
-        RecipeSearchAsyncTask recipeSearch = new RecipeSearchAsyncTask();
-        try
-        {
-            if(recipeSearch.execute()!=null)        //null인 경우는 처리 안해줘도 되나? 일단 처리함
-                list = recipeSearch.execute("searchMyRecipeList").get();
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
-        return list;
+//        btnCreateRecipe.setOnClickListener(new View.OnClickListener()
+//        {
+//           @Override
+//           public void onClick(View v)
+//           {
+//               //레시피 등록 화면 넘기기
+//           }
+//
+//        });
+    }
+    public void getRecipeList()        //내 레시피 서버에서 받아온다
+    {
+//        RecipeSearchAsyncTask recipeSearch = new RecipeSearchAsyncTask();
+//        try
+//        {
+//            if(recipeSearch.execute()!=null)        //null인 경우는 처리 안해줘도 되나? 일단 처리함
+//                list = recipeSearch.execute("searchMyRecipeList").get();
+//        }
+//        catch(Exception e)
+//        {
+//            e.printStackTrace();
+//        }
     }
 }

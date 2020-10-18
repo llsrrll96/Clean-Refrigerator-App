@@ -54,13 +54,20 @@ public class MyRecipeListAdapter extends RecyclerView.Adapter<MyRecipeListAdapte
         {
             super(itemView);
             this.adapter = adapter;
+            recipeMainImage = itemView.findViewById(R.id.recipeMainImage);
+            title = itemView.findViewById(R.id.title);
+            like_count = itemView.findViewById(R.id.like_count);
+            comment_count = itemView.findViewById(R.id.comment_count);
+            uploadDate = itemView.findViewById(R.id.uploadDate);
+            btnEditRecipe = itemView.findViewById(R.id.recipeEditBtn);
+            btnDelRecipe = itemView.findViewById(R.id.recipeDelBtn);
         }
         public void onBind(Recipe recipe)
         {
             //mainimage 셋팅
             title.setText(recipe.getTitle());
-            comment_count.setText(recipe.getCommentCount());
-            like_count.setText(recipe.getLikeCount());
+            comment_count.setText(Integer.toString(recipe.getCommentCount()));
+            like_count.setText(Integer.toString(recipe.getLikeCount()));
             uploadDate.setText(recipe.getUploadDate());
         }
         public void setListener()
