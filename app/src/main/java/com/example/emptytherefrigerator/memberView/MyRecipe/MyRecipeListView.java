@@ -3,13 +3,12 @@ package com.example.emptytherefrigerator.memberView.MyRecipe;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageButton;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.emptytherefrigerator.AsyncTasks.RecipeSearchAsyncTask;
+
 import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.entity.Recipe;
 
@@ -40,7 +39,7 @@ public class MyRecipeListView extends AppCompatActivity
         adapter = new MyRecipeListAdapter(this, list);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.myRecipeToolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);//기본 제목을 없애줍니다
