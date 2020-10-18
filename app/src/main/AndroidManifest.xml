@@ -32,7 +32,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".main.MainSearchResultView" />
-
+        <activity android:name=".memberView.MyRecipe.MyRecipeListView"/>
     </application>
 
 </manifest>
