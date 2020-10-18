@@ -55,10 +55,10 @@
         android:id="@+id/commentView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="@+id/backBtn"
+        app:layout_constraintEnd_toEndOf="@+id/btnBack"
         app:layout_constraintHorizontal_bias="0.044"
-        app:layout_constraintStart_toStartOf="@+id/backBtn"
-        app:layout_constraintTop_toBottomOf="@+id/backBtn" />
+        app:layout_constraintStart_toStartOf="@+id/btnBack"
+        app:layout_constraintTop_toBottomOf="@+id/btnBack" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
@@ -68,7 +68,7 @@
         app:layout_constraintGuide_end="157dp" />
 
     <ImageButton
-        android:id="@+id/backBtn"
+        android:id="@+id/btnBack"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:background="@color/colorWhite"

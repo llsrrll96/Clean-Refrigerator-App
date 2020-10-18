@@ -4,6 +4,7 @@
     <string name="strID">아이디</string>
     <string name="strPW">비밀번호</string>
     <string name="strLogin">로그인</string>
+    <string name="strLogout">로그아웃</string>
     <string name="strSignup">회원가입</string>
     <string name="strCheck">확인</string>
     <string name="strRegister">등록</string>
@@ -22,5 +23,6 @@
     <string name="mycontents">내 컨텐츠 관리</string>
     <string name="recipeInfo">요리 정보</string>
     <string name="recipePrice">식재료가격</string>
-
+    <string name="userInf">회원정보</string>
+    <string name="myRecipe">내 레시피</string>
 </resources>
