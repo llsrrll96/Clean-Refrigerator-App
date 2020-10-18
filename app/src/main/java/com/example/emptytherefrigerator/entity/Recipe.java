@@ -9,7 +9,7 @@ public class Recipe
     private String ingredientUnit;   //식재료 단위
     private int recipePerson;       //몇 인분
     private int recipeTime;         //조리 시간
-    private byte[][] recipeImageByte; //다중 레시피 이미지 데이터
+    private String[] recipeImageByte; //다중 레시피 이미지 데이터
     private String recipeImagePath; //레시피 조리 이미지 경로(들) : ㅇㅇㅇ, ㅇㅇㅇ
     private String recipeContents;  //레시피 조리법 설명
     private int commentCount;         //댓글 개수
@@ -58,11 +58,11 @@ public class Recipe
         this.uploadDate = uploadDate;
     }
 
-    public byte[][] getRecipeImageByte() {
+    public String[] getRecipeImageByte() {
         return recipeImageByte;
     }
 
-    public void setRecipeImageByte(byte[][] recipeImageByte) {
+    public void setRecipeImageByte(String[] recipeImageByte) {
         this.recipeImageByte = recipeImageByte;
     }
 
