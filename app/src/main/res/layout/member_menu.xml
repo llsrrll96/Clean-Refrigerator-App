@@ -59,7 +59,7 @@
                 android:maxWidth="35dp"
                 android:maxHeight="35dp"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/recipes" />
+                app:srcCompat="@drawable/recipe_book_blue" />
 
             <ImageButton
                 android:id="@+id/commentInquireBtn"

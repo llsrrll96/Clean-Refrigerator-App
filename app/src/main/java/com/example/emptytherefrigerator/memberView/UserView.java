@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.main.MainPageView;
+import com.example.emptytherefrigerator.memberView.MyComment.MyCommentView;
 import com.example.emptytherefrigerator.memberView.MyRecipe.MyRecipeListView;
 
 //Main 화면 Home
@@ -67,7 +68,8 @@ public class UserView extends Fragment
             @Override
             public void onClick(View v)
             {
-                //내 댓글 조회
+                Intent intent = new Intent(getActivity(), MyCommentView.class);
+                startActivity(intent);
             }
         });
         btnLIkeInquire.setOnClickListener(new View.OnClickListener()

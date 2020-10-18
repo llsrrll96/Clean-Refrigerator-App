@@ -25,4 +25,5 @@
     <string name="recipePrice">식재료가격</string>
     <string name="userInf">회원정보</string>
     <string name="myRecipe">내 레시피</string>
+    <string name="myComment">내 댓글</string>
 </resources>
