@@ -34,7 +34,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".main.MainSearchResultView" />
-
+        <activity android:name=".memberView.MyRecipe.MyRecipeListView"/>
+        <activity android:name=".memberView.MyComment.MyCommentView"/>
     </application>
 
 </manifest>

@@ -18,11 +18,9 @@
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:background="@color/colorSky"
-        android:paddingLeft="25dp"
-        android:paddingTop="25dp"
-        android:paddingBottom="25dp"
+        android:gravity="center"
         android:text="@string/profile"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
@@ -37,12 +35,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.13269494" />
+        app:layout_constraintGuide_percent="0.12" />
 
     <TableLayout
         android:id="@+id/tableLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3">
@@ -60,7 +59,7 @@
                 android:maxWidth="35dp"
                 android:maxHeight="35dp"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/recipes" />
+                app:srcCompat="@drawable/recipe_book_blue" />
 
             <ImageButton
                 android:id="@+id/commentInquireBtn"
@@ -193,11 +192,9 @@
     <TextView
         android:id="@+id/textView3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:background="@color/colorSky"
-        android:paddingLeft="25dp"
-        android:paddingTop="25dp"
-        android:paddingBottom="25dp"
+        android:gravity="center"
         android:text="@string/mycontents"
         android:textColor="#FFFFFF"
         android:textSize="20dp"
@@ -209,12 +206,12 @@
         android:id="@+id/memberEditBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="25dp"
+        android:layout_marginEnd="24dp"
         android:background="@color/colorSky"
         app:layout_constraintBottom_toBottomOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="@+id/textView"
         app:layout_constraintTop_toTopOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.6"
+        app:layout_constraintVertical_bias="0.555"
         app:srcCompat="@drawable/edit_icon" />
 
     <Button

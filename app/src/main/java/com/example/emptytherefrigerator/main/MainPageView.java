@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.emptytherefrigerator.R;
-import com.example.emptytherefrigerator.memberView.MemberView;
+import com.example.emptytherefrigerator.memberView.UserView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 //MainSearchFrag 와 MainUserFrag 가 합쳐짐
@@ -17,7 +17,7 @@ public class MainPageView extends AppCompatActivity
 {
     private FragmentManager fragmentManager = getSupportFragmentManager();
     private MainSearchFragView mainSearchFrag = new MainSearchFragView();
-    private MemberView memberView = new MemberView();
+    private UserView memberView = new UserView();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
