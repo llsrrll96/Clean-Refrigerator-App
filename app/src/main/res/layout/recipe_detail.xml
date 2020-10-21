@@ -12,7 +12,8 @@
         android:scrollbars="vertical"
         android:scrollbarAlwaysDrawVerticalTrack="true"
         android:layout_alignParentTop="true"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/colorWhite">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -27,7 +28,7 @@
                     android:id="@+id/titleTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="40sp"
+                    android:textSize="25sp"
                     android:textStyle="bold"
                     android:gravity="center"/>
 
@@ -49,17 +50,9 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="81dp"
+                    android:layout_height="50dp"
                     android:orientation="horizontal"
                     >
-
-
-                    <ImageView
-                        android:id="@+id/userImageView"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:layout_weight="1"/>
-
                     <TextView
                         android:id="@+id/userIdTextView"
                         android:layout_width="wrap_content"
@@ -89,7 +82,7 @@
                         android:layout_height="wrap_content"
                         android:text="요리 정보"
                         android:paddingLeft="25dp"
-                        android:textSize="25sp"
+                        android:textSize="20sp"
                         android:textStyle="bold"/>
 
                     <LinearLayout
@@ -151,6 +144,7 @@
                     android:background="@color/colorGray"/>
                 <!---재료-->
                 <LinearLayout
+                    android:id="@+id/root_ingredientsLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -161,7 +155,7 @@
                         android:layout_height="wrap_content"
                         android:text="재료"
                         android:paddingLeft="25dp"
-                        android:textSize="25sp"
+                        android:textSize="20sp"
                         android:textStyle="bold"/>
 
                     <!---재료 동적추가-->
@@ -169,8 +163,8 @@
                         android:id="@+id/ingredientsLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="20dp">
+                        android:orientation="vertical"
+                        android:padding="10dp">
                     </LinearLayout>
                 </LinearLayout>
 
@@ -191,7 +185,7 @@
                         android:layout_height="wrap_content"
                         android:text="식재료 가격"
                         android:paddingLeft="25dp"
-                        android:textSize="25sp"
+                        android:textSize="20sp"
                         android:textStyle="bold"/>
 
                     <!---식재료가격 동적추가-->
@@ -210,6 +204,7 @@
                     android:background="@color/colorGray"/>
                 <!---요리방법(레시피) 등록-->
                 <LinearLayout
+                    android:id="@+id/root_createRecipeContentLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -219,7 +214,7 @@
                         android:layout_height="wrap_content"
                         android:text="요리 방법"
                         android:paddingLeft="25dp"
-                        android:textSize="25sp"
+                        android:textSize="20sp"
                         android:textStyle="bold"
                         android:paddingBottom="10dp"/>
 
@@ -228,7 +223,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="20dp"
-                        android:orientation="horizontal"
+                        android:orientation="vertical"
                         >
 
                     </LinearLayout>
@@ -249,18 +244,22 @@
         android:layout_alignParentBottom="true"
         android:background="@color/colorSky"
         android:orientation="horizontal">
-        <ImageView
-            android:id="@+id/chatimg"
+        <ImageButton
+            android:id="@+id/btnComments"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_weight="1"
+            android:background="@color/colorSky"
+            android:scaleType="fitCenter"
             app:srcCompat="@android:drawable/sym_action_chat" />
 
-        <ImageView
-            android:id="@+id/heartimg"
+        <ImageButton
+            android:id="@+id/btnHeart"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_weight="1"
+            android:background="@color/colorSky"
+            android:scaleType="fitCenter"
             app:srcCompat="@drawable/heart" />
 
 
