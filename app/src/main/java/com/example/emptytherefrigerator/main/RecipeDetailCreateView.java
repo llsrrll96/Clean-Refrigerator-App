@@ -222,13 +222,15 @@ public class RecipeDetailCreateView extends AppCompatActivity {
         json.accumulate("recipePerson", recipe.getRecipePerson());
         json.accumulate("recipeTime", recipe.getRecipeTime());
         json.accumulate("recipeContents", recipe.getRecipeContents());
-        json.accumulate("recipeImageCount", recipe.getRecipeImageByte().length);
 
-        String name = "recipeImageByte";
+        JSONArray recipeImages = new JSONArray();
         for (int i = 0; i < recipe.getRecipeImageByte().length; i++) {
             char n = (char) (i + '0');
-            json.accumulate(name + n, recipe.getRecipeImageByte()[i]);
+            JSONObject imgJSON = new JSONObject();
+            imgJSON.accumulate("recipeImageByte", recipe.getRecipeImageByte()[i]);
+            recipeImages.put(imgJSON);
         }
+        json.accumulate("recipeImageBytes", recipeImages.toString());
     }
 
     //사용자가 입력한 데이터를 recipe 객체에 set
