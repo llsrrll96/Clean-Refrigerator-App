@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.emptytherefrigerator.AsyncTasks.LoginMngAsyncTask;
 import com.example.emptytherefrigerator.R;
+import com.example.emptytherefrigerator.entity.User;
 import com.example.emptytherefrigerator.main.MainPageView;
 import org.json.JSONObject;
 
@@ -20,9 +21,6 @@ public class LoginView extends AppCompatActivity {
     private Intent intent;
     private EditText editTextID;
     private EditText editTextPW;
-
-    private SharedPreferences userInfo = getSharedPreferences(UserInfo.PREFERENCES_NAME, MODE_PRIVATE);
-    SharedPreferences.Editor preferencesEditor = userInfo.edit();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -64,18 +62,18 @@ public class LoginView extends AppCompatActivity {
     {
         LoginMngAsyncTask login = new LoginMngAsyncTask();
         JSONObject data = new JSONObject();
+        User user = new User(editTextID.getText().toString(), editTextPW.getText().toString());
         try
         {
-            data.accumulate("userId", editTextID.getText().toString());
-            data.accumulate("pw", editTextPW.getText().toString());
+            data.accumulate("userId", user.getId());
+            data.accumulate("pw", user.getPw());
 
             String result = login.execute("login", data.toString()).get();      //통신 결과값 저장
 
             if(result.equals("1"))      //로그인 성공
             {
-                preferencesEditor.putString(UserInfo.ID_KEY, editTextID.getText().toString());
-                preferencesEditor.putString(UserInfo.PW_KEY, editTextPW.getText().toString());
-                preferencesEditor.apply();
+                UserInfo.setString(this, UserInfo.ID_KEY, user.getId());
+                UserInfo.setString(this, UserInfo.PW_KEY, user.getPw());
 
                 Intent intent = new Intent(getApplicationContext(), MainPageView.class);      //현재 화면의 제어를 넘길 클래스 지정
                 startActivity(intent);      //다음 화면으로 넘어감
@@ -93,9 +91,8 @@ public class LoginView extends AppCompatActivity {
 
     public void autoLogin()
     {
-        SharedPreferences userInfo = getSharedPreferences(UserInfo.PREFERENCES_NAME, MODE_PRIVATE);
-        String id = userInfo.getString(UserInfo.ID_KEY, "");
-        String pw = userInfo.getString(UserInfo.PW_KEY, "");
+        String id = UserInfo.getString(this, UserInfo.ID_KEY);
+        String pw = UserInfo.getString(this, UserInfo.PW_KEY);
 
         if(!id.equals("") && !pw.equals(""))        //값이 있는 경우에만 화면을 넘어가게 함
         {
