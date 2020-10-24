@@ -27,6 +27,7 @@ public class LoginView extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+
         autoLogin();
         initializeView();
         setListener();
@@ -91,12 +92,17 @@ public class LoginView extends AppCompatActivity {
 
     public void autoLogin()
     {
+        Intent intent = getIntent();
+        if(intent.getStringExtra("logOut").equals("logOut"))        //로그아웃에서 넘어온거면 자동로그인을 하지 않음
+        {
+            return;
+        }
         String id = UserInfo.getString(this, UserInfo.ID_KEY);
         String pw = UserInfo.getString(this, UserInfo.PW_KEY);
 
         if(!id.equals("") && !pw.equals(""))        //값이 있는 경우에만 화면을 넘어가게 함
         {
-            Intent intent = new Intent(getApplicationContext(), MainPageView.class);      //현재 화면의 제어를 넘길 클래스 지정
+            intent = new Intent(getApplicationContext(), MainPageView.class);      //현재 화면의 제어를 넘길 클래스 지정
             startActivity(intent);      //다음 화면으로 넘어감
         }
     }

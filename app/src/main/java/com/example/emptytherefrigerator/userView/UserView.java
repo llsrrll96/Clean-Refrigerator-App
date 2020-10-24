@@ -93,8 +93,9 @@ public class UserView extends Fragment
         {
             @Override
             public void onClick(View v)
-            {
+            {           //로그아웃
                 Intent intent = new Intent(getActivity(), LoginView.class);
+                intent.putExtra("logOut", "logOut");
                 startActivity(intent);
             }
         });
