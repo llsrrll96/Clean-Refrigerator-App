@@ -6,6 +6,8 @@
     <string name="strLogin">로그인</string>
     <string name="strLogout">로그아웃</string>
     <string name="strSignup">회원가입</string>
+    <string name="strEditUserInfo">회원 정보 수정</string>
+    <string name="strEdit">수정</string>
     <string name="strCheck">확인</string>
     <string name="strRegister">등록</string>
     <string name="strCancel">취소</string>
