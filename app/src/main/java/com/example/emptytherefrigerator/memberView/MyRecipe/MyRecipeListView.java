@@ -26,7 +26,7 @@ public class MyRecipeListView extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.member_my_recipe_list);
+        setContentView(R.layout.user_my_recipe_list);
 
         getRecipeList();
         initializeView();

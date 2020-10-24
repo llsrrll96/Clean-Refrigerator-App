@@ -22,7 +22,7 @@ public class MyCommentView extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.member_my_comment_list);
+        setContentView(R.layout.user_my_comment_list);
         initializeView();
     }
     public void initializeView()

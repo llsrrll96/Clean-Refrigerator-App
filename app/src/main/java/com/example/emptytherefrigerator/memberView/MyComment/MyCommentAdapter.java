@@ -13,8 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.entity.Comment;
-import com.example.emptytherefrigerator.entity.Recipe;
-import com.example.emptytherefrigerator.memberView.MyRecipe.MyRecipeListAdapter;
 
 import java.util.ArrayList;
 
@@ -42,7 +40,7 @@ public class MyCommentAdapter extends RecyclerView.Adapter<MyCommentAdapter.MyCo
     @Override
     public MyCommentViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
-        View itemView = inflater.inflate(R.layout.member_my_comment_item, parent, false);
+        View itemView = inflater.inflate(R.layout.user_my_comment_item, parent, false);
         return new MyCommentAdapter.MyCommentViewHolder(itemView, this);
     }
 

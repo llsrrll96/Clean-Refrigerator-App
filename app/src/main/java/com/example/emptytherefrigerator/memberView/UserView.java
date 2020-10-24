@@ -18,7 +18,6 @@ import androidx.fragment.app.Fragment;
 import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.login.LoginView;
 import com.example.emptytherefrigerator.login.UserInfo;
-import com.example.emptytherefrigerator.main.MainPageView;
 import com.example.emptytherefrigerator.memberView.MyComment.MyCommentView;
 import com.example.emptytherefrigerator.memberView.MyRecipe.MyRecipeListView;
 
@@ -37,7 +36,7 @@ public class UserView extends Fragment
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
-        view = inflater.inflate(R.layout.member_menu,container,false);
+        view = inflater.inflate(R.layout.user_menu,container,false);
         initializeView();
         setListener();
         setUserInfo();
