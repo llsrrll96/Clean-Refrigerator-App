@@ -1,4 +1,4 @@
-package com.example.emptytherefrigerator.memberView;
+package com.example.emptytherefrigerator.userView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,35 +7,35 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
-
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
 import androidx.fragment.app.Fragment;
-
 import com.example.emptytherefrigerator.R;
-import com.example.emptytherefrigerator.main.MainPageView;
-import com.example.emptytherefrigerator.memberView.MyComment.MyCommentView;
-import com.example.emptytherefrigerator.memberView.MyRecipe.MyRecipeListView;
+import com.example.emptytherefrigerator.login.LoginView;
+import com.example.emptytherefrigerator.login.UserInfo;
+import com.example.emptytherefrigerator.userView.MyComment.MyCommentView;
+import com.example.emptytherefrigerator.userView.MyRecipe.MyRecipeListView;
 
-//Main 화면 Home
-//이 달의 레시피 검색 결과
+//회원정보 창
 public class UserView extends Fragment
 {
     private ImageButton btnEditUser, btnRecipeInquire, btnCommentInquire, btnLIkeInquire, btnSetting;
     private Button logoutBtn;
     private View view;
+    private TextView userIdTextView, userPwTextView;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
-        view = inflater.inflate(R.layout.member_menu,container,false);
+        view = inflater.inflate(R.layout.user_menu,container,false);
         initializeView();
         setListener();
+        setUserInfo();
         return view;
     }
-    private void initializeView()
+    public void initializeView()
     {
         btnEditUser = view.findViewById(R.id.memberEditBtn);
         btnRecipeInquire = view.findViewById(R.id.recipeInquireBtn);
@@ -44,26 +44,27 @@ public class UserView extends Fragment
         btnSetting=view.findViewById(R.id.settingBtn);
         logoutBtn= view.findViewById(R.id.logoutBtn);
     }
-    private void setListener()
+    public void setListener()
     {
-        btnEditUser.setOnClickListener(new View.OnClickListener()
+        btnEditUser.setOnClickListener(new View.OnClickListener()       //회원 수정 화면을 넘어감
             {
                 @Override
                 public void onClick(View v)
                 {
-                    //멤버 수정 화면
+                    Intent intent = new Intent(getActivity(), UserEditView.class);
+                    startActivity(intent);
                 }
             });
         btnRecipeInquire.setOnClickListener(new View.OnClickListener()
-                {
+        {
                     @Override
                     public void onClick(View v)
-                    {
-                        Intent intent = new Intent(getActivity(), MyRecipeListView.class);      //현재 화면의 제어를 넘길 클래스 지정
-                        startActivity(intent);      //다음 화면으로 넘어감
+                    {       //내 레시피 조회 화면으로 넘어감
+                        Intent intent = new Intent(getActivity(), MyRecipeListView.class);
+                        startActivity(intent);
                     }
                 });
-        btnCommentInquire.setOnClickListener(new View.OnClickListener()
+        btnCommentInquire.setOnClickListener(new View.OnClickListener()     //내 댓글 조회 화면으로 넘어감
         {
             @Override
             public void onClick(View v)
@@ -88,13 +89,26 @@ public class UserView extends Fragment
                 //셋팅 화면 넘김
             }
         });
-        logoutBtn.setOnClickListener(new View.OnClickListener()
+        logoutBtn.setOnClickListener(new View.OnClickListener()     ////로그인 화면으로 돌아감
         {
             @Override
             public void onClick(View v)
-            {
-                //로그아웃
+            {           //로그아웃
+                Intent intent = new Intent(getActivity(), LoginView.class);
+                intent.putExtra("logOut", "logOut");
+                startActivity(intent);
             }
         });
+    }
+    public void setUserInfo()
+    {
+        String id = UserInfo.getString(getActivity(),UserInfo.ID_KEY);
+        String pw = UserInfo.getString(getActivity(), UserInfo.PW_KEY);
+
+        if(!id.equals("") || !pw.equals(""))        //shared preference에 값이있다면 가져옴 -> 없는 경우에는 어떻게 처리하지 ㄷㄷ
+        {
+            userIdTextView.setText(id);
+            userPwTextView.setText(pw);
+        }
     }
 }

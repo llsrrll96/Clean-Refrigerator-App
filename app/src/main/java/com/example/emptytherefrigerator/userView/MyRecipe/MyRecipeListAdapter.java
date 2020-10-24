@@ -1,4 +1,4 @@
-package com.example.emptytherefrigerator.memberView.MyRecipe;
+package com.example.emptytherefrigerator.userView.MyRecipe;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -27,7 +27,7 @@ public class MyRecipeListAdapter extends RecyclerView.Adapter<MyRecipeListAdapte
     @Override
     public MyRecipeListViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
-        View itemView = inflater.inflate(R.layout.member_my_recipe_item, parent, false);
+        View itemView = inflater.inflate(R.layout.user_my_recipe_item, parent, false);
         return new MyRecipeListViewHolder(itemView, this);
     }
 

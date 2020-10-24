@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.emptytherefrigerator.R;
-import com.example.emptytherefrigerator.memberView.UserView;
+import com.example.emptytherefrigerator.userView.UserView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 //MainSearchFrag 와 MainUserFrag 가 합쳐짐

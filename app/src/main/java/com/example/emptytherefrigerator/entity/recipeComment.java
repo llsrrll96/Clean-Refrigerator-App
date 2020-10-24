@@ -1,6 +1,6 @@
 package com.example.emptytherefrigerator.entity;
 
-public class Comment
+public class recipeComment
 {
     private int recipeId;
     private int commentId;
@@ -9,11 +9,11 @@ public class Comment
     private String content; //댓글 내용
     private String uploadDate;  //댓글 작성 날짜
 
-    public Comment()
+    public recipeComment()
     {
 
     }
-    public Comment(int recipeId, int commentId, String recipeTitle, String userId, String content, String uploadDate)
+    public recipeComment(int recipeId, int commentId, String recipeTitle, String userId, String content, String uploadDate)
     {
         this.recipeId = recipeId;
         this.commentId = commentId;
