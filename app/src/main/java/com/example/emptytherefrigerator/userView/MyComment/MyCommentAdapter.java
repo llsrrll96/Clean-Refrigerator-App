@@ -1,4 +1,4 @@
-package com.example.emptytherefrigerator.memberView.MyComment;
+package com.example.emptytherefrigerator.userView.MyComment;
 
 import android.content.Context;
 import android.view.LayoutInflater;

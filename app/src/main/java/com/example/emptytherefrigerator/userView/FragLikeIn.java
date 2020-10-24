@@ -1,9 +1,7 @@
-package com.example.emptytherefrigerator.memberView;
+package com.example.emptytherefrigerator.userView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.emptytherefrigerator.entity.Recipe;
-import java.util.ArrayList;
 
 public class FragLikeIn extends Fragment
 {

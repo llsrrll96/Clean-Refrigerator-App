@@ -1,4 +1,4 @@
-package com.example.emptytherefrigerator.memberView.MyRecipe;
+package com.example.emptytherefrigerator.userView.MyRecipe;
 
 import android.content.Context;
 import android.view.LayoutInflater;

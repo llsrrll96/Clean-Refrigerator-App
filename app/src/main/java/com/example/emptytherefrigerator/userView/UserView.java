@@ -1,4 +1,4 @@
-package com.example.emptytherefrigerator.memberView;
+package com.example.emptytherefrigerator.userView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,8 +18,8 @@ import androidx.fragment.app.Fragment;
 import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.login.LoginView;
 import com.example.emptytherefrigerator.login.UserInfo;
-import com.example.emptytherefrigerator.memberView.MyComment.MyCommentView;
-import com.example.emptytherefrigerator.memberView.MyRecipe.MyRecipeListView;
+import com.example.emptytherefrigerator.userView.MyComment.MyCommentView;
+import com.example.emptytherefrigerator.userView.MyRecipe.MyRecipeListView;
 
 import static android.content.Context.MODE_PRIVATE;
 
