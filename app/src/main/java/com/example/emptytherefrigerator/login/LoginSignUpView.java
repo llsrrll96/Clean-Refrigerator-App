@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.emptytherefrigerator.AsyncTasks.LoginMngAsyncTask;
+import com.example.emptytherefrigerator.AsyncTasks.UserMngAsyncTask;
 import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.main.MainPageView;
 
@@ -70,24 +71,24 @@ public class LoginSignUpView extends AppCompatActivity {
     }
     public void signUp(View view)
     {
-        LoginMngAsyncTask login = new LoginMngAsyncTask();
+        UserMngAsyncTask signUp = new UserMngAsyncTask();
         JSONObject data = new JSONObject();
         try
         {
-            data.accumulate("id", id.getText().toString());
+            data.accumulate("userId", id.getText().toString());
             data.accumulate("pw", password.getText().toString());
-            String result = login.execute("signUp", data.toString()).get();      //통신 결과값 저장
+            String result = signUp.execute("signUp", data.toString()).get();      //통신 결과값 저장
 
-            if(result.equals("ok"))
+            if(result.equals("1"))          //성공
             {
                 Intent intent = new Intent(getApplicationContext(), LoginView.class);      //현재 화면의 제어를 넘길 클래스 지정
                 startActivity(intent);      //다음 화면으로 넘어감
             }
-            else if(result.equals("error"))
+            else if(result.equals("2"))     //실패
             {
                 Toast.makeText(getApplicationContext(),"내부 서버 문제로 실행할 수 없습니다", Toast.LENGTH_SHORT).show();
             }
-            else if(result.equals("중복"))
+            else if(result.equals("3"))     //실패 2 인데 정확한 에러 항목에 대해서는 얘기가 되지 않은 상태이다 -> 추후 수정 필요
             {
                 Toast.makeText(getApplicationContext(),"이미 존재하는 아이디 입니다", Toast.LENGTH_SHORT).show();
             }
