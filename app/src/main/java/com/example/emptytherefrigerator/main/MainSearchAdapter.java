@@ -88,6 +88,7 @@ public class MainSearchAdapter extends RecyclerView.Adapter<MainSearchAdapter.Vi
 
                         holdercontext = v.getContext();
                         intent = new Intent(holdercontext, RecipeDetailView.class);     //조회된 레시피 화면으로 넘어간다
+                        intent.putExtra("RECIPE",recipeLists.get(pos));      //다음 화면에 레시피 객체 송신
                         holdercontext.startActivity(intent);
                     }
                 }

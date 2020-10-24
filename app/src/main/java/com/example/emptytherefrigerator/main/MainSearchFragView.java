@@ -45,7 +45,7 @@ public class MainSearchFragView extends Fragment
         super.onActivityCreated(savedInstanceState);
 
         setSearchRecipe();             //검색창
-        setRecyclerView();          //이달의 레시피 창
+        setRecoRecipe();          //이달의 레시피 창
     }
 
     public void setSearchRecipe()
@@ -70,24 +70,13 @@ public class MainSearchFragView extends Fragment
         });
     }
 
-    public void setRecyclerView()   //이달의 레시피 출력
+    public void setRecoRecipe()
     {
-        ArrayList<Recipe> recipeList;
-        try
-        {
-            recipeList =  new RecipeSearchAsyncTask().execute("bestRecipeReq").get();//서버쪽에 따라 변경될 수 있음
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
-
         //RecyclerView
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity()); //상하
         recyclerView.addItemDecoration(new RecyclerDecoration(50)); //아이템 간격
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(new MainSearchAdapter(insertItemList()));
-        //recyclerView.setAdapter(new MainSearchAdapter(recipeList));   //서버쪽 구현이 완료되면 이걸로 바꿀 예정
 
         //리사이클러뷰 구분선
         DividerItemDecoration dividerItemDecoration =
@@ -96,18 +85,45 @@ public class MainSearchFragView extends Fragment
     }
 
     //데이터 넣는 곳 , db에서 데이터 불러서 반복문으로 list에 저장 추가 , 비동기 백그라운드 사용 예정
+    //test data
     ArrayList insertItemList(){
         list = new ArrayList<>(  );
-        Recipe recipeList1 = new Recipe("https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG_transparency_demonstration_1.png/420px-PNG_transparency_demonstration_1.png"
-                ,"제목1~~~",100, 12,"2020-10-01");
-        Recipe recipeList2 = new Recipe("https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG_transparency_demonstration_1.png/420px-PNG_transparency_demonstration_1.png"
-                ,"제목1~~~",100, 12,"2020-10-01");
-        Recipe recipeList3 = new Recipe("https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG_transparency_demonstration_1.png/420px-PNG_transparency_demonstration_1.png"
-                ,"제목1~~~",100, 12,"2020-10-01");
+        Recipe recipeList1 = new Recipe();
+
+        String userId = "유저 아이디";
+        String title = "타이틀";
+        String recipeImagePath = "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG_transparency_demonstration_1.png/420px-PNG_transparency_demonstration_1.png," +
+                "https://upload.wikimedia.org/wikipedia/commons/5/5f/%EA%B4%91%ED%99%94%EB%AC%B8_Gwanghwamun_%E5%85%89%E5%8C%96%E9%96%80_-_panoramio.jpg," +
+                "https://upload.wikimedia.org/wikipedia/commons/0/02/Nordsee_Wellen.JPG," +
+                "https://upload.wikimedia.org/wikipedia/commons/5/5f/%EA%B4%91%ED%99%94%EB%AC%B8_Gwanghwamun_%E5%85%89%E5%8C%96%E9%96%80_-_panoramio.jpg";
+        String recipePerson = "1";
+        String recipeTime = "30";
+        String ingredient = "식재료1,식재료2,식재료3";
+        String ingredientUnit = "1개,2개,3개";
+        String recipeContents = "요리방법 1,요리방법 2,요리방법3";
+        int commentCount = 10;
+        int likeCount = 50;
+        String uploadDate = "2020-10-24";
+
+        recipeList1.setUserId(userId);
+        recipeList1.setTitle(title);
+        recipeList1.setRecipeImagePath(recipeImagePath);
+        recipeList1.setRecipePerson(Integer.parseInt(recipePerson));
+        recipeList1.setRecipeTime(Integer.parseInt(recipeTime));
+        recipeList1.setIngredient(ingredient);
+        recipeList1.setIngredientUnit(ingredientUnit);
+        recipeList1.setContents(recipeContents);
+        recipeList1.setCommentCount(commentCount);
+        recipeList1.setLikeCount(likeCount);
+        recipeList1.setUploadDate(uploadDate);
+
+/*        Recipe recipeList2 = new Recipe();
+        Recipe recipeList3 = new Recipe();*/
 
         list.add(recipeList1);
-        list.add(recipeList2);
-        list.add(recipeList3);
+        list.add(recipeList1);
+        list.add(recipeList1);
         return list;
     }
 }
+

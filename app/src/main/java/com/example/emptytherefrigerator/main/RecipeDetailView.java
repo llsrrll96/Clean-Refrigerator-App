@@ -1,6 +1,7 @@
 package com.example.emptytherefrigerator.main;
 
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -66,12 +67,12 @@ public class RecipeDetailView extends AppCompatActivity {
         btnHeart = (ImageButton) findViewById(R.id.btnHeart);
 
         //레시피 받아오기
-        getRecipeDataFromToServer();
+        getRecipeDataFromIntent();
         //받아온 레시피를 String[] 배열로
         recipeImagePaths = recipe.getRecipeImagePath().split(",");
         ingredientNames = recipe.getIngredient().split(",");
         ingredientUnits = recipe.getIngredientUnit().split(",");
-        recipeContents = recipe.getRecipeContents().split(",");
+        recipeContents = recipe.getContents().split(",");
     }
     ///////////////////////////////////////////////////////////////////////////
     public void setListener()
@@ -93,11 +94,15 @@ public class RecipeDetailView extends AppCompatActivity {
         });
     }
     ///////////////////////////////////////////////////////////////////////////
-    //서버에서 Recipe 데이터를 가져온다.
-    private void getRecipeDataFromToServer()
+    ////////////////////Intent에서 Recipe 데이터를 가져온다.
+    private void getRecipeDataFromIntent()
     {
-        recipe = new Recipe();
-        String userId = "유저 아이디";
+        //recipe = new Recipe();
+        Intent intent = getIntent();        //데이터 수신
+        recipe = (Recipe)intent.getSerializableExtra("RECIPE");
+
+
+/*        String userId = "유저 아이디";
         String title = "타이틀";
         String recipeImagePath = "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG_transparency_demonstration_1.png/420px-PNG_transparency_demonstration_1.png," +
                 "https://upload.wikimedia.org/wikipedia/commons/5/5f/%EA%B4%91%ED%99%94%EB%AC%B8_Gwanghwamun_%E5%85%89%E5%8C%96%E9%96%80_-_panoramio.jpg," +
@@ -116,8 +121,7 @@ public class RecipeDetailView extends AppCompatActivity {
         recipe.setRecipeTime(Integer.parseInt(recipeTime));
         recipe.setIngredient(ingredient);
         recipe.setIngredientUnit(ingredientUnit);
-        recipe.setRecipeContents(recipeContents);
-
+        recipe.setRecipeContents(recipeContents);*/
     }
     ////////////////////////////////////////////////////////////////////////
     //타이틀

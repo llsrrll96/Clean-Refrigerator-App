@@ -28,6 +28,7 @@ import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.entity.Recipe;
 import com.google.gson.JsonObject;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -214,14 +215,14 @@ public class RecipeDetailCreateView extends AppCompatActivity {
 
     // 레시피 JSON 만들기
     public void makeRecipeJSON(JSONObject json) throws JSONException {
-        json.accumulate("recipeId", recipe.getRecipeId());
+        json.accumulate("recipeId", recipe.getRecipeInId());
         json.accumulate("title", recipe.getTitle());
         json.accumulate("userId", recipe.getUserId());
         json.accumulate("ingredient", recipe.getIngredient());
         json.accumulate("ingredientUnit", recipe.getIngredientUnit());
         json.accumulate("recipePerson", recipe.getRecipePerson());
         json.accumulate("recipeTime", recipe.getRecipeTime());
-        json.accumulate("recipeContents", recipe.getRecipeContents());
+        json.accumulate("recipeContents", recipe.getContents());
 
         JSONArray recipeImages = new JSONArray();
         for (int i = 0; i < recipe.getRecipeImageByte().length; i++) {
@@ -268,7 +269,7 @@ public class RecipeDetailCreateView extends AppCompatActivity {
                 recipeContents += ",";
             }
         }
-        recipe.setRecipeContents(recipeContents);
+        recipe.setContents(recipeContents);
     }
 
     //모든 이미지 데이터를 가져온다.
