@@ -22,7 +22,6 @@ import java.util.ArrayList;
 public class MyRecipeListView extends AppCompatActivity
 {
     private RecyclerView recyclerView;
-    private ImageButton  btnCreateRecipe;/*btnBack*/;
     private Toolbar toolbar;
     private ArrayList<RecipeIn> list = new ArrayList<>();
     private MyRecipeListAdapter adapter = null;
@@ -32,7 +31,6 @@ public class MyRecipeListView extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_my_recipe_list);
-
         getRecipeList();
         initializeView();
         setListener();

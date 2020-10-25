@@ -1,5 +1,9 @@
 package com.example.emptytherefrigerator.entity;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
+
 import java.io.Serializable;
 
 public class RecipeIn implements Serializable
@@ -22,7 +26,21 @@ public class RecipeIn implements Serializable
      * row 는 사진 갯수, col 은 해당 이미지 데이터 byte 코드
      * */
 
-    public RecipeIn() {
+    public RecipeIn(){}
+    public RecipeIn(int recipeInId, String title, String userId, String ingredient,
+                    int recipePerson, int recipeTime, String[] recipeImageByte, String contents, int commentCount, int likeCount, String uploadDate)
+    {
+        this.recipeInId = recipeInId;
+        this.title = title;
+        this.userId = userId;
+        this.ingredient = ingredient;
+        this.recipePerson = recipePerson;
+        this.recipeTime = recipeTime;
+        this.recipeImageByte = recipeImageByte;
+        this.contents = contents;
+        this.commentCount = commentCount;
+        this.likeCount = likeCount;
+        this.uploadDate = uploadDate;
     }
 
     public RecipeIn(int recipeInId, String title, String userId, String ingredient,
@@ -40,6 +58,17 @@ public class RecipeIn implements Serializable
         this.uploadDate = uploadDate;
     }
 
+    public static Bitmap StringToBitmap(String encodedString)                      //스트링 이미지 데이터 -> 비트맵으로
+    {
+        try {
+            byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        } catch (Exception e) {
+            e.getMessage();
+            return null;
+        }
+    }
     public int getRecipeInId() {
         return recipeInId;
     }

@@ -13,38 +13,46 @@ public class JsonParsing
 {
     public static ArrayList<RecipeIn> parsingRecipe(String data)     //레시피 정보 파싱
     {
-        ArrayList<RecipeIn> list = new ArrayList<RecipeIn>();
-        JSONObject jsonObject;
+        ArrayList<RecipeIn> recipeListData = new ArrayList<RecipeIn>();
         try
         {
-            jsonObject = new JSONObject(data);
-            String jsonString = jsonObject.getString("Recipe");
-            JSONArray resRecipeList = new JSONArray(jsonString);
-
-            for(int i=0; i<resRecipeList.length(); i++)
+            JSONArray jsonArray = new JSONArray(data);
+            for (int i = 0 ; i< jsonArray.length(); i++)
             {
-                JSONObject recipe = resRecipeList.getJSONObject(i);
-                int recipeId = recipe.getInt("recipeId");
-                String title = recipe.getString("title");
-                String userId = recipe.getString("userId");
-                String ingredient = recipe.getString("ingredient");
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                //test
+                System.out.println("jsonObject: "+ jsonObject.get("title"));
 
-                int recipePerson = recipe.getInt("recipePerson");
-                int recipeTime = recipe.getInt("recipeTime");
-                String recipeImagePath = recipe.getString("recipeImagePath");
-                String recipeContents = recipe.getString("recipeContents");
-                int commentCount = recipe.getInt("recipeContents");
-                int likeCount = recipe.getInt("likeCount");
-                String uploadDate = recipe.getString("uploadData");
+                RecipeIn recipeIn = new RecipeIn();
+                recipeIn.setRecipeInId(jsonObject.getInt("recipeInId"));
+                recipeIn.setTitle(jsonObject.getString("title"));
+                recipeIn.setUserId(jsonObject.getString("userId"));
+                recipeIn.setIngredient(jsonObject.getString("ingredient"));
+                recipeIn.setIngredientUnit(jsonObject.getString("ingredientUnit"));
+                recipeIn.setRecipePerson(jsonObject.getInt("recipePerson"));
+                recipeIn.setRecipeTime(jsonObject.getInt("recipeTime"));
+                recipeIn.setContents(jsonObject.getString("contents"));
+                recipeIn.setCommentCount(jsonObject.getInt("commentCount"));
+                recipeIn.setLikeCount(jsonObject.getInt("likeCount"));
+                recipeIn.setUploadDate(jsonObject.getString("uploadDate"));
 
-                list.add(new RecipeIn(recipeId, title, userId, ingredient, recipePerson, recipeTime, recipeImagePath, recipeContents, commentCount, likeCount, uploadDate));
+                JSONArray jsonArrayImage = jsonObject.getJSONArray("recipeImageBytes");
+                String[] recipeImageBytes = new String [jsonArrayImage.length()];
+
+                for(int j= 0; j < jsonArrayImage.length(); j++)
+                {
+                    JSONObject jsonObjectImage = jsonArrayImage.getJSONObject(j);
+                    recipeImageBytes[j] = jsonObjectImage.getString("recipeImageByte");
+                }
+                recipeIn.setRecipeImageByte(recipeImageBytes);
+                recipeListData.add(recipeIn);
             }
         }
         catch(JSONException e)
         {
             e.printStackTrace();
         }
-        return list;
+        return recipeListData;
     }
     public static ArrayList<RecipeComment>parsingCommentList(String data)
     {

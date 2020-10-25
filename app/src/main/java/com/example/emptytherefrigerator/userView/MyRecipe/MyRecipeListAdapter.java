@@ -10,6 +10,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.entity.RecipeIn;
 import java.util.ArrayList;
@@ -18,6 +21,7 @@ public class MyRecipeListAdapter extends RecyclerView.Adapter<MyRecipeListAdapte
 {
     private ArrayList<RecipeIn> list;
     private LayoutInflater inflater;
+    Context context;
 
     public MyRecipeListAdapter(Context context, ArrayList<RecipeIn> list)
     {
@@ -34,6 +38,9 @@ public class MyRecipeListAdapter extends RecyclerView.Adapter<MyRecipeListAdapte
     @Override
     public void onBindViewHolder(@NonNull MyRecipeListAdapter.MyRecipeListViewHolder holder, int position)
     {
+        context = holder.itemView.getContext();
+
+        holder.recipeMainImage.setImageBitmap(RecipeIn.StringToBitmap(list.get(position).getRecipeImageByte()[0]));
         holder.onBind(list.get(position));
     }
 
@@ -45,29 +52,29 @@ public class MyRecipeListAdapter extends RecyclerView.Adapter<MyRecipeListAdapte
 
     class MyRecipeListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
+
         MyRecipeListAdapter adapter;
         ImageView recipeMainImage;
-        TextView comment_count, like_count, uploadDate, title;
+        TextView commentCount, likeCount, uploadDate, title;
         ImageButton btnEditRecipe, btnDelRecipe;
 
-        public MyRecipeListViewHolder(View itemView, MyRecipeListAdapter adapter)
+        public MyRecipeListViewHolder(View view, MyRecipeListAdapter adapter)
         {
-            super(itemView);
+            super(view);
             this.adapter = adapter;
-            recipeMainImage = itemView.findViewById(R.id.recipeMainImage);
+            recipeMainImage = itemView.findViewById(R.id.recipeMainImage_);
             title = itemView.findViewById(R.id.title);
-            like_count = itemView.findViewById(R.id.like_count);
-            comment_count = itemView.findViewById(R.id.comment_count);
+            likeCount = itemView.findViewById(R.id.like_count);
+            commentCount = itemView.findViewById(R.id.comment_count);
             uploadDate = itemView.findViewById(R.id.uploadDate);
             btnEditRecipe = itemView.findViewById(R.id.recipeEditBtn);
             btnDelRecipe = itemView.findViewById(R.id.recipeDelBtn);
         }
         public void onBind(RecipeIn recipe)
         {
-            //mainimage 셋팅
             title.setText(recipe.getTitle());
-            comment_count.setText(Integer.toString(recipe.getCommentCount()));
-            like_count.setText(Integer.toString(recipe.getLikeCount()));
+            commentCount.setText(Integer.toString(recipe.getCommentCount()));
+            likeCount.setText(Integer.toString(recipe.getLikeCount()));
             uploadDate.setText(recipe.getUploadDate());
         }
         public void setListener()
