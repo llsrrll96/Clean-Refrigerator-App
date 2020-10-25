@@ -55,6 +55,24 @@ public class LoginSignUpView extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
+                String strId = id.getText().toString(), strPw = password.getText().toString();
+
+                if(strId.getBytes().length<=0 && strPw.getBytes().length<=0)
+                {
+                    Toast.makeText(getApplicationContext(),"정보를 입력해 주세요", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if(strId.getBytes().length<=0)      //아이디를 입력하지 않은 경우
+                {
+                    Toast.makeText(getApplicationContext(),"아이디를 입력해 주세요", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if(strPw.getBytes().length<=0) //비밀번호를 입력하지 않은 경우
+                {
+                    Toast.makeText(getApplicationContext(),"비밀번호를 입력해 주세요", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 signUp(v);
             }
         });
@@ -63,6 +81,7 @@ public class LoginSignUpView extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
+
                 intent = new Intent(v.getContext(), LoginView.class);
                 v.getContext().startActivity(intent);
 

@@ -93,10 +93,11 @@ public class LoginView extends AppCompatActivity {
     public void autoLogin()
     {
         Intent intent = getIntent();
-        if(intent.getStringExtra("logOut").equals("logOut"))        //로그아웃에서 넘어온거면 자동로그인을 하지 않음
-        {
+        if(intent.getStringExtra("logOut")==null || intent.getStringExtra("logOut").equals(""))
             return;
-        }
+        else if(intent.getStringExtra("logOut").equals("logOut"))        //로그아웃에서 넘어온거면 자동로그인을 하지 않음
+            return;
+
         String id = UserInfo.getString(this, UserInfo.ID_KEY);
         String pw = UserInfo.getString(this, UserInfo.PW_KEY);
 

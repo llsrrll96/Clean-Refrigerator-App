@@ -1,5 +1,6 @@
 package com.example.emptytherefrigerator.userView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -89,6 +90,9 @@ public class UserEditView extends AppCompatActivity
             if(result.equals("1"))      //수정이 완료된 경우(성공)
             {
                 UserInfo.setString(this, UserInfo.PW_KEY, user.getPw());        //preference 업데이트
+                System.out.println("result is " + result);
+                Intent intent = new Intent(getApplicationContext(), UserView.class);    //다시 회원정보 조회 화면으로 돌아감
+                startActivity(intent);
             }
             else if(result.equals("2")) //실패한 경우
             {
