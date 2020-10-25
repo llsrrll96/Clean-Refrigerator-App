@@ -11,10 +11,8 @@ public class RecipeSearchAsyncTask extends AsyncTask<String, Void, String>
 {
     protected String doInBackground(String... strings)
     {
-        ArrayList<RecipeIn> recipeList = new ArrayList<RecipeIn>();
-
         NetworkHandler.getInstance().connect(strings[0]);      //서버와 연결
-        String jsonData = NetworkHandler.communication(null);        //요청만 하기 때문에 보낼 데이터는 없음, result는 null
+        String jsonData = NetworkHandler.communication(strings[1]);        //요청만 하기 때문에 보낼 데이터는 없음, result는 null
         NetworkHandler.disconnect();
 
         return jsonData;

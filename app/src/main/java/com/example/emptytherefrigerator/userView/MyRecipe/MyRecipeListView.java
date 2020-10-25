@@ -9,8 +9,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.emptytherefrigerator.AsyncTasks.RecipeSearchAsyncTask;
 import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.entity.RecipeIn;
+import com.example.emptytherefrigerator.network.JsonParsing;
 
 import java.util.ArrayList;
 
@@ -30,7 +32,7 @@ public class MyRecipeListView extends AppCompatActivity
 
         getRecipeList();
         initializeView();
-        //setListener();
+        setListener();
     }
 
     public void initializeView()
@@ -77,15 +79,17 @@ public class MyRecipeListView extends AppCompatActivity
     }
     public void getRecipeList()        //내 레시피 서버에서 받아온다
     {
-//        RecipeSearchAsyncTask recipeSearch = new RecipeSearchAsyncTask();
-//        try
-//        {
-//            if(recipeSearch.execute()!=null)        //null인 경우는 처리 안해줘도 되나? 일단 처리함
-//                list = recipeSearch.execute("searchMyRecipeList").get();
-//        }
-//        catch(Exception e)
-//        {
-//            e.printStackTrace();
-//        }
+        RecipeSearchAsyncTask recipeSearch = new RecipeSearchAsyncTask();
+        String jsonData="";
+        try
+        {
+            if(recipeSearch.execute()!=null)        //null인 경우는 처리 안해줘도 되나? 일단 처리함
+                jsonData = recipeSearch.execute("readUserRecipe", "").get();
+            list = JsonParsing.parsingRecipe(jsonData);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 }
