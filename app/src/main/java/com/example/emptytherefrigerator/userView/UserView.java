@@ -81,12 +81,13 @@ public class UserView extends Fragment
                 //내 좋아요 조회
             }
         });
-        btnSetting.setOnClickListener(new View.OnClickListener()
+        btnSetting.setOnClickListener(new View.OnClickListener()    //셋팅 화면 넘김
         {
             @Override
             public void onClick(View v)
             {
-                //셋팅 화면 넘김
+                Intent intent = new Intent(getActivity(), SettingView.class);
+                startActivity(intent);
             }
         });
         logoutBtn.setOnClickListener(new View.OnClickListener()     ////로그인 화면으로 돌아감
