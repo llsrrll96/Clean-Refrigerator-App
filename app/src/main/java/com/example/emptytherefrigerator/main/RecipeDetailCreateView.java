@@ -171,11 +171,20 @@ public class RecipeDetailCreateView extends AppCompatActivity {
             public void onClick(View v) {
                 //서버에 등록데이터 보내고 서버에서 받은 메시지로 결과 출력
                 //getServerData(sendRegisterDataToServer());
+                String result = "2";
                 try {
-                    sendRegisterDataToServer();
+                    result = sendRegisterDataToServer();
                 } catch (JSONException e) { e.printStackTrace();
                 } catch (ExecutionException e) { e.printStackTrace();
                 } catch (InterruptedException | IOException e) { e.printStackTrace(); }
+                if(result.equals("1"))
+                {
+                    onBackPressed();
+                    Toast.makeText(v.getContext(),"등록 성공",Toast.LENGTH_SHORT).show();
+                }else
+                {
+                    Toast.makeText(v.getContext(),"입력 양식에 맞게 입력해 주세요.",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -213,14 +222,14 @@ public class RecipeDetailCreateView extends AppCompatActivity {
 
     // 레시피 JSON 만들기
     public void makeRecipeJSON(JSONObject json) throws JSONException {
-        json.accumulate("recipeId", recipe.getRecipeInId());
+        json.accumulate("recipeInId", recipe.getRecipeInId());
         json.accumulate("title", recipe.getTitle());
         json.accumulate("userId", recipe.getUserId());
         json.accumulate("ingredient", recipe.getIngredient());
         json.accumulate("ingredientUnit", recipe.getIngredientUnit());
         json.accumulate("recipePerson", recipe.getRecipePerson());
         json.accumulate("recipeTime", recipe.getRecipeTime());
-        json.accumulate("recipeContents", recipe.getContents());
+        json.accumulate("contents", recipe.getContents());
 
         JSONArray recipeImages = new JSONArray();
         for (int i = 0; i < recipe.getRecipeImageByte().length; i++) {

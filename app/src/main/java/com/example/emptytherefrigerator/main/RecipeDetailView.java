@@ -2,7 +2,10 @@ package com.example.emptytherefrigerator.main;
 
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageButton;
@@ -33,7 +36,6 @@ public class RecipeDetailView extends AppCompatActivity {
 
     private RecipeIn recipe;
 
-    private String[] recipeImagePaths;               //여러개의 이미지 경로들
     private String[] ingredientNames;               //여러개의 재료들
     private String[] ingredientUnits;               //여러개의 재료 단위
     private String[] recipeContents;                //여러개의 요리 방법
@@ -68,10 +70,9 @@ public class RecipeDetailView extends AppCompatActivity {
         //레시피 받아오기
         getRecipeDataFromIntent();
         //받아온 레시피를 String[] 배열로
-        recipeImagePaths = recipe.getRecipeImagePath().split(",");
-        ingredientNames = recipe.getIngredient().split(",");
-        ingredientUnits = recipe.getIngredientUnit().split(",");
-        recipeContents = recipe.getContents().split(",");
+        ingredientNames = recipe.getIngredient().split("`");
+        ingredientUnits = recipe.getIngredientUnit().split("`");
+        recipeContents = recipe.getContents().split("`");
     }
     ///////////////////////////////////////////////////////////////////////////
     public void setListener()
@@ -96,31 +97,23 @@ public class RecipeDetailView extends AppCompatActivity {
     ////////////////////Intent에서 Recipe 데이터를 가져온다.
     private void getRecipeDataFromIntent()
     {
+
         //recipe = new Recipe();
         Intent intent = getIntent();        //데이터 수신
-        recipe = (RecipeIn)intent.getSerializableExtra("RECIPE");
+        recipe = (RecipeIn) intent.getSerializableExtra("RECIPE");
 
-
-/*        String userId = "유저 아이디";
-        String title = "타이틀";
-        String recipeImagePath = "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG_transparency_demonstration_1.png/420px-PNG_transparency_demonstration_1.png," +
-                "https://upload.wikimedia.org/wikipedia/commons/5/5f/%EA%B4%91%ED%99%94%EB%AC%B8_Gwanghwamun_%E5%85%89%E5%8C%96%E9%96%80_-_panoramio.jpg," +
-                "https://upload.wikimedia.org/wikipedia/commons/0/02/Nordsee_Wellen.JPG," +
-                "https://upload.wikimedia.org/wikipedia/commons/5/5f/%EA%B4%91%ED%99%94%EB%AC%B8_Gwanghwamun_%E5%85%89%E5%8C%96%E9%96%80_-_panoramio.jpg";
-        String recipePerson = "1";
-        String recipeTime = "30";
-        String ingredient = "식재료1,식재료2,식재료3";
-        String ingredientUnit = "1개,2개,3개";
-        String recipeContents = "요리방법 1,요리방법 2,요리방법3";
-
-        recipe.setUserId(userId);
-        recipe.setTitle(title);
-        recipe.setRecipeImagePath(recipeImagePath);
-        recipe.setRecipePerson(Integer.parseInt(recipePerson));
-        recipe.setRecipeTime(Integer.parseInt(recipeTime));
-        recipe.setIngredient(ingredient);
-        recipe.setIngredientUnit(ingredientUnit);
-        recipe.setRecipeContents(recipeContents);*/
+    }
+    ////////////////////////스트링 이미지 데이터 -> 비트맵으로///////////////////////////////////
+    public Bitmap StringToBitmap(String encodedString)
+    {
+        try {
+            byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        } catch (Exception e) {
+            e.getMessage();
+            return null;
+        }
     }
     ////////////////////////////////////////////////////////////////////////
     //타이틀
@@ -132,10 +125,7 @@ public class RecipeDetailView extends AppCompatActivity {
     //레시피 이미지 넣는다.
     private void setRecipeImg()
     {
-        Glide.with(this)
-                .load(recipeImagePaths[0])
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(recipeImage);                         //이미지
+        recipeImage.setImageBitmap(StringToBitmap(recipe.getRecipeImageByte()[0]));//이미지
     }
     //////////////////////////////////////////////////////////////////////////
     private void setUserId()
@@ -226,7 +216,7 @@ public class RecipeDetailView extends AppCompatActivity {
             ImageView contentsImageView = new ImageView(this);  //조리 이미지
             TextView contentsTextView = new TextView(this);     //조리 설명
 
-            // 요리 방법
+            // 요리 방법 //
             LinearLayout.LayoutParams paramsCnt = new LinearLayout.LayoutParams(100, 100);
             paramsCnt.gravity = Gravity.CENTER;
 
@@ -251,11 +241,8 @@ public class RecipeDetailView extends AppCompatActivity {
             //contentsTextView.setText(recipeContent);                                                    //요리내용
 
             //////////////////데이터 넣는 부분////////////////////////////////////////////
-            countTextView.setText(Integer.toString(i+1));
-            Glide.with(this)
-                    .load(recipeImagePaths[i+1])
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(contentsImageView);                         //이미지
+            countTextView.setText(Integer.toString(i+1));           // 1, 2, 3 ..
+            contentsImageView.setImageBitmap(StringToBitmap(recipe.getRecipeImageByte()[i+1]));             //이미지
             contentsTextView.setText(recipeContents[i]);
 
 

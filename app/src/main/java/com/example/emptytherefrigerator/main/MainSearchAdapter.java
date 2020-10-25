@@ -2,6 +2,9 @@ package com.example.emptytherefrigerator.main;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,16 +42,16 @@ public class MainSearchAdapter extends RecyclerView.Adapter<MainSearchAdapter.Vi
         return new ViewHolder(view);
     }//아이템 뷰로 사용 될 xml inflate 시킴
 
-
+    ///////////////////////////////////리스트 데이터 넣는 곳 ///////////////////////////////////////
     @Override
     public void onBindViewHolder(@NonNull MainSearchAdapter.ViewHolder holder, final int position) {
         context = holder.itemView.getContext();
 
-        Glide.with(context)
+/*        Glide.with(context)
                 .load(recipeLists.get(position).getRecipeImagePath())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(holder.getRecipeImage());                         //이미지
-
+                .into(holder.getRecipeImage());   */                      //이미지
+        holder.recipeImage.setImageBitmap(StringToBitmap(recipeLists.get(position).getRecipeImageByte()[0]));
         holder.title.setText(recipeLists.get(position).getTitle());   //viewHolder 객체
         holder.commentCount.setText(Integer.toString(recipeLists.get(position).getCommentCount()));   //viewHolder 객체
         holder.likeCount.setText(Integer.toString(recipeLists.get(position).getLikeCount()));   //viewHolder 객체
@@ -59,6 +62,19 @@ public class MainSearchAdapter extends RecyclerView.Adapter<MainSearchAdapter.Vi
     public int getItemCount() {
         return recipeLists.size();
     }
+
+    public Bitmap StringToBitmap(String encodedString)                      //스트링 이미지 데이터 -> 비트맵으로
+    {
+        try {
+            byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        } catch (Exception e) {
+            e.getMessage();
+            return null;
+        }
+    }
+
 
     //ViewHolder 클래스 / 구현때 수정
     class ViewHolder extends RecyclerView.ViewHolder{
@@ -90,6 +106,7 @@ public class MainSearchAdapter extends RecyclerView.Adapter<MainSearchAdapter.Vi
                         intent = new Intent(holdercontext, RecipeDetailView.class);     //조회된 레시피 화면으로 넘어간다
                         intent.putExtra("RECIPE",recipeLists.get(pos));      //다음 화면에 레시피 객체 송신
                         holdercontext.startActivity(intent);
+
                     }
                 }
             });

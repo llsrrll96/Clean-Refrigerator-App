@@ -15,9 +15,13 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.emptytherefrigerator.AsyncTasks.RecipeMngAsyncTask;
 import com.example.emptytherefrigerator.AsyncTasks.RecipeSearchAsyncTask;
 import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.entity.RecipeIn;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -70,12 +74,48 @@ public class MainSearchFragView extends Fragment
         });
     }
 
+    //이달의 레시피 창
     public void setRecyclerView()   //이달의 레시피 출력
     {
-        ArrayList<RecipeIn> recipeList;
+        ArrayList<RecipeIn> recipeList = new ArrayList<RecipeIn>();
+        String recipeListData;
         try
         {
-            recipeList =  new RecipeSearchAsyncTask().execute("bestRecipeReq").get();//서버쪽에 따라 변경될 수 있음
+            recipeListData =  new RecipeMngAsyncTask().execute("readRecipe","123").get();//서버쪽에 따라 변경될 수 있음
+            JSONArray jsonArray = new JSONArray(recipeListData);
+            for (int i = 0 ; i< jsonArray.length(); i++)
+            {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                //test
+                System.out.println("jsonObject: "+ jsonObject.get("title"));
+
+                RecipeIn recipeIn = new RecipeIn();
+                recipeIn.setRecipeInId(jsonObject.getInt("recipeInId"));
+                recipeIn.setTitle(jsonObject.getString("title"));
+                recipeIn.setUserId(jsonObject.getString("userId"));
+                recipeIn.setIngredient(jsonObject.getString("ingredient"));
+                recipeIn.setIngredientUnit(jsonObject.getString("ingredientUnit"));
+                recipeIn.setRecipePerson(jsonObject.getInt("recipePerson"));
+                recipeIn.setRecipeTime(jsonObject.getInt("recipeTime"));
+                recipeIn.setContents(jsonObject.getString("contents"));
+                recipeIn.setCommentCount(jsonObject.getInt("commentCount"));
+                recipeIn.setLikeCount(jsonObject.getInt("likeCount"));
+                recipeIn.setUploadDate(jsonObject.getString("uploadDate"));
+
+
+                JSONArray jsonArrayImage = jsonObject.getJSONArray("recipeImageBytes");
+                String[] recipeImageBytes = new String [jsonArrayImage.length()];
+
+                System.out.println("jsonArrayImage.length(): "+ jsonArrayImage.length());
+
+                for(int j= 0; j < jsonArrayImage.length(); j++)
+                {
+                    JSONObject jsonObjectImage = jsonArrayImage.getJSONObject(j);
+                    recipeImageBytes[j] = jsonObjectImage.getString("recipeImageByte");
+                }
+                recipeIn.setRecipeImageByte(recipeImageBytes);
+                recipeList.add(recipeIn);
+            }
         }
         catch(Exception e)
         {
@@ -86,53 +126,11 @@ public class MainSearchFragView extends Fragment
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity()); //상하
         recyclerView.addItemDecoration(new RecyclerDecoration(50)); //아이템 간격
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(new MainSearchAdapter(insertItemList()));
-        //recyclerView.setAdapter(new MainSearchAdapter(recipeList));   //서버쪽 구현이 완료되면 이걸로 바꿀 예정
+        recyclerView.setAdapter(new MainSearchAdapter(recipeList));   //서버쪽 구현이 완료되면 이걸로 바꿀 예정
 
         //리사이클러뷰 구분선
         DividerItemDecoration dividerItemDecoration =
                 new DividerItemDecoration(recyclerView.getContext(), new LinearLayoutManager(getActivity()).getOrientation());
         recyclerView.addItemDecoration(dividerItemDecoration);
-    }
-
-    //데이터 넣는 곳 , db에서 데이터 불러서 반복문으로 list에 저장 추가 , 비동기 백그라운드 사용 예정
-    ArrayList insertItemList(){
-        list = new ArrayList<>(  );
-        RecipeIn recipeList1 = new RecipeIn();
-
-        String userId = "유저 아이디";
-        String title = "타이틀";
-        String recipeImagePath = "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG_transparency_demonstration_1.png/420px-PNG_transparency_demonstration_1.png," +
-                "https://upload.wikimedia.org/wikipedia/commons/5/5f/%EA%B4%91%ED%99%94%EB%AC%B8_Gwanghwamun_%E5%85%89%E5%8C%96%E9%96%80_-_panoramio.jpg," +
-                "https://upload.wikimedia.org/wikipedia/commons/0/02/Nordsee_Wellen.JPG," +
-                "https://upload.wikimedia.org/wikipedia/commons/5/5f/%EA%B4%91%ED%99%94%EB%AC%B8_Gwanghwamun_%E5%85%89%E5%8C%96%E9%96%80_-_panoramio.jpg";
-        String recipePerson = "1";
-        String recipeTime = "30";
-        String ingredient = "식재료1,식재료2,식재료3";
-        String ingredientUnit = "1개,2개,3개";
-        String recipeContents = "요리방법 1,요리방법 2,요리방법3";
-        int commentCount = 10;
-        int likeCount = 50;
-        String uploadDate = "2020-10-24";
-
-        recipeList1.setUserId(userId);
-        recipeList1.setTitle(title);
-        recipeList1.setRecipeImagePath(recipeImagePath);
-        recipeList1.setRecipePerson(Integer.parseInt(recipePerson));
-        recipeList1.setRecipeTime(Integer.parseInt(recipeTime));
-        recipeList1.setIngredient(ingredient);
-        recipeList1.setIngredientUnit(ingredientUnit);
-        recipeList1.setContents(recipeContents);
-        recipeList1.setCommentCount(commentCount);
-        recipeList1.setLikeCount(likeCount);
-        recipeList1.setUploadDate(uploadDate);
-
-/*        Recipe recipeList2 = new Recipe();
-        Recipe recipeList3 = new Recipe();*/
-
-        list.add(recipeList1);
-        list.add(recipeList1);
-        list.add(recipeList1);
-        return list;
     }
 }
