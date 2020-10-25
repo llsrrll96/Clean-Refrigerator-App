@@ -1,5 +1,6 @@
 package com.example.emptytherefrigerator.userView.MyRecipe;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,7 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.emptytherefrigerator.AsyncTasks.RecipeSearchAsyncTask;
 import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.entity.RecipeIn;
+import com.example.emptytherefrigerator.login.LoginView;
 import com.example.emptytherefrigerator.login.UserInfo;
+import com.example.emptytherefrigerator.main.RecipeDetailCreateView;
 import com.example.emptytherefrigerator.network.JsonParsing;
 
 import org.json.JSONObject;
@@ -62,6 +65,9 @@ public class MyRecipeListView extends AppCompatActivity
                 finish();
             case R.id.btnCreateRecipe:
                 //레시피 등록 화면으로 넘어감
+                Intent intent = new Intent(getApplicationContext(), RecipeDetailCreateView.class);      //현재 화면의 제어를 넘길 클래스 지정
+                startActivity(intent);      //다음 화면으로 넘어감
+
                 break;
         }
         return super.onOptionsItemSelected(item);
