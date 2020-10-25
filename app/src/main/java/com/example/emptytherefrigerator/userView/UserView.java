@@ -37,6 +37,8 @@ public class UserView extends Fragment
     }
     public void initializeView()
     {
+        userIdTextView = view.findViewById(R.id.userIdTextView);
+        userPwTextView = view.findViewById(R.id.userPwTextView);
         btnEditUser = view.findViewById(R.id.memberEditBtn);
         btnRecipeInquire = view.findViewById(R.id.recipeInquireBtn);
         btnCommentInquire = view.findViewById(R.id.commentInquireBtn);

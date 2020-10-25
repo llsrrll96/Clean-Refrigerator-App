@@ -75,7 +75,7 @@ public class MainSearchFragView extends Fragment
         ArrayList<RecipeIn> recipeList;
         try
         {
-            recipeList =  new RecipeSearchAsyncTask().execute("bestRecipeReq").get();//서버쪽에 따라 변경될 수 있음
+            //recipeList =  new RecipeSearchAsyncTask().execute("bestRecipeReq").get();//서버쪽에 따라 변경될 수 있음
         }
         catch(Exception e)
         {

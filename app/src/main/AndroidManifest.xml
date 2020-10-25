@@ -37,6 +37,7 @@
         <activity android:name=".userView.MyRecipe.MyRecipeListView"/>
         <activity android:name=".userView.MyComment.MyCommentView"/>
         <activity android:name=".userView.UserEditView"/>
+        <activity android:name=".userView.SettingView"/>
     </application>
 
 </manifest>
