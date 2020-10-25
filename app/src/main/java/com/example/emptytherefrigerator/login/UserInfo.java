@@ -34,14 +34,14 @@ public class UserInfo           //자동 로그인 밑 앱 내에서 사용자�
         String value = prefs.getString(key,DEFAULT_VALUE_STRING);
         return value;
     }
-    public static void removeKey(Context context, String key)
+    public static void removeKey(Context context, String key)       //키 값 삭제
     {
         SharedPreferences prefs = getPreferences(context);
         SharedPreferences.Editor edit = prefs.edit();
         edit.remove(key);
         edit.apply();
     }
-    public static void clear(Context context)
+    public static void clear(Context context)       //모든 저장 데이터 삭제
     {
         SharedPreferences prefs = getPreferences(context);
         SharedPreferences.Editor edit = prefs.edit();

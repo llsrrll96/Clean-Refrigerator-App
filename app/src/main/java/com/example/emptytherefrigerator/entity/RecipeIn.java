@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class RecipeIn implements Serializable
 {
-    private String recipeInId;
+    private int recipeInId;
     private String title;
     private String userId;
     private String ingredient;      //식재료
@@ -25,7 +25,7 @@ public class RecipeIn implements Serializable
     public RecipeIn() {
     }
 
-    public RecipeIn(String recipeInId, String title, String userId, String ingredient,
+    public RecipeIn(int recipeInId, String title, String userId, String ingredient,
                     int recipePerson, int recipeTime, String recipeImagePath, String contents, int commentCount, int likeCount, String uploadDate) {
         this.recipeInId = recipeInId;
         this.title = title;
@@ -40,11 +40,11 @@ public class RecipeIn implements Serializable
         this.uploadDate = uploadDate;
     }
 
-    public String getRecipeInId() {
+    public int getRecipeInId() {
         return recipeInId;
     }
 
-    public void setRecipeInId(String recipeInId) {
+    public void setRecipeInId(int recipeInId) {
         this.recipeInId = recipeInId;
     }
 

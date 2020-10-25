@@ -102,7 +102,7 @@ public class LoginView extends AppCompatActivity {
 
         if(!id.equals("") && !pw.equals(""))        //값이 있는 경우에만 화면을 넘어가게 함
         {
-            intent = new Intent(getApplicationContext(), MainPageView.class);      //현재 화면의 제어를 넘길 클래스 지정
+            intent = new Intent(getApplicationContext(), LoginView.class);      //현재 화면의 제어를 넘길 클래스 지정
             startActivity(intent);      //다음 화면으로 넘어감
         }
     }
