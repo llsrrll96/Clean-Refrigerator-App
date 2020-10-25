@@ -15,18 +15,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.emptytherefrigerator.R;
-import com.example.emptytherefrigerator.entity.Recipe;
+import com.example.emptytherefrigerator.entity.RecipeIn;
 
 import java.util.ArrayList;
 
 //MainSearchFrag 의 리싸이클러뷰의 어댑터
 public class MainSearchAdapter extends RecyclerView.Adapter<MainSearchAdapter.ViewHolder>
 {
-    private final ArrayList<Recipe> recipeLists;
+    private final ArrayList<RecipeIn> recipeLists;
     private Context context;
     private Intent intent;
 
-    public MainSearchAdapter(ArrayList<Recipe> recipeLists) {
+    public MainSearchAdapter(ArrayList<RecipeIn> recipeLists) {
         this.recipeLists = recipeLists;
     }
 

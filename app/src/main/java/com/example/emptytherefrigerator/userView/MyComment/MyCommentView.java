@@ -9,14 +9,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.emptytherefrigerator.AsyncTasks.RecipeSearchAsyncTask;
 import com.example.emptytherefrigerator.R;
-import com.example.emptytherefrigerator.entity.recipeComment;
+import com.example.emptytherefrigerator.entity.RecipeComment;
 import com.example.emptytherefrigerator.network.JsonParsing;
 import java.util.ArrayList;
 
 public class MyCommentView extends AppCompatActivity
 {
     RecyclerView recyclerView;
-    ArrayList<recipeComment> list = new ArrayList<>();
+    ArrayList<RecipeComment> list = new ArrayList<>();
     Toolbar toolbar;
     MyCommentAdapter adapter = null;
     @Override
@@ -42,7 +42,7 @@ public class MyCommentView extends AppCompatActivity
     public void getCommentList()
     {
         RecipeSearchAsyncTask searchMyComment = new RecipeSearchAsyncTask();
-        ArrayList<recipeComment> commentList = new ArrayList<recipeComment>();
+        ArrayList<RecipeComment> commentList = new ArrayList<RecipeComment>();
         String result = "";
 
         try

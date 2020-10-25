@@ -2,7 +2,7 @@ package com.example.emptytherefrigerator.entity;
 
 import java.io.Serializable;
 
-public class Recipe implements Serializable
+public class RecipeIn implements Serializable
 {
     private String recipeInId;
     private String title;
@@ -22,11 +22,11 @@ public class Recipe implements Serializable
      * row 는 사진 갯수, col 은 해당 이미지 데이터 byte 코드
      * */
 
-    public Recipe() {
+    public RecipeIn() {
     }
 
-    public Recipe(String recipeInId, String title, String userId, String ingredient,
-                  int recipePerson, int recipeTime, String recipeImagePath, String contents, int commentCount, int likeCount, String uploadDate) {
+    public RecipeIn(String recipeInId, String title, String userId, String ingredient,
+                    int recipePerson, int recipeTime, String recipeImagePath, String contents, int commentCount, int likeCount, String uploadDate) {
         this.recipeInId = recipeInId;
         this.title = title;
         this.userId = userId;

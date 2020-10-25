@@ -2,7 +2,6 @@ package com.example.emptytherefrigerator.main;
 
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -16,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.emptytherefrigerator.R;
-import com.example.emptytherefrigerator.entity.Recipe;
+import com.example.emptytherefrigerator.entity.RecipeIn;
 
 import java.util.ArrayList;
 
@@ -32,7 +31,7 @@ public class RecipeDetailView extends AppCompatActivity {
     private ImageButton btnComments;
     private ImageButton btnHeart;
 
-    private Recipe recipe;
+    private RecipeIn recipe;
 
     private String[] recipeImagePaths;               //여러개의 이미지 경로들
     private String[] ingredientNames;               //여러개의 재료들
@@ -99,7 +98,7 @@ public class RecipeDetailView extends AppCompatActivity {
     {
         //recipe = new Recipe();
         Intent intent = getIntent();        //데이터 수신
-        recipe = (Recipe)intent.getSerializableExtra("RECIPE");
+        recipe = (RecipeIn)intent.getSerializableExtra("RECIPE");
 
 
 /*        String userId = "유저 아이디";

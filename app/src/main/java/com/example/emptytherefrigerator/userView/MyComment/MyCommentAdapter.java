@@ -12,16 +12,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.emptytherefrigerator.R;
-import com.example.emptytherefrigerator.entity.recipeComment;
+import com.example.emptytherefrigerator.entity.RecipeComment;
 
 import java.util.ArrayList;
 
 public class MyCommentAdapter extends RecyclerView.Adapter<MyCommentAdapter.MyCommentViewHolder>
 {
-    private ArrayList<recipeComment> list;
+    private ArrayList<RecipeComment> list;
     private LayoutInflater inflater;
 
-    public MyCommentAdapter(Context context, ArrayList<recipeComment> list)
+    public MyCommentAdapter(Context context, ArrayList<RecipeComment> list)
     {
         inflater = LayoutInflater.from(context);
         this.list = list;
@@ -62,7 +62,7 @@ public class MyCommentAdapter extends RecyclerView.Adapter<MyCommentAdapter.MyCo
             btnCommentDel = itemView.findViewById(R.id.btnCommentDel);
             setListener();
         }
-        public void onBind(recipeComment comment)
+        public void onBind(RecipeComment comment)
         {
             commentListTitle.setText(comment.getRecipeTitle());
             myCommentContent.setText(comment.getUserId());

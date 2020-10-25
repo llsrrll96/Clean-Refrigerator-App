@@ -25,8 +25,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.emptytherefrigerator.AsyncTasks.RecipeMngAsyncTask;
 import com.example.emptytherefrigerator.R;
-import com.example.emptytherefrigerator.entity.Recipe;
-import com.google.gson.JsonObject;
+import com.example.emptytherefrigerator.entity.RecipeIn;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,7 +35,6 @@ import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -78,7 +76,7 @@ public class RecipeDetailCreateView extends AppCompatActivity {
     private String absoultePath ="";
 
     private int recipeContCnt;                  //요리방법 갯수
-    private Recipe recipe;                      //레시피 클래스 객체
+    private RecipeIn recipe;                      //레시피 클래스 객체
     private String ingredient = "";
     private String ingredientUnit ="";
     private Bitmap repPhotoBitmap;
@@ -121,7 +119,7 @@ public class RecipeDetailCreateView extends AppCompatActivity {
         //요리 방법
         recipeContCnt = 0;
 
-        recipe = new Recipe();
+        recipe = new RecipeIn();
 
         //대표이미지뷰를 리스트에 추가
         recipeImageViewList.add(recipeDetailImage);

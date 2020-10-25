@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.emptytherefrigerator.AsyncTasks.RecipeSearchAsyncTask;
 import com.example.emptytherefrigerator.R;
-import com.example.emptytherefrigerator.entity.Recipe;
+import com.example.emptytherefrigerator.entity.RecipeIn;
 
 import java.util.ArrayList;
 
@@ -28,7 +28,7 @@ public class MainSearchFragView extends Fragment
     private View view;
     private RecyclerView recyclerView;
     private SearchView searchView;
-    private ArrayList<Recipe> list;
+    private ArrayList<RecipeIn> list;
     private Intent intent;
 
     @Nullable
@@ -72,7 +72,7 @@ public class MainSearchFragView extends Fragment
 
     public void setRecyclerView()   //이달의 레시피 출력
     {
-        ArrayList<Recipe> recipeList;
+        ArrayList<RecipeIn> recipeList;
         try
         {
             recipeList =  new RecipeSearchAsyncTask().execute("bestRecipeReq").get();//서버쪽에 따라 변경될 수 있음
@@ -98,7 +98,7 @@ public class MainSearchFragView extends Fragment
     //데이터 넣는 곳 , db에서 데이터 불러서 반복문으로 list에 저장 추가 , 비동기 백그라운드 사용 예정
     ArrayList insertItemList(){
         list = new ArrayList<>(  );
-        Recipe recipeList1 = new Recipe();
+        RecipeIn recipeList1 = new RecipeIn();
 
         String userId = "유저 아이디";
         String title = "타이틀";

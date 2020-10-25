@@ -1,6 +1,6 @@
 package com.example.emptytherefrigerator.network;
 
-import com.example.emptytherefrigerator.entity.Recipe;
+import com.example.emptytherefrigerator.entity.RecipeIn;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -9,9 +9,9 @@ import java.util.ArrayList;
 
 public class JsonParsing
 {
-    public static ArrayList<Recipe> parsingRecipe(String data)     //레시피 정보 파싱
+    public static ArrayList<RecipeIn> parsingRecipe(String data)     //레시피 정보 파싱
     {
-        ArrayList<Recipe> list = new ArrayList<Recipe>();
+        ArrayList<RecipeIn> list = new ArrayList<RecipeIn>();
         JSONObject jsonObject;
         try
         {
@@ -35,7 +35,7 @@ public class JsonParsing
                 int likeCount = recipe.getInt("likeCount");
                 String uploadDate = recipe.getString("uploadData");
 
-                list.add(new Recipe(recipeId, title, userId, ingredient, recipePerson, recipeTime, recipeImagePath, recipeContents, commentCount, likeCount, uploadDate));
+                list.add(new RecipeIn(recipeId, title, userId, ingredient, recipePerson, recipeTime, recipeImagePath, recipeContents, commentCount, likeCount, uploadDate));
             }
         }
         catch(JSONException e)

@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.emptytherefrigerator.R;
-import com.example.emptytherefrigerator.entity.Recipe;
+import com.example.emptytherefrigerator.entity.RecipeIn;
 
 import java.util.ArrayList;
 
@@ -27,7 +27,7 @@ public class MainSearchResultView extends AppCompatActivity {
     private SearchView searchView;
     private ImageButton btnIngredient;
 
-    private ArrayList<Recipe> resultList;
+    private ArrayList<RecipeIn> resultList;
     private Intent intent;
 
     @Override
@@ -64,7 +64,7 @@ public class MainSearchResultView extends AppCompatActivity {
     ///////////////////////////////////////////데이터 넣는 곳//////////////////////////////////////////////////////////////////////
     ArrayList insertItemList(){
         resultList = new ArrayList<>(  );
-        Recipe recipeList1 = new Recipe();
+        RecipeIn recipeList1 = new RecipeIn();
 
         String userId = "유저 아이디";
         String title = "타이틀";

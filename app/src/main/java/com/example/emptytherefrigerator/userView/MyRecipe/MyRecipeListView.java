@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.emptytherefrigerator.R;
-import com.example.emptytherefrigerator.entity.Recipe;
+import com.example.emptytherefrigerator.entity.RecipeIn;
 
 import java.util.ArrayList;
 
@@ -19,7 +19,7 @@ public class MyRecipeListView extends AppCompatActivity
     private RecyclerView recyclerView;
     private ImageButton  btnCreateRecipe;/*btnBack*/;
     private Toolbar toolbar;
-    private ArrayList<Recipe> list = new ArrayList<>();
+    private ArrayList<RecipeIn> list = new ArrayList<>();
     private MyRecipeListAdapter adapter = null;
 
     @Override

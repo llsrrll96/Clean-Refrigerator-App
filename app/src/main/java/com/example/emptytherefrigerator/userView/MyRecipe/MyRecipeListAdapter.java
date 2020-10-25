@@ -11,15 +11,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.emptytherefrigerator.R;
-import com.example.emptytherefrigerator.entity.Recipe;
+import com.example.emptytherefrigerator.entity.RecipeIn;
 import java.util.ArrayList;
 
 public class MyRecipeListAdapter extends RecyclerView.Adapter<MyRecipeListAdapter.MyRecipeListViewHolder>
 {
-    private ArrayList<Recipe> list;
+    private ArrayList<RecipeIn> list;
     private LayoutInflater inflater;
 
-    public MyRecipeListAdapter(Context context, ArrayList<Recipe> list)
+    public MyRecipeListAdapter(Context context, ArrayList<RecipeIn> list)
     {
         inflater = LayoutInflater.from(context);
         this.list = list;
@@ -62,7 +62,7 @@ public class MyRecipeListAdapter extends RecyclerView.Adapter<MyRecipeListAdapte
             btnEditRecipe = itemView.findViewById(R.id.recipeEditBtn);
             btnDelRecipe = itemView.findViewById(R.id.recipeDelBtn);
         }
-        public void onBind(Recipe recipe)
+        public void onBind(RecipeIn recipe)
         {
             //mainimage 셋팅
             title.setText(recipe.getTitle());

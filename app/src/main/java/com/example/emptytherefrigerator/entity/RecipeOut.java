@@ -1,17 +1,17 @@
 package com.example.emptytherefrigerator.entity;
 
-public class recipeOut
+public class RecipeOut
 {
     private int recipeOutId;
     private String link;
     private String title;
     private String ingredient;
 
-    public recipeOut(int reicpeOutId, String link, String title, String ingredient)
+    public RecipeOut(int reicpeOutId, String link, String title, String ingredient)
     {
         this.recipeOutId = reicpeOutId; this.link = link; this.title = title; this.ingredient = ingredient;
     }
-    public recipeOut(int reicpeOutId, String link, String title)
+    public RecipeOut(int reicpeOutId, String link, String title)
     {
         this.recipeOutId = reicpeOutId; this.link = link; this.title = title;
     }
