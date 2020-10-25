@@ -53,21 +53,22 @@ public class SettingView extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext()); //alert 창
+                AlertDialog.Builder builder = new AlertDialog.Builder(SettingView.this); //alert 창
                 builder.setTitle("회원 탈퇴");
                 builder.setMessage("정말 탈퇴하시겠습니까?");
-                builder.setPositiveButton("예", new DialogInterface.OnClickListener()   //ok 클릭시 회원정보 삭제
+                builder.setNegativeButton("예", new DialogInterface.OnClickListener()   //ok 클릭시 회원정보 삭제
                 {
                     public void onClick(DialogInterface dialog, int id)
                     {
-//                        deleteUser();
+                        deleteUser();
                     }
                 });
                 builder.setPositiveButton("아니오", new DialogInterface.OnClickListener()
                 {
                     public void onClick(DialogInterface dialog, int which) {}
                 });
-                builder.show();
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
             }
         });
     }
