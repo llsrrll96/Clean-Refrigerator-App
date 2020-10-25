@@ -26,6 +26,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.emptytherefrigerator.AsyncTasks.RecipeMngAsyncTask;
 import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.entity.RecipeIn;
+import com.example.emptytherefrigerator.login.UserInfo;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -210,7 +211,7 @@ public class RecipeDetailCreateView extends AppCompatActivity {
         recipeDetailImageIdx = recipeImageViewList.size();
     }
 
-    // 레시피 정보 JSON 전송 및 결과 수신 
+    // 레시피 정보 JSON 전송 및 결과 수신
     public String sendRegisterDataToServer() throws JSONException, ExecutionException, InterruptedException, IOException {
         JSONObject recipeJSON = new JSONObject();
         setRecipeData();
@@ -241,9 +242,12 @@ public class RecipeDetailCreateView extends AppCompatActivity {
         json.accumulate("recipeImageBytes", recipeImages.toString());
     }
 
-    //사용자가 입력한 데이터를 recipe 객체에 set
+    ////////////////////////////////사용자가 입력한 데이터를 recipe 객체에 set///////////////////////////////
     public void setRecipeData() throws IOException {
-        //타이틀, 인원, 조리시간
+        //유저아이디, 타이틀, 인원, 조리시간
+
+        String strUserId = UserInfo.getString(this,"USER_ID");
+        recipe.setUserId(strUserId);
         recipe.setTitle(editTextTitle.getText().toString());
         recipe.setRecipePerson(Integer.parseInt(recipeInfoCount.getText().toString()));
         recipe.setRecipeTime(Integer.parseInt(recipeInfoTime.getText().toString()));
@@ -260,8 +264,8 @@ public class RecipeDetailCreateView extends AppCompatActivity {
             ingredient += etIngredientList.get(i).getText().toString();
             ingredientUnit += etIngredientUnitList.get(i).getText().toString();
             if(i != etIngredientList.size() - 1) {
-                ingredient += ",";
-                ingredientUnit += ",";
+                ingredient += "`";
+                ingredientUnit += "`";
             }
         }
         recipe.setIngredient(ingredient);
@@ -273,7 +277,7 @@ public class RecipeDetailCreateView extends AppCompatActivity {
         {
             recipeContents += recipeContentList.get(contCnt).getText().toString();
             if(i != recipeContentList.size() -1){
-                recipeContents += ",";
+                recipeContents += "`";
             }
         }
         recipe.setContents(recipeContents);
@@ -503,3 +507,4 @@ public class RecipeDetailCreateView extends AppCompatActivity {
     }
 
 }
+
