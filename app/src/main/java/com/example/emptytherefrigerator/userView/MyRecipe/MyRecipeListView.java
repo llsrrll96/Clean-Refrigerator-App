@@ -63,11 +63,11 @@ public class MyRecipeListView extends AppCompatActivity
         {
             case android.R.id.home:     //뒤로가기 버튼이 눌렸을 때
                 finish();
+                break;
             case R.id.btnCreateRecipe:
                 //레시피 등록 화면으로 넘어감
                 Intent intent = new Intent(getApplicationContext(), RecipeDetailCreateView.class);      //현재 화면의 제어를 넘길 클래스 지정
                 startActivity(intent);      //다음 화면으로 넘어감
-
                 break;
         }
         return super.onOptionsItemSelected(item);

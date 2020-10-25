@@ -14,7 +14,7 @@ import java.net.URL;
 
 public class NetworkHandler
 {
-    private static final String url="http://119.56.229.177:3000/";        //서버의 주소
+    private static final String url="http://192.168.25.51:3000/";        //서버의 주소
     private static HttpURLConnection conn;              //커넥션을 맺는 객체
 
     public static final NetworkHandler networkHandler =  new NetworkHandler();      //앱 내에 하나만 있어야 하므로 싱글톤 패턴 적용

@@ -57,12 +57,10 @@ public class JsonParsing
     public static ArrayList<RecipeComment>parsingCommentList(String data)
     {
         ArrayList<RecipeComment> list = new ArrayList<>();
-        JSONObject jsonObject;
         try
         {
-            jsonObject = new JSONObject(data);
-            String jsonString = jsonObject.getString("myCommentList");
-            JSONArray resCommentList = new JSONArray(jsonString);
+            JSONArray resCommentList = new JSONArray(data);
+            System.out.println(data);
 
             for(int i=0; i<resCommentList.length(); i++)
             {

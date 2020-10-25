@@ -10,7 +10,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.emptytherefrigerator.AsyncTasks.RecipeSearchAsyncTask;
 import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.entity.RecipeComment;
+import com.example.emptytherefrigerator.login.UserInfo;
 import com.example.emptytherefrigerator.network.JsonParsing;
+
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class MyCommentView extends AppCompatActivity
@@ -42,19 +46,21 @@ public class MyCommentView extends AppCompatActivity
     public void getCommentList()
     {
         RecipeSearchAsyncTask searchMyComment = new RecipeSearchAsyncTask();
-        ArrayList<RecipeComment> commentList = new ArrayList<RecipeComment>();
         String result = "";
-
+        JSONObject data = new JSONObject();
         try
         {
-            result = searchMyComment.execute("readComment", null).get();
-            if(result.equals("2") || result.equals("3"))        // search에 실패하면
-            {
-                // toast 해줘야되나?
-                return;
-            }
+            data.accumulate("userId", UserInfo.getString(this,UserInfo.ID_KEY));
+            result = searchMyComment.execute("readUserComment", data.toString()).get();
+            System.out.println(result);
+
+//            if(result.equals("2") || result.equals("3"))        // search에 실패하면
+//            {
+//                // toast 해줘야되나?
+//                return;
+//            }
             //제대로 값이 넘어오면
-            commentList = JsonParsing.parsingCommentList(result);
+            list = JsonParsing.parsingCommentList(result);
         }
         catch(Exception e)
         {
