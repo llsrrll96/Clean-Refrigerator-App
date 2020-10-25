@@ -12,7 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.emptytherefrigerator.AsyncTasks.RecipeSearchAsyncTask;
 import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.entity.RecipeIn;
+import com.example.emptytherefrigerator.login.UserInfo;
 import com.example.emptytherefrigerator.network.JsonParsing;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -80,11 +83,13 @@ public class MyRecipeListView extends AppCompatActivity
     public void getRecipeList()        //내 레시피 서버에서 받아온다
     {
         RecipeSearchAsyncTask recipeSearch = new RecipeSearchAsyncTask();
+        JSONObject data = new JSONObject();
+
         String jsonData="";
         try
         {
-            if(recipeSearch.execute()!=null)        //null인 경우는 처리 안해줘도 되나? 일단 처리함
-                jsonData = recipeSearch.execute("readUserRecipe", "").get();
+            data.accumulate("userId", UserInfo.getString(this,UserInfo.ID_KEY));
+            jsonData = recipeSearch.execute("readUserRecipe", data.toString()).get();
             list = JsonParsing.parsingRecipe(jsonData);
         }
         catch(Exception e)
