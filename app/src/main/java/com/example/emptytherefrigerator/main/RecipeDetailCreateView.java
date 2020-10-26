@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
@@ -37,6 +38,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -203,11 +205,17 @@ public class RecipeDetailCreateView extends AppCompatActivity {
         permissionCheck();
 
         // 앨범 호출
-        Intent intent = new Intent(Intent.ACTION_PICK);
+/*        Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
         //onActivityResult 호출
         isDetail = true;
-        startActivityForResult(intent, PICK_FROM_ALBUM);
+        startActivityForResult(intent, PICK_FROM_ALBUM);*/
+
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, 1);
+
         recipeDetailImageIdx = recipeImageViewList.size();
     }
 
@@ -338,6 +346,7 @@ public class RecipeDetailCreateView extends AppCompatActivity {
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //이미지 관련 처리
+    /*
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -407,7 +416,34 @@ public class RecipeDetailCreateView extends AppCompatActivity {
             }
         }
     }
+*/
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Check which request we're responding to
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            // Make sure the request was successful
+            if (resultCode == RESULT_OK) {
+                try {
+                    // 선택한 이미지에서 비트맵 생성
+                    InputStream in = getContentResolver().openInputStream(data.getData());
+                    repPhotoBitmap = BitmapFactory.decodeStream(in);
+                    in.close();
+                    // 이미지 표시
 
+                    if (isDetail) {
+                        recipeDetailImage.setImageBitmap(repPhotoBitmap); // 레이아웃의 이미지칸에 CROP된 BITMAP을 보여줌
+                        isDetail = false;
+                    }
+                    else {
+                        recipeImageViewList.get(recipeImageViewList.size() - 1).setImageBitmap(repPhotoBitmap);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
     /////////////////////////////////////////////////////////////////////////////////////////////////////
     public void setIngredient()
     {
@@ -456,10 +492,14 @@ public class RecipeDetailCreateView extends AppCompatActivity {
                 // 앨범 호출
                 recipeImageViewList.add(recipeImageView);
 
-                Intent intent = new Intent(Intent.ACTION_PICK);
+/*                Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
                 //onActivityResult 호출
-                startActivityForResult(intent, PICK_FROM_ALBUM);
+                startActivityForResult(intent, PICK_FROM_ALBUM);*/
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(intent, 1);
             }
         });
 
