@@ -1,26 +1,27 @@
 package com.example.emptytherefrigerator.userView.MyComment;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.entity.RecipeComment;
+import com.example.emptytherefrigerator.entity.RecipeIn;
 
 import java.util.ArrayList;
 
 public class MyCommentAdapter extends RecyclerView.Adapter<MyCommentAdapter.MyCommentViewHolder>
 {
-    private ArrayList<RecipeComment> list;
+    private ArrayList<RecipeComment> list = new ArrayList<>();
     private LayoutInflater inflater;
-
+    Context context;
     public MyCommentAdapter(Context context, ArrayList<RecipeComment> list)
     {
         inflater = LayoutInflater.from(context);
@@ -29,7 +30,9 @@ public class MyCommentAdapter extends RecyclerView.Adapter<MyCommentAdapter.MyCo
     @Override
     public void onBindViewHolder(@NonNull MyCommentAdapter.MyCommentViewHolder holder, int position)
     {
+        context = holder.itemView.getContext();
         holder.onBind(list.get(position));
+        holder.myComment_RecipeMainImage.setImageBitmap(RecipeIn.StringToBitmap(list.get(position).getRecipeImageByte()[0]));
     }
     @Override
     public int getItemCount()       //전체 아이템 갯수 리턴
@@ -44,16 +47,16 @@ public class MyCommentAdapter extends RecyclerView.Adapter<MyCommentAdapter.MyCo
         return new MyCommentAdapter.MyCommentViewHolder(itemView, this);
     }
 
-    class MyCommentViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
+    class MyCommentViewHolder extends RecyclerView.ViewHolder
     {
         MyCommentAdapter adapter;
         TextView commentListTitle, myCommentContent, myCommentUploadDate;
         ImageView myComment_RecipeMainImage;
         ImageButton btnCommentDel;
 
-        public MyCommentViewHolder(View itemView, MyCommentAdapter adapter)
+        public MyCommentViewHolder(View view, MyCommentAdapter adapter)
         {
-            super(itemView);
+            super(view);
             this.adapter = adapter;
             commentListTitle = itemView.findViewById(R.id.commentListTitle);
             myCommentContent = itemView.findViewById(R.id.myCommentContent);
@@ -65,7 +68,7 @@ public class MyCommentAdapter extends RecyclerView.Adapter<MyCommentAdapter.MyCo
         public void onBind(RecipeComment comment)
         {
             commentListTitle.setText(comment.getRecipeTitle());
-            myCommentContent.setText(comment.getUserId());
+            myCommentContent.setText(comment.getContent());
             myCommentUploadDate.setText(comment.getUploadDate());
             //이미지 설정
         }
@@ -78,11 +81,6 @@ public class MyCommentAdapter extends RecyclerView.Adapter<MyCommentAdapter.MyCo
                     //댓글 삭제
                 }
             });
-        }
-        @Override
-        public void onClick(View v)
-        {
-            //조회 화면 넘기기
         }
     }
 }

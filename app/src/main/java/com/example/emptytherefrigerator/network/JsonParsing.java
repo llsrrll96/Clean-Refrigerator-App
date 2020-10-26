@@ -66,14 +66,22 @@ public class JsonParsing
             {
                 JSONObject comment = resCommentList.getJSONObject(i);
 
-                int recipeId = comment.getInt("recipeId");
+                int recipeId = comment.getInt("recipeInId");
                 int commentId = comment.getInt("commentId");
                 String title = comment.getString("title");
                 String userId = comment.getString("userId");
                 String content = comment.getString("content");
-                String uploadDate = comment.getString("uploadData");
+                String uploadDate = comment.getString("uploadDate");
 
-                list.add(new RecipeComment(recipeId, commentId, title, userId, content, uploadDate));
+                JSONArray jsonArrayImage = comment.getJSONArray("recipeImageBytes");
+                String[] recipeImageBytes = new String [jsonArrayImage.length()];
+
+                for(int j= 0; j < jsonArrayImage.length(); j++)
+                {
+                    JSONObject jsonObjectImage = jsonArrayImage.getJSONObject(j);
+                    recipeImageBytes[j] = jsonObjectImage.getString("recipeImageByte");
+                }
+                list.add(new RecipeComment(recipeId, commentId, title, userId, content, uploadDate, recipeImageBytes));
             }
         }
         catch(JSONException e)

@@ -1,20 +1,19 @@
 package com.example.emptytherefrigerator.userView.MyRecipe;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.entity.RecipeIn;
+import com.example.emptytherefrigerator.main.RecipeDetailView;
+
 import java.util.ArrayList;
 
 public class MyRecipeListAdapter extends RecyclerView.Adapter<MyRecipeListAdapter.MyRecipeListViewHolder>
@@ -50,7 +49,7 @@ public class MyRecipeListAdapter extends RecyclerView.Adapter<MyRecipeListAdapte
         return list.size();
     }
 
-    class MyRecipeListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
+    class MyRecipeListViewHolder extends RecyclerView.ViewHolder
     {
 
         MyRecipeListAdapter adapter;
@@ -69,6 +68,15 @@ public class MyRecipeListAdapter extends RecyclerView.Adapter<MyRecipeListAdapte
             uploadDate = itemView.findViewById(R.id.uploadDate);
             btnEditRecipe = itemView.findViewById(R.id.recipeEditBtn);
             btnDelRecipe = itemView.findViewById(R.id.recipeDelBtn);
+
+            view.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v)
+                {
+                    inquireRecipeDetailView(v);
+                }
+
+            });
         }
         public void onBind(RecipeIn recipe)
         {
@@ -94,10 +102,18 @@ public class MyRecipeListAdapter extends RecyclerView.Adapter<MyRecipeListAdapte
                 }
             });
         }
-        @Override
-        public void onClick(View view)
+
+        public void inquireRecipeDetailView(View view)
         {
-            //레시피 조회 화면 넘기기
+            int pos = getAdapterPosition();     //레시피 조회 화면 넘기기
+//            if(pos != RecyclerView.NO_POSITION)
+//            {
+                context = view.getContext();
+                Intent intent = new Intent(context, RecipeDetailView.class);     //조회된 레시피 화면으로 넘어간다
+                intent.putExtra("RECIPE",list.get(pos));      //다음 화면에 레시피 객체 송신
+                context.startActivity(intent);
+//            }
+
         }
     }
 

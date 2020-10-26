@@ -31,7 +31,7 @@
 
     <TextView
         android:id="@+id/myCommentContent"
-        android:layout_width="80dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         app:layout_constraintStart_toStartOf="@+id/commentListTitle"
@@ -47,11 +47,12 @@
         app:layout_constraintStart_toStartOf="@+id/myCommentContent"
         app:layout_constraintTop_toBottomOf="@+id/myCommentContent" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/btnCommentDel"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginEnd="30dp"
+        android:background="#ffffff"
         app:layout_constraintBottom_toBottomOf="@+id/myCommentUploadDate"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/commentListTitle"
