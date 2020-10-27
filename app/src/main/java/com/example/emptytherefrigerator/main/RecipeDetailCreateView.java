@@ -27,7 +27,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.emptytherefrigerator.AsyncTasks.RecipeMngAsyncTask;
 import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.entity.RecipeIn;
+import com.example.emptytherefrigerator.login.LoginView;
 import com.example.emptytherefrigerator.login.UserInfo;
+import com.example.emptytherefrigerator.userView.MyRecipe.MyRecipeListView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -182,8 +184,11 @@ public class RecipeDetailCreateView extends AppCompatActivity {
                 } catch (InterruptedException | IOException e) { e.printStackTrace(); }
                 if(result.equals("1"))
                 {
-                    onBackPressed();
                     Toast.makeText(v.getContext(),"등록 성공",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(), MyRecipeListView.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                    getApplicationContext().startActivity(intent);
                 }else
                 {
                     Toast.makeText(v.getContext(),"입력 양식에 맞게 입력해 주세요.",Toast.LENGTH_SHORT).show();
@@ -195,6 +200,7 @@ public class RecipeDetailCreateView extends AppCompatActivity {
         btnCancel.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                onBackPressed();
             }
         });
     }
