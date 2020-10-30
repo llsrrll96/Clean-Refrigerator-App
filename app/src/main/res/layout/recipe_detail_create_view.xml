@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorWhite"
     tools:context=".main.RecipeDetailCreateView">
 
     <LinearLayout
@@ -104,6 +105,7 @@
                     android:paddingLeft="10dp"
                     android:textSize="20sp"
                     android:textColor="#ff000000"
+                    android:inputType="number"
                     android:text="시간"
                     />
                 <EditText
@@ -111,6 +113,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:inputType="number"
                     android:hint="ex) 30분 -> 30"
                     />
             </LinearLayout>
@@ -144,7 +147,8 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
-            tools:src="@android:drawable/ic_input_add" />
+            android:background="@null"
+            android:src="@drawable/add" />
 
         <View
             android:layout_width="match_parent"
@@ -174,7 +178,8 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
-            tools:src="@android:drawable/ic_input_add" />
+            android:background="@null"
+            android:src="@drawable/add"/>
 
 
         <Button

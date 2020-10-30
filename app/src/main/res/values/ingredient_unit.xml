@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="unit">
+        <item>개</item>
+        <item>컵</item>
+        <item>컵(종이컵)</item>
+        <item>봉</item>
+        <item>근</item>
+        <item>대</item>
+        <item>포기</item>
+        <item>스푼</item>
+        <item>큰술</item>
+        <item>작은술</item>
+        <item>숟가락</item>
+        <item>꼬집</item>
+        <item>장</item>
+        <item>그릇</item>
+        <item>줄</item>
+        <item>공기</item>
+        <item>캔</item>
+        <item>조각</item>
+        <item>줌</item>
+        <item>뭉치</item>
+        <item>국자</item>
+        <item>ml</item>
+        <item>L</item>
+        <item>g</item>
+        <item>kg</item>
+        <item>T</item>
+
+    </string-array>
+</resources>

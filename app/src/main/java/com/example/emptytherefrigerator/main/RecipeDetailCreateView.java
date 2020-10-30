@@ -13,11 +13,13 @@ import android.os.Environment;
 import android.util.Base64;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -70,6 +72,7 @@ public class RecipeDetailCreateView extends AppCompatActivity {
 
     private List<EditText> etIngredientList;        //재료 리스트
     private List<EditText> etIngredientUnitList;    //재료단위 리스트
+    private List<Spinner> spIngredientUnitList;     //ex)개, kg
     private List<ImageView> recipeImageViewList;    //요리 방법 이미지 리스트 ( 첫 이미지 경로는 대표이미지 경로 두번째 부터 요리방법 이미지 )
     private List<EditText> recipeContentList;       //요리 방법 설명 editText 리스트
 
@@ -116,6 +119,7 @@ public class RecipeDetailCreateView extends AppCompatActivity {
         //식재료와 단위 저장 리스트
         etIngredientList = new ArrayList<EditText>();
         etIngredientUnitList = new ArrayList<EditText>();
+        spIngredientUnitList = new ArrayList<Spinner>();
         recipeImageViewList = new ArrayList<ImageView>();
         recipeContentList = new ArrayList<EditText>();
         //등록 취소 버튼
@@ -151,7 +155,7 @@ public class RecipeDetailCreateView extends AppCompatActivity {
         btnIngredient.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ingredientCnt++ < 10) {
+                if (ingredientCnt++ < 20) {
                     setIngredient();
                 }else {
                     Toast.makeText(v.getContext(),"더 이상 늘릴 수 없습니다.",Toast.LENGTH_SHORT).show();
@@ -163,7 +167,7 @@ public class RecipeDetailCreateView extends AppCompatActivity {
         btnRecipe.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (recipeCnt++ < 10) {
+                if (recipeCnt++ < 20) {
                     setRecipeContent();
                 }else
                     Toast.makeText(v.getContext(),"더 이상 늘릴 수 없습니다.",Toast.LENGTH_SHORT).show();
@@ -181,7 +185,8 @@ public class RecipeDetailCreateView extends AppCompatActivity {
                     result = sendRegisterDataToServer();
                 } catch (JSONException e) { e.printStackTrace();
                 } catch (ExecutionException e) { e.printStackTrace();
-                } catch (InterruptedException | IOException e) { e.printStackTrace(); }
+                } catch (InterruptedException | IOException e) { e.printStackTrace();
+                } catch (Exception e) {}
                 if(result.equals("1"))
                 {
                     Toast.makeText(v.getContext(),"등록 성공",Toast.LENGTH_SHORT).show();
@@ -258,43 +263,51 @@ public class RecipeDetailCreateView extends AppCompatActivity {
 
     ////////////////////////////////사용자가 입력한 데이터를 recipe 객체에 set///////////////////////////////
     public void setRecipeData() throws IOException {
-        //유저아이디, 타이틀, 인원, 조리시간
+        try {
+            //유저아이디, 타이틀, 인원, 조리시간
 
-        String strUserId = UserInfo.getString(this,"USER_ID");
-        recipe.setUserId(strUserId);
-        recipe.setTitle(editTextTitle.getText().toString());
-        recipe.setRecipePerson(Integer.parseInt(recipeInfoCount.getText().toString()));
-        recipe.setRecipeTime(Integer.parseInt(recipeInfoTime.getText().toString()));
+            String strUserId = UserInfo.getString(this, "USER_ID");
+            recipe.setUserId(strUserId);
+            recipe.setTitle(editTextTitle.getText().toString());
+            recipe.setRecipePerson(Integer.parseInt(recipeInfoCount.getText().toString()));
+            recipe.setRecipeTime(Integer.parseInt(recipeInfoTime.getText().toString()));
 
-        //대표 이미지, 저장
-        //이미지 갯수는 대표 이미지 + 요리 방법에 들어가는 이미지 갯수
+            //대표 이미지, 저장
+            //이미지 갯수는 대표 이미지 + 요리 방법에 들어가는 이미지 갯수
 
-        recipe.setRecipeImageByte(getByteArrayFromBitmap(recipeImageViewList,recipeContCnt+1));
+            recipe.setRecipeImageByte(getByteArrayFromBitmap(recipeImageViewList, recipeContCnt + 1));
 
-        //재료 데이터
-        int i = 0;int j = 0;
-        for(; i < etIngredientList.size(); i++, j++)
-        {
-            ingredient += etIngredientList.get(i).getText().toString();
-            ingredientUnit += etIngredientUnitList.get(i).getText().toString();
-            if(i != etIngredientList.size() - 1) {
-                ingredient += "`";
-                ingredientUnit += "`";
+            //재료 데이터
+            int i = 0;
+            int j = 0;
+            for (; i < etIngredientList.size(); i++, j++) {
+                ingredient += etIngredientList.get(i).getText().toString();
+                ingredientUnit += etIngredientUnitList.get(i).getText().toString();
+                ingredientUnit += spIngredientUnitList.get(i).getSelectedItem().toString();
+
+
+                if (i != etIngredientList.size() - 1) {
+                    ingredient += "`";
+                    ingredientUnit += "`";
+                }
             }
-        }
-        recipe.setIngredient(ingredient);
-        recipe.setIngredientUnit(ingredientUnit);
+            recipe.setIngredient(ingredient);
+            recipe.setIngredientUnit(ingredientUnit);
 
-        //요리 방법 데이터
-        String recipeContents = "";
-        for(int contCnt=0; contCnt < recipeContentList.size(); contCnt++)
-        {
-            recipeContents += recipeContentList.get(contCnt).getText().toString();
-            if(i != recipeContentList.size() -1){
-                recipeContents += "`";
+            //요리 방법 데이터
+            String recipeContents = "";
+            for (int contCnt = 0; contCnt < recipeContentList.size(); contCnt++) {
+                recipeContents += recipeContentList.get(contCnt).getText().toString();
+                if (i != recipeContentList.size() - 1) {
+                    recipeContents += "`";
+                }
             }
+            recipe.setContents(recipeContents);
+
+        }catch (Exception e)
+        {
+            Toast.makeText(this.getApplicationContext(),"내용을 모두 입력해주세요.",Toast.LENGTH_SHORT).show();
         }
-        recipe.setContents(recipeContents);
     }
 
     //모든 이미지 데이터를 가져온다.
@@ -458,19 +471,33 @@ public class RecipeDetailCreateView extends AppCompatActivity {
         ingredLayout.setPadding(30,30,30,30);
 
         EditText etIngredient = new EditText(RecipeDetailCreateView.this);
-        etIngredient.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT,1f));
+        etIngredient.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT,2f));
         etIngredient.setPadding(20,20,20,20);
         etIngredient.setHint("재료명");
 
         EditText etIngredientUnit = new EditText(RecipeDetailCreateView.this);
-        etIngredientUnit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT,1f));
+        etIngredientUnit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT,1f));
         etIngredientUnit.setPadding(20,20,20,20);
-        etIngredientUnit.setHint("재료 단위");
+        etIngredientUnit.setHint("재료 양");
+        etIngredientUnit.setInputType(0x00000002);           //숫자만
+
+        Spinner spIngredientUnit = new Spinner(RecipeDetailCreateView.this);
+        spIngredientUnit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT,1f));
+        spIngredientUnit.setPadding(20,20,20,20);
+        //단위 추가
+        String[] units = getResources().getStringArray(R.array.unit);
+        ArrayAdapter<String> adapter =
+                new ArrayAdapter<String>(getBaseContext(), R.layout.support_simple_spinner_dropdown_item, units);
+        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        spIngredientUnit.setAdapter(adapter);
 
         etIngredientList.add(etIngredient);                         //생성된 재료 editText 를 넣는다.
         etIngredientUnitList.add(etIngredientUnit);                 //생성된 재료단위 editText 를 넣는다.
+        spIngredientUnitList.add(spIngredientUnit);
+
         ingredLayout.addView(etIngredient);
         ingredLayout.addView(etIngredientUnit);
+        ingredLayout.addView(spIngredientUnit);
         recipeIngredientLayout.addView(ingredLayout);
     }
 
