@@ -10,9 +10,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.emptytherefrigerator.AsyncTasks.RecipeMngAsyncTask;
 import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.entity.RecipeIn;
 import com.example.emptytherefrigerator.main.RecipeDetailView;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -77,6 +81,7 @@ public class MyRecipeListAdapter extends RecyclerView.Adapter<MyRecipeListAdapte
                 }
 
             });
+            setListener();
         }
         public void onBind(RecipeIn recipe)
         {
@@ -87,18 +92,35 @@ public class MyRecipeListAdapter extends RecyclerView.Adapter<MyRecipeListAdapte
         }
         public void setListener()
         {
-            btnEditRecipe.setOnClickListener(new View.OnClickListener() {
+            btnEditRecipe.setOnClickListener(new View.OnClickListener() {   //레시피 수정 화면 넘기기
                 @Override
-                public void onClick(View v) {
-                    //레시피 수정 화면 넘기기
+                public void onClick(View view)
+                {
+                    int pos = getAdapterPosition();
+                    context = view.getContext();
+//                    Intent intent = new Intent(context, 레시피 수정 화면.class);
+//                    intent.putExtra("RECIPE",list.get(pos));      //다음 화면에 레시피 객체 송신
+//                    context.startActivity(intent);
                 }
             });
-            btnDelRecipe.setOnClickListener(new View.OnClickListener()
+            btnDelRecipe.setOnClickListener(new View.OnClickListener()  //레시피 삭제
             {
                 @Override
                 public void onClick(View v)
                 {
-                    //레시피 삭제
+                    try
+                    {
+                        int pos = getAdapterPosition();
+                        RecipeMngAsyncTask deleteRecipe = new RecipeMngAsyncTask();
+                        JSONObject data = new JSONObject();
+                        data.accumulate("recipeInId",list.get(pos).getRecipeInId());
+                        String result = deleteRecipe.execute("deleteRecipe", data.toString()).get();        //성공 값은 일단 받아놓는걸로
+                    }
+                    catch(Exception e)
+                    {
+                        e.printStackTrace();
+                    }
+
                 }
             });
         }
@@ -106,7 +128,7 @@ public class MyRecipeListAdapter extends RecyclerView.Adapter<MyRecipeListAdapte
         public void inquireRecipeDetailView(View view)
         {
             int pos = getAdapterPosition();     //레시피 조회 화면 넘기기
-//            if(pos != RecyclerView.NO_POSITION)
+            if(pos != RecyclerView.NO_POSITION)
 //            {
                 context = view.getContext();
                 Intent intent = new Intent(context, RecipeDetailView.class);     //조회된 레시피 화면으로 넘어간다
