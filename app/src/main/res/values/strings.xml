@@ -28,4 +28,5 @@
     <string name="userInf">회원정보</string>
     <string name="myRecipe">내 레시피</string>
     <string name="myComment">내 댓글</string>
+    <string name="myLike">내가 좋아요 한 레시피</string>
 </resources>

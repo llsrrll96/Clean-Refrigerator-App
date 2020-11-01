@@ -14,6 +14,7 @@ import com.example.emptytherefrigerator.AsyncTasks.UserMngAsyncTask;
 import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.entity.User;
 import com.example.emptytherefrigerator.login.UserInfo;
+import com.example.emptytherefrigerator.main.MainPageView;
 
 import org.json.JSONObject;
 
@@ -91,7 +92,7 @@ public class UserEditView extends AppCompatActivity
             {
                 UserInfo.setString(this, UserInfo.PW_KEY, user.getPw());        //preference 업데이트
                 System.out.println("result is " + result);
-                Intent intent = new Intent(getApplicationContext(), UserView.class);    //다시 회원정보 조회 화면으로 돌아감
+                Intent intent = new Intent(getApplicationContext(), MainPageView.class);      //현재 화면의 제어를 넘길 클래스 지정
                 startActivity(intent);
             }
             else if(result.equals("2")) //실패한 경우
