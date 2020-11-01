@@ -6,45 +6,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TableRow
-        android:id="@+id/tableRow4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#0DE1F2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageButton
-            android:id="@+id/btnBack"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="#0DE1F2"
-            app:srcCompat="@drawable/back_icon_white" />
-
-    </TableRow>
-
     <FrameLayout
+        android:id="@+id/likeFrame"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/likeNavView"
-        app:layout_constraintTop_toBottomOf="@+id/tableRow4"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        app:layout_constraintBottom_toTopOf="@+id/likeBottomNav"
+        app:layout_constraintTop_toBottomOf="@+id/myLikeToolbar"
         app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="0dp">
+        tools:layout_editor_absoluteX="16dp">
 
     </FrameLayout>
 
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/likeNavView"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/likeBottomNav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:background="?android:attr/windowBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/like_devide">
+        app:menu="@menu/like_devide" />
 
-    </com.google.android.material.navigation.NavigationView>
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/myLikeToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_weight="0"
+        android:background="#0DE1F2"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/mylike"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/myLike"
+        android:textColor="#ffffff"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/myLikeToolbar"
+        app:layout_constraintEnd_toEndOf="@+id/myLikeToolbar"
+        app:layout_constraintStart_toStartOf="@+id/myLikeToolbar"
+        app:layout_constraintTop_toTopOf="@+id/myLikeToolbar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
