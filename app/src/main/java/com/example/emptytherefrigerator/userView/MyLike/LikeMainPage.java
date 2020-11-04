@@ -13,8 +13,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class LikeMainPage extends AppCompatActivity
 {
     private FragmentManager fragmentManager = getSupportFragmentManager();
-    private FragLikeIn likeIn = new FragLikeIn();
-    private FragLikeOut likeOut = new FragLikeOut();
+    private FragLikeInView likeIn = new FragLikeInView();
+    private FragLikeOutView likeOut = new FragLikeOutView();
     private Toolbar toolbar;
 
     @Override

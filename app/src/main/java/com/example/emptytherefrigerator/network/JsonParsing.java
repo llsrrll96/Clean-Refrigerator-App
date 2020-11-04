@@ -1,5 +1,6 @@
 package com.example.emptytherefrigerator.network;
 
+import com.example.emptytherefrigerator.entity.LikeIn;
 import com.example.emptytherefrigerator.entity.RecipeComment;
 import com.example.emptytherefrigerator.entity.RecipeIn;
 
@@ -89,5 +90,41 @@ public class JsonParsing
             e.printStackTrace();
         }
         return list;
+    }
+    public static ArrayList<LikeIn> parsingLikeInList(String data)
+    {
+        ArrayList<LikeIn> list = new ArrayList<>();
+        try
+        {
+            JSONArray likeInList = new JSONArray(data);
+            System.out.println(data);
+
+            for(int i=0;i<likeInList.length(); i++)
+            {
+                JSONObject likeIn = likeInList.getJSONObject(i);
+
+                int recipeInId = likeIn.getInt("recipeInId");
+                String title = likeIn.getString("title");
+                String writerId = likeIn.getString("userId");       //레시피를 쓴 사람의 id
+                String uploadDate = likeIn.getString("uploadDate");
+
+                JSONArray jsonArrayImage = likeIn.getJSONArray("recipeImageBytes");
+                String[] recipeImageBytes = new String [jsonArrayImage.length()];
+
+                for(int j= 0; j < jsonArrayImage.length(); j++)
+                {
+                    JSONObject jsonObjectImage = jsonArrayImage.getJSONObject(j);
+                    recipeImageBytes[j] = jsonObjectImage.getString("recipeImageByte");
+                }
+                //list.add(new LikeIn(recipeInId, ))            //나중에 디비 구조 보고 수정 필요
+
+            }
+            return list;
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

@@ -98,9 +98,6 @@ public class MyRecipeListAdapter extends RecyclerView.Adapter<MyRecipeListAdapte
                 {
                     int pos = getAdapterPosition();
                     context = view.getContext();
-//                    Intent intent = new Intent(context, 레시피 수정 화면.class);
-//                    intent.putExtra("RECIPE",list.get(pos));      //다음 화면에 레시피 객체 송신
-//                    context.startActivity(intent);
                 }
             });
             btnDelRecipe.setOnClickListener(new View.OnClickListener()  //레시피 삭제
@@ -115,6 +112,13 @@ public class MyRecipeListAdapter extends RecyclerView.Adapter<MyRecipeListAdapte
                         JSONObject data = new JSONObject();
                         data.accumulate("recipeInId",list.get(pos).getRecipeInId());
                         String result = deleteRecipe.execute("deleteRecipe", data.toString()).get();        //성공 값은 일단 받아놓는걸로
+                        if(result.equals("1"))
+                        {
+                            list.remove(pos);
+                            adapter.notifyDataSetChanged();
+
+                        }
+
                     }
                     catch(Exception e)
                     {
