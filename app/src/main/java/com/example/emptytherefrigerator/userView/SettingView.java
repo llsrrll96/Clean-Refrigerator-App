@@ -93,7 +93,7 @@ public class SettingView extends AppCompatActivity
             }
             else if(result.equals("2"))
             {
-                Toast.makeText(getApplicationContext(),"에러입니다", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"내부 오류로 요청을 수행하지 못했습니다", Toast.LENGTH_SHORT).show();
             }
             UserInfo.clear(this);
         }

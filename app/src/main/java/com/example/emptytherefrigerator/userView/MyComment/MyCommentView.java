@@ -2,7 +2,6 @@ package com.example.emptytherefrigerator.userView.MyComment;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -53,13 +52,6 @@ public class MyCommentView extends AppCompatActivity
             data.accumulate("userId", UserInfo.getString(this,UserInfo.ID_KEY));
             result = searchMyComment.execute("readUserComment", data.toString()).get();
             System.out.println(result);
-
-//            if(result.equals("2") || result.equals("3"))        // search에 실패하면
-//            {
-//                // toast 해줘야되나?
-//                return;
-//            }
-            //제대로 값이 넘어오면
             list = JsonParsing.parsingCommentList(result);
         }
         catch(Exception e)
