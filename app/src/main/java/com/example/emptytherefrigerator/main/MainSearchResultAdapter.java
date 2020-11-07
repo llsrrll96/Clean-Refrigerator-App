@@ -2,6 +2,9 @@ package com.example.emptytherefrigerator.main;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,10 +45,11 @@ public class MainSearchResultAdapter extends RecyclerView.Adapter<MainSearchResu
     public void onBindViewHolder(@NonNull MainSearchResultAdapter.ViewHolder holder, int position) {
         context = holder.itemView.getContext();
 
-        Glide.with(context)
+/*        Glide.with(context)
             .load(recipeResults.get(position).getRecipeImagePath())
             .diskCacheStrategy(DiskCacheStrategy.ALL)
-            .into(holder.recipeImage);
+            .into(holder.recipeImage);*/
+        holder.recipeImage.setImageBitmap(StringToBitmap(recipeResults.get(position).getRecipeImageByte()[0]));
         holder.title.setText(recipeResults.get(position).getTitle());   //viewHolder 객체
         holder.commentCount.setText(Integer.toString(recipeResults.get(position).getCommentCount()));   //viewHolder 객체
         holder.likeCount.setText(Integer.toString(recipeResults.get(position).getLikeCount()));   //viewHolder 객체
@@ -55,6 +59,18 @@ public class MainSearchResultAdapter extends RecyclerView.Adapter<MainSearchResu
     @Override
     public int getItemCount() {
         return recipeResults.size();
+    }
+
+    public Bitmap StringToBitmap(String encodedString)                      //스트링 이미지 데이터 -> 비트맵으로
+    {
+        try {
+            byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        } catch (Exception e) {
+            e.getMessage();
+            return null;
+        }
     }
 
     //ViewHolder 클래스

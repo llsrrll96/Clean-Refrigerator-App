@@ -136,7 +136,7 @@ public class MyRecipeListAdapter extends RecyclerView.Adapter<MyRecipeListAdapte
 //            {
                 context = view.getContext();
                 Intent intent = new Intent(context, RecipeDetailView.class);     //조회된 레시피 화면으로 넘어간다
-                intent.putExtra("RECIPE",list.get(pos));      //다음 화면에 레시피 객체 송신
+                intent.putExtra("RECIPE",list.get(pos).getRecipeInId());      //다음 화면에 레시피 객체 송신
                 context.startActivity(intent);
 //            }
 

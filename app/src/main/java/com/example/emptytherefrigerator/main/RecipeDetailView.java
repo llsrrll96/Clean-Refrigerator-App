@@ -17,10 +17,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.emptytherefrigerator.AsyncTasks.RecipeMngAsyncTask;
 import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.entity.RecipeIn;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 //조회된 레시피 엑티비티
 public class RecipeDetailView extends AppCompatActivity {
@@ -94,14 +100,53 @@ public class RecipeDetailView extends AppCompatActivity {
         });
     }
     ///////////////////////////////////////////////////////////////////////////
-    ////////////////////Intent에서 Recipe 데이터를 가져온다.
+    ////////////////////Intent에서 Recipe 데이터를 가져온다.////////////////////////////
     private void getRecipeDataFromIntent()
     {
+        try {
+            recipe = new RecipeIn();
 
-        //recipe = new Recipe();
-        Intent intent = getIntent();        //데이터 수신
-        recipe = (RecipeIn) intent.getSerializableExtra("RECIPE");
+            Intent intent = getIntent();        //데이터 수신
+            int recipeInId = intent.getExtras().getInt("RECIPE");
 
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.accumulate("recipeInId", recipeInId);
+
+            RecipeMngAsyncTask recipeMngAsyncTask = new RecipeMngAsyncTask();
+            String result = recipeMngAsyncTask.execute("readRecipeDetail", jsonObject.toString()).get();    //서버로 레시피 아이디 보낸다.
+
+            JSONObject jsonObjectResult = new JSONObject(result);
+
+            recipe.setRecipeInId(jsonObjectResult.getInt("recipeInId"));
+            recipe.setTitle(jsonObjectResult.getString("title"));
+            recipe.setUserId(jsonObjectResult.getString("userId"));
+            recipe.setIngredient(jsonObjectResult.getString("ingredient"));
+            recipe.setIngredientUnit(jsonObjectResult.getString("ingredientUnit"));
+            recipe.setRecipePerson(jsonObjectResult.getInt("recipePerson"));
+            recipe.setRecipeTime(jsonObjectResult.getInt("recipeTime"));
+            recipe.setContents(jsonObjectResult.getString("contents"));
+            recipe.setCommentCount(jsonObjectResult.getInt("commentCount"));
+            recipe.setLikeCount(jsonObjectResult.getInt("likeCount"));
+            recipe.setUploadDate(jsonObjectResult.getString("uploadDate"));
+
+
+            JSONArray jsonArrayImage = jsonObjectResult.getJSONArray("recipeImageBytes");
+            String[] recipeImageBytes = new String [jsonArrayImage.length()];
+
+            for(int j= 0; j < jsonArrayImage.length(); j++)
+            {
+                JSONObject jsonObjectImage = jsonArrayImage.getJSONObject(j);
+                recipeImageBytes[j] = jsonObjectImage.getString("recipeImageByte");
+            }
+            recipe.setRecipeImageByte(recipeImageBytes);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
     }
     ////////////////////////스트링 이미지 데이터 -> 비트맵으로///////////////////////////////////
     public Bitmap StringToBitmap(String encodedString)

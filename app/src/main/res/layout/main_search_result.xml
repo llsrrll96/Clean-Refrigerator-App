@@ -1,19 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="vertical"
-        android:scrollbarAlwaysDrawVerticalTrack="true"
-        android:layout_alignParentTop="true"
-        android:orientation="vertical">
-
-
 
     <LinearLayout
         android:id="@+id/headerLinearLayout"
@@ -23,12 +13,10 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/buttonBack"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:id="@+id/btnBack"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="1"
             android:background="@drawable/back_button" />
 
         <SearchView
@@ -40,12 +28,12 @@
             android:layout_gravity="center"
             />
         <CheckBox
-            android:id="@+id/checkBox"
+            android:id="@+id/recipeChkBox"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_gravity="center"
-            android:text="@string/ingredients" />
+            android:text="식재료" />
     </LinearLayout>
 
     <TextView
@@ -59,25 +47,19 @@
         android:id="@+id/resultRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="top"/>
-    </LinearLayout>
+        android:layout_gravity="top"
+        android:layout_marginBottom="40dp"/>
 
-    <LinearLayout
-        android:id="@+id/footer"
+    <TextView
+        android:id="@+id/btnRecipeOut"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/colorSky"
-        android:orientation="horizontal">
+        android:layout_height="40dp"
+        android:layout_gravity="bottom"
+        android:gravity="center"
+        android:textSize="17dp"
+        android:background="@color/colorWhite"
+        android:layout_marginTop="-40dp"
+        android:text="원하는 레시피가 없나요? (외부사이트 검색)" />
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_gravity="bottom"
-            android:gravity="center"
-            android:textSize="17sp"
-            android:background="@color/colorWhite"
-            android:text="@string/anotherRecipeMsg" />
-    </LinearLayout>
-</RelativeLayout>
+
+</LinearLayout>
