@@ -103,7 +103,7 @@ public class MainSearchAdapter extends RecyclerView.Adapter<MainSearchAdapter.Vi
                         Toast.makeText(v.getContext(), title + " 클릭 되었습니다.", Toast.LENGTH_SHORT).show();
 
                         holdercontext = v.getContext();
-                        intent = new Intent(holdercontext, RecipeDetailUpdateView.class);     //조회된 레시피 화면으로 넘어간다
+                        intent = new Intent(holdercontext, RecipeDetailView.class);     //조회된 레시피 화면으로 넘어간다
                         //intent.putExtra("RECIPE",recipeLists.get(pos));      //다음 화면에 레시피 객체 송신
                         intent.putExtra("RECIPE",recipeLists.get(pos).getRecipeInId());      //다음 화면에 레시피 아이디 값을 넘긴다
                         holdercontext.startActivity(intent);
