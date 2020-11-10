@@ -119,7 +119,8 @@ public class MainSearchFragView extends Fragment
         }
         catch(Exception e)
         {
-            e.printStackTrace();
+            System.out.println("에러: e.printStackTrace()");
+            Toast.makeText(getContext(),"내용 없음", Toast.LENGTH_SHORT).show();
         }
 
         //RecyclerView

@@ -3,8 +3,11 @@ package com.example.emptytherefrigerator.main;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -16,16 +19,16 @@ import com.example.emptytherefrigerator.entity.RecipeIn;
 
 import java.util.ArrayList;
 
-//조회된 레시피
-//레시피, 식재료 검색결과 바운더리
 //검색 결과
 public class MainSearchResultView extends AppCompatActivity {
 
     private View view;
 
-    private RecyclerView recyclerView;
-    private SearchView searchView;
-    private ImageButton btnIngredient;
+    private Button btnBack;
+    private SearchView searchRecipe;
+    private CheckBox recipeChkBox;
+    private RecyclerView resultRecyclerView;
+    private TextView btnRecipeOut;
 
     private ArrayList<RecipeIn> resultList;
     private Intent intent;
@@ -37,31 +40,51 @@ public class MainSearchResultView extends AppCompatActivity {
         setContentView(R.layout.main_search_result);
 
         initializeView();
+        setListener();
         setResultRecipe();
     }
 
     public void initializeView()
     {
-        recyclerView = (RecyclerView) findViewById(R.id.resultRecyclerView);
-        searchView = (SearchView) findViewById(R.id.searchRecipe);
-        btnIngredient = (ImageButton) findViewById(R.id.btnIngredient);
+        btnBack = (Button)findViewById(R.id.btnBack);
+        searchRecipe = (SearchView)findViewById(R.id.searchRecipe);
+        recipeChkBox = (CheckBox) findViewById(R.id.recipeChkBox);
+        resultRecyclerView = (RecyclerView)findViewById(R.id.resultRecyclerView);
+        btnRecipeOut = (TextView)findViewById(R.id.btnRecipeOut);
+    }
+
+    public void setListener()
+    {
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+        btnRecipeOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     public void setResultRecipe()
     {
         //RecyclerView
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this); //상하
-        recyclerView.addItemDecoration(new RecyclerDecoration(50)); //아이템 간격
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(new MainSearchResultAdapter(insertItemList()));       //어댑터
+        resultRecyclerView.addItemDecoration(new RecyclerDecoration(50)); //아이템 간격
+        resultRecyclerView.setLayoutManager(layoutManager);
+        resultRecyclerView.setAdapter(new MainSearchResultAdapter(insertItemList()));       //어댑터
 
         //리사이클러뷰 구분선
         DividerItemDecoration dividerItemDecoration =
-                new DividerItemDecoration(recyclerView.getContext(), new LinearLayoutManager(this).getOrientation());
-        recyclerView.addItemDecoration(dividerItemDecoration);
+                new DividerItemDecoration(resultRecyclerView.getContext(), new LinearLayoutManager(this).getOrientation());
+        resultRecyclerView.addItemDecoration(dividerItemDecoration);
     }
 
-    ///////////////////////////////////////////데이터 넣는 곳//////////////////////////////////////////////////////////////////////
+    // test 데이터 넣는 곳
     ArrayList insertItemList(){
         resultList = new ArrayList<>(  );
         RecipeIn recipeList1 = new RecipeIn();
@@ -96,6 +119,7 @@ public class MainSearchResultView extends AppCompatActivity {
 /*        Recipe recipeList2 = new Recipe();
         Recipe recipeList3 = new Recipe();*/
 
+        resultList.add(recipeList1);
         resultList.add(recipeList1);
         resultList.add(recipeList1);
         resultList.add(recipeList1);

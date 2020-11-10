@@ -298,7 +298,7 @@ public class RecipeDetailCreateView extends AppCompatActivity {
             String recipeContents = "";
             for (int contCnt = 0; contCnt < recipeContentList.size(); contCnt++) {
                 recipeContents += recipeContentList.get(contCnt).getText().toString();
-                if (i != recipeContentList.size() - 1) {
+                if (contCnt != recipeContentList.size() - 1) {
                     recipeContents += "`";
                 }
             }
@@ -323,7 +323,8 @@ public class RecipeDetailCreateView extends AppCompatActivity {
             //바이트로 바꾸는 작업
             System.out.println(idx + " : " + imageViewList.get(idx).getWidth());
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            bitmapImage = resizeBitmapImg(bitmapImage,150);
+            bitmapImage.compress(Bitmap.CompressFormat.PNG, 50, stream);
 
             String streamData = Base64.encodeToString(stream.toByteArray(), Base64.DEFAULT);
             data[idx] = streamData;
@@ -332,7 +333,29 @@ public class RecipeDetailCreateView extends AppCompatActivity {
         return data;
     }
 
+    public Bitmap resizeBitmapImg(Bitmap source, int maxResolution){
+        int width = source.getWidth();
+        int height = source.getHeight();
+        int newWidth = width;
+        int newHeight = height;
+        float rate = 0.0f;
 
+        if(width > height){
+            if(maxResolution < width){
+                rate = maxResolution / (float) width;
+                newHeight = (int) (height * rate);
+                newWidth = maxResolution;
+            }
+        }else{
+            if(maxResolution < height){
+                rate = maxResolution / (float) height;
+                newWidth = (int) (width * rate);
+                newHeight = maxResolution;
+            }
+        }
+
+        return Bitmap.createScaledBitmap(source, newWidth, newHeight, true);
+    }
     ///////////////////////////////////////////////////////////////////////////////
     public void permissionCheck()
     {
@@ -447,6 +470,7 @@ public class RecipeDetailCreateView extends AppCompatActivity {
                     // 선택한 이미지에서 비트맵 생성
                     InputStream in = getContentResolver().openInputStream(data.getData());
                     repPhotoBitmap = BitmapFactory.decodeStream(in);
+
                     in.close();
                     // 이미지 표시
 

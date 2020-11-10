@@ -15,7 +15,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         >
-        <activity android:name=".main.RecipeDetailView"></activity>
+        <activity android:name=".main.RecipeDetailView"/>
+        <activity android:name=".main.RecipeDetailUpdateView"/>
         <activity android:name=".main.RecipeDetailCreateView" />
         <activity android:name=".main.SettingView" />
         <activity android:name=".login.LoginAnimation">
