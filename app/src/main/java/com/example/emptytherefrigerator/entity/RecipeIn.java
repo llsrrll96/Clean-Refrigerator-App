@@ -27,6 +27,13 @@ public class RecipeIn implements Serializable
      * */
 
     public RecipeIn(){}
+    public RecipeIn(int recipeInId, String title, String userId,String uploadDate)
+    {
+        this.recipeInId = recipeInId;
+        this.title = title;
+        this.userId = userId;
+        this.uploadDate = uploadDate;
+    }
     public RecipeIn(int recipeInId, String title, String userId, String ingredient,
                     int recipePerson, int recipeTime, String[] recipeImageByte, String contents, int commentCount, int likeCount, String uploadDate)
     {
@@ -72,7 +79,6 @@ public class RecipeIn implements Serializable
     public int getRecipeInId() {
         return recipeInId;
     }
-
     public void setRecipeInId(int recipeInId) {
         this.recipeInId = recipeInId;
     }
@@ -80,7 +86,6 @@ public class RecipeIn implements Serializable
     public String getTitle() {
         return title;
     }
-
     public void setTitle(String title) {
         this.title = title;
     }
@@ -88,7 +93,6 @@ public class RecipeIn implements Serializable
     public String getUserId() {
         return userId;
     }
-
     public void setUserId(String userId) {
         this.userId = userId;
     }
@@ -96,7 +100,6 @@ public class RecipeIn implements Serializable
     public String getIngredient() {
         return ingredient;
     }
-
     public void setIngredient(String ingredient) {
         this.ingredient = ingredient;
     }
@@ -104,7 +107,6 @@ public class RecipeIn implements Serializable
     public String getIngredientUnit() {
         return ingredientUnit;
     }
-
     public void setIngredientUnit(String ingredientUnit) {
         this.ingredientUnit = ingredientUnit;
     }
@@ -112,7 +114,6 @@ public class RecipeIn implements Serializable
     public int getRecipePerson() {
         return recipePerson;
     }
-
     public void setRecipePerson(int recipePerson) {
         this.recipePerson = recipePerson;
     }
@@ -120,7 +121,6 @@ public class RecipeIn implements Serializable
     public int getRecipeTime() {
         return recipeTime;
     }
-
     public void setRecipeTime(int recipeTime) {
         this.recipeTime = recipeTime;
     }
@@ -128,7 +128,6 @@ public class RecipeIn implements Serializable
     public String[] getRecipeImageByte() {
         return recipeImageByte;
     }
-
     public void setRecipeImageByte(String[] recipeImageByte) {
         this.recipeImageByte = recipeImageByte;
     }
@@ -136,7 +135,6 @@ public class RecipeIn implements Serializable
     public String getRecipeImagePath() {
         return recipeImagePath;
     }
-
     public void setRecipeImagePath(String recipeImagePath) {
         this.recipeImagePath = recipeImagePath;
     }
@@ -144,7 +142,6 @@ public class RecipeIn implements Serializable
     public String getContents() {
         return contents;
     }
-
     public void setContents(String contents) {
         this.contents = contents;
     }
@@ -152,7 +149,6 @@ public class RecipeIn implements Serializable
     public int getCommentCount() {
         return commentCount;
     }
-
     public void setCommentCount(int commentCount) {
         this.commentCount = commentCount;
     }
@@ -160,7 +156,6 @@ public class RecipeIn implements Serializable
     public int getLikeCount() {
         return likeCount;
     }
-
     public void setLikeCount(int likeCount) {
         this.likeCount = likeCount;
     }
@@ -168,7 +163,6 @@ public class RecipeIn implements Serializable
     public String getUploadDate() {
         return uploadDate;
     }
-
     public void setUploadDate(String uploadDate) {
         this.uploadDate = uploadDate;
     }

@@ -7,6 +7,7 @@ public class RecipeOut
     private String title;
     private String ingredient;
 
+    public RecipeOut() {}
     public RecipeOut(int reicpeOutId, String link, String title, String ingredient)
     {
         this.recipeOutId = reicpeOutId; this.link = link; this.title = title; this.ingredient = ingredient;

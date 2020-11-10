@@ -2,18 +2,13 @@ package com.example.emptytherefrigerator.entity;
 
 public class LikeOut
 {
-    private int recipeOutId;
-    private String userId;
+    private RecipeOut recipeOut;
 
-    public LikeOut(int recipeOutId, String userId)
+    public LikeOut(){}
+    public LikeOut(RecipeOut recipeOut)
     {
-        this.recipeOutId = recipeOutId; this.userId = userId;
+        this.recipeOut= recipeOut;
     }
-
-    public int getRecipeOutId() { return recipeOutId; }
-    public String getUserId() { return userId; }
-
-    public void setRecipeOutId(int recipeOutId) { this.recipeOutId = recipeOutId; }
-    public void setUserId(String userId) { this.userId = userId; }
-
+    public RecipeOut getRecipeOut() { return recipeOut; }
+    public void setRecipeOut(RecipeOut recipeOut) { this.recipeOut = recipeOut; }
 }
