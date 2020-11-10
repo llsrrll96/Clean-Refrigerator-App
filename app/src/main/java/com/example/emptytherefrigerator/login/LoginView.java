@@ -64,6 +64,7 @@ public class LoginView extends AppCompatActivity {
         LoginMngAsyncTask login = new LoginMngAsyncTask();
         JSONObject data = new JSONObject();
         User user = new User(editTextID.getText().toString(), editTextPW.getText().toString());
+
         try
         {
             data.accumulate("userId", user.getId());

@@ -14,7 +14,9 @@ import androidx.fragment.app.Fragment;
 import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.login.LoginView;
 import com.example.emptytherefrigerator.login.UserInfo;
+import com.example.emptytherefrigerator.main.MainPageView;
 import com.example.emptytherefrigerator.userView.MyComment.MyCommentView;
+import com.example.emptytherefrigerator.userView.MyLike.LikeMainPage;
 import com.example.emptytherefrigerator.userView.MyRecipe.MyRecipeListView;
 
 //회원정보 창
@@ -48,11 +50,11 @@ public class UserView extends Fragment
     }
     public void setListener()
     {
-        btnEditUser.setOnClickListener(new View.OnClickListener()       //회원 수정 화면을 넘어감
+        btnEditUser.setOnClickListener(new View.OnClickListener()
             {
                 @Override
                 public void onClick(View v)
-                {
+                {       //회원 수정 화면을 넘어감
                     Intent intent = new Intent(getActivity(), UserEditView.class);
                     startActivity(intent);
                 }
@@ -66,11 +68,11 @@ public class UserView extends Fragment
                         startActivity(intent);
                     }
                 });
-        btnCommentInquire.setOnClickListener(new View.OnClickListener()     //내 댓글 조회 화면으로 넘어감
+        btnCommentInquire.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
-            {
+            {   //내 댓글 조회 화면으로 넘어감
                 Intent intent = new Intent(getActivity(), MyCommentView.class);
                 startActivity(intent);
             }
@@ -79,8 +81,9 @@ public class UserView extends Fragment
         {
             @Override
             public void onClick(View v)
-            {
-                //내 좋아요 조회
+            {       //내 좋아요 조회
+                Intent intent = new Intent(userIdTextView.getContext(), LikeMainPage.class);
+                startActivity(intent);
             }
         });
         btnSetting.setOnClickListener(new View.OnClickListener()    //셋팅 화면 넘김
@@ -108,7 +111,7 @@ public class UserView extends Fragment
         String id = UserInfo.getString(getActivity(),UserInfo.ID_KEY);
         String pw = UserInfo.getString(getActivity(), UserInfo.PW_KEY);
 
-        if(!id.equals("") || !pw.equals(""))        //shared preference에 값이있다면 가져옴 -> 없는 경우에는 어떻게 처리하지 ㄷㄷ
+        if(!id.equals("") || !pw.equals(""))        //shared preference에 값이있다면 가져옴
         {
             userIdTextView.setText(id);
             userPwTextView.setText(pw);

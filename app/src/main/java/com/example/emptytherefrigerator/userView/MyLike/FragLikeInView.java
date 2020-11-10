@@ -24,9 +24,9 @@ public class FragLikeInView extends Fragment
 {
     private RecyclerView recyclerView;
     private View view;
-    private ArrayList<LikeIn> list;
-    private MyLikeInAdapter adapter;
+    private ArrayList<LikeIn> list = new ArrayList<>();
     private Intent intent;
+    private MyLikeInAdapter adapter = null;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
@@ -46,15 +46,19 @@ public class FragLikeInView extends Fragment
 
     public void setRecyclerView()
     {
+        getLikeInList();
         recyclerView = view.findViewById(R.id.recipeRecycler);
-        adapter = new MyLikeInAdapter(getActivity(), list);
+        adapter = new MyLikeInAdapter(list);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
     public void getLikeInList()
     {
-        LikeMngAsyncTask asyncTas = new LikeMngAsyncTask();
+        //LikeMngAsyncTask asyncTas = new LikeMngAsyncTask();
+
+        RecipeIn recipe = new RecipeIn();
+        list.add(new LikeIn(recipe));
 
     }
 }

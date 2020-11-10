@@ -9,14 +9,14 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.emptytherefrigerator.AsyncTasks.LikeMngAsyncTask;
-import com.example.emptytherefrigerator.AsyncTasks.RecipeMngAsyncTask;
 import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.entity.LikeIn;
 import com.example.emptytherefrigerator.entity.RecipeIn;
+import com.example.emptytherefrigerator.login.UserInfo;
+
 import org.json.JSONObject;
 import java.util.ArrayList;
 
@@ -25,8 +25,8 @@ public class MyLikeInAdapter extends RecyclerView.Adapter<MyLikeInAdapter.MyLike
     private LayoutInflater inflater;
     Context context;
 
-    public MyLikeInAdapter(Context context, ArrayList<LikeIn> list) {
-        inflater = LayoutInflater.from(context);
+    public MyLikeInAdapter(ArrayList<LikeIn> list)
+    {
         this.list = list;
     }
 
@@ -34,7 +34,7 @@ public class MyLikeInAdapter extends RecyclerView.Adapter<MyLikeInAdapter.MyLike
     public void onBindViewHolder(@NonNull MyLikeInAdapter.MyLikeInViewHolder holder, int position) {
         context = holder.itemView.getContext();
         holder.onBind(list.get(position));
-        holder.likeInMainImg.setImageBitmap(RecipeIn.StringToBitmap(list.get(position).getRecipeImageByte()[0]));
+        holder.likeInMainImg.setImageBitmap(RecipeIn.StringToBitmap(list.get(position).getRecipeIn().getRecipeImagePath()));
     }
 
     @Override
@@ -44,38 +44,42 @@ public class MyLikeInAdapter extends RecyclerView.Adapter<MyLikeInAdapter.MyLike
     }
 
     @Override
-    public MyLikeInAdapter.MyLikeInViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = inflater.inflate(R.layout.user_my_comment_item, parent, false);
+    public MyLikeInAdapter.MyLikeInViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+    {
+        View itemView = inflater.inflate(R.layout.user_my_like_in_item, parent, false);
         return new MyLikeInAdapter.MyLikeInViewHolder(itemView, this);
     }
 
-    class MyLikeInViewHolder extends RecyclerView.ViewHolder {
+    class MyLikeInViewHolder extends RecyclerView.ViewHolder
+    {
         MyLikeInAdapter adapter;
         ImageView likeInMainImg;
         TextView likeInTitle, likeInRecipeWriter, likeInUploadDate;
         ImageButton likeDelBtn;
-        Context context;
 
-        public MyLikeInViewHolder(View view, MyLikeInAdapter adapter) {
+        public MyLikeInViewHolder(View view, MyLikeInAdapter adapter)
+        {
             super(view);
             this.adapter = adapter;
-            likeInMainImg = view.findViewById(R.id.likeInMainImg);
-            likeInTitle = view.findViewById(R.id.likeInTitle);
-            likeInRecipeWriter = view.findViewById(R.id.likeInRecipeWriter);
-            likeInUploadDate = view.findViewById(R.id.likeInUploadDate);
-            likeDelBtn = view.findViewById(R.id.likeDelBtn);
-            context = view.getContext();
+            likeInMainImg = itemView.findViewById(R.id.likeInMainImg);
+            likeInTitle = itemView.findViewById(R.id.likeInTitle);
+            likeInRecipeWriter = itemView.findViewById(R.id.likeInRecipeWriter);
+            likeInUploadDate = itemView.findViewById(R.id.likeInUploadDate);
+            likeDelBtn = itemView.findViewById(R.id.likeDelBtn);
+            context = itemView.getContext();
             setListener();
         }
 
-        public void onBind(LikeIn likeIn) {
-            likeInTitle.setText(likeIn.getRecipe().getTitle());
-            likeInRecipeWriter.setText(likeIn.getWriterId());
-            likeInUploadDate.setText(likeIn.getUploadDate());
+        public void onBind(LikeIn likeIn)
+        {
+            likeInTitle.setText(likeIn.getRecipeIn().getTitle());
+            likeInRecipeWriter.setText(likeIn.getRecipeIn().getUserId());
+            likeInUploadDate.setText(likeIn.getRecipeIn().getUploadDate());
         }
 
         public void setListener() {
-            likeDelBtn.setOnClickListener(new View.OnClickListener() {
+            likeDelBtn.setOnClickListener(new View.OnClickListener()
+            {
                 @Override
                 public void onClick(View v)
                 {
@@ -87,11 +91,12 @@ public class MyLikeInAdapter extends RecyclerView.Adapter<MyLikeInAdapter.MyLike
         public  void deleteLikeIn()            //좋아요 삭제
         {
             LikeMngAsyncTask deleteLike = new LikeMngAsyncTask();
-            try {
+            try
+            {
                 int pos = getAdapterPosition();
                 JSONObject data = new JSONObject();
-                data.accumulate("likeInId", list.get(pos).getLikeInId());
-                data.accumulate("userId", list.get(pos).getUserId());
+                data.accumulate("recipeInId", list.get(pos).getRecipeIn().getRecipeInId());
+                data.accumulate("userId", UserInfo.getString(context, UserInfo.ID_KEY));        //shared preference에서 값을 불러움
                 String result = deleteLike.execute("deleteLikeIn", data.toString()).get();
                 if (result.equals("1"))
                 {
@@ -101,9 +106,10 @@ public class MyLikeInAdapter extends RecyclerView.Adapter<MyLikeInAdapter.MyLike
                 }
                 else
                 {
-                    Toast.makeText(context,"내부 오류로 요청을 수행하지 못했습니다", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(itemView.getContext(),"내부 오류로 요청을 수행하지 못했습니다", Toast.LENGTH_SHORT).show();
                 }
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 e.printStackTrace();
             }
         }

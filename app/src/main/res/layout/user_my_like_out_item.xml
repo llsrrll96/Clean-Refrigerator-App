@@ -10,22 +10,39 @@
         android:id="@+id/site_link"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="16dp"
+        android:ellipsize="end"
+        android:ems="20"
+        android:maxLines="1"
+        android:textSize="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="@id/recipeOutTitle"
+        app:layout_constraintTop_toBottomOf="@id/recipeOutTitle"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
-        android:id="@+id/imageButton3"
+        android:id="@+id/btnLikeOutDelete"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginEnd="30dp"
         android:background="#ffffff"
         app:layout_constraintBottom_toBottomOf="@+id/site_link"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/site_link"
+        app:layout_constraintTop_toTopOf="@+id/recipeOutTitle"
         app:srcCompat="@drawable/like_filled1" />
+
+    <TextView
+        android:id="@+id/recipeOutTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="16dp"
+        android:ellipsize="end"
+        android:ems="10"
+        android:maxLines="1"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
