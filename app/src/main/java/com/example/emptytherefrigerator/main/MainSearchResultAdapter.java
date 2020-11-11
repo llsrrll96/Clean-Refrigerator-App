@@ -97,7 +97,7 @@ public class MainSearchResultAdapter extends RecyclerView.Adapter<MainSearchResu
                     if(pos != RecyclerView.NO_POSITION){
                         holdercontext = v.getContext();
                         intent = new Intent(holdercontext, RecipeDetailView.class);     //조회된 레시피 화면으로 넘어간다
-                        intent.putExtra("RECIPE",recipeResults.get(pos));      //다음 화면에 레시피 객체 송신
+                        intent.putExtra("RECIPE",recipeResults.get(pos).getRecipeInId());      //다음 화면에 레시피 객체아이디를 넘긴다.
                         holdercontext.startActivity(intent);
                     }
                 }
