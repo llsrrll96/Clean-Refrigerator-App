@@ -27,7 +27,7 @@
         android:layout_height="60dp"
         android:layout_marginEnd="30dp"
         android:background="#ffffff"
-        app:layout_constraintBottom_toBottomOf="@+id/site_link"
+        app:layout_constraintBottom_toBottomOf="@+id/likeOutUploadDate"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/recipeOutTitle"
         app:srcCompat="@drawable/like_filled1" />
@@ -44,5 +44,17 @@
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/likeOutUploadDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="16dp"
+        android:textSize="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/site_link"
+        app:layout_constraintTop_toBottomOf="@+id/site_link"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

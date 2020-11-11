@@ -38,6 +38,16 @@ public class LikeMainPage extends AppCompatActivity
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);    //기본 제목을 없애줍니다
     }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch(item.getItemId())
+        {
+            case android.R.id.home:     //뒤로가기 버튼이 눌렸을 때
+                finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     class ItemSelectedListener implements BottomNavigationView.OnNavigationItemSelectedListener {       //bottom nav 선택에 따른 화면 출력 설정
         @Override
