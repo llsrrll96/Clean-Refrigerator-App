@@ -16,17 +16,19 @@ import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.entity.LikeIn;
 import com.example.emptytherefrigerator.entity.RecipeIn;
 import com.example.emptytherefrigerator.login.UserInfo;
-
 import org.json.JSONObject;
 import java.util.ArrayList;
 
-public class MyLikeInAdapter extends RecyclerView.Adapter<MyLikeInAdapter.MyLikeInViewHolder> {
+public class MyLikeInAdapter extends RecyclerView.Adapter<MyLikeInAdapter.MyLikeInViewHolder>
+{
     private ArrayList<LikeIn> list = new ArrayList<>();
     private LayoutInflater inflater;
     Context context;
 
-    public MyLikeInAdapter(ArrayList<LikeIn> list)
+    public MyLikeInAdapter(Context context, ArrayList<LikeIn> list)
     {
+        this.context= context;
+        inflater = LayoutInflater.from(context);
         this.list = list;
     }
 
@@ -74,7 +76,7 @@ public class MyLikeInAdapter extends RecyclerView.Adapter<MyLikeInAdapter.MyLike
         {
             likeInTitle.setText(likeIn.getRecipeIn().getTitle());
             likeInRecipeWriter.setText(likeIn.getRecipeIn().getUserId());
-            likeInUploadDate.setText(likeIn.getRecipeIn().getUploadDate());
+            likeInUploadDate.setText(likeIn.getUploadDate());
         }
 
         public void setListener() {

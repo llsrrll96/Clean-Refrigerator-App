@@ -144,16 +144,17 @@ public class JsonParsing
 
             for(int i=0;i<likeInList.length(); i++)
             {
-                JSONObject likeIn = likeInList.getJSONObject(i);
+                JSONObject object = likeInList.getJSONObject(i);
 
                 RecipeIn recipeIn= new RecipeIn();
+                LikeIn likeIn = new LikeIn();
 
-                recipeIn.setRecipeInId(likeIn.getInt("recipeInId"));
-                recipeIn.setTitle(likeIn.getString("title"));
-                recipeIn.setUserId(likeIn.getString("userId"));      //레시피를 쓴 사람의 id
-                recipeIn.setUploadDate(likeIn.getString("uploadDate"));
+                recipeIn.setRecipeInId(object.getInt("recipeInId"));
+                recipeIn.setTitle(object.getString("title"));
+                recipeIn.setUserId(object.getString("userId"));      //레시피를 쓴 사람의 id
+                likeIn.setUploadDate(object.getString("uploadDate"));
 
-                JSONArray jsonArrayImage = likeIn.getJSONArray("recipeImageBytes");
+                JSONArray jsonArrayImage = object.getJSONArray("recipeImageBytes");
                 String[] recipeImageBytes = new String [jsonArrayImage.length()];
 
                 for(int j= 0; j < jsonArrayImage.length(); j++)         //이미지 bytes
@@ -162,7 +163,9 @@ public class JsonParsing
                     recipeImageBytes[j] = jsonObjectImage.getString("recipeImageByte");
                 }
                 recipeIn.setRecipeImageByte(recipeImageBytes);
-                list.add(new LikeIn(recipeIn));
+                likeIn.setRecipeIn(recipeIn);
+
+                list.add(likeIn);
             }
             return list;
         }
@@ -183,10 +186,12 @@ public class JsonParsing
             {
                 JSONObject object = likeOutList.getJSONObject(i);
                 RecipeOut recipeOut = new RecipeOut();
+                LikeOut likeOut = new LikeOut();
 
                 recipeOut.setRecipeOutId(object.getInt("recipeOutId"));
                 recipeOut.setTitle(object.getString("title"));
                 recipeOut.setLink(object.getString("link"));
+                likeOut.setUploadDate(object.getString("uploadDate"));
 
                 list.add(new LikeOut(recipeOut));
             }
@@ -195,7 +200,7 @@ public class JsonParsing
         catch(Exception e)
         {
             e.printStackTrace();
-            return null;
         }
+        return list;
     }
 }

@@ -16,6 +16,8 @@ import com.example.emptytherefrigerator.AsyncTasks.LikeMngAsyncTask;
 import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.entity.LikeIn;
 import com.example.emptytherefrigerator.entity.RecipeIn;
+import com.example.emptytherefrigerator.main.MainSearchAdapter;
+import com.example.emptytherefrigerator.main.RecyclerDecoration;
 import com.example.emptytherefrigerator.userView.MyRecipe.MyRecipeListAdapter;
 
 import java.util.ArrayList;
@@ -26,7 +28,6 @@ public class FragLikeInView extends Fragment
     private View view;
     private ArrayList<LikeIn> list = new ArrayList<>();
     private Intent intent;
-    private MyLikeInAdapter adapter = null;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
@@ -47,18 +48,25 @@ public class FragLikeInView extends Fragment
     public void setRecyclerView()
     {
         getLikeInList();
-        recyclerView = view.findViewById(R.id.recipeRecycler);
-        adapter = new MyLikeInAdapter(list);
-        recyclerView.setAdapter(adapter);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setAdapter(new MyLikeInAdapter(getActivity(), list));   //서버쪽 구현이 완료되면 이걸로 바꿀 예정
     }
 
     public void getLikeInList()
     {
-        //LikeMngAsyncTask asyncTas = new LikeMngAsyncTask();
-
-        RecipeIn recipe = new RecipeIn();
-        list.add(new LikeIn(recipe));
-
+//        LikeMngAsyncTask asyncTask = new LikeMngAsyncTask();
+//        JSONObject data = new JSONObject();
+//        try
+//        {
+//           data.accumulate("userId", UserInfo.getString(recyclerView.getContext(), UserInfo.ID_KEY));
+//           String result = asyncTask.execute("readLikeOutList", data.toString()).get();        //요청 이름은 현재 서버에 없는거 같으니 나중에 말씀드리고 바꿀것
+//            if(result.equals(null))                                                           //서버에서 받아온 값이 null이 아니라면 parsing 진행
+//               list = JsonParsing.parsingLikeOutList(result);
+//        }
+//        catch(Exception e)
+//        {
+//            e.printStackTrace();
+//        }
     }
 }
