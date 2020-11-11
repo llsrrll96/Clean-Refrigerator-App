@@ -10,22 +10,37 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class JsonParsing
 {
+    public static String dateToString(String date)      //서버에서 받은 datetime을 우리가 원하는 포맷으로 바꿔주는 함수
+    {
+        StringBuilder tmp = new StringBuilder();
+
+        for(int i=0; i<19;i++)
+        {
+            if(date.charAt(i)=='T')
+            {
+                tmp.append(' ');
+                continue;
+            }
+            tmp.append(date.charAt(i));
+        }
+        System.out.println(tmp.toString());
+        return tmp.toString();
+    }
     public static ArrayList<RecipeIn> parsingRecipe(String data)     //레시피 정보 파싱
     {
-        ArrayList<RecipeIn> recipeListData = new ArrayList<RecipeIn>();
+        ArrayList<RecipeIn> recipeListData = new ArrayList<>();
         try
         {
             JSONArray jsonArray = new JSONArray(data);
             for (int i = 0 ; i< jsonArray.length(); i++)
             {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                //test
-                System.out.println("jsonObject: "+ jsonObject.get("title"));
-
                 RecipeIn recipeIn = new RecipeIn();
                 recipeIn.setRecipeInId(jsonObject.getInt("recipeInId"));
                 recipeIn.setTitle(jsonObject.getString("title"));
@@ -37,8 +52,8 @@ public class JsonParsing
                 recipeIn.setContents(jsonObject.getString("contents"));
                 recipeIn.setCommentCount(jsonObject.getInt("commentCount"));
                 recipeIn.setLikeCount(jsonObject.getInt("likeCount"));
-                recipeIn.setUploadDate(jsonObject.getString("uploadDate"));
 
+                recipeIn.setUploadDate(dateToString(jsonObject.getString("uploadDate")));
                 JSONArray jsonArrayImage = jsonObject.getJSONArray("recipeImageBytes");
                 String[] recipeImageBytes = new String [jsonArrayImage.length()];
 
@@ -64,7 +79,6 @@ public class JsonParsing
         {
             JSONObject jsonObject = new JSONObject(data);
 
-                //System.out.println("jsonObject: "+ jsonObject.get("title"));
             recipeIn.setRecipeInId(jsonObject.getInt("recipeInId"));
             recipeIn.setTitle(jsonObject.getString("title"));
             recipeIn.setUserId(jsonObject.getString("userId"));
@@ -75,7 +89,8 @@ public class JsonParsing
             recipeIn.setContents(jsonObject.getString("contents"));
             recipeIn.setCommentCount(jsonObject.getInt("commentCount"));
             recipeIn.setLikeCount(jsonObject.getInt("likeCount"));
-            recipeIn.setUploadDate(jsonObject.getString("uploadDate"));
+
+            recipeIn.setUploadDate(dateToString(jsonObject.getString("uploadDate")));
 
             JSONArray jsonArrayImage = jsonObject.getJSONArray("recipeImageBytes");
             String[] recipeImageBytes = new String [jsonArrayImage.length()];
@@ -114,7 +129,7 @@ public class JsonParsing
                 recipeComment.setRecipeTitle(comment.getString("title"));
                 recipeComment.setUserId(comment.getString("userId"));
                 recipeComment.setContent(comment.getString("content"));
-                recipeComment.setUploadDate(comment.getString("uploadDate"));
+                recipeComment.setUploadDate(dateToString(comment.getString("uploadDate")));
 
                 JSONArray jsonArrayImage = comment.getJSONArray("recipeImageBytes");
                 String[] recipeImageBytes = new String [jsonArrayImage.length()];
@@ -152,7 +167,7 @@ public class JsonParsing
                 recipeIn.setRecipeInId(object.getInt("recipeInId"));
                 recipeIn.setTitle(object.getString("title"));
                 recipeIn.setUserId(object.getString("userId"));      //레시피를 쓴 사람의 id
-                likeIn.setUploadDate(object.getString("uploadDate"));
+                likeIn.setUploadDate(dateToString(object.getString("uploadDate")));
 
                 JSONArray jsonArrayImage = object.getJSONArray("recipeImageBytes");
                 String[] recipeImageBytes = new String [jsonArrayImage.length()];
@@ -191,7 +206,7 @@ public class JsonParsing
                 recipeOut.setRecipeOutId(object.getInt("recipeOutId"));
                 recipeOut.setTitle(object.getString("title"));
                 recipeOut.setLink(object.getString("link"));
-                likeOut.setUploadDate(object.getString("uploadDate"));
+                likeOut.setUploadDate(dateToString(object.getString("uploadDate")));
 
                 list.add(new LikeOut(recipeOut));
             }
