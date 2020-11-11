@@ -19,7 +19,8 @@
             android:id="@+id/searchRecipe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="8"
+            android:layout_weight="1"
+            android:iconifiedByDefault="false"
             android:layout_gravity="center"
             />
         <CheckBox
@@ -38,6 +39,12 @@
         android:layout_marginBottom="10dp"
 
         app:srcCompat="@drawable/recorecipe" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#FF686868"/>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
