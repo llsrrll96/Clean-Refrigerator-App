@@ -7,29 +7,26 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.emptytherefrigerator.AsyncTasks.LikeMngAsyncTask;
 import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.entity.LikeOut;
-import com.example.emptytherefrigerator.entity.RecipeIn;
 import com.example.emptytherefrigerator.login.UserInfo;
-
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 
 public class MyLikeOutAdapter extends RecyclerView.Adapter<MyLikeOutAdapter.MyLikeOutViewHolder>
 {
-    private ArrayList<LikeOut> list;
+    private ArrayList<LikeOut> list= new ArrayList<>();
     private LayoutInflater inflater;
     Context context;
 
-    public MyLikeOutAdapter(ArrayList<LikeOut> list)
+    public MyLikeOutAdapter(Context context, ArrayList<LikeOut> list)
     {
         this.list=list;
+        this.context= context;
+        inflater = LayoutInflater.from(context);
     }
 
     @Override
@@ -53,8 +50,7 @@ public class MyLikeOutAdapter extends RecyclerView.Adapter<MyLikeOutAdapter.MyLi
     {
         MyLikeOutAdapter adapter;
 
-        TextView recipeOutTitle;
-        TextView site_link;
+        TextView recipeOutTitle, site_link, likeOutUploadDate;
         ImageButton btnLikeOutDelete;
 
         public MyLikeOutViewHolder(View view, MyLikeOutAdapter adapter)
@@ -65,6 +61,7 @@ public class MyLikeOutAdapter extends RecyclerView.Adapter<MyLikeOutAdapter.MyLi
             recipeOutTitle = itemView.findViewById(R.id.recipeOutTitle);
             site_link = itemView.findViewById(R.id.site_link);
             btnLikeOutDelete = itemView.findViewById(R.id.btnLikeOutDelete);
+            likeOutUploadDate = itemView.findViewById(R.id.likeOutUploadDate);
 
             btnLikeOutDelete.setOnClickListener(new View.OnClickListener()
             {
@@ -79,6 +76,7 @@ public class MyLikeOutAdapter extends RecyclerView.Adapter<MyLikeOutAdapter.MyLi
         {
             recipeOutTitle.setText(likeOut.getRecipeOut().getTitle());
             site_link.setText(likeOut.getRecipeOut().getLink());
+            likeOutUploadDate.setText(likeOut.getUploadDate());
         }
 
         public void deleteLikeOut()
