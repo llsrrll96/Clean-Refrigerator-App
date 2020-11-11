@@ -12,8 +12,12 @@
     <string name="strRegister">등록</string>
     <string name="strCancel">취소</string>
     <string name="anotherRecipeMsg">원하는 레시피가 없나요? (외부사이트 검색)</string>
+    <string name="foodName">음식 이름</string>
     <string name="ingredients">식재료</string>
+    <string name="ingPrice">식재료 가격</string>
     <string name="ingredi">재료</string>
+    <string name="person">인원</string>
+    <string name="time">시간</string>
     <string name="recipe">레시피</string>
     <string name="strRecipe">요리 방법</string>
     <string name="setting">설정</string>
