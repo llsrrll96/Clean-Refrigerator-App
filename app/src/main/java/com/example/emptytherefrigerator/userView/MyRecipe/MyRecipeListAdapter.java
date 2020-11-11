@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.emptytherefrigerator.AsyncTasks.RecipeMngAsyncTask;
 import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.entity.RecipeIn;
+import com.example.emptytherefrigerator.main.RecipeDetailUpdateView;
 import com.example.emptytherefrigerator.main.RecipeDetailView;
 
 import org.json.JSONObject;
@@ -24,6 +25,7 @@ public class MyRecipeListAdapter extends RecyclerView.Adapter<MyRecipeListAdapte
 {
     private ArrayList<RecipeIn> list;
     private LayoutInflater inflater;
+    private Intent intent;
     Context context;
 
     public MyRecipeListAdapter(Context context, ArrayList<RecipeIn> list)
@@ -98,6 +100,10 @@ public class MyRecipeListAdapter extends RecyclerView.Adapter<MyRecipeListAdapte
                 {
                     int pos = getAdapterPosition();
                     context = view.getContext();
+
+                    intent = new Intent(context, RecipeDetailUpdateView.class);
+                    intent.putExtra("RECIPE",list.get(pos).getRecipeInId());
+                    context.startActivity(intent);
                 }
             });
             btnDelRecipe.setOnClickListener(new View.OnClickListener()  //레시피 삭제
