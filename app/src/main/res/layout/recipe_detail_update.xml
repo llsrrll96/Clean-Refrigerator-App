@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:textSize="20sp"
-            android:hint="음식 이름"
+            android:hint="@string/foodName"
             android:inputType="textPersonName" />
         <View
             android:layout_width="match_parent"
@@ -58,7 +58,7 @@
                 android:paddingLeft="25dp"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:text="요리 정보"
+                android:text="@string/recipeInfo"
                 />
 
             <LinearLayout
@@ -78,7 +78,7 @@
                     android:paddingLeft="10dp"
                     android:textSize="17sp"
                     android:textColor="#ff000000"
-                    android:text="인원"
+                    android:text="@string/person"
                     />
                 <EditText
                     android:id="@+id/et_info_personCount"
@@ -107,7 +107,7 @@
                     android:paddingLeft="10dp"
                     android:textSize="17sp"
                     android:textColor="#ff000000"
-                    android:text="시간"
+                    android:text="@string/time"
                     />
                 <EditText
                     android:id="@+id/et_info_time"
