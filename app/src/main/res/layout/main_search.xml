@@ -31,13 +31,15 @@
             android:text="@string/ingredients" />
     </LinearLayout>
 
-    <ImageView
+    <TextView
+        android:id="@+id/textView10"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-
-        app:srcCompat="@drawable/recorecipe" />
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:text="@string/bestRecipe"
+        android:textAlignment="center"
+        android:textColor="#03DAC5"
+        android:textSize="30dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
@@ -48,9 +50,6 @@
         android:padding="10dp"
         android:background="@drawable/border"
         />
-
-
-
 
 
 </LinearLayout>
