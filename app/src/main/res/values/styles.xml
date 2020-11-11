@@ -9,7 +9,9 @@
         <!-- No Title Bar-->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-
     </style>
 
+    <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.Dark">
+       <item name="android:homeAsUpIndicator">@drawable/back_icon_white</item>
+    </style>
 </resources>
