@@ -10,25 +10,24 @@
         android:id="@+id/likeInUploadDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="51dp"
+        app:layout_constraintBottom_toBottomOf="@+id/likeInMainImg"
         app:layout_constraintStart_toStartOf="@+id/likeInRecipeWriter"
-        app:layout_constraintTop_toBottomOf="@+id/likeInRecipeWriter" />
+        app:layout_constraintTop_toBottomOf="@+id/likeInTitle" />
 
     <TextView
         android:id="@+id/likeInRecipeWriter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="@+id/likeInTitle"
         app:layout_constraintTop_toBottomOf="@+id/likeInTitle" />
 
     <ImageView
         android:id="@+id/likeInMainImg"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginLeft="30dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="15dp"
         android:ellipsize="end"
@@ -42,24 +41,23 @@
         android:id="@+id/likeInTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
+        android:layout_marginStart="12dp"
 
+        android:layout_marginTop="12dp"
         android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/likeInMainImg"
         app:layout_constraintStart_toEndOf="@+id/likeInMainImg"
-        app:layout_constraintTop_toTopOf="@+id/likeInMainImg"
-        app:layout_constraintVertical_bias="0.075" />
+        app:layout_constraintTop_toTopOf="@+id/likeInMainImg" />
 
     <ImageButton
         android:id="@+id/likeDelBtn"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginEnd="28dp"
+        android:layout_marginEnd="24dp"
         android:layout_marginBottom="8dp"
         android:background="#ffffff"
         app:layout_constraintBottom_toBottomOf="@+id/likeInUploadDate"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/title"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintTop_toTopOf="@+id/likeInMainImg"
+        app:layout_constraintVertical_bias="0.652"
         app:srcCompat="@drawable/like_filled1" />
 </androidx.constraintlayout.widget.ConstraintLayout>
