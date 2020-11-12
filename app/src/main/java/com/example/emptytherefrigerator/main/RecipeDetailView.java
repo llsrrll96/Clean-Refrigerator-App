@@ -20,6 +20,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.emptytherefrigerator.AsyncTasks.RecipeMngAsyncTask;
 import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.entity.RecipeIn;
+import com.example.emptytherefrigerator.main.Comment.CommentListView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -87,6 +88,9 @@ public class RecipeDetailView extends AppCompatActivity {
         btnComments.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), CommentListView.class);
+                intent.putExtra("recipeInId", recipe.getRecipeInId());
+                startActivity(intent);
 
             }
         });

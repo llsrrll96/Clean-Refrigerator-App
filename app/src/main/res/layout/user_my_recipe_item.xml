@@ -94,9 +94,9 @@
 
     <ImageView
         android:id="@+id/recipeMainImage_"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginLeft="30dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="15dp"
         app:layout_constraintBottom_toBottomOf="parent"

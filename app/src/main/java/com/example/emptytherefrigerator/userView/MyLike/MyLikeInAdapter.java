@@ -11,7 +11,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.emptytherefrigerator.AsyncTasks.LikeMngAsyncTask;
+
+import com.example.emptytherefrigerator.AsyncTasks.MyAsyncTask;
 import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.entity.LikeIn;
 import com.example.emptytherefrigerator.entity.RecipeIn;
@@ -92,7 +93,7 @@ public class MyLikeInAdapter extends RecyclerView.Adapter<MyLikeInAdapter.MyLike
 
         public  void deleteLikeIn()            //좋아요 삭제
         {
-            LikeMngAsyncTask deleteLike = new LikeMngAsyncTask();
+            MyAsyncTask deleteLike = new MyAsyncTask();
             try
             {
                 int pos = getAdapterPosition();

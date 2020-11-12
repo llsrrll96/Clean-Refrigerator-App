@@ -17,9 +17,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.emptytherefrigerator.AsyncTasks.RecipeMngAsyncTask;
-import com.example.emptytherefrigerator.AsyncTasks.RecipeSearchAsyncTask;
 import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.entity.RecipeIn;
+import com.example.emptytherefrigerator.network.JsonParsing;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -125,7 +125,7 @@ public class MainSearchFragView extends Fragment
                 recipeIn.setContents(jsonObject.getString("contents"));
                 recipeIn.setCommentCount(jsonObject.getInt("commentCount"));
                 recipeIn.setLikeCount(jsonObject.getInt("likeCount"));
-                recipeIn.setUploadDate(jsonObject.getString("uploadDate"));
+                recipeIn.setUploadDate(JsonParsing.dateToString(jsonObject.getString("uploadDate")));
 
 
                 JSONArray jsonArrayImage = jsonObject.getJSONArray("recipeImageBytes");

@@ -4,16 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageButton;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.emptytherefrigerator.AsyncTasks.RecipeSearchAsyncTask;
+import com.example.emptytherefrigerator.AsyncTasks.MyAsyncTask;
 import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.entity.RecipeIn;
-import com.example.emptytherefrigerator.login.LoginView;
 import com.example.emptytherefrigerator.login.UserInfo;
 import com.example.emptytherefrigerator.main.RecipeDetailCreateView;
 import com.example.emptytherefrigerator.network.JsonParsing;
@@ -36,7 +35,6 @@ public class MyRecipeListView extends AppCompatActivity
         setContentView(R.layout.user_my_recipe_list);
         getRecipeList();
         initializeView();
-        setListener();
     }
 
     public void initializeView()
@@ -72,21 +70,10 @@ public class MyRecipeListView extends AppCompatActivity
         }
         return super.onOptionsItemSelected(item);
     }
-    public void setListener()
-    {
-//        btnCreateRecipe.setOnClickListener(new View.OnClickListener()
-//        {
-//           @Override
-//           public void onClick(View v)
-//           {
-//               //레시피 등록 화면 넘기기
-//           }
-//
-//        });
-    }
+
     public void getRecipeList()        //내 레시피 서버에서 받아온다
     {
-        RecipeSearchAsyncTask recipeSearch = new RecipeSearchAsyncTask();
+        MyAsyncTask recipeSearch = new MyAsyncTask();
         JSONObject data = new JSONObject();
 
         String jsonData="";

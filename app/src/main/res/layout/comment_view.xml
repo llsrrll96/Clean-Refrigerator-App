@@ -15,11 +15,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/userId"
+        android:id="@+id/commentListMyId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="40dp"
-        android:text="jaehe"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.488"
@@ -48,17 +47,16 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="12dp"
         app:layout_constraintEnd_toStartOf="@+id/commentInputBtn"
-        app:layout_constraintStart_toStartOf="@+id/userId"
-        app:layout_constraintTop_toBottomOf="@+id/userId" />
+        app:layout_constraintStart_toStartOf="@+id/commentListMyId"
+        app:layout_constraintTop_toBottomOf="@+id/commentListMyId" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/commentView"
+        android:id="@+id/commentListRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="@+id/btnBack"
-        app:layout_constraintHorizontal_bias="0.044"
-        app:layout_constraintStart_toStartOf="@+id/btnBack"
-        app:layout_constraintTop_toBottomOf="@+id/btnBack" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/commentListToolbar" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
@@ -67,15 +65,15 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_end="157dp" />
 
-    <ImageButton
-        android:id="@+id/btnBack"
-        android:layout_width="60dp"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/commentListToolbar"
+        android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@color/colorWhite"
+        android:background="#0DE1F2"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/back_button" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

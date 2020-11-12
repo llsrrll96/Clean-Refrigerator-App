@@ -40,6 +40,7 @@
         <activity android:name=".userView.UserEditView"/>
         <activity android:name=".userView.SettingView"/>
         <activity android:name=".userView.MyLike.LikeMainPage"/>
+        <activity android:name=".main.Comment.CommentListView"/>
     </application>
 
 </manifest>
