@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.entity.RecipeComment;
 import com.example.emptytherefrigerator.entity.RecipeIn;
-
 import java.util.ArrayList;
 
 public class MyCommentAdapter extends RecyclerView.Adapter<MyCommentAdapter.MyCommentViewHolder>

@@ -6,7 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.emptytherefrigerator.AsyncTasks.RecipeSearchAsyncTask;
+
+import com.example.emptytherefrigerator.AsyncTasks.MyAsyncTask;
 import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.entity.RecipeComment;
 import com.example.emptytherefrigerator.login.UserInfo;
@@ -44,7 +45,7 @@ public class MyCommentView extends AppCompatActivity
     }
     public void getCommentList()
     {
-        RecipeSearchAsyncTask searchMyComment = new RecipeSearchAsyncTask();
+        MyAsyncTask searchMyComment = new MyAsyncTask();
         String result = "";
         JSONObject data = new JSONObject();
         try

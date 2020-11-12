@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.emptytherefrigerator.AsyncTasks.RecipeMngAsyncTask;
-import com.example.emptytherefrigerator.AsyncTasks.RecipeSearchAsyncTask;
 import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.entity.RecipeIn;
 import com.example.emptytherefrigerator.network.JsonParsing;
