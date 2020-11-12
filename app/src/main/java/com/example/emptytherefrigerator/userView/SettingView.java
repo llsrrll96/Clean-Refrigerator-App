@@ -12,12 +12,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.example.emptytherefrigerator.AsyncTasks.UserMngAsyncTask;
+import com.example.emptytherefrigerator.AsyncTasks.MyAsyncTask;
 import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.entity.User;
 import com.example.emptytherefrigerator.login.LoginView;
 import com.example.emptytherefrigerator.login.UserInfo;
-import com.example.emptytherefrigerator.main.MainPageView;
 
 import org.json.JSONObject;
 
@@ -75,7 +74,7 @@ public class SettingView extends AppCompatActivity
 
     public void deleteUser()
     {
-        UserMngAsyncTask deleteUser = new UserMngAsyncTask();
+        MyAsyncTask deleteUser = new MyAsyncTask();
         String result="";
         User user = new User( UserInfo.getString(this, UserInfo.ID_KEY), UserInfo.getString(this, UserInfo.PW_KEY));        //preference에서 회원 정보를 가져와 객체를 만듬
         JSONObject data = new JSONObject();

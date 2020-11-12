@@ -9,7 +9,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.emptytherefrigerator.AsyncTasks.LikeMngAsyncTask;
+
+import com.example.emptytherefrigerator.AsyncTasks.MyAsyncTask;
 import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.entity.LikeOut;
 import com.example.emptytherefrigerator.login.UserInfo;
@@ -81,7 +82,7 @@ public class MyLikeOutAdapter extends RecyclerView.Adapter<MyLikeOutAdapter.MyLi
 
         public void deleteLikeOut()
         {
-            LikeMngAsyncTask deleteLikeOut = new LikeMngAsyncTask();
+            MyAsyncTask deleteLikeOut = new MyAsyncTask();
 
             try
             {

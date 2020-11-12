@@ -10,7 +10,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import com.example.emptytherefrigerator.AsyncTasks.UserMngAsyncTask;
+
+import com.example.emptytherefrigerator.AsyncTasks.MyAsyncTask;
 import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.entity.User;
 import com.example.emptytherefrigerator.login.UserInfo;
@@ -78,7 +79,7 @@ public class UserEditView extends AppCompatActivity
 
     public void updateUserInfo(View view)       //서버에 회원정보 update 요청
     {
-        UserMngAsyncTask editUser = new UserMngAsyncTask();
+        MyAsyncTask editUser = new MyAsyncTask();
         User user = new User(userEditId.getText().toString(),userEditPw.getText().toString());
 
         JSONObject data = new JSONObject();

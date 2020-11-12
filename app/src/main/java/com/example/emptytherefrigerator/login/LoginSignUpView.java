@@ -1,28 +1,16 @@
 package com.example.emptytherefrigerator.login;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.emptytherefrigerator.AsyncTasks.LoginMngAsyncTask;
-import com.example.emptytherefrigerator.AsyncTasks.UserMngAsyncTask;
+import com.example.emptytherefrigerator.AsyncTasks.MyAsyncTask;
 import com.example.emptytherefrigerator.R;
-import com.example.emptytherefrigerator.main.MainPageView;
 
 import org.json.JSONObject;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 public class LoginSignUpView extends AppCompatActivity {
     private TextView btnOk;
@@ -90,7 +78,7 @@ public class LoginSignUpView extends AppCompatActivity {
     }
     public void signUp(View view)
     {
-        UserMngAsyncTask signUp = new UserMngAsyncTask();
+        MyAsyncTask signUp = new MyAsyncTask();
         JSONObject data = new JSONObject();
         try
         {
