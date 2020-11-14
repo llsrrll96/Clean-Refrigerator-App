@@ -208,6 +208,16 @@ public class JsonParsing
                 recipeOut.setLink(object.getString("link"));
                 likeOut.setUploadDate(dateToString(object.getString("uploadDate")));
 
+                JSONArray jsonArrayImage = object.getJSONArray("recipeImageBytes");
+                String[] recipeImageBytes = new String [jsonArrayImage.length()];
+
+                for(int j= 0; j < jsonArrayImage.length(); j++)         //이미지 bytes
+                {
+                    JSONObject jsonObjectImage = jsonArrayImage.getJSONObject(j);
+                    recipeImageBytes[j] = jsonObjectImage.getString("recipeImageByte");
+                }
+                recipeOut.setRecipeImageByte(recipeImageBytes);
+
                 list.add(new LikeOut(recipeOut));
             }
             return list;

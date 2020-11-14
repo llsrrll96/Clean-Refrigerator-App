@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.emptytherefrigerator.AsyncTasks.MyAsyncTask;
 import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.entity.LikeOut;
+import com.example.emptytherefrigerator.entity.RecipeIn;
 import com.example.emptytherefrigerator.login.UserInfo;
 import org.json.JSONObject;
 import java.util.ArrayList;
@@ -39,6 +41,7 @@ public class MyLikeOutAdapter extends RecyclerView.Adapter<MyLikeOutAdapter.MyLi
     public void onBindViewHolder(@NonNull MyLikeOutAdapter.MyLikeOutViewHolder holder, int position) {
         context = holder.itemView.getContext();
         holder.onBind(list.get(position));
+        holder.likeOutMainImg.setImageBitmap(RecipeIn.StringToBitmap(list.get(position).getRecipeOut().getRecipeImageByte()[0]));
     }
     @Override
     public MyLikeOutAdapter.MyLikeOutViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
@@ -53,6 +56,7 @@ public class MyLikeOutAdapter extends RecyclerView.Adapter<MyLikeOutAdapter.MyLi
 
         TextView recipeOutTitle, site_link, likeOutUploadDate;
         ImageButton btnLikeOutDelete;
+        ImageView likeOutMainImg;
 
         public MyLikeOutViewHolder(View view, MyLikeOutAdapter adapter)
         {
@@ -63,6 +67,7 @@ public class MyLikeOutAdapter extends RecyclerView.Adapter<MyLikeOutAdapter.MyLi
             site_link = itemView.findViewById(R.id.site_link);
             btnLikeOutDelete = itemView.findViewById(R.id.btnLikeOutDelete);
             likeOutUploadDate = itemView.findViewById(R.id.likeOutUploadDate);
+            likeOutMainImg = itemView.findViewById(R.id.likeOutMainImg);
 
             btnLikeOutDelete.setOnClickListener(new View.OnClickListener()
             {
