@@ -7,11 +7,18 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.emptytherefrigerator.AsyncTasks.MyAsyncTask;
 import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.entity.RecipeComment;
 import com.example.emptytherefrigerator.entity.RecipeIn;
+
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class MyCommentAdapter extends RecyclerView.Adapter<MyCommentAdapter.MyCommentViewHolder>
@@ -50,6 +57,7 @@ public class MyCommentAdapter extends RecyclerView.Adapter<MyCommentAdapter.MyCo
         TextView commentListTitle, myCommentContent, myCommentUploadDate;
         ImageView myComment_RecipeMainImage;
         ImageButton btnCommentDel;
+        int commentId;
 
         public MyCommentViewHolder(View view, MyCommentAdapter adapter)
         {
@@ -71,13 +79,35 @@ public class MyCommentAdapter extends RecyclerView.Adapter<MyCommentAdapter.MyCo
         }
         public void setListener()
         {
-            btnCommentDel.setOnClickListener(new View.OnClickListener(){
+            btnCommentDel.setOnClickListener(new View.OnClickListener()//댓글 삭제
+            {
                 @Override
                 public void onClick(View v)
                 {
-                    //댓글 삭제
+                    deleteComment();
                 }
             });
+        }
+
+        public void deleteComment()
+        {
+            MyAsyncTask deleteComment = new MyAsyncTask();
+            JSONObject object = new JSONObject();
+            int pos = getAdapterPosition();
+            String result;
+            try
+            {
+                object.accumulate("commentId", list.get(pos).getCommentId());
+                result = deleteComment.execute("deleteComment", object.toString()).get();
+                if(result.equals("1"))  //성공
+                    return;
+                else
+                    Toast.makeText(itemView.getContext(),"내부 오류로 요청을 수행하지 못했습니다", Toast.LENGTH_SHORT).show();
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
         }
     }
 }
