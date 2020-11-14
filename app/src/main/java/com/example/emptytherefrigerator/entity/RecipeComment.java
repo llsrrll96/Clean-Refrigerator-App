@@ -15,6 +15,10 @@ public class RecipeComment
     {
 
     }
+    public RecipeComment(int recipeId, String userId, String content, String uploadDate)
+    {
+        this.recipeId = recipeId; this.userId = userId; this.content = content; this.uploadDate = uploadDate;
+    }
     public RecipeComment(int recipeId, int commentId, String recipeTitle, String userId, String content, String uploadDate)
     {
         this.recipeId = recipeId;
