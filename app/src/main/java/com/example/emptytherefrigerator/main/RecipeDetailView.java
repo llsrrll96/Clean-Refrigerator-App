@@ -17,9 +17,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.emptytherefrigerator.AsyncTasks.MyAsyncTask;
 import com.example.emptytherefrigerator.AsyncTasks.RecipeMngAsyncTask;
 import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.entity.RecipeIn;
+import com.example.emptytherefrigerator.login.UserInfo;
 import com.example.emptytherefrigerator.main.Comment.CommentListView;
 
 import org.json.JSONArray;
@@ -40,6 +42,8 @@ public class RecipeDetailView extends AppCompatActivity {
     private TextView recipeInfoTimeTextView;
     private ImageButton btnComments;
     private ImageButton btnHeart;
+    private boolean liked=false;      //좋아요 값을 저장하고 있음, false면 안한거 true면 좋아요 한거
+    private boolean alreadyLiked=false; //이전에 좋아요가 되어있는 상태인가
 
     private RecipeIn recipe;
 
@@ -63,7 +67,49 @@ public class RecipeDetailView extends AppCompatActivity {
         setPrice();                 //식재료 가격 (크롤링)
         setRecipeContents();         //조리방법
     }
+    @Override
+    protected void onDestroy()      //뷰가 꺼질때 좋아요에 관한 정보를 확인하고 서버로 관련 작업 요청, 나중에 직접 해봐야됨, 킹론상으로는 작동
+    {
+        super.onDestroy();
+        if(!alreadyLiked&&liked)   //이전에 좋아요를 하지 않은 경우, 하트를 누른 상태
+            createLikeIn();
+        else if(alreadyLiked&&!liked)   //이전에 좋아요를 했고 하트가 누르지 않은 상태
+            deleteLikeIn();
 
+    }
+
+    public void createLikeIn()      //좋아요 등록
+    {
+        MyAsyncTask inquiry = new MyAsyncTask();
+        JSONObject object = new JSONObject();
+        try
+        {
+            object.accumulate("recipeInId", recipe.getRecipeInId());
+            object.accumulate("userId", UserInfo.getString(this, UserInfo.ID_KEY));
+
+            String result = inquiry.execute("createLikeIn", object.toString()).get();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+    public void deleteLikeIn()      //좋아요 삭제
+    {
+        MyAsyncTask inquiry = new MyAsyncTask();
+        JSONObject object = new JSONObject();
+        try
+        {
+            object.accumulate("recipeInId", recipe.getRecipeInId());
+            object.accumulate("userId", UserInfo.getString(this, UserInfo.ID_KEY));
+
+            String result = inquiry.execute("deleteLikeIn", object.toString()).get();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
     private void setInitial()
     {
         titleTextView = (TextView)findViewById(R.id.titleTextView);
@@ -73,6 +119,12 @@ public class RecipeDetailView extends AppCompatActivity {
         recipeInfoTimeTextView = (TextView)findViewById(R.id.recipeInfoTime);//조리 시간
         btnComments = (ImageButton)findViewById(R.id.btnComments);
         btnHeart = (ImageButton) findViewById(R.id.btnHeart);
+        if(readLikeIn().equals("1"))     //1이면 좋아요 한 상태
+        {
+            btnHeart.setImageResource(R.drawable.like_filled1);
+            liked=true;
+            alreadyLiked=true;
+        }
 
         //레시피 받아오기
         getRecipeDataFromIntent();
@@ -85,23 +137,48 @@ public class RecipeDetailView extends AppCompatActivity {
     public void setListener()
     {
         //채팅 버튼
-        btnComments.setOnClickListener(new View.OnClickListener() {
+        btnComments.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 Intent intent = new Intent(getApplicationContext(), CommentListView.class);
                 intent.putExtra("recipeInId", recipe.getRecipeInId());
                 startActivity(intent);
-
             }
         });
 
         //하트 버튼
-        btnHeart.setOnClickListener(new View.OnClickListener() {
+        btnHeart.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
-
+            public void onClick(View v)
+            {
+                liked=!liked;   //토글
+                if(liked)
+                    btnHeart.setImageResource(R.drawable.like_filled1);
+                else
+                    btnHeart.setImageResource(R.drawable.like);
             }
         });
+    }
+    public String readLikeIn()
+    {
+        MyAsyncTask inquiry = new MyAsyncTask();
+        JSONObject object = new JSONObject();
+        try
+        {
+            object.accumulate("recipeInId", recipe.getRecipeInId());
+            object.accumulate("userId", UserInfo.getString(this, UserInfo.ID_KEY));
+
+            String result = inquiry.execute("readLikeIn", object.toString()).get();
+            return result;
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        }
     }
     ///////////////////////////////////////////////////////////////////////////
     ////////////////////Intent에서 Recipe 데이터를 가져온다.////////////////////////////

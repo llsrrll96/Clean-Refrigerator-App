@@ -110,7 +110,7 @@ public class JsonParsing
             return null;
         }
     }
-    public static ArrayList<RecipeComment>parsingCommentList(String data)
+    public static ArrayList<RecipeComment>parsingCommentList(String data)       //내 댓글 조회, 레시피 디테일뷰 댓글 조회
     {
         ArrayList<RecipeComment> list = new ArrayList<>();
         try
@@ -150,7 +150,7 @@ public class JsonParsing
         }
         return list;
     }
-    public static ArrayList<LikeIn> parsingLikeInList(String data)
+    public static ArrayList<LikeIn> parsingLikeInList(String data)      //내 좋아요 목록 외부 레시피 조회
     {
         ArrayList<LikeIn> list = new ArrayList<>();
         try
@@ -190,7 +190,7 @@ public class JsonParsing
             return null;
         }
     }
-    public static ArrayList<LikeOut> parsingLikeOutList(String data)
+    public static ArrayList<LikeOut> parsingLikeOutList(String data)        //내 좋아요 목록 외부 레시피 조회
     {
         ArrayList<LikeOut> list = new ArrayList<>();
         try

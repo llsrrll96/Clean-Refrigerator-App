@@ -240,27 +240,29 @@
     <LinearLayout
         android:id="@+id/footer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorSky"
-        android:orientation="horizontal">
+        android:background="#ffffff"
+        android:orientation="horizontal"
+        android:gravity="center">
+
         <ImageButton
             android:id="@+id/btnComments"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:background="@color/colorSky"
+            android:background="#ffffff"
             android:scaleType="fitCenter"
-            app:srcCompat="@android:drawable/sym_action_chat" />
+            app:srcCompat="@drawable/comment" />
 
         <ImageButton
             android:id="@+id/btnHeart"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:background="@color/colorSky"
+            android:background="#ffffff"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/heart" />
+            app:srcCompat="@drawable/like" />
 
 
     </LinearLayout>
