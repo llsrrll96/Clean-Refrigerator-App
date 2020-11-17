@@ -119,15 +119,14 @@ public class RecipeDetailView extends AppCompatActivity {
         recipeInfoTimeTextView = (TextView)findViewById(R.id.recipeInfoTime);//조리 시간
         btnComments = (ImageButton)findViewById(R.id.btnComments);
         btnHeart = (ImageButton) findViewById(R.id.btnHeart);
-        if(readLikeIn().equals("1"))     //1이면 좋아요 한 상태
-        {
-            btnHeart.setImageResource(R.drawable.like_filled1);
-            liked=true;
-            alreadyLiked=true;
-        }
-
         //레시피 받아오기
         getRecipeDataFromIntent();
+//        if(readLikeIn().equals("1"))     //1이면 좋아요 한 상태
+//        {
+//            btnHeart.setImageResource(R.drawable.like_filled1);
+//            liked=true;
+//            alreadyLiked=true;
+//        }
         //받아온 레시피를 String[] 배열로
         ingredientNames = recipe.getIngredient().split("`");
         ingredientUnits = recipe.getIngredientUnit().split("`");
@@ -195,39 +194,42 @@ public class RecipeDetailView extends AppCompatActivity {
 
             RecipeMngAsyncTask recipeMngAsyncTask = new RecipeMngAsyncTask();
             String result = recipeMngAsyncTask.execute("readRecipeDetail", jsonObject.toString()).get();    //서버로 레시피 아이디 보낸다.
-
             JSONObject jsonObjectResult = new JSONObject(result);
-
-            recipe.setRecipeInId(jsonObjectResult.getInt("recipeInId"));
-            recipe.setTitle(jsonObjectResult.getString("title"));
-            recipe.setUserId(jsonObjectResult.getString("userId"));
-            recipe.setIngredient(jsonObjectResult.getString("ingredient"));
-            recipe.setIngredientUnit(jsonObjectResult.getString("ingredientUnit"));
-            recipe.setRecipePerson(jsonObjectResult.getInt("recipePerson"));
-            recipe.setRecipeTime(jsonObjectResult.getInt("recipeTime"));
-            recipe.setContents(jsonObjectResult.getString("contents"));
-            recipe.setCommentCount(jsonObjectResult.getInt("commentCount"));
-            recipe.setLikeCount(jsonObjectResult.getInt("likeCount"));
-            recipe.setUploadDate(jsonObjectResult.getString("uploadDate"));
-
-
-            JSONArray jsonArrayImage = jsonObjectResult.getJSONArray("recipeImageBytes");
-            String[] recipeImageBytes = new String [jsonArrayImage.length()];
-
-            for(int j= 0; j < jsonArrayImage.length(); j++)
+            if(!result.equals("2"))
             {
-                JSONObject jsonObjectImage = jsonArrayImage.getJSONObject(j);
-                recipeImageBytes[j] = jsonObjectImage.getString("recipeImageByte");
-            }
-            recipe.setRecipeImageByte(recipeImageBytes);
+                recipe.setRecipeInId(jsonObjectResult.getInt("recipeInId"));
+                recipe.setTitle(jsonObjectResult.getString("title"));
+                recipe.setUserId(jsonObjectResult.getString("userId"));
+                recipe.setIngredient(jsonObjectResult.getString("ingredient"));
+                recipe.setIngredientUnit(jsonObjectResult.getString("ingredientUnit"));
+                recipe.setRecipePerson(jsonObjectResult.getInt("recipePerson"));
+                recipe.setRecipeTime(jsonObjectResult.getInt("recipeTime"));
+                recipe.setContents(jsonObjectResult.getString("contents"));
+                recipe.setCommentCount(jsonObjectResult.getInt("commentCount"));
+                recipe.setLikeCount(jsonObjectResult.getInt("likeCount"));
+                recipe.setUploadDate(jsonObjectResult.getString("uploadDate"));
 
-        } catch (JSONException e) {
+
+                JSONArray jsonArrayImage = jsonObjectResult.getJSONArray("recipeImageBytes");
+                String[] recipeImageBytes = new String [jsonArrayImage.length()];
+
+                for(int j= 0; j < jsonArrayImage.length(); j++)
+                {
+                    JSONObject jsonObjectImage = jsonArrayImage.getJSONObject(j);
+                    recipeImageBytes[j] = jsonObjectImage.getString("recipeImageByte");
+                }
+                recipe.setRecipeImageByte(recipeImageBytes);
+
+            }
+
+        }catch (JSONException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
+
     }
     ////////////////////////스트링 이미지 데이터 -> 비트맵으로///////////////////////////////////
     public Bitmap StringToBitmap(String encodedString)
