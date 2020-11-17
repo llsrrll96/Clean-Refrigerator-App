@@ -10,35 +10,31 @@
         android:id="@+id/site_link"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="20dp"
         android:ellipsize="end"
-        android:ems="15"
+        android:ems="10"
         android:maxLines="1"
-        android:textSize="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@id/recipeOutTitle"
-        app:layout_constraintTop_toBottomOf="@+id/recipeOutTitle"
-        app:layout_constraintVertical_bias="0.152" />
+        app:layout_constraintTop_toBottomOf="@+id/recipeOutTitle" />
 
     <ImageButton
         android:id="@+id/btnLikeOutDelete"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="20dp"
         android:background="#ffffff"
         app:layout_constraintBottom_toBottomOf="@+id/likeOutUploadDate"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/recipeOutTitle"
-        app:layout_constraintVertical_bias="0.633"
+        app:layout_constraintVertical_bias="0.571"
         app:srcCompat="@drawable/like_filled1" />
 
     <TextView
         android:id="@+id/recipeOutTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
         android:ellipsize="end"
         android:ems="7"
         android:maxLines="1"
@@ -50,19 +46,15 @@
         android:id="@+id/likeOutUploadDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="16dp"
-        android:textSize="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="@+id/site_link"
-        app:layout_constraintTop_toBottomOf="@+id/site_link"
-        app:layout_constraintVertical_bias="0.147" />
+        app:layout_constraintTop_toBottomOf="@+id/site_link" />
 
     <ImageView
         android:id="@+id/likeOutMainImg"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="15dp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -9,7 +9,7 @@
     <FrameLayout
         android:id="@+id/likeFrame"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         app:layout_constraintBottom_toTopOf="@+id/likeBottomNav"
         app:layout_constraintTop_toBottomOf="@+id/myLikeToolbar"

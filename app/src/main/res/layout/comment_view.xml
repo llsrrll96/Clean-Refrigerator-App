@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
 
     <TableRow
@@ -21,7 +23,7 @@
         android:paddingLeft="40dp"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
@@ -29,7 +31,6 @@
         android:id="@+id/commentInputBtn"
         android:layout_width="70dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="13dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/btn_background"
         android:text="입력"
@@ -37,20 +38,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/commentInputText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/commentInputText"
-        app:layout_constraintTop_toTopOf="@+id/commentInputText"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/commentInputText"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="12dp"
-        app:counterEnabled="true"
-        app:counterMaxLength="20"
-        app:layout_constraintEnd_toStartOf="@+id/commentInputBtn"
-        app:layout_constraintStart_toStartOf="@+id/commentListMyId"
-        app:layout_constraintTop_toBottomOf="@+id/commentListMyId" />
+        app:layout_constraintTop_toTopOf="@+id/commentInputText" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/commentListRecyclerView"
@@ -65,7 +53,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_end="157dp" />
+        app:layout_constraintGuide_end="126dp" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/commentListToolbar"
@@ -77,5 +65,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/commentInputText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:ems="13"
+        android:maxLength="30"
+        android:maxLines="2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/commentListMyId"
+        app:layout_constraintVertical_bias="0.377" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
