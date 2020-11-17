@@ -150,7 +150,7 @@ public class MainSearchFragView extends Fragment
 
         //RecyclerView
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity()); //상하
-        recyclerView.addItemDecoration(new RecyclerDecoration(50)); //아이템 간격
+        recyclerView.addItemDecoration(new RecyclerDecoration(10)); //아이템 간격
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(new MainSearchAdapter(recipeList));   //서버쪽 구현이 완료되면 이걸로 바꿀 예정
 
