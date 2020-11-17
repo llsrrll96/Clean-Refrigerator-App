@@ -4,8 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
     android:orientation="vertical"
-    tools:context=".main.MainPageView">
+    tools:context=".main.MainPageView"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
 
     <LinearLayout
@@ -19,16 +22,16 @@
             android:id="@+id/searchRecipe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:iconifiedByDefault="false"
             android:layout_gravity="center"
-            />
+            android:layout_weight="1"
+            android:iconifiedByDefault="false" />
+
         <CheckBox
             android:id="@+id/checkBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
             android:layout_gravity="center"
+            android:layout_weight="2"
             android:text="@string/ingredients" />
     </LinearLayout>
 
@@ -45,17 +48,17 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="#FF686868"/>
+        android:background="#FF686868" />
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp"
+        android:overScrollMode="never"
         android:padding="10dp"
-        />
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp" />
 
 
 </LinearLayout>
