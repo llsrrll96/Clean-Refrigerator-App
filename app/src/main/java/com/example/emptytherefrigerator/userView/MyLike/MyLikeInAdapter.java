@@ -37,7 +37,7 @@ public class MyLikeInAdapter extends RecyclerView.Adapter<MyLikeInAdapter.MyLike
     public void onBindViewHolder(@NonNull MyLikeInAdapter.MyLikeInViewHolder holder, int position) {
         context = holder.itemView.getContext();
         holder.onBind(list.get(position));
-        holder.likeInMainImg.setImageBitmap(RecipeIn.StringToBitmap(list.get(position).getRecipeIn().getRecipeImagePath()));
+        holder.likeInMainImg.setImageBitmap(RecipeIn.StringToBitmap(list.get(position).getRecipeIn().getRecipeImageByte()[0]));
     }
 
     @Override

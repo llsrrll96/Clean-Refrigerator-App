@@ -61,7 +61,7 @@ public class FragLikeInView extends Fragment
         {
            data.accumulate("userId", UserInfo.getString(recyclerView.getContext(), UserInfo.ID_KEY));
            String result = asyncTask.execute("readUserLikeIn", data.toString()).get();        //요청 이름은 현재 서버에 없는거 같으니 나중에 말씀드리고 바꿀것
-            if(result.equals(null))                                                           //서버에서 받아온 값이 null이 아니라면 parsing 진행
+            if(!result.equals(null))                                                           //서버에서 받아온 값이 null이 아니라면 parsing 진행
                list = JsonParsing.parsingLikeInList(result);
         }
         catch(Exception e)

@@ -51,8 +51,7 @@ public class CommentListView extends AppCompatActivity
         userId = findViewById(R.id.commentListMyId);
         userId.setText(UserInfo.getString(this, UserInfo.ID_KEY));
         commentInputBtn = findViewById(R.id.commentInputBtn);
-        commentInputText = findViewById(R.id.commentInputText);     //max length 20, 글자수 counting해줌
-        commentInputText.setOnClickListener(new View.OnClickListener()
+        commentInputBtn.setOnClickListener(new View.OnClickListener()
         {   //댓글 등록
             @Override
             public void onClick(View view)
@@ -60,13 +59,13 @@ public class CommentListView extends AppCompatActivity
                 sendComment();
             }
         });
+        commentInputText = findViewById(R.id.commentInputText);     //max length 20, 글자수 counting해줌
     }
     public void sendComment()
     {
         MyAsyncTask createComment = new MyAsyncTask();
         String result;
         JSONObject object = new JSONObject();
-
         try
         {
             RecipeComment comment = new RecipeComment();
