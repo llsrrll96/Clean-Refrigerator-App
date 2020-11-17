@@ -99,9 +99,6 @@ public class MainSearchAdapter extends RecyclerView.Adapter<MainSearchAdapter.Vi
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
                     if(pos != RecyclerView.NO_POSITION){
-                        String title = recipeLists.get(pos).getTitle();
-                        Toast.makeText(v.getContext(), title + " 클릭 되었습니다.", Toast.LENGTH_SHORT).show();
-
                         holdercontext = v.getContext();
                         intent = new Intent(holdercontext, RecipeDetailView.class);     //조회된 레시피 화면으로 넘어간다
                         //intent.putExtra("RECIPE",recipeLists.get(pos));      //다음 화면에 레시피 객체 송신
