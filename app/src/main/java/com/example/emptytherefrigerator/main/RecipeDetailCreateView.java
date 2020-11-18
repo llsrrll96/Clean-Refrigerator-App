@@ -156,6 +156,7 @@ public class RecipeDetailCreateView extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (ingredientCnt++ < 20) {
+                    if(!ingredientIsEmpty())
                     setIngredient();
                 }else {
                     Toast.makeText(v.getContext(),"더 이상 늘릴 수 없습니다.",Toast.LENGTH_SHORT).show();
@@ -168,6 +169,7 @@ public class RecipeDetailCreateView extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (recipeCnt++ < 20) {
+                    if(!recipeValueIsEmpty())
                     setRecipeContent();
                 }else
                     Toast.makeText(v.getContext(),"더 이상 늘릴 수 없습니다.",Toast.LENGTH_SHORT).show();
@@ -209,7 +211,28 @@ public class RecipeDetailCreateView extends AppCompatActivity {
             }
         });
     }
-
+    //재료 값 있으면 트루
+    private boolean ingredientIsEmpty()
+    {
+        boolean result = false;
+        for(int i =0 ; i < etIngredientList.size(); i++)
+        {
+            if(etIngredientList.get(i).getText().toString().matches("") || etIngredientUnitList.get(i).getText().toString().matches(""))
+                result = true;
+        }
+        return result;
+    }
+    //요리 방법 있는 지 없는지
+    private boolean recipeValueIsEmpty()
+    {
+        boolean result = false;
+        for(int i = 0; i < recipeContentList.size(); i++)
+        {
+            if(recipeContentList.get(i).getText().toString().matches(""))
+                result = true;
+        }
+        return result;
+    }
     ////////////////////////////////////////////////////////////////////////////////
     public void setDetailImage() // 앨범에서 이미지 가져오기 버튼
     {
