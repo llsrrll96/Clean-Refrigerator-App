@@ -69,7 +69,7 @@ public class CommentListView extends AppCompatActivity
         try
         {
             RecipeComment comment = new RecipeComment();
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             comment.setUploadDate(format.format(new Date()));
 
             object.accumulate("userId", UserInfo.getString(this, UserInfo.ID_KEY));
@@ -77,7 +77,7 @@ public class CommentListView extends AppCompatActivity
             object.accumulate("content", commentInputText.getText());
             object.accumulate("uploadDate", comment.getUploadDate());
 
-            result = createComment.execute("sendComment", object.toString()).get();
+            result = createComment.execute("createComment", object.toString()).get();
             if(result.equals("1"))  //등록 성공
             {
                 comment.setRecipeId(recipeInId);
@@ -114,9 +114,9 @@ public class CommentListView extends AppCompatActivity
         try
         {
             data.accumulate("recipeInId", recipeInId);
-            String result = readCommentList.execute("readCommentList", data.toString()).get();        //요청 이름은 서버 보고 바꿀것
-
-            if(!result.equals("2") || !result.equals("3"))      //실패가 아닌 경우
+            String result = readCommentList.execute("readComment", data.toString()).get();        //요청 이름은 서버 보고 바꿀것
+            System.out.println(result);
+            if(!result.equals("2"))      //실패가 아닌 경우
             {
                 list = JsonParsing.parsingCommentList(result);
                 return;

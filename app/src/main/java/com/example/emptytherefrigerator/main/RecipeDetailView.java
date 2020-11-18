@@ -121,12 +121,12 @@ public class RecipeDetailView extends AppCompatActivity {
         btnHeart = (ImageButton) findViewById(R.id.btnHeart);
         //레시피 받아오기
         getRecipeDataFromIntent();
-//        if(readLikeIn().equals("1"))     //1이면 좋아요 한 상태
-//        {
-//            btnHeart.setImageResource(R.drawable.like_filled1);
-//            liked=true;
-//            alreadyLiked=true;
-//        }
+        if(readLikeIn().equals("1"))     //1이면 좋아요 한 상태
+        {
+            btnHeart.setImageResource(R.drawable.like_filled1);
+            liked=true;
+            alreadyLiked=true;
+        }
         //받아온 레시피를 String[] 배열로
         ingredientNames = recipe.getIngredient().split("`");
         ingredientUnits = recipe.getIngredientUnit().split("`");
