@@ -16,6 +16,7 @@ public class RecipeSearchAsyncTask extends AsyncTask<String, Void, String>
         String data = strings[1];
         switch (functionType)
         {
+            case "reqBestRecipe" : break;
             case "reqSearchRecipe" : break;
         }
 
