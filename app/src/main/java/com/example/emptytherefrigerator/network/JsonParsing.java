@@ -72,6 +72,41 @@ public class JsonParsing
         }
         return recipeListData;
     }
+
+    public static ArrayList<RecipeOut> parsingRecipeOut(String data)     //레시피 정보 파싱
+    {
+        ArrayList<RecipeOut> recipeListData = new ArrayList<>();
+        try
+        {
+            JSONArray jsonArray = new JSONArray(data);
+            for (int i = 0 ; i< jsonArray.length(); i++)
+            {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                RecipeOut recipeOut = new RecipeOut();
+                recipeOut.setRecipeOutId(jsonObject.getInt("recipeOutId"));
+                recipeOut.setLink(jsonObject.getString("link"));
+                recipeOut.setTitle(jsonObject.getString("title"));
+                recipeOut.setIngredient(jsonObject.getString("ingredient"));            //서버에서 받아오는지 확인후 수정
+
+                JSONArray jsonArrayImage = jsonObject.getJSONArray("recipeImageBytes");
+                String[] recipeImageBytes = new String [jsonArrayImage.length()];
+
+                for(int j= 0; j < jsonArrayImage.length(); j++)
+                {
+                    JSONObject jsonObjectImage = jsonArrayImage.getJSONObject(j);
+                    recipeImageBytes[j] = jsonObjectImage.getString("recipeImageByte");
+                }
+                recipeOut.setRecipeImageByte(recipeImageBytes);
+                recipeListData.add(recipeOut);
+            }
+        }
+        catch(JSONException e)
+        {
+            e.printStackTrace();
+        }
+        return recipeListData;
+    }
+
     public static RecipeIn parsingRecipeIn(String data)     //레시피 객체 하나만 파싱
     {
         RecipeIn recipeIn= new RecipeIn();

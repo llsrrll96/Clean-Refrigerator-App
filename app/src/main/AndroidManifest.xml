@@ -15,6 +15,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         >
+        <activity android:name=".main.MainSearchResultRecipeOut"/>
         <activity android:name=".main.RecipeDetailView"/>
         <activity android:name=".main.RecipeDetailUpdateView"/>
         <activity android:name=".main.RecipeDetailCreateView" />
