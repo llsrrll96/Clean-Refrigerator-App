@@ -51,6 +51,12 @@ public class MyCommentAdapter extends RecyclerView.Adapter<MyCommentAdapter.MyCo
         return new MyCommentAdapter.MyCommentViewHolder(itemView, this);
     }
 
+    public void removeItem(int position)
+    {
+        this.list.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, getItemCount()-position);
+    }
     class MyCommentViewHolder extends RecyclerView.ViewHolder
     {
         MyCommentAdapter adapter;
@@ -99,8 +105,12 @@ public class MyCommentAdapter extends RecyclerView.Adapter<MyCommentAdapter.MyCo
             {
                 object.accumulate("commentId", list.get(pos).getCommentId());
                 result = deleteComment.execute("deleteComment", object.toString()).get();
+
                 if(result.equals("1"))  //성공
+                {
+                    adapter.removeItem(pos);
                     return;
+                }
                 else
                     Toast.makeText(itemView.getContext(),"내부 오류로 요청을 수행하지 못했습니다", Toast.LENGTH_SHORT).show();
             }
