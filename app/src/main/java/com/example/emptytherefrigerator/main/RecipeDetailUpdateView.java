@@ -606,7 +606,7 @@ public class RecipeDetailUpdateView extends AppCompatActivity
             String recipeContents = "";
             for (int contCnt = 0; contCnt < recipeContentList.size(); contCnt++) {
                 recipeContents += recipeContentList.get(contCnt).getText().toString();
-                if (i != recipeContentList.size() - 1) {
+                if (contCnt != recipeContentList.size() - 1) {
                     recipeContents += "`";
                 }
             }
