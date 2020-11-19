@@ -20,7 +20,6 @@
         <activity android:name=".main.RecipeDetailView"/>
         <activity android:name=".main.RecipeDetailUpdateView"/>
         <activity android:name=".main.RecipeDetailCreateView" />
-        <activity android:name=".main.SettingView" />
         <activity android:name=".login.LoginAnimation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -47,6 +46,7 @@
         <activity android:name=".userView.SettingView"/>
         <activity android:name=".userView.MyLike.LikeMainPage"/>
         <activity android:name=".main.Comment.CommentListView"/>
+        <activity android:name=".main.Alarm.AlarmView"/>
     </application>
 
 </manifest>

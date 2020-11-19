@@ -1,6 +1,8 @@
 package com.example.emptytherefrigerator.userView.MyRecipe;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +18,7 @@ import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.entity.RecipeIn;
 import com.example.emptytherefrigerator.main.RecipeDetailUpdateView;
 import com.example.emptytherefrigerator.main.RecipeDetailView;
+import com.example.emptytherefrigerator.userView.SettingView;
 
 import org.json.JSONObject;
 
@@ -54,7 +57,12 @@ public class MyRecipeListAdapter extends RecyclerView.Adapter<MyRecipeListAdapte
     {
         return list.size();
     }
-
+    public void removeItem(int position)
+    {
+        this.list.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, getItemCount()-position);
+    }
     class MyRecipeListViewHolder extends RecyclerView.ViewHolder
     {
 
@@ -111,42 +119,63 @@ public class MyRecipeListAdapter extends RecyclerView.Adapter<MyRecipeListAdapte
                 @Override
                 public void onClick(View v)
                 {
-                    try
-                    {
-                        int pos = getAdapterPosition();
-                        RecipeMngAsyncTask deleteRecipe = new RecipeMngAsyncTask();
-                        JSONObject data = new JSONObject();
-                        data.accumulate("recipeInId",list.get(pos).getRecipeInId());
-                        String result = deleteRecipe.execute("deleteRecipe", data.toString()).get();        //성공 값은 일단 받아놓는걸로
-                        if(result.equals("1"))
-                        {
-                            list.remove(pos);
-                            adapter.notifyDataSetChanged();
-
-                        }
-
-                    }
-                    catch(Exception e)
-                    {
-                        e.printStackTrace();
-                    }
+                    createAlertDialog();
 
                 }
             });
+        }
+        public void createAlertDialog()
+        {
+            AlertDialog.Builder builder = new AlertDialog.Builder(context); //alert 창
+            builder.setTitle("레시피 삭제");
+            builder.setMessage("정말 삭제하시겠습니까?");
+            builder.setNegativeButton("예", new DialogInterface.OnClickListener()   //ok 클릭시 회원정보 삭제
+            {
+                public void onClick(DialogInterface dialog, int id)
+                {
+                    deleteRecipe();
+                }
+            });
+            builder.setPositiveButton("아니오", new DialogInterface.OnClickListener()
+            {
+                public void onClick(DialogInterface dialog, int which) {}
+            });
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+        }
+
+        public void deleteRecipe()
+        {
+            try
+            {
+                int pos = getAdapterPosition();
+                RecipeMngAsyncTask deleteRecipe = new RecipeMngAsyncTask();
+                JSONObject data = new JSONObject();
+                data.accumulate("recipeInId",list.get(pos).getRecipeInId());
+                String result = deleteRecipe.execute("deleteRecipe", data.toString()).get();        //성공 값은 일단 받아놓는걸로
+                if(result.equals("1"))
+                {
+                    adapter.removeItem(pos);
+                }
+
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
         }
 
         public void inquireRecipeDetailView(View view)
         {
             int pos = getAdapterPosition();     //레시피 조회 화면 넘기기
             if(pos != RecyclerView.NO_POSITION)
-//            {
+            {
                 context = view.getContext();
                 Intent intent = new Intent(context, RecipeDetailView.class);     //조회된 레시피 화면으로 넘어간다
                 intent.putExtra("RECIPE",list.get(pos).getRecipeInId());      //다음 화면에 레시피 객체 송신
                 context.startActivity(intent);
-//            }
+            }
 
         }
     }
-
 }
