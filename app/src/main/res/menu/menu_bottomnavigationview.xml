@@ -9,6 +9,10 @@
         android:id="@+id/menu_user"
         android:icon="@drawable/user"
         android:title="" />
+    <item
+        android:id="@+id/menu_alarm"
+        android:icon="@drawable/alarm_blue"
+        android:title=""/>
 
 
 </menu>
