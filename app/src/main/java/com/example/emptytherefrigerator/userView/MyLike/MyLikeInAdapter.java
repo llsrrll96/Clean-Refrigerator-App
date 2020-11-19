@@ -2,6 +2,7 @@ package com.example.emptytherefrigerator.userView.MyLike;
 
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,10 @@ import com.example.emptytherefrigerator.entity.LikeIn;
 import com.example.emptytherefrigerator.entity.RecipeIn;
 import com.example.emptytherefrigerator.login.UserInfo;
 import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MyLikeInAdapter extends RecyclerView.Adapter<MyLikeInAdapter.MyLikeInViewHolder>
 {
@@ -59,6 +63,7 @@ public class MyLikeInAdapter extends RecyclerView.Adapter<MyLikeInAdapter.MyLike
         ImageView likeInMainImg;
         TextView likeInTitle, likeInRecipeWriter, likeInUploadDate;
         ImageButton likeDelBtn;
+        boolean liked = true;
 
         public MyLikeInViewHolder(View view, MyLikeInAdapter adapter)
         {
@@ -80,13 +85,17 @@ public class MyLikeInAdapter extends RecyclerView.Adapter<MyLikeInAdapter.MyLike
             likeInUploadDate.setText(likeIn.getUploadDate());
         }
 
-        public void setListener() {
+        public void setListener() {         //좋아요 토글형식으로, 화면에서 바로 안지움
             likeDelBtn.setOnClickListener(new View.OnClickListener()
             {
                 @Override
                 public void onClick(View v)
                 {
-                    deleteLikeIn();
+                    liked=!liked;
+                    if(liked)       //좋아요 상태가 되면
+                        createLikeIn();
+                    else
+                        deleteLikeIn();
                 }
             });
         }
@@ -99,21 +108,50 @@ public class MyLikeInAdapter extends RecyclerView.Adapter<MyLikeInAdapter.MyLike
                 int pos = getAdapterPosition();
                 JSONObject data = new JSONObject();
                 data.accumulate("recipeInId", list.get(pos).getRecipeIn().getRecipeInId());
-                data.accumulate("userId", UserInfo.getString(context, UserInfo.ID_KEY));        //shared preference에서 값을 불러움
+                data.accumulate("userId", UserInfo.getString(context, UserInfo.ID_KEY));        //shared preference 에서 값을 불러움
                 String result = deleteLike.execute("deleteLikeIn", data.toString()).get();
                 if (result.equals("1"))
                 {
                     likeDelBtn.setImageResource(R.drawable.like);       //하트 클릭시 빈 하트로 변하게 됨
-                    list.remove(pos);                                   //list에서 지움
-                    adapter.notifyDataSetChanged();                     //list 업데이트
                 }
                 else
                 {
                     Toast.makeText(itemView.getContext(),"내부 오류로 요청을 수행하지 못했습니다", Toast.LENGTH_SHORT).show();
                 }
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 e.printStackTrace();
+                Toast.makeText(itemView.getContext(),"내부 오류로 요청을 수행하지 못했습니다", Toast.LENGTH_SHORT).show();
+            }
+        }
+        public void createLikeIn()
+        {
+            MyAsyncTask deleteLike = new MyAsyncTask();
+            try
+            {
+                int pos = getAdapterPosition();
+                JSONObject data = new JSONObject();
+                data.accumulate("recipeInId", list.get(pos).getRecipeIn().getRecipeInId());
+                data.accumulate("userId", UserInfo.getString(context, UserInfo.ID_KEY));
+
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                data.accumulate("uploadDate", format.format(new Date()));
+
+                String result = deleteLike.execute("createLikeIn", data.toString()).get();
+                if (result.equals("1"))
+                {
+                    likeDelBtn.setImageResource(R.drawable.like_filled1);
+                }
+                else
+                {
+                    Toast.makeText(itemView.getContext(),"내부 오류로 요청을 수행하지 못했습니다", Toast.LENGTH_SHORT).show();
+                }
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+                Toast.makeText(itemView.getContext(),"내부 오류로 요청을 수행하지 못했습니다", Toast.LENGTH_SHORT).show();
             }
         }
     }
