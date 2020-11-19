@@ -1,5 +1,6 @@
 package com.example.emptytherefrigerator.main;
 
+import android.app.job.JobInfo;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -107,43 +108,11 @@ public class MainSearchFragView extends Fragment
         try
         {
             recipeListData =  new RecipeMngAsyncTask().execute("readRecipe","123").get();//서버쪽에 따라 변경될 수 있음
-            JSONArray jsonArray = new JSONArray(recipeListData);
-            for (int i = 0 ; i< jsonArray.length(); i++)
-            {
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                //test
-                System.out.println("jsonObject: "+ jsonObject.get("title"));
-
-                RecipeIn recipeIn = new RecipeIn();
-                recipeIn.setRecipeInId(jsonObject.getInt("recipeInId"));
-                recipeIn.setTitle(jsonObject.getString("title"));
-                recipeIn.setUserId(jsonObject.getString("userId"));
-                recipeIn.setIngredient(jsonObject.getString("ingredient"));
-                recipeIn.setIngredientUnit(jsonObject.getString("ingredientUnit"));
-                recipeIn.setRecipePerson(jsonObject.getInt("recipePerson"));
-                recipeIn.setRecipeTime(jsonObject.getInt("recipeTime"));
-                recipeIn.setContents(jsonObject.getString("contents"));
-                recipeIn.setCommentCount(jsonObject.getInt("commentCount"));
-                recipeIn.setLikeCount(jsonObject.getInt("likeCount"));
-                recipeIn.setUploadDate(JsonParsing.dateToString(jsonObject.getString("uploadDate")));
-
-
-                JSONArray jsonArrayImage = jsonObject.getJSONArray("recipeImageBytes");
-                String[] recipeImageBytes = new String [jsonArrayImage.length()];
-
-                System.out.println("jsonArrayImage.length(): "+ jsonArrayImage.length());
-
-                for(int j= 0; j < jsonArrayImage.length(); j++)
-                {
-                    JSONObject jsonObjectImage = jsonArrayImage.getJSONObject(j);
-                    recipeImageBytes[j] = jsonObjectImage.getString("recipeImageByte");
-                }
-                recipeIn.setRecipeImageByte(recipeImageBytes);
-                recipeList.add(recipeIn);
-            }
+            recipeList = JsonParsing.parsingRecipe(recipeListData);
         }
         catch(Exception e)
         {
+            e.printStackTrace();
             System.out.println("에러: e.printStackTrace()");
             Toast.makeText(getContext(),"내용 없음", Toast.LENGTH_SHORT).show();
         }

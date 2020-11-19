@@ -17,6 +17,8 @@ import com.example.emptytherefrigerator.entity.RecipeIn;
 import com.example.emptytherefrigerator.entity.RecipeOut;
 import com.example.emptytherefrigerator.network.JsonParsing;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 //외부 검색 결과
@@ -44,6 +46,8 @@ public class MainSearchResultRecipeOut extends AppCompatActivity
         btnBack = (Button)findViewById(R.id.btnBack);
         textView = (TextView) findViewById(R.id.textView);
         resultoutRecyclerView = (RecyclerView) findViewById(R.id.resultoutRecyclerView);
+
+        resultList = new ArrayList<RecipeOut>( );
 
         //검색어, 체크박스 값 받아오기
         intent = getIntent();
@@ -81,12 +85,18 @@ public class MainSearchResultRecipeOut extends AppCompatActivity
     // 서버로부터 레시피 데이터 얻는 함수
     ArrayList insertItemList()
     {
-        resultList = new ArrayList<RecipeOut>( );
-        //검색어로 서치
-
         try
         {
-            String recipeListData =  new RecipeSearchAsyncTask().execute("reqSearchRecipe","123").get();//서버쪽에 따라 변경될 수 있음
+            //받은 검색 값으로 서버에 값 넘기기
+            JSONObject jsonObjectQuery = new JSONObject();
+            jsonObjectQuery.accumulate("preQuery", preQuery);
+
+            String recipeListData="";
+            if(preIsChk)
+                recipeListData =  new RecipeSearchAsyncTask().execute("readIngOutRecipe",jsonObjectQuery.toString()).get(); //재료 기반
+            else
+                recipeListData =  new RecipeSearchAsyncTask().execute("readFoodOutRecipe",jsonObjectQuery.toString()).get();    //요리 기반
+
             resultList = JsonParsing.parsingRecipeOut(recipeListData);
 
         } catch (Exception e)

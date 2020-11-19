@@ -52,9 +52,9 @@ public class JsonParsing
                 recipeIn.setContents(jsonObject.getString("contents"));
                 recipeIn.setCommentCount(jsonObject.getInt("commentCount"));
                 recipeIn.setLikeCount(jsonObject.getInt("likeCount"));
-
                 recipeIn.setUploadDate(dateToString(jsonObject.getString("uploadDate")));
-                JSONArray jsonArrayImage = jsonObject.getJSONArray("recipeImageBytes");
+
+/*                JSONArray jsonArrayImage = jsonObject.getJSONArray("recipeImageBytes");
                 String[] recipeImageBytes = new String [jsonArrayImage.length()];
 
                 for(int j= 0; j < jsonArrayImage.length(); j++)
@@ -62,7 +62,11 @@ public class JsonParsing
                     JSONObject jsonObjectImage = jsonArrayImage.getJSONObject(j);
                     recipeImageBytes[j] = jsonObjectImage.getString("recipeImageByte");
                 }
-                recipeIn.setRecipeImageByte(recipeImageBytes);
+                recipeIn.setRecipeImageByte(recipeImageBytes);*/
+                String[] recipeImageByte = new String [1];
+                recipeImageByte[0] = jsonObject.getString("recipeImageByte");
+                recipeIn.setRecipeImageByte(recipeImageByte);
+
                 recipeListData.add(recipeIn);
             }
         }

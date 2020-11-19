@@ -21,6 +21,8 @@ import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.entity.RecipeIn;
 import com.example.emptytherefrigerator.network.JsonParsing;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
@@ -57,6 +59,8 @@ public class MainSearchResultView extends AppCompatActivity {
         recipeChkBox = (CheckBox) findViewById(R.id.recipeChkBox);
         resultRecyclerView = (RecyclerView)findViewById(R.id.resultRecyclerView);
         btnRecipeOut = (TextView)findViewById(R.id.btnRecipeOut);
+
+        resultList = new ArrayList<RecipeIn>( );
 
         if(!recipeChkBox.isChecked())
             searchRecipe.setQueryHint("음식명을 검색해주세요");
@@ -114,8 +118,7 @@ public class MainSearchResultView extends AppCompatActivity {
                     intent.putExtra("IS_CHECKED",false);
                 intent.putExtra("QUERY", query);
 
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
                 getApplicationContext().startActivity(intent);
                 return true;
@@ -148,13 +151,18 @@ public class MainSearchResultView extends AppCompatActivity {
     // 서버로부터 레시피 데이터 얻는 함수
     ArrayList insertItemList()
     {
-        resultList = new ArrayList<RecipeIn>( );
-
-        //받은 검색 값으로 서버에 값 넘기기
-
         try
         {
-            String recipeListData =  new RecipeSearchAsyncTask().execute("reqSearchRecipe","123").get();//서버쪽에 따라 변경될 수 있음
+            //받은 검색 값으로 서버에 값 넘기기
+            JSONObject jsonObjectQuery = new JSONObject();
+            jsonObjectQuery.accumulate("title", preQuery);
+
+            String recipeListData="";
+            if(preIsChk)
+                recipeListData =  new RecipeSearchAsyncTask().execute("reqSearchRecipeIng",jsonObjectQuery.toString()).get(); //재료 기반
+            else
+                recipeListData =  new RecipeSearchAsyncTask().execute("reqSearchRecipe",jsonObjectQuery.toString()).get();    //요리 기반
+
             resultList = JsonParsing.parsingRecipe(recipeListData);
 
         } catch (Exception e)

@@ -36,7 +36,11 @@
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
         </activity>
-        <activity android:name=".main.MainSearchResultView" />
+        <activity android:name=".main.MainSearchResultView" >
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+        </activity>
         <activity android:name=".userView.MyRecipe.MyRecipeListView"/>
         <activity android:name=".userView.MyComment.MyCommentView"/>
         <activity android:name=".userView.UserEditView"/>
