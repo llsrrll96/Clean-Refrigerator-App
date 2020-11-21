@@ -14,13 +14,14 @@
         android:layout_marginBottom="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/likeInRecipeWriter"
-        app:layout_constraintTop_toBottomOf="@+id/likeInRecipeWriter" />
+        app:layout_constraintTop_toBottomOf="@+id/likeInRecipeWriter"
+        app:layout_constraintVertical_bias="0.96" />
 
     <TextView
         android:id="@+id/likeInRecipeWriter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="24dp"
         android:ellipsize="end"
         android:ems="10"
         android:maxLines="1"
@@ -46,16 +47,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="10dp"
-        android:textSize="20dp"
+        android:layout_marginStart="12dp"
         android:ellipsize="end"
         android:ems="7"
         android:maxLines="1"
-        app:layout_constraintBottom_toBottomOf="@+id/likeInMainImg"
+        android:textSize="20dp"
         app:layout_constraintStart_toEndOf="@+id/likeInMainImg"
-        app:layout_constraintTop_toTopOf="@+id/likeInMainImg"
-        app:layout_constraintVertical_bias="0.01" />
+        app:layout_constraintTop_toTopOf="@+id/likeInMainImg" />
 
     <ImageButton
         android:id="@+id/likeDelBtn"

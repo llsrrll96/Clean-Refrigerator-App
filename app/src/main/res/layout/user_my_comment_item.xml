@@ -10,14 +10,12 @@
         android:id="@+id/commentListTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="4dp"
         android:maxLines="1"
         android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/myComment_RecipeMainImage"
         app:layout_constraintStart_toEndOf="@+id/myComment_RecipeMainImage"
-        app:layout_constraintTop_toTopOf="@+id/myComment_RecipeMainImage"
-        app:layout_constraintVertical_bias="0.048" />
+        app:layout_constraintTop_toTopOf="@+id/myComment_RecipeMainImage" />
 
     <ImageView
         android:id="@+id/myComment_RecipeMainImage"
@@ -47,7 +45,8 @@
         android:layout_marginBottom="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/myCommentContent"
-        app:layout_constraintTop_toBottomOf="@+id/myCommentContent" />
+        app:layout_constraintTop_toBottomOf="@+id/myCommentContent"
+        app:layout_constraintVertical_bias="0.952" />
 
     <ImageButton
         android:id="@+id/btnCommentDel"
