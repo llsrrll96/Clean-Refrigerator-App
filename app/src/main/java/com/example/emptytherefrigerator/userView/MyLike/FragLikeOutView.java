@@ -33,20 +33,13 @@ public class FragLikeOutView extends Fragment
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
         view = inflater.inflate(R.layout.user_my_like_out_list,container,false);
+        getLikeOutList();
+        setRecyclerView();
         return view;
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState)
-    {
-        super.onActivityCreated(savedInstanceState);
-
-        setRecyclerView();          //이달의 레시피 창
     }
 
     public void setRecyclerView()
     {
-        getLikeInList();
         recyclerView = view.findViewById(R.id.likeOutRecyclerView);
         adapter = new MyLikeOutAdapter(getActivity(),list);
 
@@ -58,15 +51,15 @@ public class FragLikeOutView extends Fragment
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
-    public void getLikeInList()     //현재 어플 사용자의 좋아요 목록을 불러온다
+    public void getLikeOutList()     //현재 어플 사용자의 좋아요 목록을 불러온다
     {
         MyAsyncTask asyncTask = new MyAsyncTask();
         JSONObject data = new JSONObject();
         try
         {
-           data.accumulate("userId", UserInfo.getString(recyclerView.getContext(), UserInfo.ID_KEY));
-           String result = asyncTask.execute("readUserLikeOut", data.toString()).get();        //요청 이름은 현재 서버에 없는거 같으니 나중에 말씀드리고 바꿀것
-            if(result.equals(null))                                                           //서버에서 받아온 값이 null이 아니라면 parsing 진행
+           data.accumulate("userId", UserInfo.getString(getContext(), UserInfo.ID_KEY));
+           String result = asyncTask.execute("readUserLikeOut", data.toString()).get();
+            if(!result.equals(null))                                                           //서버에서 받아온 값이 null이 아니라면 parsing 진행
                list = JsonParsing.parsingLikeOutList(result);
         }
         catch(Exception e)

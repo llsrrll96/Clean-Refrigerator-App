@@ -102,6 +102,8 @@ public class MyLikeInAdapter extends RecyclerView.Adapter<MyLikeInAdapter.MyLike
 
         public  void deleteLikeIn()            //좋아요 삭제
         {
+            likeDelBtn.setImageResource(R.drawable.like);
+
             MyAsyncTask deleteLike = new MyAsyncTask();
             try
             {
@@ -110,14 +112,8 @@ public class MyLikeInAdapter extends RecyclerView.Adapter<MyLikeInAdapter.MyLike
                 data.accumulate("recipeInId", list.get(pos).getRecipeIn().getRecipeInId());
                 data.accumulate("userId", UserInfo.getString(context, UserInfo.ID_KEY));        //shared preference 에서 값을 불러움
                 String result = deleteLike.execute("deleteLikeIn", data.toString()).get();
-                if (result.equals("1"))
-                {
-                    likeDelBtn.setImageResource(R.drawable.like);       //하트 클릭시 빈 하트로 변하게 됨
-                }
-                else
-                {
+                if (!result.equals("1"))
                     Toast.makeText(itemView.getContext(),"내부 오류로 요청을 수행하지 못했습니다", Toast.LENGTH_SHORT).show();
-                }
             }
             catch (Exception e)
             {
@@ -127,6 +123,8 @@ public class MyLikeInAdapter extends RecyclerView.Adapter<MyLikeInAdapter.MyLike
         }
         public void createLikeIn()
         {
+            likeDelBtn.setImageResource(R.drawable.like_filled1);
+
             MyAsyncTask deleteLike = new MyAsyncTask();
             try
             {
@@ -139,14 +137,8 @@ public class MyLikeInAdapter extends RecyclerView.Adapter<MyLikeInAdapter.MyLike
                 data.accumulate("uploadDate", format.format(new Date()));
 
                 String result = deleteLike.execute("createLikeIn", data.toString()).get();
-                if (result.equals("1"))
-                {
-                    likeDelBtn.setImageResource(R.drawable.like_filled1);
-                }
-                else
-                {
+                if (!result.equals("1"))
                     Toast.makeText(itemView.getContext(),"내부 오류로 요청을 수행하지 못했습니다", Toast.LENGTH_SHORT).show();
-                }
             }
             catch (Exception e)
             {
