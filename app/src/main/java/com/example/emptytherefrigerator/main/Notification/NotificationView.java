@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -45,6 +46,10 @@ public class NotificationView extends Fragment
         recyclerView.addItemDecoration(new RecyclerDecoration(10)); //아이템 간격
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(new NotificationAdapter(getContext(), list));   //서버쪽 구현이 완료되면 이걸로 바꿀 예정
+
+        DividerItemDecoration dividerItemDecoration =
+                new DividerItemDecoration(recyclerView.getContext(), new LinearLayoutManager(getContext()).getOrientation());
+        recyclerView.addItemDecoration(dividerItemDecoration);
         readNotification();
     }
 

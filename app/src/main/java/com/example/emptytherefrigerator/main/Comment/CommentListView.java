@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
@@ -38,12 +39,11 @@ public class CommentListView extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.comment_view);
+        Intent intent = getIntent();
+        recipeInId = intent.getExtras().getInt("recipeInId");
         getCommentList();
         setRecyclerView();
         initializeView();       //화면 업데이트
-
-        Intent intent = getIntent();
-        recipeInId = intent.getExtras().getInt("recipeInId");
     }
 
     public void initializeView()
@@ -74,6 +74,7 @@ public class CommentListView extends AppCompatActivity
 
             object.accumulate("userId", UserInfo.getString(this, UserInfo.ID_KEY));
             object.accumulate("recipeInId", recipeInId);
+            System.out.println(recipeInId);
             object.accumulate("content", commentInputText.getText());
             object.accumulate("uploadDate", comment.getUploadDate());
 
@@ -102,6 +103,11 @@ public class CommentListView extends AppCompatActivity
         recyclerView.setAdapter(new CommentListAdapter(this, list));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         toolbar = findViewById(R.id.commentListToolbar);
+
+        DividerItemDecoration dividerItemDecoration =
+                new DividerItemDecoration(recyclerView.getContext(), new LinearLayoutManager(this).getOrientation());
+        recyclerView.addItemDecoration(dividerItemDecoration);
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);    //기본 제목을 없애줍니다
@@ -118,7 +124,7 @@ public class CommentListView extends AppCompatActivity
             System.out.println(result);
             if(!result.equals("2"))      //실패가 아닌 경우
             {
-                list = JsonParsing.parsingCommentList(result);
+                list = JsonParsing.parsingCommentViewList(result);
                 return;
             }
         }

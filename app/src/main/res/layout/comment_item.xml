@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">`  `
+    android:layout_height="wrap_content"
+    android:background="#ffffff">` `
 
     <TextView
         android:id="@+id/userId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:paddingLeft="40dp"
         android:paddingTop="10dp"
         android:paddingBottom="5dp"
-        android:text="jaehe"
-        android:textSize="20dp"
 
+        android:textSize="20dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -27,7 +28,6 @@
         android:paddingLeft="40dp"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
-        android:text="coment blablablabla"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="@+id/userId"
         app:layout_constraintStart_toStartOf="@+id/userId"
@@ -37,11 +37,12 @@
         android:id="@+id/writenDay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         android:paddingLeft="40dp"
         android:paddingTop="5dp"
         android:paddingBottom="10dp"
-        android:text="2020.09.09"
         android:textSize="13dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/commentText"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/commentText"
