@@ -13,14 +13,23 @@ public class UserInfo           //자동 로그인 밑 앱 내에서 사용자�
     public static final String PREFERENCES_NAME = "come.example.emptytherefrigerator.userInfo";
 
     private static final String DEFAULT_VALUE_STRING = "";
+    private static final int DEFAULT_VALUE_INT = -1;
     public static final String ID_KEY = "USER_ID";
     public static final String PW_KEY = "USER_PW";
+    public static final String NOTIFICATION_KEY = "NOTIFICATION";       //1 : 알림 on, 0 : 알림 off
 
     private static SharedPreferences getPreferences(Context context)
     {
         return context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
     }
 
+    public static void setInt(Context context, String key, int value)
+    {
+        SharedPreferences prefs = getPreferences(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt(key, value);
+        editor.apply();
+    }
     public static void setString(Context context, String key, String value)
     {
         SharedPreferences prefs = getPreferences(context);
@@ -32,6 +41,12 @@ public class UserInfo           //자동 로그인 밑 앱 내에서 사용자�
     {
         SharedPreferences prefs = getPreferences(context);
         String value = prefs.getString(key,DEFAULT_VALUE_STRING);
+        return value;
+    }
+    public static int getInt(Context context, String key)
+    {
+        SharedPreferences prefs = getPreferences(context);
+        int value = prefs.getInt(key,DEFAULT_VALUE_INT);
         return value;
     }
     public static void removeKey(Context context, String key)       //키 값 삭제

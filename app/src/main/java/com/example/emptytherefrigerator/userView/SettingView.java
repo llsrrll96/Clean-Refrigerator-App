@@ -1,12 +1,14 @@
 package com.example.emptytherefrigerator.userView;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -26,12 +28,15 @@ public class SettingView extends AppCompatActivity
     Toolbar settingToolbar;
     Switch swAlarm;
     Button btnDelete;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.setting);
+
+        context = this;
 
         initializeView();
         setListener();
@@ -41,6 +46,8 @@ public class SettingView extends AppCompatActivity
     {
         settingToolbar = findViewById(R.id.settingToolbar);
         swAlarm = findViewById(R.id.swAlarm);
+        if(UserInfo.getInt(this, UserInfo.NOTIFICATION_KEY)==1)     //이전에 이미 알림을 켜둔 상태라면
+            swAlarm.setChecked(true);
         btnDelete = findViewById(R.id.btnDelete);
         setSupportActionBar(settingToolbar);        //툴바 설정
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -81,8 +88,45 @@ public class SettingView extends AppCompatActivity
                 alertDialog.show();
             }
         });
+
+        swAlarm.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+            {
+                // 스위치 버튼이 체크되었는지 검사
+                if (isChecked)
+                {
+                   UserInfo.setInt(context, UserInfo.NOTIFICATION_KEY, 1);
+                }
+                else
+                    {
+                    UserInfo.setInt(context, UserInfo.NOTIFICATION_KEY, 0);
+                }
+                //updateSetting(UserInfo.getInt(context, UserInfo.NOTIFICATION_KEY));       //현재로서는 작동하지 않는 기능
+            }
+        });
     }
 
+    public void updateSetting(int setting)      //알림 설정 정보 업데이트
+    {
+        MyAsyncTask update = new MyAsyncTask();
+        JSONObject object = new JSONObject();
+
+        System.out.println("notification : " +UserInfo.getInt(this, UserInfo.NOTIFICATION_KEY));
+        try
+        {
+            object.accumulate("userId", UserInfo.getString(this, UserInfo.ID_KEY));
+            object.accumulate("notification",UserInfo.getInt(this, UserInfo.NOTIFICATION_KEY));
+
+            String result = update.execute("updateSetting", object.toString()).get();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(),"내부 오류로 요청을 수행하지 못했습니다", Toast.LENGTH_SHORT).show();
+        }
+    }
     public void deleteUser()
     {
         MyAsyncTask deleteUser = new MyAsyncTask();
