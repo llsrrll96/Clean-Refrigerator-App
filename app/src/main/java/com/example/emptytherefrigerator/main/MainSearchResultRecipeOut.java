@@ -93,13 +93,18 @@ public class MainSearchResultRecipeOut extends AppCompatActivity
         {
             //받은 검색 값으로 서버에 값 넘기기
             JSONObject jsonObjectQuery = new JSONObject();
-            jsonObjectQuery.accumulate("title", preQuery);
 
             String recipeListData="";
-            if(preIsChk)
-                recipeListData =  new RecipeSearchAsyncTask().execute("readIngOutRecipe",jsonObjectQuery.toString()).get(); //재료 기반
-            else
-                recipeListData =  new RecipeSearchAsyncTask().execute("readFoodOutRecipe",jsonObjectQuery.toString()).get();    //요리 기반
+
+            if (preIsChk)
+            {
+                jsonObjectQuery.accumulate("ingredient", preQuery);
+                recipeListData = new RecipeSearchAsyncTask().execute("readIngOutRecipe", jsonObjectQuery.toString()).get(); //재료 기반
+            } else
+            {
+                jsonObjectQuery.accumulate("title", preQuery);
+                recipeListData = new RecipeSearchAsyncTask().execute("readFoodOutRecipe", jsonObjectQuery.toString()).get();    //요리 기반
+            }
 
             resultList = JsonParsing.parsingRecipeOut(recipeListData);
 

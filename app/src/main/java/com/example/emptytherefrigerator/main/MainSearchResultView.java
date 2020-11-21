@@ -64,10 +64,13 @@ public class MainSearchResultView extends AppCompatActivity {
 
         if(!recipeChkBox.isChecked())
             searchRecipe.setQueryHint("음식명을 검색해주세요");
+
         //검색 값 받기
         intent = getIntent();
         preIsChk = intent.getExtras().getBoolean("IS_CHECKED");    //식재료 체크
         preQuery = intent.getExtras().getString("QUERY");          //검색어
+        if(preIsChk) recipeChkBox.setChecked(true);
+        searchRecipe.setQueryHint(preQuery);
     }
 
     public void setListener()
@@ -101,6 +104,7 @@ public class MainSearchResultView extends AppCompatActivity {
         });
     }
 
+    //검색 처리 함수
     public void clickSearchRecipe()
     {
         searchRecipe.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
@@ -151,18 +155,20 @@ public class MainSearchResultView extends AppCompatActivity {
     // 서버로부터 레시피 데이터 얻는 함수
     ArrayList insertItemList()
     {
-        try
-        {
+        try {
             //받은 검색 값으로 서버에 값 넘기기
             JSONObject jsonObjectQuery = new JSONObject();
-            jsonObjectQuery.accumulate("title", preQuery);
+            String recipeListData = "";
 
-            String recipeListData="";
-            if(preIsChk)
-                recipeListData =  new RecipeSearchAsyncTask().execute("reqSearchRecipeIng",jsonObjectQuery.toString()).get(); //재료 기반
-            else
-                recipeListData =  new RecipeSearchAsyncTask().execute("reqSearchRecipe",jsonObjectQuery.toString()).get();    //요리 기반
-
+            if (preIsChk)
+            {
+                jsonObjectQuery.accumulate("ingredient", preQuery);
+                recipeListData = new RecipeSearchAsyncTask().execute("reqSearchRecipeIng", jsonObjectQuery.toString()).get(); //재료 기반
+            } else
+            {
+                jsonObjectQuery.accumulate("title", preQuery);
+                recipeListData = new RecipeSearchAsyncTask().execute("reqSearchRecipe", jsonObjectQuery.toString()).get();    //요리 기반
+            }
             resultList = JsonParsing.parsingRecipe(recipeListData);
 
         } catch (Exception e)
