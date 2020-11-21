@@ -20,6 +20,7 @@ public class RecipeMngAsyncTask extends AsyncTask<String, Integer, String>
             case "deleteRecipe" : break;
             case "readRecipe" : break;
             case "readRecipeDetail" : break;
+            case "readIngPrice" : break;
         }
         
         NetworkHandler.getInstance().connect(functionType);      // 서버와 연결

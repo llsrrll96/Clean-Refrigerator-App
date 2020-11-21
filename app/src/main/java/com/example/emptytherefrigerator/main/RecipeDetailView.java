@@ -110,6 +110,7 @@ public class RecipeDetailView extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+    //============================================================================================//
     private void setInitial()
     {
         titleTextView = (TextView)findViewById(R.id.titleTextView);
@@ -132,7 +133,7 @@ public class RecipeDetailView extends AppCompatActivity {
         ingredientUnits = recipe.getIngredientUnit().split("`");
         recipeContents = recipe.getContents().split("`");
     }
-    ///////////////////////////////////////////////////////////////////////////
+    //============================================================================================//
     public void setListener()
     {
         //채팅 버튼
@@ -161,6 +162,7 @@ public class RecipeDetailView extends AppCompatActivity {
             }
         });
     }
+    //============================================================================================//
     public String readLikeIn()
     {
         MyAsyncTask inquiry = new MyAsyncTask();
@@ -179,7 +181,7 @@ public class RecipeDetailView extends AppCompatActivity {
             return null;
         }
     }
-    ///////////////////////////////////////////////////////////////////////////
+    //============================================================================================//
     ////////////////////Intent에서 Recipe 데이터를 가져온다.////////////////////////////
     private void getRecipeDataFromIntent()
     {
@@ -221,7 +223,6 @@ public class RecipeDetailView extends AppCompatActivity {
                 recipe.setRecipeImageByte(recipeImageBytes);
 
             }
-
         }catch (JSONException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -229,7 +230,6 @@ public class RecipeDetailView extends AppCompatActivity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-
     }
     ////////////////////////스트링 이미지 데이터 -> 비트맵으로///////////////////////////////////
     public Bitmap StringToBitmap(String encodedString)
@@ -302,34 +302,63 @@ public class RecipeDetailView extends AppCompatActivity {
 
     ////////////////////////////////////////////////////////////////////////////
     //식재료 가격
-    private String getPrice(String ingredientName)        //식재료를 검색해 가격을 알아온다.//크롤링
+    private String getPrice(String ingName)        //식재료를 검색해 가격을 알아온다.//크롤링
     {
-        return "";
+        String price = "";
+        try
+        {
+            JSONObject jsonObjectIngName = new JSONObject();
+            jsonObjectIngName.accumulate("ingName", ingName);
+
+            RecipeMngAsyncTask recipeMngAsyncTask = new RecipeMngAsyncTask();
+
+            String data = recipeMngAsyncTask.execute("readIngPrice", jsonObjectIngName.toString()).get();
+
+            JSONObject jsonObject = new JSONObject(data);
+            //json 해체
+            price = jsonObject.getString("ingPrice");
+
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            //e.printStackTrace();
+            price = " - ";
+        }
+
+        return price;
     }
 
     private void setPrice()     //화면에 가격 출력
     {
         String ingredientName = "식재료";
-        String ingredientPrice = "20200";
+        String ingredientPrice = " - ";
 
-        //1. TextView 객체 생성 한다, 2. 속성등록 한다. 반복문 예정
-        TextView ingredientTextView = new TextView(this);
-        TextView ingredientCntTextView = new TextView(this);
+        //데이터 넣는 부분
+        for (int i = 0; i < ingredientNames.length; i++)
+        {
+            //가격 얻기
+            ingredientPrice = getPrice(ingredientNames[i]);
+            //1. TextView 객체 생성 한다, 2. 속성등록 한다. 반복문 예정
+            TextView ingredientTextView = new TextView(this);
+            TextView ingredientPriceTextView = new TextView(this);
 
-        ingredientTextView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT,1f));
-        ingredientTextView.setPadding(20,20,20,20);
-        ingredientTextView.setTextSize(15);
-        ingredientTextView.setText(ingredientName);
+            ingredientTextView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1f));
+            ingredientTextView.setPadding(20, 20, 20, 20);
+            ingredientTextView.setTextSize(15);
+            ingredientTextView.setText(ingredientNames[i]);
 
-        ingredientCntTextView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT,1f));
-        ingredientCntTextView.setPadding(20,20,20,20);
-        ingredientCntTextView.setTextSize(15);
-        ingredientCntTextView.setText(ingredientPrice);
+            ingredientPriceTextView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1f));
+            ingredientPriceTextView.setPadding(20, 20, 20, 20);
+            ingredientPriceTextView.setTextSize(15);
+            ingredientPriceTextView.setText(ingredientPrice);
 
-        //recipe_detail에서 식재료 레이아웃 그려줄 목표 레이아웃, 추가한다.
-        LinearLayout ingredientsLayout = (LinearLayout)findViewById(R.id.priceLayout);
-        ingredientsLayout.addView(ingredientTextView);
-        ingredientsLayout.addView(ingredientCntTextView);
+            //recipe_detail에서 식재료 레이아웃 그려줄 목표 레이아웃, 추가한다.
+            LinearLayout ingredientsLayout = (LinearLayout) findViewById(R.id.priceLayout);
+            ingredientsLayout.addView(ingredientTextView);
+            ingredientsLayout.addView(ingredientPriceTextView);
+        }
     }
 
 
