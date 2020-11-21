@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -55,6 +56,9 @@ public class MainSearchResultRecipeOut extends AppCompatActivity
         preQuery = intent.getExtras().getString("QUERY");          //검색어
 
         textView.setText(preQuery + " 에 대한 검색 결과");
+        textView.setTextSize(18);
+        textView.setGravity(Gravity.CENTER_VERTICAL);
+
     }
 
     private void setListener()
@@ -89,7 +93,7 @@ public class MainSearchResultRecipeOut extends AppCompatActivity
         {
             //받은 검색 값으로 서버에 값 넘기기
             JSONObject jsonObjectQuery = new JSONObject();
-            jsonObjectQuery.accumulate("preQuery", preQuery);
+            jsonObjectQuery.accumulate("title", preQuery);
 
             String recipeListData="";
             if(preIsChk)

@@ -92,15 +92,10 @@ public class JsonParsing
                 recipeOut.setTitle(jsonObject.getString("title"));
                 recipeOut.setIngredient(jsonObject.getString("ingredient"));            //서버에서 받아오는지 확인후 수정
 
-                JSONArray jsonArrayImage = jsonObject.getJSONArray("recipeImageBytes");
-                String[] recipeImageBytes = new String [jsonArrayImage.length()];
+                String[] recipeImageByte = new String [1];
+                recipeImageByte[0] = jsonObject.getString("recipeImageByte");
+                recipeOut.setRecipeImageByte(recipeImageByte);
 
-                for(int j= 0; j < jsonArrayImage.length(); j++)
-                {
-                    JSONObject jsonObjectImage = jsonArrayImage.getJSONObject(j);
-                    recipeImageBytes[j] = jsonObjectImage.getString("recipeImageByte");
-                }
-                recipeOut.setRecipeImageByte(recipeImageBytes);
                 recipeListData.add(recipeOut);
             }
         }
