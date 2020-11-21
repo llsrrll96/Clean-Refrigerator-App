@@ -28,7 +28,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.concurrent.ExecutionException;
 
 //조회된 레시피 엑티비티
@@ -87,7 +89,8 @@ public class RecipeDetailView extends AppCompatActivity {
         {
             object.accumulate("recipeInId", recipe.getRecipeInId());
             object.accumulate("userId", UserInfo.getString(this, UserInfo.ID_KEY));
-
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            object.accumulate("uploadDate", format.format(new Date()));
             String result = inquiry.execute("createLikeIn", object.toString()).get();
         }
         catch(Exception e)

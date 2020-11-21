@@ -57,13 +57,14 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             this.adapter= adapter;
             memberName = itemView.findViewById(R.id.userId);
             commentText = itemView.findViewById(R.id.commentText);
-            uploadDate = itemView.findViewById(R.id.uploadDate);
+            uploadDate = itemView.findViewById(R.id.writenDay);
         }
 
         public void onBind(RecipeComment comment)
         {
             memberName.setText(comment.getUserId());
             commentText.setText(comment.getContent());
+            System.out.println(comment.getUploadDate());
             uploadDate.setText(comment.getUploadDate());
         }
     }

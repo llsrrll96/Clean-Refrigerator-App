@@ -38,12 +38,11 @@ public class CommentListView extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.comment_view);
+        Intent intent = getIntent();
+        recipeInId = intent.getExtras().getInt("recipeInId");
         getCommentList();
         setRecyclerView();
         initializeView();       //화면 업데이트
-
-        Intent intent = getIntent();
-        recipeInId = intent.getExtras().getInt("recipeInId");
     }
 
     public void initializeView()
@@ -74,6 +73,7 @@ public class CommentListView extends AppCompatActivity
 
             object.accumulate("userId", UserInfo.getString(this, UserInfo.ID_KEY));
             object.accumulate("recipeInId", recipeInId);
+            System.out.println(recipeInId);
             object.accumulate("content", commentInputText.getText());
             object.accumulate("uploadDate", comment.getUploadDate());
 
@@ -118,7 +118,7 @@ public class CommentListView extends AppCompatActivity
             System.out.println(result);
             if(!result.equals("2"))      //실패가 아닌 경우
             {
-                list = JsonParsing.parsingCommentList(result);
+                list = JsonParsing.parsingCommentViewList(result);
                 return;
             }
         }
