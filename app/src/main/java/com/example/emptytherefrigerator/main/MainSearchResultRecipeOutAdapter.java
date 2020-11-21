@@ -26,7 +26,6 @@ public class MainSearchResultRecipeOutAdapter extends RecyclerView.Adapter<MainS
 
     private final ArrayList<RecipeOut> recipeResults;
     private Context context;
-    private Intent intent;
 
     public MainSearchResultRecipeOutAdapter(ArrayList<RecipeOut> recipeResults) {
         this.recipeResults = recipeResults;
@@ -69,6 +68,7 @@ public class MainSearchResultRecipeOutAdapter extends RecyclerView.Adapter<MainS
 
     //ViewHolder 클래스
     class ViewHolder extends RecyclerView.ViewHolder{
+        Intent intent;
         public ImageView recipeImage;
         public TextView title;
         public TextView link;
@@ -88,14 +88,20 @@ public class MainSearchResultRecipeOutAdapter extends RecyclerView.Adapter<MainS
                     if(pos != RecyclerView.NO_POSITION){
                         holdercontext = v.getContext();
 
-                        Intent intent = new Intent(Intent.ACTION_VIEW);
+/*                        intent = new Intent(Intent.ACTION_VIEW);
                         Uri uri = Uri.parse(recipeResults.get(pos).getLink());
                         intent.setData(uri);
-                        holdercontext.startActivity(intent);
+                        holdercontext.startActivity(intent);*/
 
                         //해당 링크로 이동
                         //intent = new Intent(holdercontext, RecipeDetailView.class);     //조회된 레시피 화면으로 넘어간다
                         //intent.putExtra("RECIPE",recipeResults.get(pos).getRecipeOutId());  //해당 링크로 이동
+
+                        intent = new Intent(Intent.ACTION_VIEW);
+                        intent = new Intent(holdercontext, MainSearchRecipeOutWebView.class);       //외부 검색
+                        intent.putExtra("TITLE", recipeResults.get(pos).getTitle());
+                        intent.putExtra("LINK", recipeResults.get(pos).getLink());
+                        holdercontext.startActivity(intent);
                     }
                 }
             });
