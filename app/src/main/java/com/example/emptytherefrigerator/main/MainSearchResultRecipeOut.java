@@ -55,7 +55,7 @@ public class MainSearchResultRecipeOut extends AppCompatActivity
         preIsChk = intent.getExtras().getBoolean("IS_CHECKED");    //식재료 체크
         preQuery = intent.getExtras().getString("QUERY");          //검색어
 
-        textView.setText(preQuery + " 에 대한 검색 결과");
+        textView.setText(preQuery + " 에 대한 외부 사이트 검색 결과");
         textView.setTextSize(18);
         textView.setGravity(Gravity.CENTER_VERTICAL);
 

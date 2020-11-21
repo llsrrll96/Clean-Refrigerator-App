@@ -3,9 +3,9 @@
     package="com.example.emptytherefrigerator">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!--파일 읽기 권한-->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!--파일 쓰기 권한-->
-    <uses-permission android:name="android.permission.VIBRATE"/>     <!--진동 울리기 권한-->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- 파일 읽기 권한 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 파일 쓰기 권한 -->
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -14,11 +14,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true"
-        >
-        <activity android:name=".main.MainSearchResultRecipeOut"/>
-        <activity android:name=".main.RecipeDetailView"/>
-        <activity android:name=".main.RecipeDetailUpdateView"/>
+        android:usesCleartextTraffic="true">
+        <activity android:name=".main.MainSearchRecipeOutWebView"></activity>
+        <activity android:name=".main.MainSearchResultRecipeOut" />
+        <activity android:name=".main.RecipeDetailView" />
+        <activity android:name=".main.RecipeDetailUpdateView" />
         <activity android:name=".main.RecipeDetailCreateView" />
         <activity android:name=".login.LoginAnimation">
             <intent-filter>
@@ -27,26 +27,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".login.LoginView">
-        </activity>
+        <activity android:name=".login.LoginView"></activity>
         <activity android:name=".login.LoginSignUpView" />
         <activity android:name=".main.MainPageView">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
         </activity>
-        <activity android:name=".main.MainSearchResultView" >
+        <activity android:name=".main.MainSearchResultView">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
         </activity>
-        <activity android:name=".userView.MyRecipe.MyRecipeListView"/>
-        <activity android:name=".userView.MyComment.MyCommentView"/>
-        <activity android:name=".userView.UserEditView"/>
-        <activity android:name=".userView.SettingView"/>
-        <activity android:name=".userView.MyLike.LikeMainPage"/>
-        <activity android:name=".main.Comment.CommentListView"/>
-        <activity android:name=".main.Notification.NotificationView"/>
+        <activity android:name=".userView.MyRecipe.MyRecipeListView" />
+        <activity android:name=".userView.MyComment.MyCommentView" />
+        <activity android:name=".userView.UserEditView" />
+        <activity android:name=".userView.SettingView" />
+        <activity android:name=".userView.MyLike.LikeMainPage" />
+        <activity android:name=".main.Comment.CommentListView" />
+        <activity android:name=".main.Notification.NotificationView" />
     </application>
 
 </manifest>
