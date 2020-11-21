@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.emptytherefrigerator.R;
+import com.example.emptytherefrigerator.main.Notification.NotificationView;
 import com.example.emptytherefrigerator.userView.UserView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -18,6 +19,7 @@ public class MainPageView extends AppCompatActivity
     private FragmentManager fragmentManager = getSupportFragmentManager();
     private MainSearchFragView mainSearchFrag = new MainSearchFragView();
     private UserView memberView = new UserView();
+    private NotificationView notificationView = new NotificationView();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +46,12 @@ public class MainPageView extends AppCompatActivity
             switch (menuItem.getItemId()) {
                 case R.id.menu_home:
                     transaction.replace(R.id.frameLayout, mainSearchFrag).commitAllowingStateLoss();
-
                     break;
                 case R.id.menu_user:
                     transaction.replace(R.id.frameLayout, memberView).commitAllowingStateLoss();
+                    break;
+                case R.id.menu_alarm:
+                    transaction.replace(R.id.frameLayout, notificationView).commitAllowingStateLoss();
                     break;
             }
             return true;

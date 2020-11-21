@@ -1,6 +1,7 @@
 package com.example.emptytherefrigerator.userView.MyComment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import com.example.emptytherefrigerator.AsyncTasks.MyAsyncTask;
 import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.entity.RecipeComment;
 import com.example.emptytherefrigerator.entity.RecipeIn;
+import com.example.emptytherefrigerator.main.RecipeDetailView;
 
 import org.json.JSONObject;
 
@@ -74,6 +76,21 @@ public class MyCommentAdapter extends RecyclerView.Adapter<MyCommentAdapter.MyCo
             myCommentUploadDate = itemView.findViewById(R.id.myCommentUploadDate);
             myComment_RecipeMainImage = itemView.findViewById(R.id.myComment_RecipeMainImage);
             btnCommentDel = itemView.findViewById(R.id.btnCommentDel);
+            view.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View view)
+                {
+                    int pos = getAdapterPosition();     //레시피 조회 화면 넘기기
+                    if(pos != RecyclerView.NO_POSITION)
+                    {
+                        context = view.getContext();
+                        Intent intent = new Intent(context, RecipeDetailView.class);     //조회된 레시피 화면으로 넘어간다
+                        intent.putExtra("RECIPE",list.get(pos).getRecipeId());      //다음 화면에 레시피 객체 송신
+                        context.startActivity(intent);
+                    }
+                }
+            });
             setListener();
         }
         public void onBind(RecipeComment comment)

@@ -91,22 +91,28 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         }
         public void onBind(Notification noti)
         {
-            if(noti.getType()==1)       //타입에 관한 값이 뭔지 모름
+            if(noti.getType()==2)       //좋아요
             {
-                alarmImage.setImageResource(R.drawable.like_filled1);       //좋아요
-                content.setText("누가 " + noti.getRecipe().getTitle()+"을 좋아요 했습니다");
+                alarmImage.setImageResource(R.drawable.like_filled1);
+                content.setText(noti.getRecipe().getUserId() + "님이 " + splitRecipeTitle(noti.getRecipe().getTitle())+"을 좋아요 했습니다");
             }
-            else
+            else if(noti.getType()==1)  //댓글
             {
                 alarmImage.setImageResource(R.drawable.comment);
-                content.setText("누가 " + noti.getRecipe().getTitle()+"에 댓글을 달았습니다");
+                content.setText(noti.getRecipe().getUserId() +"님이 " + splitRecipeTitle(noti.getRecipe().getTitle())+"에 댓글을 달았습니다");
             }
+        }
+        public String splitRecipeTitle(String title)
+        {
+            if(title.length()>8)
+                return title.substring(0,8) + "...";
+            else
+                return title;
         }
         public void deleteNotification()
         {
             MyAsyncTask deleteNoti = new MyAsyncTask();
             JSONObject object = new JSONObject();
-
             try
             {
                 object.accumulate("notificationId", list.get(getAdapterPosition()).getNotificationId());

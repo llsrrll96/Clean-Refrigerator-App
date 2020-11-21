@@ -278,6 +278,7 @@ public class JsonParsing
 
                 noti.setNotificationId(object.getInt("notificationId"));
                 noti.getRecipe().setRecipeInId(object.getInt("recipeInId"));
+                noti.getRecipe().setUserId(object.getString("userId"));
                 noti.setType(object.getInt("type"));
                 list.add(noti);
             }

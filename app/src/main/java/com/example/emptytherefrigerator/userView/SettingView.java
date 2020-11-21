@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Switch;
@@ -44,6 +45,16 @@ public class SettingView extends AppCompatActivity
         setSupportActionBar(settingToolbar);        //툴바 설정
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch(item.getItemId())
+        {
+            case android.R.id.home:     //뒤로가기 버튼이 눌렸을 때
+                finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
     public void setListener()
     {

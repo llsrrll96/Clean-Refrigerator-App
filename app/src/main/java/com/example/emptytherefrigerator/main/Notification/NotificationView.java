@@ -36,13 +36,8 @@ public class NotificationView extends Fragment
         view = inflater.inflate(R.layout.main_search,container,false);
         recyclerView = view.findViewById(R.id.recycler_view);
         alarmListToolbar = view.findViewById(R.id.alarmListToolbar);
-        return view;
-    }
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState)
-    {
-        super.onActivityCreated(savedInstanceState);
         initializeView();
+        return view;
     }
     public void initializeView()
     {
@@ -61,7 +56,7 @@ public class NotificationView extends Fragment
         try
         {
             object.accumulate("userId", UserInfo.getString(getActivity(),UserInfo.ID_KEY));
-            String result = readNoti.execute("getNotification", object.toString()).get();
+            String result = readNoti.execute("readNotification", object.toString()).get();
 
             if(!result.equals("2"))     //조회가 성공인 경우
             {
