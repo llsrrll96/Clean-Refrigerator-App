@@ -2,6 +2,7 @@ package com.example.emptytherefrigerator.network;
 
 import com.example.emptytherefrigerator.entity.LikeIn;
 import com.example.emptytherefrigerator.entity.LikeOut;
+import com.example.emptytherefrigerator.entity.Notification;
 import com.example.emptytherefrigerator.entity.RecipeComment;
 import com.example.emptytherefrigerator.entity.RecipeIn;
 import com.example.emptytherefrigerator.entity.RecipeOut;
@@ -10,6 +11,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -266,5 +268,30 @@ public class JsonParsing
             e.printStackTrace();
         }
         return list;
+    }
+
+    public static ArrayList<Notification> parsingNotificationList(String data)
+    {
+        ArrayList<Notification> list= new ArrayList<>();
+        try
+        {
+            JSONArray notiArr = new JSONArray(data);
+            for(int i=0;i<notiArr.length(); i++)
+            {
+                JSONObject object = notiArr.getJSONObject(i);
+                Notification noti = new Notification();
+
+                noti.setNotificationId(object.getInt("notificationId"));
+                noti.getRecipe().setRecipeInId(object.getInt("recipeInId"));
+                noti.setType(object.getInt("type"));
+                list.add(noti);
+            }
+            return list;
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return list;
+        }
     }
 }
