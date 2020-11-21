@@ -39,6 +39,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="top"
         android:padding="10dp"
+        android:scrollbars="vertical"
         />
 
 
