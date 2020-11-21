@@ -50,6 +50,7 @@ public class RecipeDetailView extends AppCompatActivity {
     private String[] ingredientNames;               //여러개의 재료들
     private String[] ingredientUnits;               //여러개의 재료 단위
     private String[] recipeContents;                //여러개의 요리 방법
+    private String[] ingredientPrices;              //여러개의 재료 가격
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -301,45 +302,52 @@ public class RecipeDetailView extends AppCompatActivity {
     }
 
     ////////////////////////////////////////////////////////////////////////////
-    //식재료 가격
-    private String getPrice(String ingName)        //식재료를 검색해 가격을 알아온다.//크롤링
+    //서버를 통해 식재료 가격을 가져온다.
+    //인풋 값 : 식재료1`식재료2
+    //아웃풋 : 1000`2000
+    private String getPrice(String ingredient)        //식재료를 검색해 가격을 알아온다.//크롤링
     {
-        String price = "";
+        System.out.println("ingredient: " + ingredient);
+        String prices = "";
         try
         {
             JSONObject jsonObjectIngName = new JSONObject();
-            jsonObjectIngName.accumulate("ingName", ingName);
+            jsonObjectIngName.accumulate("ingredient", ingredient);
 
             RecipeMngAsyncTask recipeMngAsyncTask = new RecipeMngAsyncTask();
-
             String data = recipeMngAsyncTask.execute("readIngPrice", jsonObjectIngName.toString()).get();
 
-            JSONObject jsonObject = new JSONObject(data);
+            System.out.println("data: " + data);
+
             //json 해체
-            price = jsonObject.getString("ingPrice");
+            JSONObject jsonObject = new JSONObject(data);
+            prices = jsonObject.getString("ingPrice");
+
+            System.out.println("prices: " + prices);
 
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (JSONException e) {
-            //e.printStackTrace();
-            price = " - ";
+            e.printStackTrace();
+            System.out.println("json 오류");
         }
 
-        return price;
+
+        return prices;
     }
 
     private void setPrice()     //화면에 가격 출력
     {
         String ingredientName = "식재료";
-        String ingredientPrice = " - ";
+        //가격 얻기
+        String ingredientPrice = getPrice(recipe.getIngredient());
+        ingredientPrices = ingredientPrice.split("`");
 
         //데이터 넣는 부분
         for (int i = 0; i < ingredientNames.length; i++)
         {
-            //가격 얻기
-            ingredientPrice = getPrice(ingredientNames[i]);
             //1. TextView 객체 생성 한다, 2. 속성등록 한다. 반복문 예정
             TextView ingredientTextView = new TextView(this);
             TextView ingredientPriceTextView = new TextView(this);
@@ -352,7 +360,7 @@ public class RecipeDetailView extends AppCompatActivity {
             ingredientPriceTextView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1f));
             ingredientPriceTextView.setPadding(20, 20, 20, 20);
             ingredientPriceTextView.setTextSize(15);
-            ingredientPriceTextView.setText(ingredientPrice);
+            ingredientPriceTextView.setText(ingredientPrices[i]);
 
             //recipe_detail에서 식재료 레이아웃 그려줄 목표 레이아웃, 추가한다.
             LinearLayout ingredientsLayout = (LinearLayout) findViewById(R.id.priceLayout);
