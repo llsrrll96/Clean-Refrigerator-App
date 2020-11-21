@@ -107,7 +107,8 @@ public class MainSearchFragView extends Fragment
         String recipeListData;
         try
         {
-            recipeListData =  new RecipeMngAsyncTask().execute("readRecipe","123").get();//서버쪽에 따라 변경될 수 있음
+            recipeListData =  new RecipeMngAsyncTask().execute("reqBestRecipe","123").get();//이달추 조회
+            //recipeListData =  new RecipeMngAsyncTask().execute("readRecipe","123").get();//일반 조회
             recipeList = JsonParsing.parsingRecipe(recipeListData);
         }
         catch(Exception e)
