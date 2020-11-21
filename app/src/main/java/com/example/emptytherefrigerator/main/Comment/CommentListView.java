@@ -90,23 +90,22 @@ public class CommentListView extends AppCompatActivity
         {
             RecipeComment comment = new RecipeComment();
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            comment.setUploadDate(format.format(new Date()));
 
-            object.accumulate("userId", UserInfo.getString(this, UserInfo.ID_KEY));
-            object.accumulate("recipeInId", recipeInId);
-            System.out.println(recipeInId);
-            object.accumulate("content", commentInputText.getText());
+            comment.setUserId(UserInfo.getString(this, UserInfo.ID_KEY));
+            comment.setUploadDate(format.format(new Date()));
+            comment.setContent(commentInputText.getText().toString());
+            comment.setRecipeId(recipeInId);
+
+            object.accumulate("userId", comment.getUserId());
+            object.accumulate("recipeInId", comment.getRecipeId());
+            object.accumulate("content", comment.getContent());
             object.accumulate("uploadDate", comment.getUploadDate());
 
             result = createComment.execute("createComment", object.toString()).get();
             if(result.equals("1"))  //등록 성공
             {
-                comment.setRecipeId(recipeInId);
-                comment.setUserId(UserInfo.getString(this, UserInfo.ID_KEY));
-                comment.setUploadDate(format.format(new Date()));
-                list.add(comment);
                 adapter.addItem(comment);
-                adapter.notifyItemRangeChanged(0,adapter.getItemCount());
+                commentInputText.setText(null);
                 return;
             }
             else

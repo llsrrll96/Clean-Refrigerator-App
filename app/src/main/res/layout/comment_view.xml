@@ -9,30 +9,32 @@
     android:focusableInTouchMode="true">
 
 
-    <TableRow
-        android:id="@+id/tableRow2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/commentListRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:overScrollMode="never"
         app:layout_constrainedHeight="true"
+        app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/commentListToolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/commentListToolbar"
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_end="109dp" />
+        app:layout_constraintGuide_end="97dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="516dp" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/commentListToolbar"
@@ -64,7 +66,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="40dp"
-                android:layout_marginTop="15dp"
                 android:layout_marginBottom="10dp">
 
                 <TextView
@@ -83,10 +84,9 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/commentInputText"
-                    android:layout_width="wrap_content"
+                    android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="16dp"
-                    android:layout_weight="10"
                     android:maxLength="30"
                     android:maxLines="2" />
 
@@ -96,7 +96,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginEnd="16dp"
-                    android:layout_weight="1"
                     android:background="@drawable/btn_background"
                     android:text="입력"
                     android:textColor="#FFFFFF" />

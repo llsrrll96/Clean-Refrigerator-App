@@ -49,7 +49,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
     public void addItem(RecipeComment comment)
     {
         this.list.add(comment);
-        notifyItemInserted(getItemCount());
+        notifyDataSetChanged();
     }
 
     class CommentListViewHolder extends RecyclerView.ViewHolder
