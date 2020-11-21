@@ -52,7 +52,11 @@ public class RecipeDetailView extends AppCompatActivity {
     private String[] ingredientNames;               //여러개의 재료들
     private String[] ingredientUnits;               //여러개의 재료 단위
     private String[] recipeContents;                //여러개의 요리 방법
-    private String[] ingredientPrices;              //여러개의 재료 가격
+    private String[] ingNames;              //여러개의 재료 가격
+    private String[] ingPriceUnits;              //여러개의 재료 가격
+
+    private String ingName = "";
+    private String ingPriceUnit = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -307,26 +311,40 @@ public class RecipeDetailView extends AppCompatActivity {
     ////////////////////////////////////////////////////////////////////////////
     //서버를 통해 식재료 가격을 가져온다.
     //인풋 값 : 식재료1`식재료2
-    //아웃풋 : 1000`2000
-    private String getPrice(String ingredient)        //식재료를 검색해 가격을 알아온다.//크롤링
+    //아웃풋 : ingId , ingName, ingPriceUnit
+    private void getPrice(String ingredient)        //식재료를 검색해 가격을 알아온다.//크롤링
     {
-        System.out.println("ingredient: " + ingredient);
-        String prices = "";
         try
         {
+            //=========서버에 식재료 데이터 보내기 =========//
             JSONObject jsonObjectIngName = new JSONObject();
             jsonObjectIngName.accumulate("ingredient", ingredient);
 
             RecipeMngAsyncTask recipeMngAsyncTask = new RecipeMngAsyncTask();
             String data = recipeMngAsyncTask.execute("readIngPrice", jsonObjectIngName.toString()).get();
 
-            System.out.println("data: " + data);
+            System.out.println("data data: "+ data);
 
+            //=========받은 데이터 String 으로 바꾸기 =========//
             //json 해체
-            JSONObject jsonObject = new JSONObject(data);
-            prices = jsonObject.getString("ingPrice");
+            JSONArray jsonArrayPrice = new JSONArray(data);
 
-            System.out.println("prices: " + prices);
+            for (int i = 0 ; i< jsonArrayPrice.length(); i++)
+            {
+                JSONArray arr = jsonArrayPrice.getJSONArray(i);
+                JSONObject jsonObjectPrice = arr.getJSONObject(0);
+
+                ingName +=       arr.getJSONObject(0).getString("ingName");
+                ingPriceUnit +=  arr.getJSONObject(0).getString("ingPriceUnit");
+
+                System.out.println("jsonObject.getString(\"ingName\") : "+ jsonObjectPrice.getString("ingName"));
+                if(i != jsonArrayPrice.length() -1)
+                {
+                    ingName+="`";
+                    ingPriceUnit+="`";
+                }
+
+            }
 
         } catch (ExecutionException e) {
             e.printStackTrace();
@@ -337,19 +355,19 @@ public class RecipeDetailView extends AppCompatActivity {
             System.out.println("json 오류");
         }
 
-
-        return prices;
     }
 
     private void setPrice()     //화면에 가격 출력
     {
-        String ingredientName = "식재료";
+        System.out.println("recipe.getIngredient(): " + recipe.getIngredient());
         //가격 얻기
-        String ingredientPrice = getPrice(recipe.getIngredient());
-        ingredientPrices = ingredientPrice.split("`");
+        getPrice(recipe.getIngredient());
+
+        ingNames = ingName.split("`");
+        ingPriceUnits = ingPriceUnit.split("`");
 
         //데이터 넣는 부분
-        for (int i = 0; i < ingredientNames.length; i++)
+        for (int i = 0; i < ingNames.length; i++)
         {
             //1. TextView 객체 생성 한다, 2. 속성등록 한다. 반복문 예정
             TextView ingredientTextView = new TextView(this);
@@ -358,17 +376,21 @@ public class RecipeDetailView extends AppCompatActivity {
             ingredientTextView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1f));
             ingredientTextView.setPadding(20, 20, 20, 20);
             ingredientTextView.setTextSize(15);
-            ingredientTextView.setText(ingredientNames[i]);
+            ingredientTextView.setText(ingNames[i]);
 
             ingredientPriceTextView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1f));
             ingredientPriceTextView.setPadding(20, 20, 20, 20);
             ingredientPriceTextView.setTextSize(15);
-            ingredientPriceTextView.setText(ingredientPrices[i]);
+            ingredientPriceTextView.setText(ingPriceUnits[i]);
 
             //recipe_detail에서 식재료 레이아웃 그려줄 목표 레이아웃, 추가한다.
-            LinearLayout ingredientsLayout = (LinearLayout) findViewById(R.id.priceLayout);
-            ingredientsLayout.addView(ingredientTextView);
-            ingredientsLayout.addView(ingredientPriceTextView);
+            LinearLayout ingredientsPriceLayout = (LinearLayout) findViewById(R.id.priceLayout);
+            LinearLayout subIngredientPriceLayout = new LinearLayout(this);
+            subIngredientPriceLayout.setOrientation(LinearLayout.HORIZONTAL);
+            subIngredientPriceLayout.addView(ingredientTextView);
+            subIngredientPriceLayout.addView(ingredientPriceTextView);
+            ingredientsPriceLayout.addView(subIngredientPriceLayout);
+
         }
     }
 
