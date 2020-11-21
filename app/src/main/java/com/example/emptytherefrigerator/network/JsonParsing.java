@@ -186,6 +186,45 @@ public class JsonParsing
         }
         return list;
     }
+    public static ArrayList<RecipeComment>parsingCommentViewList(String data)       //내 댓글 조회, 레시피 디테일뷰 댓글 조회
+    {
+        ArrayList<RecipeComment> list = new ArrayList<>();
+        try
+        {
+            JSONArray resCommentList = new JSONArray(data);
+            System.out.println(data);
+
+            for(int i=0; i<resCommentList.length(); i++)
+            {
+                JSONObject comment = resCommentList.getJSONObject(i);
+
+                RecipeComment recipeComment= new RecipeComment();
+
+                recipeComment.setRecipeId(comment.getInt("recipeInId"));
+                recipeComment.setCommentId(comment.getInt("commentId"));
+                recipeComment.setUserId(comment.getString("userId"));
+                recipeComment.setContent(comment.getString("content"));
+                recipeComment.setUploadDate(dateToString(comment.getString("uploadDate")));
+
+//                JSONArray jsonArrayImage = comment.getJSONArray("recipeImageBytes");
+//                String[] recipeImageBytes = new String [jsonArrayImage.length()];
+//
+//                for(int j= 0; j < jsonArrayImage.length(); j++)
+//                {
+//                    JSONObject jsonObjectImage = jsonArrayImage.getJSONObject(j);
+//                    recipeImageBytes[j] = jsonObjectImage.getString("recipeImageByte");
+//                }
+//                recipeComment.setRecipeImageByte(recipeImageBytes);
+
+                list.add(recipeComment);
+            }
+        }
+        catch(JSONException e)
+        {
+            e.printStackTrace();
+        }
+        return list;
+    }
     public static ArrayList<LikeIn> parsingLikeInList(String data)      //내 좋아요 목록 외부 레시피 조회
     {
         ArrayList<LikeIn> list = new ArrayList<>();
