@@ -20,6 +20,8 @@ import com.example.emptytherefrigerator.login.UserInfo;
 import com.example.emptytherefrigerator.network.JsonParsing;
 import com.google.android.material.textfield.TextInputEditText;
 import org.json.JSONObject;
+import org.w3c.dom.Comment;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -32,6 +34,7 @@ public class CommentListView extends AppCompatActivity
     Button commentInputBtn;
     TextInputEditText commentInputText;
     ArrayList<RecipeComment> list = new ArrayList<>();
+    CommentListAdapter adapter;
     int recipeInId;     //댓글이 하나도 없는 경우에도 레시피 번호를 알아야 하니까
 
     @Override
@@ -61,6 +64,23 @@ public class CommentListView extends AppCompatActivity
         });
         commentInputText = findViewById(R.id.commentInputText);     //max length 20, 글자수 counting해줌
     }
+    public void setRecyclerView()
+    {
+        recyclerView = findViewById(R.id.commentListRecyclerView);
+        CommentListAdapter adapter = new CommentListAdapter(this, list);
+        this.adapter = adapter;
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        toolbar = findViewById(R.id.commentListToolbar);
+
+        DividerItemDecoration dividerItemDecoration =
+                new DividerItemDecoration(recyclerView.getContext(), new LinearLayoutManager(this).getOrientation());
+        recyclerView.addItemDecoration(dividerItemDecoration);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);    //기본 제목을 없애줍니다
+    }
     public void sendComment()
     {
         MyAsyncTask createComment = new MyAsyncTask();
@@ -85,7 +105,8 @@ public class CommentListView extends AppCompatActivity
                 comment.setUserId(UserInfo.getString(this, UserInfo.ID_KEY));
                 comment.setUploadDate(format.format(new Date()));
                 list.add(comment);
-                recyclerView.getAdapter().notifyDataSetChanged();
+                adapter.addItem(comment);
+                adapter.notifyItemRangeChanged(0,adapter.getItemCount());
                 return;
             }
             else
@@ -97,21 +118,7 @@ public class CommentListView extends AppCompatActivity
             Toast.makeText(getApplicationContext(),"내부 서버 문제로 실행할 수 없습니다", Toast.LENGTH_SHORT).show();
         }
     }
-    public void setRecyclerView()
-    {
-        recyclerView = findViewById(R.id.commentListRecyclerView);
-        recyclerView.setAdapter(new CommentListAdapter(this, list));
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        toolbar = findViewById(R.id.commentListToolbar);
 
-        DividerItemDecoration dividerItemDecoration =
-                new DividerItemDecoration(recyclerView.getContext(), new LinearLayoutManager(this).getOrientation());
-        recyclerView.addItemDecoration(dividerItemDecoration);
-
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);    //기본 제목을 없애줍니다
-    }
     public void getCommentList()        //서버에서 댓글 목록을 가져온다
     {
         MyAsyncTask readCommentList = new MyAsyncTask();
