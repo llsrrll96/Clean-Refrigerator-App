@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -86,6 +87,11 @@ public class MainSearchResultRecipeOutAdapter extends RecyclerView.Adapter<MainS
                     int pos = getAdapterPosition();
                     if(pos != RecyclerView.NO_POSITION){
                         holdercontext = v.getContext();
+
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        Uri uri = Uri.parse(recipeResults.get(pos).getLink());
+                        intent.setData(uri);
+                        holdercontext.startActivity(intent);
 
                         //해당 링크로 이동
                         //intent = new Intent(holdercontext, RecipeDetailView.class);     //조회된 레시피 화면으로 넘어간다
