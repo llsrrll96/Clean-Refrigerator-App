@@ -68,7 +68,6 @@ public class RecipeDetailUpdateView extends AppCompatActivity
     private List<ImageView> recipeImageViewList;    //요리 방법 이미지 리스트 ( 첫 이미지 경로는 대표이미지 경로 두번째 부터 요리방법 이미지 )
     private List<EditText> recipeContentList;       //요리 방법 설명 editText 리스트
 
-    private boolean isDetail = false;
     private int imageIndex;
 
     @Override
@@ -210,7 +209,8 @@ public class RecipeDetailUpdateView extends AppCompatActivity
         boolean result = false;
         for(int i = 0; i < recipeContentList.size(); i++)
         {
-            if(recipeContentList.get(i).getText().toString().matches(""))
+            if(recipeContentList.get(i).getText().toString().matches("")||
+                    etIngredientUnitList.get(i).getText().toString().matches(""))
                 result = true;
         }
         return result;
@@ -286,6 +286,7 @@ public class RecipeDetailUpdateView extends AppCompatActivity
     //재료
     private void showIngredients() //예) 식재료1      1개
     {
+        int spinnerPosition = 0;
         //데이터 넣는 부분
         for (int i = 0; i < ingredientNames.length; i++)
         {
@@ -302,8 +303,8 @@ public class RecipeDetailUpdateView extends AppCompatActivity
             etIngredientCnt.setPadding(20,20,20,20);
             etIngredientCnt.setTextSize(15);
             etIngredientCnt.setHint("재료 양");
-            etIngredientCnt.setInputType(0x00000002);
-            //etIngredientCnt.setText(ingredientUnits[i]);
+            etIngredientCnt.setInputType(0x00000002);                       //숫자만
+            etIngredientCnt.setText(ingredientUnits[i].replaceAll("[^0-9]", ""));
 
             Spinner spIngredientUnit = new Spinner(this);
             spIngredientUnit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT,1f));
@@ -315,6 +316,8 @@ public class RecipeDetailUpdateView extends AppCompatActivity
             adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
             spIngredientUnit.setAdapter(adapter);
 
+            spinnerPosition = adapter.getPosition(ingredientUnits[i].replaceAll("\\d", ""));
+            spIngredientUnit.setSelection(spinnerPosition);
 
             //recipe_detail에서 식재료 레이아웃 그려줄 목표 레이아웃, 추가한다.
             LinearLayout ingredientsLayout = (LinearLayout)findViewById(R.id.ingredientsLayout_update);
@@ -567,7 +570,6 @@ public class RecipeDetailUpdateView extends AppCompatActivity
         recipeContentList.add(etContents);
     }
 
-    /////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////
     @Override
