@@ -82,11 +82,12 @@ public class RecipeDetailCreateView extends AppCompatActivity {
     private Uri mImageCaptureUri;
     private String absoultePath ="";
 
-    private int recipeContCnt;                  //요리방법 갯수
+    private int recipeContCnt;                  //요리방법 갯수 유지해야됨
     private RecipeIn recipe;                      //레시피 클래스 객체
     private String ingredient = "";
     private String ingredientUnit ="";
     private Bitmap repPhotoBitmap;
+    private int imageIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -262,13 +263,14 @@ public class RecipeDetailCreateView extends AppCompatActivity {
     }
     private void popRecipe()
     {
-        if(etIngredientList.size() >=2) {
+        if(recipeCountList.size() >=2) {
             recipeCountList.get(recipeCountList.size() - 1).setVisibility(View.INVISIBLE);
             recipeCountList.remove(recipeCountList.size() - 1);
             recipeImageViewList.get(recipeImageViewList.size() - 1).setVisibility(ImageView.GONE);
             recipeImageViewList.remove(recipeImageViewList.size() - 1);
             recipeContentList.get(recipeContentList.size() - 1).setVisibility(EditText.GONE);
             recipeContentList.remove(recipeContentList.size() - 1);
+            recipeContCnt--;
         }
     }
     ////////////////////////////////////////////////////////////////////////////////
@@ -455,21 +457,34 @@ public class RecipeDetailCreateView extends AppCompatActivity {
                     repPhotoBitmap = BitmapFactory.decodeStream(in);
 
                     in.close();
-                    // 이미지 표시
 
-                    if (isDetail) {
-                        recipeDetailImage.setImageBitmap(repPhotoBitmap); // 레이아웃의 이미지칸에 CROP된 BITMAP을 보여줌
-                        isDetail = false;
-                    }
-                    else {
-                        recipeImageViewList.get(recipeImageViewList.size() - 1).setImageBitmap(repPhotoBitmap);
-                    }
+                    recipeDetailImage.setImageBitmap(repPhotoBitmap); // 레이아웃의 이미지칸에 CROP된 BITMAP을 보여줌
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        } else if (requestCode == 2) {
+            // Make sure the request was successful
+            if (resultCode == RESULT_OK) {
+                try {
+                    // 선택한 이미지에서 비트맵 생성
+                    InputStream in = getContentResolver().openInputStream(data.getData());
+                    repPhotoBitmap = BitmapFactory.decodeStream(in);
+                    in.close();
+
+                    // 요리 정보 이미지 표시
+                    System.out.println("imageIndex: " + imageIndex);
+
+                    recipeImageViewList.get(imageIndex).setImageBitmap(repPhotoBitmap);
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         }
     }
+
+
     /////////////////////////////////////////////////////////////////////////////////////////////////////
     public void setIngredient()
     {
@@ -526,14 +541,17 @@ public class RecipeDetailCreateView extends AppCompatActivity {
         recipeImageView.setPadding(30,0,30,0);
         recipeImageView.setScaleType(ImageView.ScaleType.FIT_XY);
         recipeImageView.setImageResource(R.drawable.logo);
+        final int finalI = recipeContCnt;
         recipeImageView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 // 앨범 호출
                 Intent intent = new Intent();
                 intent.setType("image/*");
+                imageIndex = finalI;
                 intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(intent, 1);
+                startActivityForResult(intent, 2);
+                System.out.println("온클릿 호출 imageIndex: " +imageIndex);
             }
         });
 
