@@ -9,17 +9,25 @@ import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.emptytherefrigerator.AsyncTasks.MyAsyncTask;
 import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.entity.RecipeIn;
 import com.example.emptytherefrigerator.entity.RecipeOut;
+import com.example.emptytherefrigerator.login.UserInfo;
 
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MainSearchResultRecipeOutAdapter extends RecyclerView.Adapter<MainSearchResultRecipeOutAdapter.ViewHolder>
 {
@@ -72,7 +80,6 @@ public class MainSearchResultRecipeOutAdapter extends RecyclerView.Adapter<MainS
         public ImageView recipeImage;
         public TextView title;
         public TextView link;
-
         private Context holdercontext;
 
         public ViewHolder(@NonNull View view) {
@@ -101,11 +108,14 @@ public class MainSearchResultRecipeOutAdapter extends RecyclerView.Adapter<MainS
                         intent = new Intent(holdercontext, MainSearchRecipeOutWebView.class);       //외부 검색
                         intent.putExtra("TITLE", recipeResults.get(pos).getTitle());
                         intent.putExtra("LINK", recipeResults.get(pos).getLink());
+                        intent.putExtra("recipeOutId",recipeResults.get(pos).getRecipeOutId());
                         holdercontext.startActivity(intent);
                     }
                 }
             });
         }
+
+
     }
 
 }

@@ -43,6 +43,7 @@ public class MyLikeOutAdapter extends RecyclerView.Adapter<MyLikeOutAdapter.MyLi
     {
         return list.size();
     }
+
     @Override
     public void onBindViewHolder(@NonNull MyLikeOutAdapter.MyLikeOutViewHolder holder, int position) {
         context = holder.itemView.getContext();
@@ -82,19 +83,11 @@ public class MyLikeOutAdapter extends RecyclerView.Adapter<MyLikeOutAdapter.MyLi
                     int pos = getAdapterPosition();
                     if(pos != RecyclerView.NO_POSITION){
                         context = v.getContext();
-/*                        intent = new Intent(Intent.ACTION_VIEW);
-                        Uri uri = Uri.parse(recipeResults.get(pos).getLink());
-                        intent.setData(uri);
-                        holdercontext.startActivity(intent);*/
-
-                        //해당 링크로 이동
-                        //intent = new Intent(holdercontext, RecipeDetailView.class);     //조회된 레시피 화면으로 넘어간다
-                        //intent.putExtra("RECIPE",recipeResults.get(pos).getRecipeOutId());  //해당 링크로 이동
-
                         intent = new Intent(Intent.ACTION_VIEW);
                         intent = new Intent(context, MainSearchRecipeOutWebView.class);       //외부 검색
                         intent.putExtra("TITLE", list.get(pos).getRecipeOut().getTitle());
                         intent.putExtra("LINK", list.get(pos).getRecipeOut().getLink());
+                        intent.putExtra("recipeOutId", list.get(pos).getRecipeOut().getRecipeOutId());
                         context.startActivity(intent);
                     }
                 }
