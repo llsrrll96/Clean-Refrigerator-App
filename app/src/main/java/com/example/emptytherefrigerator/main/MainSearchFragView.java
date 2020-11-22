@@ -71,6 +71,19 @@ public class MainSearchFragView extends Fragment
             }
         });
     }
+    private String toBacktick(String query)
+    {
+        String[] querys = query.split(",");
+        String result = "";
+        for(int i = 0; i < querys.length; i++)
+        {
+            result += querys[i];
+            if(i != querys.length -1)
+                result += "`";
+        }
+        return result;
+    }
+
     public void setSearchRecipe()
     {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
@@ -83,10 +96,14 @@ public class MainSearchFragView extends Fragment
                 intent = new Intent(getContext(), MainSearchResultView.class);
 
                 if(checkBox.isChecked())                //식재료 검색일때
+                {
                     intent.putExtra("IS_CHECKED", true);
-                else
-                    intent.putExtra("IS_CHECKED",false);
-                intent.putExtra("QUERY", query);
+                    intent.putExtra("QUERY", toBacktick(query));
+                }
+                else {
+                    intent.putExtra("IS_CHECKED", false);
+                    intent.putExtra("QUERY", query);
+                }
                 getContext().startActivity(intent);
                 return true;
             }

@@ -151,7 +151,18 @@ public class MainSearchResultView extends AppCompatActivity {
                 new DividerItemDecoration(resultRecyclerView.getContext(), new LinearLayoutManager(this).getOrientation());
         resultRecyclerView.addItemDecoration(dividerItemDecoration);
     }
-
+    private String toBacktick(String query)
+    {
+        String[] querys = query.split(",");
+        String result = "";
+        for(int i = 0; i < querys.length; i++)
+        {
+            result += querys[i];
+            if(i != querys.length -1)
+                result += "`";
+        }
+        return result;
+    }
     // 서버로부터 레시피 데이터 얻는 함수
     ArrayList insertItemList()
     {
@@ -162,7 +173,7 @@ public class MainSearchResultView extends AppCompatActivity {
 
             if (preIsChk)
             {
-                jsonObjectQuery.accumulate("ingredient", preQuery);
+                jsonObjectQuery.accumulate("ingredient", toBacktick(preQuery));
                 recipeListData = new RecipeSearchAsyncTask().execute("reqSearchRecipeIng", jsonObjectQuery.toString()).get(); //재료 기반
             } else
             {
