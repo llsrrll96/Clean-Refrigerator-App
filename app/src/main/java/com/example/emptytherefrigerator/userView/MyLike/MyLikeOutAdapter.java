@@ -17,7 +17,10 @@ import com.example.emptytherefrigerator.entity.LikeOut;
 import com.example.emptytherefrigerator.entity.RecipeIn;
 import com.example.emptytherefrigerator.login.UserInfo;
 import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MyLikeOutAdapter extends RecyclerView.Adapter<MyLikeOutAdapter.MyLikeOutViewHolder>
 {
@@ -57,6 +60,7 @@ public class MyLikeOutAdapter extends RecyclerView.Adapter<MyLikeOutAdapter.MyLi
         TextView recipeOutTitle, site_link, likeOutUploadDate;
         ImageButton btnLikeOutDelete;
         ImageView likeOutMainImg;
+        boolean liked=true;
 
         public MyLikeOutViewHolder(View view, MyLikeOutAdapter adapter)
         {
@@ -74,7 +78,11 @@ public class MyLikeOutAdapter extends RecyclerView.Adapter<MyLikeOutAdapter.MyLi
                 @Override
                 public void onClick(View view)
                 {
-                    deleteLikeOut();
+                    liked = !liked;
+                    if(liked)
+                        createLikeOut();
+                    else
+                       deleteLikeOut();
                 }
             });
         }
@@ -85,27 +93,41 @@ public class MyLikeOutAdapter extends RecyclerView.Adapter<MyLikeOutAdapter.MyLi
             likeOutUploadDate.setText(likeOut.getUploadDate());
         }
 
-        public void deleteLikeOut()
+        public void createLikeOut()
         {
-            MyAsyncTask deleteLikeOut = new MyAsyncTask();
-
+            btnLikeOutDelete.setImageResource(R.drawable.like_filled1);
+            MyAsyncTask createLikeOut = new MyAsyncTask();
+            int pos = getAdapterPosition();
+            JSONObject data = new JSONObject();
             try
             {
-                int pos = getAdapterPosition();
-                JSONObject data = new JSONObject();
+                data.accumulate("recipeOutId", list.get(pos).getRecipeOut().getRecipeOutId());
+                data.accumulate("userId", UserInfo.getString(context, UserInfo.ID_KEY));
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                data.accumulate("uploadDate", format.format(new Date()));
+                String result = createLikeOut.execute("deleteLikeOut", data.toString()).get();
+                if(!result.equals("1"))
+                    Toast.makeText(itemView.getContext(),"내부 오류로 요청을 수행하지 못했습니다", Toast.LENGTH_SHORT).show();
+
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+        public void deleteLikeOut()
+        {
+            btnLikeOutDelete.setImageResource(R.drawable.like);
+            MyAsyncTask deleteLikeOut = new MyAsyncTask();
+            int pos = getAdapterPosition();
+            JSONObject data = new JSONObject();
+            try
+            {
                 data.accumulate("recipeOutId", list.get(pos).getRecipeOut().getRecipeOutId());
                 data.accumulate("userId", UserInfo.getString(context, UserInfo.ID_KEY));
                 String result = deleteLikeOut.execute("deleteLikeOut", data.toString()).get();
-                if(result.equals("1"))
-                {
-                    btnLikeOutDelete.setImageResource(R.drawable.like);       //하트 클릭시 빈 하트로 변하게 됨
-                    list.remove(pos);                                   //list에서 지움
-                    adapter.notifyDataSetChanged();                     //list 업데이트
-                }
-                else
-                {
+                if(!result.equals("1"))
                     Toast.makeText(itemView.getContext(),"내부 오류로 요청을 수행하지 못했습니다", Toast.LENGTH_SHORT).show();
-                }
             }
             catch (Exception e)
             {
