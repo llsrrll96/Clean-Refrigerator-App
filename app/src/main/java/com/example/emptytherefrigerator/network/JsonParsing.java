@@ -275,8 +275,8 @@ public class JsonParsing
             for(int i=0;i<likeOutList.length(); i++)
             {
                 JSONObject object = likeOutList.getJSONObject(i);
-                RecipeOut recipeOut = new RecipeOut();
                 LikeOut likeOut = new LikeOut();
+                RecipeOut recipeOut = new RecipeOut();
 
                 recipeOut.setRecipeOutId(object.getInt("recipeOutId"));
                 recipeOut.setTitle(object.getString("title"));
@@ -286,8 +286,10 @@ public class JsonParsing
                 String[] recipeImageByte = new String [1];
                 recipeImageByte[0] = object.getString("mainImg");
                 recipeOut.setRecipeImageByte(recipeImageByte);
+                System.out.println(recipeImageByte);
+                likeOut.setRecipeOut(recipeOut);
 
-                list.add(new LikeOut(recipeOut));
+                list.add(likeOut);
             }
             return list;
         }
@@ -308,12 +310,15 @@ public class JsonParsing
             {
                 JSONObject object = notiArr.getJSONObject(i);
                 Notification noti = new Notification();
+                RecipeIn recipeIn = new RecipeIn();
 
                 noti.setNotificationId(object.getInt("notificationId"));
-                noti.setUserId(object.getString("userId"));
-                noti.getRecipe().setRecipeInId(object.getInt("recipeInId"));
-                noti.getRecipe().setTitle(object.getString("title"));
+                recipeIn.setUserId(object.getString("userId"));
+                recipeIn.setRecipeInId(object.getInt("recipeInId"));
+                recipeIn.setTitle(object.getString("title"));
                 noti.setType(object.getInt("type"));
+
+                noti.setRecipe(recipeIn);
 
                 list.add(noti);
             }

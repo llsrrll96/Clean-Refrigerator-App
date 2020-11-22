@@ -6,12 +6,14 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -205,7 +207,7 @@ public class RecipeDetailView extends AppCompatActivity {
             RecipeMngAsyncTask recipeMngAsyncTask = new RecipeMngAsyncTask();
             String result = recipeMngAsyncTask.execute("readRecipeDetail", jsonObject.toString()).get();    //서버로 레시피 아이디 보낸다.
             JSONObject jsonObjectResult = new JSONObject(result);
-            if(!result.equals("2"))
+            if(!result.equals("2") && !result.equals("3"))
             {
                 recipe.setRecipeInId(jsonObjectResult.getInt("recipeInId"));
                 recipe.setTitle(jsonObjectResult.getString("title"));
@@ -229,7 +231,11 @@ public class RecipeDetailView extends AppCompatActivity {
                     recipeImageBytes[j] = jsonObjectImage.getString("recipeImageByte");
                 }
                 recipe.setRecipeImageByte(recipeImageBytes);
-
+            }
+            else if(result.equals("1"))
+            {
+                Toast.makeText(this,"삭제된 레시피입니다", Toast.LENGTH_SHORT).show();
+                onDestroy();
             }
         }catch (JSONException e) {
             e.printStackTrace();
@@ -239,6 +245,8 @@ public class RecipeDetailView extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+
     ////////////////////////스트링 이미지 데이터 -> 비트맵으로///////////////////////////////////
     public Bitmap StringToBitmap(String encodedString)
     {

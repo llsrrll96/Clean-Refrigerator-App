@@ -122,7 +122,6 @@ public class MyCommentAdapter extends RecyclerView.Adapter<MyCommentAdapter.MyCo
             {
                 object.accumulate("commentId", list.get(pos).getCommentId());
                 object.accumulate("recipeInId", list.get(pos).getRecipeId());
-                System.out.println(list.get(pos).getRecipeId());
                 result = deleteComment.execute("deleteComment", object.toString()).get();
 
                 if(result.equals("1"))  //성공
