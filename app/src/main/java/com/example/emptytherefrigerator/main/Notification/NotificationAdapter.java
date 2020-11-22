@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -80,12 +81,18 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                     if(pos != RecyclerView.NO_POSITION)
                     {
                         context = view.getContext();
-                        deleteNotification();
-                        Intent intent = new Intent(context, RecipeDetailView.class);     //조회된 레시피 화면으로 넘어간다
-                        intent.putExtra("RECIPE",list.get(pos).getRecipe().getRecipeInId());      //다음 화면에 레시피 객체 송신
-                        context.startActivity(intent);
+                        String result = deleteNotification();
+                        if(result.equals("1"))      //삭제 성공
+                        {
+                            removeItem(pos);
+                            Intent intent = new Intent(context, RecipeDetailView.class);     //조회된 레시피 화면으로 넘어간다
+                            intent.putExtra("RECIPE",list.get(pos).getRecipe().getRecipeInId());      //다음 화면에 레시피 객체 송신
+                            context.startActivity(intent);
+                        }
+                        else if(result.equals("2"))
+                            Toast.makeText(itemView.getContext(),"내부 오류로 요청을 수행하지 못했습니다", Toast.LENGTH_SHORT).show();
                     }
-                    removeItem(pos);
+
                 }
             });
         }
@@ -94,12 +101,12 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             if(noti.getType()==2)       //좋아요
             {
                 alarmImage.setImageResource(R.drawable.like_filled1);
-                content.setText(noti.getRecipe().getUserId() + "님이 " + splitRecipeTitle(noti.getRecipe().getTitle())+"을 좋아요 했습니다");
+                content.setText(noti.getRecipe().getUserId() + "님이\n" + splitRecipeTitle(noti.getRecipe().getTitle())+"을 좋아요 했습니다");
             }
             else if(noti.getType()==1)  //댓글
             {
                 alarmImage.setImageResource(R.drawable.comment);
-                content.setText(noti.getRecipe().getUserId() +"님이 " + splitRecipeTitle(noti.getRecipe().getTitle())+"에 댓글을 달았습니다");
+                content.setText(noti.getRecipe().getUserId() +"님이\n " + splitRecipeTitle(noti.getRecipe().getTitle())+"에 댓글을 달았습니다");
             }
         }
         public String splitRecipeTitle(String title)
@@ -109,18 +116,21 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             else
                 return title;
         }
-        public void deleteNotification()
+        public String deleteNotification()
         {
             MyAsyncTask deleteNoti = new MyAsyncTask();
             JSONObject object = new JSONObject();
+            int pos = getAdapterPosition();
             try
             {
                 object.accumulate("notificationId", list.get(getAdapterPosition()).getNotificationId());
                 String result = deleteNoti.execute("deleteNotification", object.toString()).get();
+                return result;
             }
             catch(Exception e)
             {
                 e.printStackTrace();
+                return "";
             }
         }
     }

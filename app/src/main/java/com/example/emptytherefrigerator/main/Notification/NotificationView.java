@@ -34,9 +34,10 @@ public class NotificationView extends Fragment
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
-        view = inflater.inflate(R.layout.main_search,container,false);
-        recyclerView = view.findViewById(R.id.recycler_view);
+        view = inflater.inflate(R.layout.notification_view,container,false);
+        recyclerView = view.findViewById(R.id.alarmRecyclerView);
         alarmListToolbar = view.findViewById(R.id.alarmListToolbar);
+        readNotification();
         initializeView();
         return view;
     }
@@ -50,7 +51,6 @@ public class NotificationView extends Fragment
         DividerItemDecoration dividerItemDecoration =
                 new DividerItemDecoration(recyclerView.getContext(), new LinearLayoutManager(getContext()).getOrientation());
         recyclerView.addItemDecoration(dividerItemDecoration);
-        readNotification();
     }
 
     public void readNotification()
@@ -61,6 +61,7 @@ public class NotificationView extends Fragment
         try
         {
             object.accumulate("userId", UserInfo.getString(getActivity(),UserInfo.ID_KEY));
+            System.out.println(UserInfo.getString(getActivity(),UserInfo.ID_KEY));
             String result = readNoti.execute("readNotification", object.toString()).get();
             System.out.println(result);
             if(!result.equals("2"))     //조회가 성공인 경우
