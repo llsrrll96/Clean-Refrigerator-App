@@ -103,7 +103,7 @@ public class SettingView extends AppCompatActivity
                     {
                     UserInfo.setInt(context, UserInfo.NOTIFICATION_KEY, 0);
                 }
-                //updateSetting(UserInfo.getInt(context, UserInfo.NOTIFICATION_KEY));       //현재로서는 작동하지 않는 기능
+                updateSetting(UserInfo.getInt(context, UserInfo.NOTIFICATION_KEY));       //현재로서는 작동하지 않는 기능
             }
         });
     }
