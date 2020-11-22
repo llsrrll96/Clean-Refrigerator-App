@@ -1,6 +1,7 @@
 package com.example.emptytherefrigerator.userView.MyLike;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,8 @@ import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.entity.LikeOut;
 import com.example.emptytherefrigerator.entity.RecipeIn;
 import com.example.emptytherefrigerator.login.UserInfo;
+import com.example.emptytherefrigerator.main.MainSearchRecipeOutWebView;
+
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
@@ -56,11 +59,11 @@ public class MyLikeOutAdapter extends RecyclerView.Adapter<MyLikeOutAdapter.MyLi
     class MyLikeOutViewHolder extends RecyclerView.ViewHolder
     {
         MyLikeOutAdapter adapter;
-
         TextView recipeOutTitle, site_link, likeOutUploadDate;
         ImageButton btnLikeOutDelete;
         ImageView likeOutMainImg;
         boolean liked=true;
+        Intent intent;
 
         public MyLikeOutViewHolder(View view, MyLikeOutAdapter adapter)
         {
@@ -72,6 +75,30 @@ public class MyLikeOutAdapter extends RecyclerView.Adapter<MyLikeOutAdapter.MyLi
             btnLikeOutDelete = itemView.findViewById(R.id.btnLikeOutDelete);
             likeOutUploadDate = itemView.findViewById(R.id.likeOutUploadDate);
             likeOutMainImg = itemView.findViewById(R.id.likeOutMainImg);
+
+            view.setOnClickListener(new View.OnClickListener() { // 리싸이클러 아이템 클릭시
+                @Override
+                public void onClick(View v) {           //클릭시
+                    int pos = getAdapterPosition();
+                    if(pos != RecyclerView.NO_POSITION){
+                        context = v.getContext();
+/*                        intent = new Intent(Intent.ACTION_VIEW);
+                        Uri uri = Uri.parse(recipeResults.get(pos).getLink());
+                        intent.setData(uri);
+                        holdercontext.startActivity(intent);*/
+
+                        //해당 링크로 이동
+                        //intent = new Intent(holdercontext, RecipeDetailView.class);     //조회된 레시피 화면으로 넘어간다
+                        //intent.putExtra("RECIPE",recipeResults.get(pos).getRecipeOutId());  //해당 링크로 이동
+
+                        intent = new Intent(Intent.ACTION_VIEW);
+                        intent = new Intent(context, MainSearchRecipeOutWebView.class);       //외부 검색
+                        intent.putExtra("TITLE", list.get(pos).getRecipeOut().getTitle());
+                        intent.putExtra("LINK", list.get(pos).getRecipeOut().getLink());
+                        context.startActivity(intent);
+                    }
+                }
+            });
 
             btnLikeOutDelete.setOnClickListener(new View.OnClickListener()
             {
@@ -105,7 +132,7 @@ public class MyLikeOutAdapter extends RecyclerView.Adapter<MyLikeOutAdapter.MyLi
                 data.accumulate("userId", UserInfo.getString(context, UserInfo.ID_KEY));
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 data.accumulate("uploadDate", format.format(new Date()));
-                String result = createLikeOut.execute("deleteLikeOut", data.toString()).get();
+                String result = createLikeOut.execute("createLikeOut", data.toString()).get();
                 if(!result.equals("1"))
                     Toast.makeText(itemView.getContext(),"내부 오류로 요청을 수행하지 못했습니다", Toast.LENGTH_SHORT).show();
 
