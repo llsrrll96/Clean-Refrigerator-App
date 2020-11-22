@@ -2,6 +2,7 @@ package com.example.emptytherefrigerator.userView.MyLike;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,8 @@ import com.example.emptytherefrigerator.R;
 import com.example.emptytherefrigerator.entity.LikeIn;
 import com.example.emptytherefrigerator.entity.RecipeIn;
 import com.example.emptytherefrigerator.login.UserInfo;
+import com.example.emptytherefrigerator.main.RecipeDetailView;
+
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
@@ -86,6 +89,14 @@ public class MyLikeInAdapter extends RecyclerView.Adapter<MyLikeInAdapter.MyLike
         }
 
         public void setListener() {         //좋아요 토글형식으로, 화면에서 바로 안지움
+            itemView.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    inquireRecipeDetailView(v);
+                }
+            });
             likeDelBtn.setOnClickListener(new View.OnClickListener()
             {
                 @Override
@@ -99,7 +110,18 @@ public class MyLikeInAdapter extends RecyclerView.Adapter<MyLikeInAdapter.MyLike
                 }
             });
         }
+        public void inquireRecipeDetailView(View view)
+        {
+            int pos = getAdapterPosition();     //레시피 조회 화면 넘기기
+            if(pos != RecyclerView.NO_POSITION)
+            {
+                context = view.getContext();
+                Intent intent = new Intent(context, RecipeDetailView.class);     //조회된 레시피 화면으로 넘어간다
+                intent.putExtra("RECIPE",list.get(pos).getRecipeIn().getRecipeInId());      //다음 화면에 레시피 객체 송신
+                context.startActivity(intent);
+            }
 
+        }
         public  void deleteLikeIn()            //좋아요 삭제
         {
             likeDelBtn.setImageResource(R.drawable.like);
