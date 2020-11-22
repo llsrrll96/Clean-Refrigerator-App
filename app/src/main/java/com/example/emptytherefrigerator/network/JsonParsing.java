@@ -146,7 +146,7 @@ public class JsonParsing
             return null;
         }
     }
-    public static ArrayList<RecipeComment>parsingCommentList(String data)       //내 댓글 조회, 레시피 디테일뷰 댓글 조회
+    public static ArrayList<RecipeComment>parsingCommentList(String data)       //내 댓글 조회
     {
         ArrayList<RecipeComment> list = new ArrayList<>();
         try
@@ -167,15 +167,9 @@ public class JsonParsing
                 recipeComment.setContent(comment.getString("content"));
                 recipeComment.setUploadDate(dateToString(comment.getString("uploadDate")));
 
-                JSONArray jsonArrayImage = comment.getJSONArray("recipeImageBytes");
-                String[] recipeImageBytes = new String [jsonArrayImage.length()];
-
-                for(int j= 0; j < jsonArrayImage.length(); j++)
-                {
-                    JSONObject jsonObjectImage = jsonArrayImage.getJSONObject(j);
-                    recipeImageBytes[j] = jsonObjectImage.getString("recipeImageByte");
-                }
-                recipeComment.setRecipeImageByte(recipeImageBytes);
+                String[] recipeImageByte = new String [1];
+                recipeImageByte[0] = comment.getString("recipeImageByte");
+                recipeComment.setRecipeImageByte(recipeImageByte);
 
                 list.add(recipeComment);
             }
@@ -206,16 +200,6 @@ public class JsonParsing
                 recipeComment.setContent(comment.getString("content"));
                 recipeComment.setUploadDate(dateToString(comment.getString("uploadDate")));
 
-//                JSONArray jsonArrayImage = comment.getJSONArray("recipeImageBytes");
-//                String[] recipeImageBytes = new String [jsonArrayImage.length()];
-//
-//                for(int j= 0; j < jsonArrayImage.length(); j++)
-//                {
-//                    JSONObject jsonObjectImage = jsonArrayImage.getJSONObject(j);
-//                    recipeImageBytes[j] = jsonObjectImage.getString("recipeImageByte");
-//                }
-//                recipeComment.setRecipeImageByte(recipeImageBytes);
-
                 list.add(recipeComment);
             }
         }
@@ -228,6 +212,7 @@ public class JsonParsing
     public static ArrayList<LikeIn> parsingLikeInList(String data)      //내 좋아요 목록 외부 레시피 조회
     {
         ArrayList<LikeIn> list = new ArrayList<>();
+        System.out.println(data);
         try
         {
             JSONArray likeInList = new JSONArray(data);
@@ -253,6 +238,7 @@ public class JsonParsing
                     recipeImageBytes[j] = jsonObjectImage.getString("recipeImageByte");
                 }
                 recipeIn.setRecipeImageByte(recipeImageBytes);
+                System.out.println(recipeImageBytes);
                 likeIn.setRecipeIn(recipeIn);
 
                 list.add(likeIn);
@@ -268,6 +254,7 @@ public class JsonParsing
     public static ArrayList<LikeOut> parsingLikeOutList(String data)        //내 좋아요 목록 외부 레시피 조회
     {
         ArrayList<LikeOut> list = new ArrayList<>();
+        System.out.println(data);
         try
         {
             JSONArray likeOutList = new JSONArray(data);
@@ -286,7 +273,6 @@ public class JsonParsing
                 String[] recipeImageByte = new String [1];
                 recipeImageByte[0] = object.getString("mainImg");
                 recipeOut.setRecipeImageByte(recipeImageByte);
-                System.out.println(recipeImageByte);
                 likeOut.setRecipeOut(recipeOut);
 
                 list.add(likeOut);

@@ -76,7 +76,7 @@ public class MainSearchResultRecipeOut extends AppCompatActivity
     {
         //RecyclerView
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this); //상하
-        resultoutRecyclerView.addItemDecoration(new RecyclerDecoration(50)); //아이템 간격
+        resultoutRecyclerView.addItemDecoration(new RecyclerDecoration(10)); //아이템 간격
         resultoutRecyclerView.setLayoutManager(layoutManager);
         resultoutRecyclerView.setAdapter(new MainSearchResultRecipeOutAdapter(insertItemList()));       //어댑터
 
