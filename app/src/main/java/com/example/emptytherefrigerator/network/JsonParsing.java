@@ -271,7 +271,7 @@ public class JsonParsing
                 likeOut.setUploadDate(dateToString(object.getString("uploadDate")));
 
                 String[] recipeImageByte = new String [1];
-                recipeImageByte[0] = object.getString("mainImg");
+                recipeImageByte[0] = object.getString("recipeImageByte");
                 recipeOut.setRecipeImageByte(recipeImageByte);
                 likeOut.setRecipeOut(recipeOut);
 
