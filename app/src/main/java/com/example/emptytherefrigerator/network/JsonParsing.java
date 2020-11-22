@@ -283,15 +283,9 @@ public class JsonParsing
                 recipeOut.setLink(object.getString("link"));
                 likeOut.setUploadDate(dateToString(object.getString("uploadDate")));
 
-                JSONArray jsonArrayImage = object.getJSONArray("recipeImageBytes");
-                String[] recipeImageBytes = new String [jsonArrayImage.length()];
-
-                for(int j= 0; j < jsonArrayImage.length(); j++)         //이미지 bytes
-                {
-                    JSONObject jsonObjectImage = jsonArrayImage.getJSONObject(j);
-                    recipeImageBytes[j] = jsonObjectImage.getString("recipeImageByte");
-                }
-                recipeOut.setRecipeImageByte(recipeImageBytes);
+                String[] recipeImageByte = new String [1];
+                recipeImageByte[0] = object.getString("mainImg");
+                recipeOut.setRecipeImageByte(recipeImageByte);
 
                 list.add(new LikeOut(recipeOut));
             }
@@ -316,9 +310,11 @@ public class JsonParsing
                 Notification noti = new Notification();
 
                 noti.setNotificationId(object.getInt("notificationId"));
+                noti.setUserId(object.getString("userId"));
                 noti.getRecipe().setRecipeInId(object.getInt("recipeInId"));
-                noti.getRecipe().setUserId(object.getString("userId"));
+                noti.getRecipe().setTitle(object.getString("title"));
                 noti.setType(object.getInt("type"));
+
                 list.add(noti);
             }
             return list;

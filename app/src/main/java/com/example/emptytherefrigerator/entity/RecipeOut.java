@@ -9,13 +9,13 @@ public class RecipeOut
     private String[] recipeImageByte; //다중 레시피 이미지 데이터
 
     public RecipeOut() {}
-    public RecipeOut(int reicpeOutId, String link, String title, String ingredient)
+    public RecipeOut(int recipeOutId, String link, String title, String ingredient)
     {
-        this.recipeOutId = reicpeOutId; this.link = link; this.title = title; this.ingredient = ingredient;
+        this.recipeOutId = recipeOutId; this.link = link; this.title = title; this.ingredient = ingredient;
     }
-    public RecipeOut(int reicpeOutId, String link, String title)
+    public RecipeOut(int recipeOutId, String link, String title)
     {
-        this.recipeOutId = reicpeOutId; this.link = link; this.title = title;
+        this.recipeOutId = recipeOutId; this.link = link; this.title = title;
     }
 
     public int getRecipeOutId() { return recipeOutId; }

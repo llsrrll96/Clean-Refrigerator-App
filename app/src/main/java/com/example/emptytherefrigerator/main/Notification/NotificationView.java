@@ -62,12 +62,11 @@ public class NotificationView extends Fragment
         {
             object.accumulate("userId", UserInfo.getString(getActivity(),UserInfo.ID_KEY));
             String result = readNoti.execute("readNotification", object.toString()).get();
-
+            System.out.println(result);
             if(!result.equals("2"))     //조회가 성공인 경우
             {
                 list = JsonParsing.parsingNotificationList(result);
             }
-
         }
         catch(Exception e)
         {

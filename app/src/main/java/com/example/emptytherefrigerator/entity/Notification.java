@@ -3,7 +3,7 @@ package com.example.emptytherefrigerator.entity;
 public class Notification
 {
     private int notificationId;
-    private String userId;
+    private String userId;      //댓글 단 사람, 좋아요 한 사람
     private RecipeIn recipeIn;
     private int type;
 
