@@ -57,6 +57,8 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="25dp"
                 android:textSize="20sp"
+                android:textColor="#ff000000"
+                android:enabled="false"
                 android:textStyle="bold"
                 android:text="@string/recipeInfo"
                 />
@@ -78,6 +80,7 @@
                     android:paddingLeft="10dp"
                     android:textSize="17sp"
                     android:textColor="#ff000000"
+                    android:enabled="false"
                     android:text="@string/person"
                     />
                 <EditText
@@ -106,6 +109,7 @@
                     android:paddingLeft="10dp"
                     android:textSize="17sp"
                     android:textColor="#ff000000"
+                    android:enabled="false"
                     android:inputType="number"
                     android:text="@string/time"
                     />
@@ -139,10 +143,18 @@
                 android:paddingLeft="25dp"
                 android:text="@string/ingredi"
                 android:textSize="20sp"
+                android:textColor="#ff000000"
+                android:enabled="false"
                 android:textStyle="bold" />
 
         </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
         <ImageButton
             android:id="@+id/btnIngredient"
             android:layout_width="40dp"
@@ -151,6 +163,14 @@
             android:background="@null"
             android:src="@drawable/add" />
 
+        <ImageButton
+            android:id="@+id/btnRemoveIngredient"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:background="@null"
+            android:src="@drawable/delete_blue" />
+    </LinearLayout>
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
@@ -170,10 +190,18 @@
                 android:paddingLeft="25dp"
                 android:text="@string/strRecipe"
                 android:textSize="20sp"
+                android:textColor="#ff000000"
+                android:enabled="false"
                 android:textStyle="bold" />
 
         </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
         <ImageButton
             android:id="@+id/btnRecipe"
             android:layout_width="40dp"
@@ -182,6 +210,14 @@
             android:background="@null"
             android:src="@drawable/add"/>
 
+        <ImageButton
+            android:id="@+id/btnRemoveRecipe"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:background="@null"
+            android:src="@drawable/delete_blue" />
+    </LinearLayout>
 
         <Button
             android:id="@+id/btnRegister"

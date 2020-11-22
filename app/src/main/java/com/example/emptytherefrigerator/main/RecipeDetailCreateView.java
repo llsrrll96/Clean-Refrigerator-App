@@ -51,9 +51,6 @@ import java.util.concurrent.ExecutionException;
 //등록버튼으로 데이터 서버에 전송 후 완료 메시지를 빋아온다.
 public class RecipeDetailCreateView extends AppCompatActivity {
 
-    private static final int PICK_FROM_ALBUM = 1;
-    private static final int CROP_FROM_iMAGE = 2;
-
     private EditText editTextTitle;
 
     private ImageView recipeDetailImage;
@@ -67,15 +64,17 @@ public class RecipeDetailCreateView extends AppCompatActivity {
     private LinearLayout recipeContentLayout;
 
     private ImageButton btnIngredient;          //재료 edittext 추가 버튼
+    private ImageButton btnRemoveIngredient;
     private ImageButton btnRecipe;
+    private ImageButton btnRemoveRecipe;
     private int ingredientCnt, recipeCnt;
 
     private List<EditText> etIngredientList;        //재료 리스트
     private List<EditText> etIngredientUnitList;    //재료단위 리스트
     private List<Spinner> spIngredientUnitList;     //ex)개, kg
+    private List<TextView> recipeCountList;
     private List<ImageView> recipeImageViewList;    //요리 방법 이미지 리스트 ( 첫 이미지 경로는 대표이미지 경로 두번째 부터 요리방법 이미지 )
     private List<EditText> recipeContentList;       //요리 방법 설명 editText 리스트
-
 
     private Button btnRegister;
     private Button btnCancel;
@@ -115,11 +114,14 @@ public class RecipeDetailCreateView extends AppCompatActivity {
         recipeContentLayout = (LinearLayout)findViewById(R.id.recipeContentLayout);
         //추가버튼
         btnIngredient = (ImageButton) findViewById(R.id.btnIngredient);
+        btnRemoveIngredient = (ImageButton)findViewById(R.id.btnRemoveIngredient);
         btnRecipe = (ImageButton) findViewById(R.id.btnRecipe);
+        btnRemoveRecipe = (ImageButton) findViewById(R.id.btnRemoveRecipe);
         //식재료와 단위 저장 리스트
         etIngredientList = new ArrayList<EditText>();
         etIngredientUnitList = new ArrayList<EditText>();
         spIngredientUnitList = new ArrayList<Spinner>();
+        recipeCountList = new ArrayList<TextView>();
         recipeImageViewList = new ArrayList<ImageView>();
         recipeContentList = new ArrayList<EditText>();
         //등록 취소 버튼
@@ -151,7 +153,7 @@ public class RecipeDetailCreateView extends AppCompatActivity {
                 setDetailImage();
             }
         });
-        //재료추가 버튼
+        //재료 추가 버튼
         btnIngredient.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -163,7 +165,13 @@ public class RecipeDetailCreateView extends AppCompatActivity {
                 }
             }
         });
-
+        //재료 삭제 버튼
+        btnRemoveIngredient.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popIngredient();
+            }
+        });
         //요리 방법 추가 버튼
         btnRecipe.setOnClickListener(new OnClickListener() {
             @Override
@@ -173,6 +181,13 @@ public class RecipeDetailCreateView extends AppCompatActivity {
                     setRecipeContent();
                 }else
                     Toast.makeText(v.getContext(),"더 이상 늘릴 수 없습니다.",Toast.LENGTH_SHORT).show();
+            }
+        });
+        //요리 방법 삭제 버튼
+        btnRemoveRecipe.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popRecipe();
             }
         });
 
@@ -234,16 +249,32 @@ public class RecipeDetailCreateView extends AppCompatActivity {
         return result;
     }
     ////////////////////////////////////////////////////////////////////////////////
+    private void popIngredient()
+    {
+        if(etIngredientList.size() >=2) {
+            etIngredientList.get(etIngredientList.size() - 1).setVisibility(EditText.GONE);
+            etIngredientList.remove(etIngredientList.size() - 1);
+            etIngredientUnitList.get(etIngredientUnitList.size() - 1).setVisibility(EditText.GONE);
+            etIngredientUnitList.remove(etIngredientUnitList.size() - 1);
+            spIngredientUnitList.get(spIngredientUnitList.size() - 1).setVisibility(Spinner.GONE);
+            spIngredientUnitList.remove(spIngredientUnitList.size() - 1);
+        }
+    }
+    private void popRecipe()
+    {
+        if(etIngredientList.size() >=2) {
+            recipeCountList.get(recipeCountList.size() - 1).setVisibility(View.INVISIBLE);
+            recipeCountList.remove(recipeCountList.size() - 1);
+            recipeImageViewList.get(recipeImageViewList.size() - 1).setVisibility(ImageView.GONE);
+            recipeImageViewList.remove(recipeImageViewList.size() - 1);
+            recipeContentList.get(recipeContentList.size() - 1).setVisibility(EditText.GONE);
+            recipeContentList.remove(recipeContentList.size() - 1);
+        }
+    }
+    ////////////////////////////////////////////////////////////////////////////////
     public void setDetailImage() // 앨범에서 이미지 가져오기 버튼
     {
         permissionCheck();
-
-        // 앨범 호출
-/*        Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
-        //onActivityResult 호출
-        isDetail = true;
-        startActivityForResult(intent, PICK_FROM_ALBUM);*/
 
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -410,78 +441,7 @@ public class RecipeDetailCreateView extends AppCompatActivity {
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//이미지 관련 처리
-    /*
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode != RESULT_OK)
-            return;
-
-        switch (requestCode) {
-
-            case PICK_FROM_ALBUM: {
-
-                // 이후의 처리가 카메라와 같으므로 일단  break없이 진행합니다.
-                // 실제 코드에서는 좀더 합리적인 방법을 선택하시기 바랍니다.
-                mImageCaptureUri = data.getData();
-
-                // 이미지를 가져온 이후의 리사이즈할 이미지 크기를 결정합니다.
-                // 이후에 이미지 크롭 어플리케이션을 호출하게 됩니다.
-                Intent intent = new Intent("com.android.camera.action.CROP");
-                intent.setDataAndType(mImageCaptureUri, "image/*");
-
-                // CROP할 이미지를 200*200 크기로 저장
-                intent.putExtra("outputX", 200); // CROP한 이미지의 x축 크기
-                intent.putExtra("outputY", 200); // CROP한 이미지의 y축 크기
-                intent.putExtra("aspectX", 1); // CROP 박스의 X축 비율
-                intent.putExtra("aspectY", 1); // CROP 박스의 Y축 비율
-                intent.putExtra("scale", true);
-                intent.putExtra("return-data", true);
-                startActivityForResult(intent, CROP_FROM_iMAGE); // CROP_FROM_iMAGE case문 이동
-                System.out.println("Recipe"+ mImageCaptureUri.getPath().toString());
-                break;
-            }
-
-            case CROP_FROM_iMAGE: {
-
-                // 크롭이 된 이후의 이미지를 넘겨 받습니다.
-                // 이미지뷰에 이미지를 보여준다거나 부가적인 작업 이후에
-                // 임시 파일을 삭제합니다.
-                if (resultCode != RESULT_OK)
-                    return;
-
-                final Bundle extras = data.getExtras();
-
-                // CROP된 이미지를 저장하기 위한 FILE 경로
-                String filePath = Environment.getExternalStorageDirectory().getAbsolutePath() +
-                        "/Recipe/" + System.currentTimeMillis() + ".jpg";
-
-                if (extras != null) {
-                    repPhotoBitmap = extras.getParcelable("data"); // CROP된 BITMAP
-                    if (isDetail) {
-                        recipeDetailImage.setImageBitmap(repPhotoBitmap); // 레이아웃의 이미지칸에 CROP된 BITMAP을 보여줌
-                        isDetail = false;
-                    }
-                    else {
-                        recipeImageViewList.get(recipeImageViewList.size() - 1).setImageBitmap(repPhotoBitmap);
-                    }
-
-                    //storeCropImage(repPhotoBitmap, filePath); // CROP된 이미지를 외부저장소, 앨범에 저장한다.
-                    //absoultePath = filePath;
-                    break;
-                }
-                // 임시 파일 삭제
-                File f = new File(mImageCaptureUri.getPath());
-                if (f.exists()) {
-
-                    f.delete();
-                }
-            }
-        }
-    }
-*/
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // Check which request we're responding to
@@ -570,12 +530,6 @@ public class RecipeDetailCreateView extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // 앨범 호출
-                recipeImageViewList.add(recipeImageView);
-
-/*                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
-                //onActivityResult 호출
-                startActivityForResult(intent, PICK_FROM_ALBUM);*/
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -588,6 +542,8 @@ public class RecipeDetailCreateView extends AppCompatActivity {
         //etRecipe.setPadding(20,20,20,20);
         etRecipe.setHint("설명");
 
+        recipeCountList.add(tvRecipeCount);
+        recipeImageViewList.add(recipeImageView);
         recipeContentList.add(etRecipe);
         recipeLayout.addView(tvRecipeCount);
         recipeLayout.addView(recipeImageView);

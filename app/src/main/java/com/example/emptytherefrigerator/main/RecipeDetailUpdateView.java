@@ -29,10 +29,12 @@ import com.example.emptytherefrigerator.userView.MyRecipe.MyRecipeListView;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -45,7 +47,9 @@ public class RecipeDetailUpdateView extends AppCompatActivity
     private EditText etInfoPersonCnt;           //인원
     private EditText etInfoTime;                 //조리시간
     private ImageButton btnAddIngredient;
+    private ImageButton btnRemoveIngredient;
     private ImageButton btnAddRecipe;
+    private ImageButton btnRemoveRecipe;
     private Button btnUpdate;
     private Button btnCancel;
 
@@ -60,6 +64,7 @@ public class RecipeDetailUpdateView extends AppCompatActivity
     private List<EditText> etIngredientList;        //재료 리스트
     private List<EditText> etIngredientUnitList;    //재료단위 리스트
     private List<Spinner> spIngredientUnitList;     //ex)개, kg
+    private List<TextView> recipeCountList;         //요리 방법 카운트 텍스트 뷰
     private List<ImageView> recipeImageViewList;    //요리 방법 이미지 리스트 ( 첫 이미지 경로는 대표이미지 경로 두번째 부터 요리방법 이미지 )
     private List<EditText> recipeContentList;       //요리 방법 설명 editText 리스트
 
@@ -96,7 +101,9 @@ public class RecipeDetailUpdateView extends AppCompatActivity
         etInfoPersonCnt = (EditText) findViewById(R.id.et_info_personCount);
         etInfoTime = (EditText) findViewById(R.id.et_info_time);
         btnAddIngredient = (ImageButton)findViewById(R.id.btn_updateLayout_addIngredient);
+        btnRemoveIngredient = (ImageButton) findViewById(R.id.btn_updateLayout_removeIngredient);
         btnAddRecipe = (ImageButton)findViewById(R.id.btn_updateLayout_addRecipe);
+        btnRemoveRecipe = (ImageButton) findViewById(R.id.btn_updateLayout_removeRecipe);
         btnUpdate = (Button) findViewById(R.id.btn_Update);
         btnCancel = (Button) findViewById(R.id.btn_Cancel);
 
@@ -104,6 +111,7 @@ public class RecipeDetailUpdateView extends AppCompatActivity
         etIngredientList = new ArrayList<EditText>();
         etIngredientUnitList = new ArrayList<EditText>();
         spIngredientUnitList = new ArrayList<Spinner>();
+        recipeCountList = new ArrayList<TextView>();
         recipeImageViewList = new ArrayList<ImageView>();
         recipeContentList = new ArrayList<EditText>();
     }
@@ -127,6 +135,14 @@ public class RecipeDetailUpdateView extends AppCompatActivity
             }
         });
 
+        //재료 삭제 버튼
+        btnRemoveIngredient.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popIngredient();
+            }
+        });
+
         //요리 방법 추가 버튼
         btnAddRecipe.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,6 +152,13 @@ public class RecipeDetailUpdateView extends AppCompatActivity
             }
         });
 
+        //요리 방법 삭제 버튼
+        btnRemoveRecipe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popRecipe();
+            }
+        });
         //수정 버튼
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -374,6 +397,7 @@ public class RecipeDetailUpdateView extends AppCompatActivity
             subRecipeContentLayout.addView(etContents);
             recipeContentLayoutUpdate.addView(subRecipeContentLayout);
 
+            recipeCountList.add(tvCount);
             recipeImageViewList.add(imageViewContents);
             recipeContentList.add(etContents);
         }
@@ -426,7 +450,28 @@ public class RecipeDetailUpdateView extends AppCompatActivity
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent, 1);
     }
-
+    private void popIngredient()
+    {
+        if(etIngredientList.size() >=2) {
+            etIngredientList.get(etIngredientList.size() - 1).setVisibility(EditText.GONE);
+            etIngredientList.remove(etIngredientList.size() - 1);
+            etIngredientUnitList.get(etIngredientUnitList.size() - 1).setVisibility(EditText.GONE);
+            etIngredientUnitList.remove(etIngredientUnitList.size() - 1);
+            spIngredientUnitList.get(spIngredientUnitList.size() - 1).setVisibility(Spinner.GONE);
+            spIngredientUnitList.remove(spIngredientUnitList.size() - 1);
+        }
+    }
+    private void popRecipe()
+    {
+        if(recipeCountList.size() >=2) {
+            recipeCountList.get(recipeCountList.size() - 1).setVisibility(View.INVISIBLE);
+            recipeCountList.remove(recipeCountList.size() - 1);
+            recipeImageViewList.get(recipeImageViewList.size() - 1).setVisibility(ImageView.GONE);
+            recipeImageViewList.remove(recipeImageViewList.size() - 1);
+            recipeContentList.get(recipeContentList.size() - 1).setVisibility(EditText.GONE);
+            recipeContentList.remove(recipeContentList.size() - 1);
+        }
+    }
     ////////////////////////////재료////////////////////////////
     public void setIngredient()
     {
@@ -478,8 +523,7 @@ public class RecipeDetailUpdateView extends AppCompatActivity
         paramsCnt.gravity = Gravity.CENTER;
         tvRecipeCount.setLayoutParams(paramsCnt);
         tvRecipeCount.setPadding(20,0,0,0);
-        tvRecipeCount.setText(Integer.toString(recipeContCnt + 1));
-        //recipeContCnt++;
+        tvRecipeCount.setText(Integer.toString(recipeContCnt));
 
         final ImageView recipeImageView = new ImageView(this);
         // 요리 방법 이미지
@@ -518,6 +562,7 @@ public class RecipeDetailUpdateView extends AppCompatActivity
         subRecipeContentLayout.addView(etContents);
         recipeContentLayoutUpdate.addView(subRecipeContentLayout);
 
+        recipeCountList.add(tvRecipeCount);
         recipeImageViewList.add(recipeImageView);
         recipeContentList.add(etContents);
     }
