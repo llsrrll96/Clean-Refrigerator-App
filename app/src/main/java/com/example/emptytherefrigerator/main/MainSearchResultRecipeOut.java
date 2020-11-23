@@ -11,6 +11,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.emptytherefrigerator.AsyncTasks.RecipeSearchAsyncTask;
 import com.example.emptytherefrigerator.R;
@@ -144,6 +145,12 @@ public class MainSearchResultRecipeOut extends AppCompatActivity
 
             resultList = JsonParsing.parsingRecipeOut(recipeListData);
 
+            if(resultList.size() == 0)//값이 없을때
+            {
+                Toast toast = Toast.makeText(getApplicationContext(),"검색 결과 없음 !",Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER_VERTICAL,0,0);
+                toast.show();
+            }
         } catch (Exception e)
         {
             e.printStackTrace();

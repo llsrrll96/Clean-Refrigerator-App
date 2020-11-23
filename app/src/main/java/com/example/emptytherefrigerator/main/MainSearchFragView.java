@@ -2,12 +2,14 @@ package com.example.emptytherefrigerator.main;
 
 import android.app.job.JobInfo;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -37,6 +39,7 @@ public class MainSearchFragView extends Fragment
     private CheckBox checkBox;
     private ArrayList<RecipeIn> list;
     private Intent intent;
+    private TextView bestTextView;
 
     @Nullable
     @Override
@@ -45,6 +48,7 @@ public class MainSearchFragView extends Fragment
         recyclerView = view.findViewById(R.id.recycler_view);
         searchView = view.findViewById(R.id.searchRecipe);
         checkBox = view.findViewById(R.id.checkBox);
+        bestTextView= view.findViewById(R.id.bestTextView);
         return view;
     }
 
@@ -57,6 +61,7 @@ public class MainSearchFragView extends Fragment
         setListener();
         setSearchRecipe();             //검색창
         showRecipe();                  //이달의 레시피 창
+        setViewBackground();
     }
 
     public void setListener()
@@ -71,6 +76,11 @@ public class MainSearchFragView extends Fragment
             }
         });
     }
+    public void setViewBackground()
+    {
+        bestTextView.setBackgroundColor(Color.RED);
+    }
+
     private String toBacktick(String query)
     {
         String[] querys = query.split(",");
