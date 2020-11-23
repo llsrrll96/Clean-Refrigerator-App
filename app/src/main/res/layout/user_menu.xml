@@ -56,10 +56,9 @@
                 android:layout_height="75dp"
                 android:layout_weight="1"
                 android:backgroundTint="#FFFFFF"
-                android:maxWidth="35dp"
                 android:maxHeight="35dp"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/recipe_book_blue" />
+                app:srcCompat="@drawable/ic_baseline_menu_book_24" />
 
             <ImageButton
                 android:id="@+id/commentInquireBtn"
@@ -126,6 +125,7 @@
                 android:id="@+id/textView16"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:gravity="center_horizontal"
                 android:text="@string/setting"
                 android:textSize="20dp" />
@@ -211,7 +211,7 @@
         app:layout_constraintEnd_toEndOf="@+id/textView"
         app:layout_constraintTop_toTopOf="@+id/textView"
         app:layout_constraintVertical_bias="0.555"
-        app:srcCompat="@drawable/edit_icon" />
+        app:srcCompat="@drawable/ic_baseline_edit_white_24" />
 
     <Button
         android:id="@+id/logoutBtn"

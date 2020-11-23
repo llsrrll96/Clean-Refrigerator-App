@@ -171,7 +171,7 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:background="@null"
-                android:src="@drawable/add" />
+                android:src="@drawable/ic_baseline_add_24" />
 
             <ImageButton
                 android:id="@+id/btn_updateLayout_removeIngredient"
@@ -179,7 +179,7 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:background="@null"
-                android:src="@drawable/delete_blue" />
+                android:src="@drawable/ic_baseline_delete_blue_24" />
         </LinearLayout>
 
 
@@ -222,20 +222,22 @@
         android:orientation="horizontal"
         android:gravity="center"
         android:padding="10dp">
+
         <ImageButton
             android:id="@+id/btn_updateLayout_addRecipe"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:background="@null"
-            android:src="@drawable/add"/>
+            android:src="@drawable/ic_baseline_add_24" />
+
         <ImageButton
             android:id="@+id/btn_updateLayout_removeRecipe"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:background="@null"
-            android:src="@drawable/delete_blue" />
+            android:src="@drawable/ic_baseline_delete_blue_24" />
     </LinearLayout>
 
         <Button
