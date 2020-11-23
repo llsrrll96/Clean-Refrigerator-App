@@ -493,12 +493,12 @@ public class RecipeDetailCreateView extends AppCompatActivity {
         ingredLayout.setPadding(30,30,30,30);
 
         EditText etIngredient = new EditText(RecipeDetailCreateView.this);
-        etIngredient.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT,2f));
+        etIngredient.setLayoutParams(new LinearLayout.LayoutParams(100, LinearLayout.LayoutParams.WRAP_CONTENT,2f));
         etIngredient.setPadding(20,20,20,20);
         etIngredient.setHint("재료명");
 
         EditText etIngredientUnit = new EditText(RecipeDetailCreateView.this);
-        etIngredientUnit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT,1f));
+        etIngredientUnit.setLayoutParams(new LinearLayout.LayoutParams(100, LinearLayout.LayoutParams.WRAP_CONTENT,1f));
         etIngredientUnit.setPadding(20,20,20,20);
         etIngredientUnit.setHint("재료 양");
         etIngredientUnit.setInputType(0x00000002);           //숫자만
@@ -556,7 +556,7 @@ public class RecipeDetailCreateView extends AppCompatActivity {
         });
 
         EditText etRecipe = new EditText(this);
-        etRecipe.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT,6f));
+        etRecipe.setLayoutParams(new LinearLayout.LayoutParams(200, LinearLayout.LayoutParams.WRAP_CONTENT,6f));
         //etRecipe.setPadding(20,20,20,20);
         etRecipe.setHint("설명");
 

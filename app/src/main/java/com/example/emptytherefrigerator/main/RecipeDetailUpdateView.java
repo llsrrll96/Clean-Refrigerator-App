@@ -479,13 +479,13 @@ public class RecipeDetailUpdateView extends AppCompatActivity
     public void setIngredient()
     {
         EditText etIngredient = new EditText(this);
-        etIngredient.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT,1f));
+        etIngredient.setLayoutParams(new LinearLayout.LayoutParams(100, LinearLayout.LayoutParams.WRAP_CONTENT,1f));
         etIngredient.setPadding(20,20,20,20);
         etIngredient.setTextSize(15);
         etIngredient.setHint("재료명");
 
         EditText etIngredientUnit = new EditText(this);
-        etIngredientUnit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT,1f));
+        etIngredientUnit.setLayoutParams(new LinearLayout.LayoutParams(100, LinearLayout.LayoutParams.WRAP_CONTENT,1f));
         etIngredientUnit.setPadding(20,20,20,20);
         etIngredientUnit.setHint("재료 양");
         etIngredientUnit.setTextSize(15);
@@ -548,7 +548,7 @@ public class RecipeDetailUpdateView extends AppCompatActivity
         });
 
         EditText etContents = new EditText(this);
-        LinearLayout.LayoutParams paramsContents = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams paramsContents = new LinearLayout.LayoutParams(200, LinearLayout.LayoutParams.WRAP_CONTENT);
         paramsContents.gravity = Gravity.CENTER;
         etContents.setLayoutParams(paramsContents);
         etContents.setPadding(10,0,0,0);
