@@ -157,7 +157,7 @@ public class MainSearchResultView extends AppCompatActivity {
         String result = "";
         for(int i = 0; i < querys.length; i++)
         {
-            result += querys[i];
+            result += querys[i].replaceAll(" ","");
             if(i != querys.length -1)
                 result += "`";
         }
