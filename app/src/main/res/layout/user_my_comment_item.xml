@@ -57,5 +57,5 @@
         app:layout_constraintBottom_toBottomOf="@+id/myCommentUploadDate"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/commentListTitle"
-        app:srcCompat="@drawable/delete_blue" />
+        app:srcCompat="@drawable/ic_baseline_delete_blue_24" />
 </androidx.constraintlayout.widget.ConstraintLayout>
