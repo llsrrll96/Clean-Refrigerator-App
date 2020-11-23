@@ -84,6 +84,11 @@ public class MainSearchFragView extends Fragment
         return result;
     }
 
+    private String trimEmptyString(String query)
+    {
+        return query.trim();
+    }
+
     public void setSearchRecipe()
     {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
@@ -102,7 +107,7 @@ public class MainSearchFragView extends Fragment
                 }
                 else {
                     intent.putExtra("IS_CHECKED", false);
-                    intent.putExtra("QUERY", query);
+                    intent.putExtra("QUERY", trimEmptyString(query));
                 }
                 getContext().startActivity(intent);
                 return true;

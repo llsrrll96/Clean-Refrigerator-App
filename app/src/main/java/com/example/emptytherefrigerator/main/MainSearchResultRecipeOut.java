@@ -55,7 +55,14 @@ public class MainSearchResultRecipeOut extends AppCompatActivity
         preIsChk = intent.getExtras().getBoolean("IS_CHECKED");    //식재료 체크
         preQuery = intent.getExtras().getString("QUERY");          //검색어
 
-        textView.setText(preQuery + " 에 대한 외부 사이트 검색 결과");
+        if(preIsChk)    //식재료 기반
+        {
+            textView.setText(trimEmptyString(toComma(preQuery)) + " 에 대한 외부 사이트 검색 결과");
+        }
+        else
+        {
+            textView.setText(trimEmptyString(preQuery) + " 에 대한 외부 사이트 검색 결과");
+        }
         textView.setTextSize(18);
         textView.setGravity(Gravity.CENTER_VERTICAL);
 
@@ -99,7 +106,22 @@ public class MainSearchResultRecipeOut extends AppCompatActivity
         }
         return result;
     }
-
+    private String toComma(String query)
+    {
+        String[] querys = query.split("`");
+        String result = "";
+        for(int i = 0; i < querys.length; i++)
+        {
+            result += querys[i];
+            if(i != querys.length -1)
+                result += ",";
+        }
+        return result;
+    }
+    private String trimEmptyString(String query)
+    {
+        return query.trim();
+    }
     // 서버로부터 레시피 데이터 얻는 함수
     ArrayList insertItemList()
     {
@@ -116,7 +138,7 @@ public class MainSearchResultRecipeOut extends AppCompatActivity
                 recipeListData = new RecipeSearchAsyncTask().execute("readIngOutRecipe", jsonObjectQuery.toString()).get(); //재료 기반
             } else
             {
-                jsonObjectQuery.accumulate("title", preQuery);
+                jsonObjectQuery.accumulate("title", trimEmptyString(preQuery));
                 recipeListData = new RecipeSearchAsyncTask().execute("readFoodOutRecipe", jsonObjectQuery.toString()).get();    //요리 기반
             }
 

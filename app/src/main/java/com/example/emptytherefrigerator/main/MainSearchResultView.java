@@ -69,8 +69,16 @@ public class MainSearchResultView extends AppCompatActivity {
         intent = getIntent();
         preIsChk = intent.getExtras().getBoolean("IS_CHECKED");    //식재료 체크
         preQuery = intent.getExtras().getString("QUERY");          //검색어
-        if(preIsChk) recipeChkBox.setChecked(true);
-        searchRecipe.setQueryHint(preQuery);
+
+        if(preIsChk)    //식재료 기반
+        {
+            recipeChkBox.setChecked(true);
+            searchRecipe.setQueryHint(trimEmptyString(toComma(preQuery)));
+        }
+        else
+        {
+            searchRecipe.setQueryHint(trimEmptyString(preQuery));
+        }
     }
 
     public void setListener()
@@ -163,6 +171,23 @@ public class MainSearchResultView extends AppCompatActivity {
         }
         return result;
     }
+    private String toComma(String query)
+    {
+        String[] querys = query.split("`");
+        String result = "";
+        for(int i = 0; i < querys.length; i++)
+        {
+            result += querys[i];
+            if(i != querys.length -1)
+                result += ",";
+        }
+        return result;
+    }
+    private String trimEmptyString(String query)
+    {
+        return query.trim();
+    }
+
     // 서버로부터 레시피 데이터 얻는 함수
     ArrayList insertItemList()
     {
@@ -177,7 +202,7 @@ public class MainSearchResultView extends AppCompatActivity {
                 recipeListData = new RecipeSearchAsyncTask().execute("reqSearchRecipeIng", jsonObjectQuery.toString()).get(); //재료 기반
             } else
             {
-                jsonObjectQuery.accumulate("title", preQuery);
+                jsonObjectQuery.accumulate("title", trimEmptyString(preQuery));
                 recipeListData = new RecipeSearchAsyncTask().execute("reqSearchRecipe", jsonObjectQuery.toString()).get();    //요리 기반
             }
             resultList = JsonParsing.parsingRecipe(recipeListData);
