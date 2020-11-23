@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginRight="5dp"
     android:background="#ffffff">
 
     <TextView
@@ -25,21 +24,21 @@
         android:id="@+id/tableRow3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="15dp"
         app:layout_constraintStart_toStartOf="@+id/title"
         app:layout_constraintTop_toBottomOf="@+id/title">
 
         <ImageView
             android:id="@+id/imageView6"
-            android:layout_width="20dp"
-            android:layout_height="match_parent"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_marginRight="5dp"
             android:layout_weight="1"
             app:srcCompat="@drawable/comment" />
 
         <TextView
             android:id="@+id/comment_count"
-            android:layout_width="25dp"
+            android:layout_width="20dp"
             android:layout_height="match_parent"
             android:layout_marginRight="5dp"
             android:layout_weight="1"
@@ -47,16 +46,16 @@
 
         <ImageView
             android:id="@+id/imageView7"
-            android:layout_width="20dp"
-            android:layout_height="match_parent"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_marginRight="5dp"
             android:layout_weight="1"
             app:srcCompat="@drawable/like_filled2" />
 
         <TextView
             android:id="@+id/like_count"
-            android:layout_width="25dp"
-            android:layout_height="wrap_content"
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:paddingLeft="3dp" />
 
@@ -66,39 +65,35 @@
         android:id="@+id/uploadDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="3dp"
         android:layout_marginBottom="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/tableRow3"
         app:layout_constraintTop_toBottomOf="@+id/tableRow3"
-        app:layout_constraintVertical_bias="0.958" />
+        app:layout_constraintVertical_bias="0.548" />
 
     <ImageButton
         android:id="@+id/recipeEditBtn"
-        android:layout_width="40dp"
+        android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:layout_marginStart="88dp"
+        android:layout_marginEnd="5dp"
         android:background="#ffffff"
-        app:layout_constraintBottom_toBottomOf="@+id/uploadDate"
-        app:layout_constraintStart_toEndOf="@+id/tableRow3"
-        app:layout_constraintTop_toTopOf="@+id/title"
-        app:layout_constraintVertical_bias="0.526"
-        app:srcCompat="@drawable/edit_icon_blue" />
+        app:layout_constraintBottom_toBottomOf="@+id/recipeDelBtn"
+        app:layout_constraintEnd_toStartOf="@+id/recipeDelBtn"
+        app:layout_constraintTop_toTopOf="@+id/recipeDelBtn"
+        app:srcCompat="@drawable/ic_baseline_edit_blue_24" />
 
     <ImageButton
         android:id="@+id/recipeDelBtn"
-        android:layout_width="40dp"
+        android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginEnd="24dp"
         android:background="@color/colorWhite"
-        app:layout_constraintBottom_toBottomOf="@+id/recipeEditBtn"
+        app:layout_constraintBottom_toBottomOf="@+id/uploadDate"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.375"
-        app:layout_constraintStart_toEndOf="@+id/recipeEditBtn"
-        app:layout_constraintTop_toTopOf="@+id/recipeEditBtn"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/delete_blue" />
+        app:layout_constraintTop_toTopOf="@+id/title"
+        app:layout_constraintVertical_bias="0.512"
+        app:srcCompat="@drawable/ic_baseline_delete_blue_24" />
 
     <ImageView
         android:id="@+id/recipeMainImage_"
