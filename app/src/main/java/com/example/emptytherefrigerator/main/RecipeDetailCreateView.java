@@ -233,7 +233,7 @@ public class RecipeDetailCreateView extends AppCompatActivity {
         boolean result = false;
         for(int i =0 ; i < etIngredientList.size(); i++)
         {
-            if(etIngredientList.get(i).getText().toString().matches("") || etIngredientUnitList.get(i).getText().toString().matches(""))
+            if(etIngredientList.get(i).getText().toString().matches(""))
                 result = true;
         }
         return result;
