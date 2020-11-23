@@ -492,7 +492,7 @@ public class RecipeDetailUpdateView extends AppCompatActivity
         etIngredientUnit.setInputType(0x00000002);           //숫자만
 
         Spinner spIngredientUnit = new Spinner(this);
-        spIngredientUnit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT,1f));
+        spIngredientUnit.setLayoutParams(new LinearLayout.LayoutParams(100, LinearLayout.LayoutParams.WRAP_CONTENT,1f));
         spIngredientUnit.setPadding(20,20,20,20);
         //단위 추가
         String[] units = getResources().getStringArray(R.array.unit);

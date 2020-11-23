@@ -504,7 +504,7 @@ public class RecipeDetailCreateView extends AppCompatActivity {
         etIngredientUnit.setInputType(0x00000002);           //숫자만
 
         Spinner spIngredientUnit = new Spinner(RecipeDetailCreateView.this);
-        spIngredientUnit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT,1f));
+        spIngredientUnit.setLayoutParams(new LinearLayout.LayoutParams(100, LinearLayout.LayoutParams.WRAP_CONTENT,1f));
         spIngredientUnit.setPadding(20,20,20,20);
         //단위 추가
         String[] units = getResources().getStringArray(R.array.unit);
