@@ -2,6 +2,7 @@ package com.example.emptytherefrigerator.main;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -208,9 +209,18 @@ public class MainSearchResultView extends AppCompatActivity {
             }
             resultList = JsonParsing.parsingRecipe(recipeListData);
 
+            if(resultList.size() == 0)//값이 없을때
+            {
+                Toast toast = Toast.makeText(getApplicationContext(),"검색 결과 없음 !",Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER_VERTICAL,0,0);
+                toast.show();
+            }
+
+
         } catch (Exception e)
         {
             e.printStackTrace();
+
         }
 
         return resultList;

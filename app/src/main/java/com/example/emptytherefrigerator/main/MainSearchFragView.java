@@ -61,7 +61,7 @@ public class MainSearchFragView extends Fragment
         setListener();
         setSearchRecipe();             //검색창
         showRecipe();                  //이달의 레시피 창
-        setViewBackground();
+        //setViewBackground();
     }
 
     public void setListener()
