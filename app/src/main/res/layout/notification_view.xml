@@ -6,15 +6,6 @@
     android:layout_height="match_parent"
     android:background="#ffffff">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/alarmRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="550dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/alarmListToolbar" />
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/alarmListToolbar"
         android:layout_width="match_parent"
@@ -31,13 +22,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="16dp"
         android:text="@string/alarmList"
         android:textColor="#ffffff"
         android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/alarmRecyclerView"
+        app:layout_constraintBottom_toBottomOf="@+id/alarmListToolbar"
         app:layout_constraintEnd_toEndOf="@+id/alarmListToolbar"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="@+id/alarmListToolbar"
         app:layout_constraintTop_toTopOf="@+id/alarmListToolbar"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.551" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/alarmListToolbar">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/alarmRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,19 +6,6 @@
     android:layout_height="match_parent"
     android:background="#ffffff">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/commentRecycler"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:overScrollMode="never"
-        app:layout_constrainedHeight="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/myCommentToolbar"
-        app:layout_constraintVertical_bias="0.0" />
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/myCommentToolbar"
         android:layout_width="match_parent"
@@ -45,5 +32,23 @@
         app:layout_constraintStart_toStartOf="@+id/myCommentToolbar"
         app:layout_constraintTop_toTopOf="@+id/myCommentToolbar"
         app:layout_constraintVertical_bias="0.0" />
+
+    <LinearLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/myCommentToolbar">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/commentRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:overScrollMode="never"
+            app:layout_constrainedHeight="true" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
