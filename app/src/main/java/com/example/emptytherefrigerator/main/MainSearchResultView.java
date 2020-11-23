@@ -130,6 +130,7 @@ public class MainSearchResultView extends AppCompatActivity {
                     intent.putExtra("IS_CHECKED",false);
                 intent.putExtra("QUERY", query);
 
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
                 getApplicationContext().startActivity(intent);
