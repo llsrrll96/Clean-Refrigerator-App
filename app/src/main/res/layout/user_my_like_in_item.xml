@@ -10,12 +10,12 @@
         android:id="@+id/likeInUploadDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/likeInRecipeWriter"
         app:layout_constraintTop_toBottomOf="@+id/likeInRecipeWriter"
-        app:layout_constraintVertical_bias="0.96" />
+        app:layout_constraintVertical_bias="0.324" />
 
     <TextView
         android:id="@+id/likeInRecipeWriter"
@@ -48,6 +48,7 @@
         android:layout_height="wrap_content"
 
         android:layout_marginStart="12dp"
+        android:layout_marginTop="3dp"
         android:ellipsize="end"
         android:ems="7"
         android:maxLines="1"
@@ -61,7 +62,7 @@
         android:layout_height="60dp"
         android:layout_marginEnd="20dp"
         android:background="#ffffff"
-        app:layout_constraintBottom_toBottomOf="@+id/likeInUploadDate"
+        app:layout_constraintBottom_toBottomOf="@+id/likeInMainImg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/likeInTitle"
         app:layout_constraintVertical_bias="0.428"

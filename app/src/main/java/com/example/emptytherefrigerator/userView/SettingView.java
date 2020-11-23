@@ -52,6 +52,11 @@ public class SettingView extends AppCompatActivity
         setSupportActionBar(settingToolbar);        //툴바 설정
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        if(UserInfo.getInt(this, UserInfo.NOTIFICATION_KEY)==0)     //이전에 설정이 꺼져있었다면
+            swAlarm.setChecked(false);
+        else if(UserInfo.getInt(this, UserInfo.NOTIFICATION_KEY)==1)    //이전에 설정이 켜져있었다면
+            swAlarm.setChecked(true);
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
