@@ -89,6 +89,7 @@ public class LoginSignUpView extends AppCompatActivity {
             if(result.equals("1"))          //성공
             {
                 Intent intent = new Intent(getApplicationContext(), LoginView.class);      //현재 화면의 제어를 넘길 클래스 지정
+                UserInfo.setInt(this, UserInfo.NOTIFICATION_KEY, 0);
                 startActivity(intent);      //다음 화면으로 넘어감
             }
             else if(result.equals("2"))     //실패
