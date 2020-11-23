@@ -42,6 +42,17 @@ public class MainSearchResultView extends AppCompatActivity {
     private String preQuery;                    //이전 화면 검색어
 
     @Override
+    public void onRestart()
+    {
+        super.onRestart();
+        // do some stuff here
+        finish();
+        overridePendingTransition(0, 0);
+        startActivity(getIntent());
+        overridePendingTransition(0, 0);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);

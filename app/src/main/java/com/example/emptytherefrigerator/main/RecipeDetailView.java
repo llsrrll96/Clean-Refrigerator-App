@@ -75,19 +75,18 @@ public class RecipeDetailView extends AppCompatActivity {
         setIngredients();            //식재료
         setPrice();                 //식재료 가격 (크롤링)
         setRecipeContents();         //조리방법
+
     }
-    @Override
-    protected void onDestroy()      //뷰가 꺼질때 좋아요에 관한 정보를 확인하고 서버로 관련 작업 요청, 나중에 직접 해봐야됨, 킹론상으로는 작동
+
+    public void checkLikeIn()
     {
-        super.onDestroy();
         if(!alreadyLiked&&liked)   //이전에 좋아요를 하지 않은 경우, 하트를 누른 상태
             createLikeIn();
         else if(alreadyLiked&&!liked)   //이전에 좋아요를 했고 하트가 누르지 않은 상태
             deleteLikeIn();
-
     }
 
-    public void createLikeIn()      //좋아요 등록
+    private void createLikeIn()      //좋아요 등록
     {
         MyAsyncTask inquiry = new MyAsyncTask();
         JSONObject object = new JSONObject();
@@ -104,7 +103,7 @@ public class RecipeDetailView extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-    public void deleteLikeIn()      //좋아요 삭제
+    private void deleteLikeIn()      //좋아요 삭제
     {
         MyAsyncTask inquiry = new MyAsyncTask();
         JSONObject object = new JSONObject();
@@ -169,6 +168,8 @@ public class RecipeDetailView extends AppCompatActivity {
                     btnHeart.setImageResource(R.drawable.like_filled1);
                 else
                     btnHeart.setImageResource(R.drawable.like);
+
+                checkLikeIn();
             }
         });
     }
