@@ -339,11 +339,10 @@ public class RecipeDetailView extends AppCompatActivity {
 
             for (int i = 0 ; i< jsonArrayPrice.length(); i++)
             {
-                JSONArray arr = jsonArrayPrice.getJSONArray(i);
-                JSONObject jsonObjectPrice = arr.getJSONObject(0);
+                JSONObject jsonObjectPrice = jsonArrayPrice.getJSONObject(i);
 
-                ingName +=       arr.getJSONObject(0).getString("ingName");
-                ingPriceUnit +=  arr.getJSONObject(0).getString("ingPriceUnit");
+                ingName +=       jsonObjectPrice.getString("ingName");
+                ingPriceUnit +=  jsonObjectPrice.getString("ingPriceUnit");
 
                 System.out.println("jsonObject.getString(\"ingName\") : "+ jsonObjectPrice.getString("ingName"));
                 if(i != jsonArrayPrice.length() -1)
