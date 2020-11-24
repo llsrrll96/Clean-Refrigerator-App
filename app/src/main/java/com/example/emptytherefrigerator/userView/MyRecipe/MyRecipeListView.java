@@ -30,6 +30,17 @@ public class MyRecipeListView extends AppCompatActivity
     private MyRecipeListAdapter adapter = null;
 
     @Override
+    public void onRestart()
+    {
+        super.onRestart();
+        // do some stuff here
+        finish();
+        overridePendingTransition(0, 0);
+        startActivity(getIntent());
+        overridePendingTransition(0, 0);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
