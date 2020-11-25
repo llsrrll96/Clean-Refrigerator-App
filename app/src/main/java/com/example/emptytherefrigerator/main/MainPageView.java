@@ -22,6 +22,14 @@ public class MainPageView extends AppCompatActivity
     private NotificationView notificationView = new NotificationView();
 
     @Override
+    public void onRestart()
+    {
+        super.onRestart();
+        // do some stuff here
+        finish();
+        startActivity(getIntent());
+    }
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_home);

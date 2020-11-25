@@ -2,6 +2,7 @@ package com.example.emptytherefrigerator.main;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -39,6 +40,17 @@ public class MainSearchResultView extends AppCompatActivity {
     private Intent intent;
     private boolean preIsChk;                  //이전 화면에서의 식재료 체크 여부
     private String preQuery;                    //이전 화면 검색어
+
+    @Override
+    public void onRestart()
+    {
+        super.onRestart();
+        // do some stuff here
+        finish();
+        overridePendingTransition(0, 0);
+        startActivity(getIntent());
+        overridePendingTransition(0, 0);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,6 +142,7 @@ public class MainSearchResultView extends AppCompatActivity {
                     intent.putExtra("IS_CHECKED",false);
                 intent.putExtra("QUERY", query);
 
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
                 getApplicationContext().startActivity(intent);
@@ -207,9 +220,18 @@ public class MainSearchResultView extends AppCompatActivity {
             }
             resultList = JsonParsing.parsingRecipe(recipeListData);
 
+            if(resultList.size() == 0)//값이 없을때
+            {
+                Toast toast = Toast.makeText(getApplicationContext(),"검색 결과 없음 !",Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER_VERTICAL,0,0);
+                toast.show();
+            }
+
+
         } catch (Exception e)
         {
             e.printStackTrace();
+
         }
 
         return resultList;

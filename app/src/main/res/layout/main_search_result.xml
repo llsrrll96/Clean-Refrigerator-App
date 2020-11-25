@@ -37,13 +37,6 @@
             android:text="@string/ingredients" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/HeadertextView"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/colorSky"
-        />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/resultRecyclerView"
         android:layout_width="match_parent"

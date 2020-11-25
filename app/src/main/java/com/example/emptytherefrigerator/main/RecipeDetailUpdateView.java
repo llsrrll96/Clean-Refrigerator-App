@@ -174,7 +174,7 @@ public class RecipeDetailUpdateView extends AppCompatActivity
                 {
                     Toast.makeText(v.getContext(),"수정 성공",Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(), MyRecipeListView.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 
                     getApplicationContext().startActivity(intent);
                 }else
