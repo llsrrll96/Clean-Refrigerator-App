@@ -84,9 +84,11 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                         String result = deleteNotification();
                         if(result.equals("1"))      //삭제 성공
                         {
-                            removeItem(pos);
+                            System.out.println("id : " + pos);
+
                             Intent intent = new Intent(context, RecipeDetailView.class);     //조회된 레시피 화면으로 넘어간다
                             intent.putExtra("RECIPE",list.get(pos).getRecipe().getRecipeInId());      //다음 화면에 레시피 객체 송신
+                            removeItem(pos);
                             context.startActivity(intent);
                         }
                         else if(result.equals("2"))
