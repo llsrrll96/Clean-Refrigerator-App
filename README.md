@@ -18,5 +18,12 @@
  서버는 Node.js 프레임워크중 하나인 Express.js를 이용하여 서버를 구성하고 안드로이드와 연동시켜 사용자가 요구하는 기능에 대한 서비스를 제공하였다.
  데이터베이스로는 MySQL을 활용하여 사진, 문자열등의 데이터를 저장하였다.
  
+ 
  ## 사용자 인터페이스
  
+![슬라이드1](https://user-images.githubusercontent.com/58140426/106449741-a2f27400-64c7-11eb-9d0d-0f8c91e1a704.JPG)
+
+![슬라이드2](https://user-images.githubusercontent.com/58140426/106449752-a5ed6480-64c7-11eb-83a7-e150eeb4f1cc.JPG)
+
+![슬라이드3](https://user-images.githubusercontent.com/58140426/106449753-a7b72800-64c7-11eb-8d3c-d9a61dce809c.JPG)
+
