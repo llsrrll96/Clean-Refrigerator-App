@@ -12,7 +12,7 @@
    
    
    
-## 구현 기술
+## 구현 아키텍쳐
 
 ![skill](https://user-images.githubusercontent.com/58140426/106448619-5e1a0d80-64c6-11eb-9335-b3663101c7f6.png)
 
